@@ -1,0 +1,55 @@
+@model HRMS.Models.Organization.DepartmentDetailsViewModel
+@{
+    ViewData["Title"] = T["DepartmentDetails"].Value;
+}
+<div>
+    @if (TempData["StatusMessage"] is string message)
+    {
+        <div class="alert alert-success" role="status">@message</div>
+    }
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h2">@T["DepartmentDetails"]</h1>
+        <div class="d-flex gap-2">
+            <a asp-action="Edit" asp-route-id="@Model.DepartmentId" class="btn btn-primary">@T["Edit"]</a>
+            <form asp-action="SetActive" asp-route-id="@Model.DepartmentId" method="post">
+                <input type="hidden" name="isActive" value="@(!Model.IsActive)" />
+                <button type="submit" class="btn btn-outline-warning">
+                    @(Model.IsActive ? T["Disable"].Value : T["Enable"].Value)
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">@T["Code"]</dt><dd class="col-sm-9">@Model.Code</dd>
+        <dt class="col-sm-3">@T["DepartmentName"]</dt><dd class="col-sm-9">@Model.Name</dd>
+        <dt class="col-sm-3">@T["Manager"]</dt><dd class="col-sm-9">@(Model.ManagerName ?? "—")</dd>
+        <dt class="col-sm-3">@T["Status"]</dt><dd class="col-sm-9">@(Model.IsActive ? T["Status.Active"].Value : T["Status.Inactive"].Value)</dd>
+    </dl>
+
+    <h2 class="h4 mt-4">@T["DepartmentEmployees"]</h2>
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead><tr><th>@T["EmployeeNumber"]</th><th>@T["Name"]</th><th>@T["JobTitle"]</th><th>@T["Status"]</th></tr></thead>
+            <tbody>
+                @if (Model.Employees.Count == 0)
+                {
+                    <tr><td colspan="4" class="text-center text-muted">@T["NoActiveDepartmentEmployees"]</td></tr>
+                }
+                else
+                {
+                    @foreach (var employee in Model.Employees)
+                    {
+                        <tr>
+                            <td>@employee.EmployeeNumber</td>
+                            <td><a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.EmployeeId">@employee.FullName</a></td>
+                            <td>@employee.PositionTitle</td>
+                            <td>@T.LocalizeValue("Employment.", employee.EmploymentStatus)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <a asp-action="Index" class="btn btn-outline-secondary">@T["BackToDepartments"]</a>
+</div>

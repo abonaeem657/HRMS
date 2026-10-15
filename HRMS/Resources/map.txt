@@ -1,0 +1,215 @@
+﻿HomeEyebrow|HRMS | إدارة الموارد البشرية|HRMS | Human Resources Management
+AttendanceTrendsHint|راجع سجلات الحضور واتجاهاتها|Review attendance records and trends
+DepartmentCountLabel|أقسام|departments
+TotalEmployees|إجمالي الموظفين|Total employees
+DepartmentScope|بيانات هذا القسم فقط|Data for this department only
+AttendanceHoursPeriodHint|ساعات الحضور ضمن الفترة المحددة|Attendance hours for the selected period
+ViewAuditLog|عرض سجل التدقيق|View audit log
+StartHere|ابدأ من هنا|Start here
+NoDepartmentsForSummary|لا توجد أقسام لعرضها. أضف أقسامًا وموظفين لعرض التوزيع.|There are no departments to display. Add departments and employees to see the distribution.
+AvailableReports|التقارير المتاحة|Available reports
+NewHiresInPeriod|الموظفون الجدد خلال الفترة|New hires in this period
+FilterSummaryByPeriod|تصفية الملخص حسب الفترة|Filter summary by period
+Activity|النشاط|Activity
+ReviewEmployeeData|استعرض بيانات الموظفين|Review employee data
+AddJobTitlesHint|أضف المسميات الوظيفية لاستخدامها عند تسجيل الموظفين|Add job titles to use when creating employee records
+DepartmentManagerSetupHint|اطلب من مسؤول النظام ربط حسابك بملف موظف وتعيينك مديرًا للقسم.|Ask your system administrator to link your account to an employee profile and assign you as department manager.
+ReviewRecordedActions|راجع العمليات المسجلة|Review recorded actions
+CreateDepartmentsHint|أنشئ الأقسام ونظّم توزيع الموظفين|Create departments and organize employee assignments
+HoursWorked|ساعات العمل|Hours worked
+Workspace|مساحة العمل|Workspace
+CreateAccountsHint|أنشئ حسابات المستخدمين واربطها بالأدوار والموظفين|Create user accounts and link them to roles and employees
+ViewEmployeeDirectory|عرض دليل الموظفين|View employee directory
+PendingLeaveRequests|طلبات الإجازة قيد المراجعة|Pending leave requests
+ViewHeadcountSummary|عرض ملخص الأعداد|View headcount summary
+RecentActivity|أحدث العمليات|Recent activity
+SystemSetup|إعداد النظام|System setup
+EmployeeCountLabel|موظفون|employees
+EmployeeDistribution|توزيع الموظفين|Employee distribution
+ViewLeaveRequests|عرض طلبات الإجازة|View leave requests
+AddEmployeesHint|أضف الموظفين وبياناتهم الوظيفية|Add employees and their job details
+PeriodSummary|ملخص الفترة|Period summary
+ManageLeaveRequests|إدارة طلبات الإجازة|Manage leave requests
+ActiveEmployeeCount|إجمالي الموظفين النشطين|Total active employees
+NoAttendanceToday|لا توجد سجلات حضور لهذا اليوم.|No attendance records for today.
+TotalHours|إجمالي الساعات|Total hours
+AttendanceDayComplete|اكتمل تسجيل اليوم|Today is complete
+MyAttendance|حضوري وانصرافي|My attendance
+AttendanceRecord|سجل الحضور|Attendance record
+MyWorkspace|مساحة عملي|My workspace
+RequestLeave|تقديم طلب إجازة|Request leave
+LinkEmployeeForSelfService|اطلب من مسؤول النظام ربط حسابك بملف موظف لاستخدام خدمات الحضور والإجازات.|Ask your system administrator to link your account to an employee profile to use attendance and leave services.
+ViewMyRequests|عرض طلباتي|View my requests
+CheckIn|تسجيل الحضور|Check in
+CheckOut|تسجيل الانصراف|Check out
+NoLeaveRequestsThisYear|لا توجد طلبات إجازة لهذا العام.|No leave requests for this year.
+MyLeaveRequests|طلباتي|My leave requests
+EmployeesByDepartment|الموظفون حسب القسم|Employees by department
+EmployeesReport|تقرير الموظفين|Employee report
+AttendanceReport|تقرير الحضور|Attendance report
+LeaveReport|تقرير الإجازات|Leave report
+HeadcountSummary|ملخص أعداد الموظفين|Headcount summary
+EmployeeDirectory|دليل الموظفين|Employee directory
+AttendanceReportTitle|تقرير الحضور|Attendance report
+EmployeeReportTitle|تقرير الموظفين|Employee report
+LeaveTypes|أنواع الإجازات|Leave types
+Results|النتائج:|Results:
+DepartmentName|اسم القسم|Department name
+Manager|المدير|Manager
+Filter|تصفية|Filter
+Period|الفترة|Period
+Days|الأيام|Days
+All|الكل|All
+Arabic|العربية|Arabic
+Paid|مدفوعة|Paid
+NoAccounts|لا توجد حسابات.|No accounts found.
+NoActivity|لا توجد أنشطة مسجلة.|No activity recorded.
+NoLeaveRequests|لا توجد طلبات إجازة.|No leave requests found.
+NoDeletedEmployees|لا يوجد موظفون محذوفون.|No deleted employees found.
+NoDepartmentsFound|لا توجد أقسام.|No departments found.
+NoPositionsFound|لا توجد مسميات وظيفية.|No job titles found.
+EmployeeDetails|تفاصيل الموظف|Employee details
+EmployeesManagement|إدارة الموظفين|Employee management
+EmployeeEdit|تعديل بيانات الموظف|Edit employee
+AddEmployee|إضافة موظف|Add employee
+BackToDepartments|العودة إلى الأقسام|Back to departments
+BackToList|العودة إلى القائمة|Back to list
+DepartmentDetails|تفاصيل القسم|Department details
+DepartmentsManagement|إدارة الأقسام|Department management
+DepartmentsIntro|أنشئ الأقسام وحدد المدير وراجع توزيع الموظفين.|Create departments, assign managers, and review employee distribution.
+SearchEmployeesIntro|ابحث عن الموظفين وصفِّ النتائج حسب القسم والحالة.|Search employees and filter by department and status.
+SearchEmployees|ابحث بالاسم أو الرقم أو البريد|Search by name, number, or email
+SearchAndFilter|بحث وتصفية|Search and filter
+AllDepartments|كل الأقسام|All departments
+PositionManagement|إدارة المسميات الوظيفية|Job title management
+PositionManagementIntro|إدارة المسميات وربطها اختياريًا بالأقسام.|Manage job titles and optionally assign them to departments.
+AddJobTitle|إضافة مسمى وظيفي|Add job title
+EditJobTitle|تعديل المسمى الوظيفي|Edit job title
+PositionDetails|تفاصيل المسمى الوظيفي|Job title details
+BackToPositions|العودة إلى المسميات الوظيفية|Back to job titles
+GeneralPosition|مسمى عام (دون قسم محدد)|General (no department assigned)
+PositionHasEmployees|المسمى مرتبط بموظفين؛ تعطيله يخفيه من القوائم الجديدة مع الاحتفاظ بسجلات الموظفين.|This job title is assigned to employees. Disabling it hides it from new selections while retaining employee records.
+NoActiveDepartmentEmployees|لا يوجد موظفون نشطون في هذا القسم.|No active employees in this department.
+DepartmentEmployees|موظفو القسم|Department employees
+SetupAdministrator|إعداد مسؤول النظام|Set up system administrator
+ChangePassword|تغيير كلمة المرور|Change password
+AccessDenied|غير مصرح بالوصول|Access denied
+AccessDeniedMessage|ليس لديك صلاحية للوصول إلى هذه الصفحة.|You do not have permission to access this page.
+LeavePageTitle|طلبات الإجازة|Leave requests
+UsersManagement|إدارة المستخدمين|User management
+CreateUserAccount|إنشاء حساب مستخدم|Create user account
+EditUserAccount|تعديل حساب المستخدم|Edit user account
+ResetPassword|إعادة تعيين كلمة المرور|Reset password
+Dashboard|لوحة المعلومات|Dashboard
+Error|حدث خطأ|An error occurred
+AuditIntro|سجل العمليات المتعلقة بإدارة الموارد البشرية.|Audit log of human resources management actions.
+AuditReadOnlyNote|هذا السجل للعرض فقط.|This log is read-only.
+AuditSearchPlaceholder|ابحث باسم المستخدم أو العملية|Search by user or action
+EmployeeOrganizationRequired|يجب إضافة قسم ومسمى وظيفي قبل إنشاء الموظف.|Create a department and job title before adding an employee.
+DepartmentSetupRequired|أضف قسمًا واحدًا على الأقل قبل إضافة الموظفين.|Create at least one department before adding employees.
+NoDirectManager|لا يوجد مدير مباشر|No direct manager
+NoManager|لا يوجد مدير|No manager
+NoManagersAvailable|لا يوجد مديرون متاحون|No managers available
+SelectDepartment|اختر القسم|Select department
+SelectEmployee|اختر الموظف|Select employee
+SelectJobTitle|اختر المسمى الوظيفي|Select job title
+SelectType|اختر النوع|Select type
+Review|مراجعة|Review
+Approve|موافقة|Approve
+Reject|رفض|Reject
+RejectReason|سبب الرفض|Rejection reason
+OptionalNotes|ملاحظات اختيارية|Optional notes
+SubmitRequest|إرسال الطلب|Submit request
+CancelRequest|إلغاء الطلب|Cancel request
+SaveLeaveType|حفظ نوع الإجازة|Save leave type
+NewLeaveType|نوع إجازة جديد|New leave type
+AttendanceSummary|ملخص الحضور|Attendance summary
+AttendanceUtcInfo|الأوقات معروضة بتوقيت UTC.|Times are displayed in UTC.
+AttendanceTimezoneInfo|قد تختلف أوقات الحضور المحلية عن توقيت UTC.|Local attendance times may differ from UTC.
+AttendanceUtcResults|الأوقات معروضة بتوقيت UTC. النتائج:|Times are displayed in UTC. Results:
+AttendanceRecordsInPeriod|سجلات الحضور في الفترة|Attendance records in period
+Headcount|ملخص أعداد الموظفين|Headcount summary
+FromDate|تاريخ البداية|Start date
+ToDate|تاريخ النهاية|End date
+Date|التاريخ|Date
+DateRange|الفترة|Date range
+HeadcountByDepartment|أعداد الموظفين حسب القسم|Headcount by department
+EmployeeCount|عدد الموظفين|Employee count
+Next|التالي|Next
+Previous|السابق|Previous
+Ascending|تصاعدي|Ascending
+Descending|تنازلي|Descending
+SortBy|ترتيب حسب|Sort by
+SortDirection|اتجاه الترتيب|Sort direction
+SystemUser|مستخدم النظام|System user
+SignInFailed|تعذر تسجيل الدخول بهذه البيانات.|Unable to sign in with these credentials.
+ReportDateRangeInvalid|تاريخ النهاية يجب ألا يسبق تاريخ البداية.|The end date must not be earlier than the start date.
+ReportYearInvalid|تحقق من نطاق التاريخ؛ يجب أن تكون النهاية بعد البداية والسنة بين 2000 و2100.|Check the date range: the end must follow the start and the year must be between 2000 and 2100.
+DateRangeInvalid|تحقق من نطاق التاريخ المحدد.|Check the selected date range.
+LeaveSubmitted|تم تقديم طلب الإجازة للمراجعة.|Leave request submitted for review.
+LeaveRejectReasonRequired|سبب الرفض مطلوب.|A rejection reason is required.
+AttendanceCorrectionSaved|تم حفظ تصحيح سجل الحضور.|Attendance record correction saved.
+DepartmentCreated|تم إنشاء القسم بنجاح.|Department created successfully.
+DepartmentUpdated|تم تحديث القسم بنجاح.|Department updated successfully.
+DepartmentEnabled|تم تفعيل القسم.|Department enabled.
+DepartmentDisabled|تم تعطيل القسم مع الاحتفاظ بسجلاته وموظفيه.|Department disabled; its records and employees were retained.
+DepartmentNotFound|تعذر العثور على القسم.|Department not found.
+PositionCreated|تمت إضافة المسمى الوظيفي بنجاح.|Job title added successfully.
+PositionUpdated|تم تحديث المسمى الوظيفي بنجاح.|Job title updated successfully.
+PositionEnabled|تم تفعيل المسمى الوظيفي.|Job title enabled.
+PositionDisabled|تم تعطيل المسمى الوظيفي مع الاحتفاظ بسجلات الموظفين.|Job title disabled; employee records were retained.
+PositionNotFound|تعذر العثور على المسمى الوظيفي.|Job title not found.
+EmployeeCreated|تمت إضافة الموظف بنجاح.|Employee added successfully.
+EmployeeUpdated|تم تحديث بيانات الموظف بنجاح.|Employee details updated successfully.
+EmployeeDisabled|تم تعطيل الموظف مع الاحتفاظ بسجله.|Employee disabled; the record was retained.
+EmployeeRestored|تمت استعادة سجل الموظف وتسجيل العملية.|Employee record restored and the action was logged.
+EmployeeRestoreNotFound|تعذرت الاستعادة؛ السجل غير موجود ضمن السجلات المحذوفة.|Unable to restore: the record was not found among deleted employees.
+UserCreated|تم إنشاء حساب المستخدم بنجاح.|User account created successfully.
+UserUpdated|تم تحديث حساب المستخدم بنجاح.|User account updated successfully.
+UserEnabled|تم تفعيل الحساب.|Account enabled.
+UserDisabled|تم تعطيل الحساب.|Account disabled.
+UserPasswordReset|تمت إعادة تعيين كلمة المرور. أبلغ المستخدم بها عبر قناة آمنة.|Password reset. Notify the user through a secure channel.
+PasswordChanged|تم تغيير كلمة المرور بنجاح.|Password changed successfully.
+Label.EmployeeNumber|رقم الموظف|Employee number
+Label.FirstName|الاسم الأول|First name
+Label.LastName|اسم العائلة|Last name
+Label.Email|البريد الإلكتروني|Email
+Label.WorkEmail|البريد الوظيفي|Work email
+Label.PhoneNumber|رقم الهاتف|Phone number
+Label.Department|القسم|Department
+Label.OptionalDepartment|القسم (اختياري)|Department (optional)
+Label.PositionTitle|المسمى الوظيفي|Job title
+Label.JobTitle|المسمى الوظيفي|Job title
+Label.Description|الوصف|Description
+Label.Grade|الدرجة الوظيفية|Job grade
+Label.HireDate|تاريخ التعيين|Hire date
+Label.EmploymentStatus|حالة التوظيف|Employment status
+Label.EmploymentType|نوع التوظيف|Employment type
+Label.DirectManager|المدير المباشر|Direct manager
+Label.DepartmentName|اسم القسم|Department name
+Label.DepartmentCode|رمز القسم|Department code
+Label.DepartmentManager|مدير القسم|Department manager
+Label.PositionCode|رمز المسمى الوظيفي|Job title code
+Label.LeaveType|نوع الإجازة|Leave type
+Label.LeaveStart|من تاريخ|Start date
+Label.LeaveEnd|إلى تاريخ|End date
+Label.Reason|السبب|Reason
+Label.ReviewNotes|ملاحظات المراجعة|Review notes
+Label.LeaveTypeName|اسم نوع الإجازة بالإنجليزية|Leave type name (English)
+Label.LeaveTypeNameAr|اسم نوع الإجازة بالعربية|Leave type name (Arabic)
+Label.DefaultDays|الأيام السنوية|Annual days
+Label.IsPaid|إجازة مدفوعة الأجر|Paid leave
+Label.IsActive|مفعّل|Active
+Label.Status|الحالة|Status
+Label.Role|الدور|Role
+Label.Password|كلمة المرور|Password
+Label.CurrentPassword|كلمة المرور الحالية|Current password
+Label.NewPassword|كلمة المرور الجديدة|New password
+Label.ConfirmPassword|تأكيد كلمة المرور|Confirm password
+Label.RememberMe|تذكرني|Remember me
+Label.LinkedEmployee|الموظف المرتبط (اختياري)|Linked employee (optional)
+Label.Notes|ملاحظات|Notes
+Label.CheckInLocal|وقت الحضور المحلي|Local check-in time
+Label.CheckOutLocal|وقت الانصراف المحلي|Local check-out time
+Label.AttendanceDate|تاريخ الحضور|Attendance date
+Label.WorkLocation|موقع العمل|Work location

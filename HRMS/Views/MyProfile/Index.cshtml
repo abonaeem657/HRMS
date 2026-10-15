@@ -1,0 +1,19 @@
+@model HRMS.Application.Employees.EmployeeDetails
+@{ ViewData["Title"] = T["MyProfile"].Value; }
+<h1 class="h3 mb-3">@T["MyProfile"]</h1>
+<section class="card card-body">
+    <h2 class="h5">@Model.FirstName @Model.LastName</h2>
+    <dl class="row mb-0">
+        <dt class="col-sm-4">@T["EmployeeNumber"]</dt><dd class="col-sm-8">@Model.EmployeeNumber</dd>
+        <dt class="col-sm-4">@T["WorkEmail"]</dt><dd class="col-sm-8" dir="ltr">@Model.WorkEmail</dd>
+        <dt class="col-sm-4">@T["Department"]</dt><dd class="col-sm-8">@Model.DepartmentName</dd>
+        <dt class="col-sm-4">@T["JobTitles"]</dt><dd class="col-sm-8">@Model.PositionTitle</dd>
+        <dt class="col-sm-4">@T["Manager"]</dt><dd class="col-sm-8">@(Model.ManagerName ?? "—")</dd>
+        <dt class="col-sm-4">@T["HireDate"]</dt><dd class="col-sm-8">@Model.HireDate.ToString("yyyy-MM-dd")</dd>
+        <dt class="col-sm-4">@T["Status"]</dt><dd class="col-sm-8">@T["Status." + Model.EmploymentStatus]</dd>
+        <dt class="col-sm-4">@T["EmploymentType"]</dt><dd class="col-sm-8">@T["EmploymentType." + Model.EmploymentType]</dd>
+        <dt class="col-sm-4">@T["Phone"]</dt><dd class="col-sm-8" dir="ltr">@(Model.PhoneNumber ?? "—")</dd>
+        <dt class="col-sm-4">@T["WorkLocation"]</dt><dd class="col-sm-8">@(Model.WorkLocation ?? "—")</dd>
+    </dl>
+    <p class="form-text mt-3 mb-0">@T["ProfileReadOnlyHint"]</p>
+</section>

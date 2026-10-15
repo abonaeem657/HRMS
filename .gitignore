@@ -1,0 +1,32 @@
+﻿.vs/
+**/bin/
+**/obj/
+.vscode/
+*.user
+*.suo
+*.cache
+*.log
+**/TestResults/
+artifacts/
+.nuget/packages/
+*.pfx
+*.p12
+*.key
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+**/appsettings.Development.json
+**/appsettings.Local.json
+secrets.json
+
+# Database backups and local databases
+*.bak
+*.mdf
+*.ldf
+*.sqlite
+*.db
+
+# Local backup folders
+localization-backup-*/

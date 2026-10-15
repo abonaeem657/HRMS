@@ -1,0 +1,83 @@
+@using System.Globalization
+@using HRMS.Application.Identity
+@model HRMS.Models.Home.HomeDashboardViewModel
+@{
+    var ar = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+    ViewData["Title"] = T["Home"].Value;
+    var summary = Model.Summary;
+    var needsSetup = Model.CanManageOrganization && (Model.DepartmentCount == 0 || Model.PositionCount == 0);
+    var needsEmployees = Model.CanManageEmployees && Model.EmployeeCount == 0 && Model.DepartmentCount > 0 && Model.PositionCount > 0;
+    var managerReady = !Model.IsDepartmentManager || Model.DepartmentId is not null;
+}
+<div class="home-dashboard home-simple">
+    <section class="dashboard-welcome" aria-labelledby="welcome-title">
+        <div>
+            <span class="dashboard-eyebrow">@Model.Today.ToDateTime(TimeOnly.MinValue).ToString("dddd، d MMMM yyyy", CultureInfo.CurrentUICulture)</span>
+            <h1 id="welcome-title">@T["WelcomeUser", Model.DisplayName]</h1>
+            <p>@(ar ? "أهم ما تحتاجه لبدء يومك، في مكان واحد." : "What you need to start your day, in one place.")</p>
+        </div>
+        <span class="role-chip">@Model.RoleName</span>
+    </section>
+
+    @if (Model.CanViewHrData)
+    {
+        <div class="home-stats" aria-label="@(ar ? "ملخص المؤسسة" : "Organization summary")">
+            <div><span>@T["ActiveEmployees"]</span><strong>@Model.EmployeeCount</strong></div>
+            <div><span>@T["Departments"]</span><strong>@Model.DepartmentCount</strong></div>
+            <div><span>@T["PendingLeaveRequests"]</span><strong>@(summary?.PendingLeaveRequests ?? 0)</strong></div>
+        </div>
+    }
+    else if (Model.IsDepartmentManager && managerReady)
+    {
+        <div class="home-stats">
+            <div><span>@T["YourDepartment"]</span><strong class="stat-name">@Model.DepartmentName</strong></div>
+            <div><span>@T["DepartmentEmployees"]</span><strong>@(summary?.EmployeesByDepartment.FirstOrDefault()?.TotalEmployees ?? 0)</strong></div>
+            <div><span>@T["PendingLeaveRequests"]</span><strong>@(summary?.PendingLeaveRequests ?? 0)</strong></div>
+        </div>
+    }
+
+    @if (needsSetup || needsEmployees)
+    {
+        <partial name="_NextStep" model="Model" />
+    }
+    else if (Model.IsDepartmentManager && !managerReady)
+    {
+        <section class="dashboard-panel">
+            <h2 class="h5">@T["NoLinkedEmployee"]</h2>
+            <p class="mb-0 text-muted">@T["DepartmentManagerSetupHint"]</p>
+        </section>
+    }
+    else if (Model.CanApproveLeaves)
+    {
+        <section class="home-task">
+            <div class="home-task-mark" aria-hidden="true">@(summary?.PendingLeaveRequests > 0 ? "!" : "✓")</div>
+            <div><h2>@(ar ? "طلبات تحتاج مراجعتك" : "Requests awaiting your review")</h2>
+                <p>@(summary?.PendingLeaveRequests > 0
+                    ? (ar ? "راجع طلبات الإجازة المعلّقة وسجّل الموافقة أو سبب الرفض." : "Review pending leave requests and record a decision.")
+                    : (ar ? "لا توجد طلبات إجازة معلّقة ضمن نطاقك حاليًا." : "There are no pending leave requests in your scope."))</p>
+            </div>
+            @if (summary?.PendingLeaveRequests > 0)
+            { <a class="btn btn-primary" asp-controller="LeaveManagement" asp-action="Index" asp-route-status="Pending">@(ar ? "مراجعة الطلبات" : "Review requests")</a> }
+        </section>
+    }
+
+    @if (!Model.CanViewHrData && Model.CanUseAttendance && Model.HasLinkedEmployee)
+    {
+        <partial name="_PersonalWorkspace" model="Model" />
+    }
+    else if (!Model.CanViewHrData && Model.CanUseAttendance && !Model.IsDepartmentManager)
+    {
+        <section class="dashboard-panel">
+            <h2 class="h5">@T["NoLinkedEmployee"]</h2>
+            <p class="text-muted mb-0">@T["LinkEmployeeForSelfService"]</p>
+        </section>
+    }
+    @if (User.IsInRole(IdentityRoles.Auditor))
+    {
+        <section class="dashboard-panel">
+            <h2 class="h5">@(ar ? "مساحة المراجعة" : "Review workspace")</h2>
+            <p class="text-muted mb-0">@(ar ? "اختر «التقارير» لتحليل بيانات المؤسسة، أو «سجل التدقيق» لمراجعة العمليات. حسابك مخصص للاطلاع دون تعديل البيانات." : "Use Reports to analyze organization data, or Audit log to review recorded operations. Your account provides read access without modifying records.")</p>
+        </section>
+    }
+    <p class="home-footnote">@(ar ? "انتقل بين مهامك من القائمة. شرح الإعداد والأدوار متوفر في «دليل الاستخدام»." : "Use the navigation for your tasks. Setup instructions and role guidance are in Getting started.")</p>
+</div>

@@ -1,0 +1,46 @@
+@model HRMS.Models.Employees.EmployeeDetailsViewModel
+@{
+    ViewData["Title"] = T["EmployeeDetails"].Value;
+}
+
+<div>
+    @if (TempData["StatusMessage"] is string statusMessage)
+    {
+        <div class="alert alert-success" role="status">@statusMessage</div>
+    }
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h2">@T["EmployeeDetails"]</h1>
+        <div class="d-flex gap-2">
+            <a asp-action="Edit" asp-route-id="@Model.EmployeeId" class="btn btn-primary">@T["Edit"]</a>
+            <a asp-action="Delete" asp-route-id="@Model.EmployeeId" class="btn btn-outline-danger">@T["Disable"]</a>
+        </div>
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">@T["EmployeeNumber"]</dt>
+        <dd class="col-sm-9">@Model.EmployeeNumber</dd>
+        <dt class="col-sm-3">@T["Name"]</dt>
+        <dd class="col-sm-9">@Model.FirstName @Model.LastName</dd>
+        <dt class="col-sm-3">@T["WorkEmail"]</dt>
+        <dd class="col-sm-9">@Model.WorkEmail</dd>
+        <dt class="col-sm-3">@T["Phone"]</dt>
+        <dd class="col-sm-9">@(Model.PhoneNumber ?? "—")</dd>
+        <dt class="col-sm-3">@T["HireDate"]</dt>
+        <dd class="col-sm-9">@Model.HireDate.ToString("d")</dd>
+        <dt class="col-sm-3">@T["EmploymentStatus"]</dt>
+        <dd class="col-sm-9">@T.LocalizeValue("Employment.", Model.EmploymentStatus)</dd>
+        <dt class="col-sm-3">@T["EmploymentType"]</dt>
+        <dd class="col-sm-9">@T.LocalizeValue("EmploymentType.", Model.EmploymentType)</dd>
+        <dt class="col-sm-3">@T["Department"]</dt>
+        <dd class="col-sm-9">@Model.DepartmentName</dd>
+        <dt class="col-sm-3">@T["JobTitle"]</dt>
+        <dd class="col-sm-9">@Model.PositionTitle</dd>
+        <dt class="col-sm-3">@T["DirectManager"]</dt>
+        <dd class="col-sm-9">@(Model.ManagerName ?? "—")</dd>
+        <dt class="col-sm-3">@T["WorkLocation"]</dt>
+        <dd class="col-sm-9">@(Model.WorkLocation ?? "—")</dd>
+    </dl>
+
+    <a asp-action="Index" class="btn btn-outline-secondary">@T["BackToList"]</a>
+</div>

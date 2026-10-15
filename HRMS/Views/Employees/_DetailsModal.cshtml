@@ -1,0 +1,25 @@
+@model HRMS.Models.Employees.EmployeeDetailsViewModel
+<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title fs-5" id="hrmsModalLabel">@T["EmployeeDetails"]</h2>
+        <button type="button" class="btn-close ms-0 me-auto" data-bs-dismiss="modal" aria-label="@T["Close"].Value"></button>
+    </div>
+    <div class="modal-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">@T["EmployeeNumber"]</dt><dd class="col-sm-8">@Model.EmployeeNumber</dd>
+            <dt class="col-sm-4">@T["Name"]</dt><dd class="col-sm-8">@Model.FirstName @Model.LastName</dd>
+            <dt class="col-sm-4">@T["WorkEmail"]</dt><dd class="col-sm-8">@Model.WorkEmail</dd>
+            <dt class="col-sm-4">@T["Phone"]</dt><dd class="col-sm-8">@(Model.PhoneNumber ?? "—")</dd>
+            <dt class="col-sm-4">@T["HireDate"]</dt><dd class="col-sm-8">@Model.HireDate.ToString("d")</dd>
+            <dt class="col-sm-4">@T["EmploymentStatus"]</dt><dd class="col-sm-8">@T.LocalizeValue("Employment.", Model.EmploymentStatus)</dd>
+            <dt class="col-sm-4">@T["EmploymentType"]</dt><dd class="col-sm-8">@T.LocalizeValue("EmploymentType.", Model.EmploymentType)</dd>
+            <dt class="col-sm-4">@T["Department"]</dt><dd class="col-sm-8">@Model.DepartmentName</dd>
+            <dt class="col-sm-4">@T["JobTitle"]</dt><dd class="col-sm-8">@Model.PositionTitle</dd>
+            <dt class="col-sm-4">@T["DirectManager"]</dt><dd class="col-sm-8">@(Model.ManagerName ?? "—")</dd>
+            <dt class="col-sm-4">@T["WorkLocation"]</dt><dd class="col-sm-8">@(Model.WorkLocation ?? "—")</dd>
+        </dl>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">@T["Close"]</button>
+    </div>
+</div>

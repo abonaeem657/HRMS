@@ -1,0 +1,19 @@
+@model HRMS.Models.Organization.PositionDetailsViewModel
+<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title fs-5" id="hrmsModalLabel">@T["PositionDetails"]</h2>
+        <button type="button" class="btn-close ms-0 me-auto" data-bs-dismiss="modal" aria-label="@T["Close"].Value"></button>
+    </div>
+    <div class="modal-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">@T["Code"]</dt><dd class="col-sm-8">@Model.Code</dd>
+            <dt class="col-sm-4">@T["PositionTitle"]</dt><dd class="col-sm-8">@Model.Title</dd>
+            <dt class="col-sm-4">@T["Grade"]</dt><dd class="col-sm-8">@(Model.Grade ?? T["GradeUnavailable"].Value)</dd>
+            <dt class="col-sm-4">@T["Description"]</dt><dd class="col-sm-8">@(Model.Description ?? T["NoDescription"].Value)</dd>
+            <dt class="col-sm-4">@T["Department"]</dt><dd class="col-sm-8">@(Model.DepartmentName ?? T["General"].Value)</dd>
+            <dt class="col-sm-4">@T["EmployeeCount"]</dt><dd class="col-sm-8">@Model.EmployeeCount</dd>
+            <dt class="col-sm-4">@T["Status"]</dt><dd class="col-sm-8">@(Model.IsActive ? T["Status.Active"].Value : T["Status.Inactive"].Value)</dd>
+        </dl>
+    </div>
+    <div class="modal-footer"><button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">@T["Close"]</button></div>
+</div>

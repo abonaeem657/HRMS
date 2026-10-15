@@ -1,0 +1,26 @@
+@using HRMS.Application.Identity
+@model HRMS.Models.Home.HomeDashboardViewModel
+@{
+    var ar = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+    var controller = "Home";
+    var action = "Guide";
+    var title = ar ? "مساحة عملك جاهزة" : "Your workspace is ready";
+    var description = ar ? "ابدأ من دليل الاستخدام لمعرفة مهام دورك وخطوات العمل." : "Open the guide to explore your role and everyday tasks.";
+    var button = ar ? "افتح الدليل" : "Open the guide";
+    if (User.IsInRoles(IdentityRoles.ManageOrganization) && Model.DepartmentCount == 0)
+    { controller = "Departments"; action = "Create"; title = ar ? "لنبدأ بتأسيس المؤسسة" : "Start with your organization"; description = ar ? "أضف القسم الأول، ثم المسمّى الوظيفي، وبعدها أضف الموظفين." : "Create your first department, then a job title, then add employees."; button = T["Departments"].Value; }
+    else if (User.IsInRoles(IdentityRoles.ManageOrganization) && Model.PositionCount == 0)
+    { controller = "Positions"; action = "Create"; title = ar ? "الخطوة التالية: المسميات الوظيفية" : "Next: define job titles"; description = ar ? "اربط المسميات بالأقسام حتى تتمكن من إضافة الموظفين." : "Connect job titles to departments before adding employees."; button = T["JobTitles"].Value; }
+    else if (Model.CanViewHrData && Model.EmployeeCount == 0 && Model.DepartmentCount > 0 && Model.PositionCount > 0)
+    { controller = "Employees"; action = "Create"; title = ar ? "أضف أول عضو في الفريق" : "Welcome your first team member"; description = ar ? "أكمل بيانات الموظف، ثم اربط حساب دخوله من إدارة المستخدمين بواسطة الأدمن." : "Create the employee record, then ask an administrator to link their login account."; button = T["AddEmployee"].Value; }
+    else if (User.IsInRoles(IdentityRoles.ManageLeaves))
+    { controller = "LeaveManagement"; action = "Index"; title = ar ? "تابع طلبات الفريق" : "Keep your team's requests moving"; description = ar ? "راجع الطلبات المعلّقة واتخذ القرار، أو استخدم القائمة للوصول إلى الموظفين والحضور والتقارير." : "Review pending requests and take action, or use the navigation to reach people, attendance and reports."; button = T["Leave"].Value; }
+    else if (User.IsInRole(IdentityRoles.Employee) && Model.HasLinkedEmployee)
+    { controller = "Attendance"; action = "Index"; title = ar ? "ابدأ يومك بتسجيل الحضور" : "Start your day with a check-in"; description = ar ? "سجّل الحضور والانصراف، وتابع طلبات إجازتك من مساحة العمل الشخصية." : "Check in and out, and track your leave requests in your personal workspace."; button = T["Attendance"].Value; }
+    else if (User.IsInRole(IdentityRoles.Auditor))
+    { controller = "Reports"; action = "Index"; title = ar ? "البيانات التي تحتاجها للمراجعة" : "The information you need to review"; description = ar ? "استعرض التقارير وسجل التدقيق دون تعديل بيانات الموظفين." : "Review reports and audit history without editing employee records."; button = T["Reports"].Value; }
+}
+<section class="workflow-banner" aria-labelledby="next-step-title">
+    <div><span class="workflow-kicker">@(ar ? "خطوتك التالية" : "YOUR NEXT STEP")</span><h2 id="next-step-title">@title</h2><p>@description</p></div>
+    <a class="btn" asp-controller="@controller" asp-action="@action">@button <span aria-hidden="true">↗</span></a>
+</section>

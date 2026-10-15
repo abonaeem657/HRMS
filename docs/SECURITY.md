@@ -1,0 +1,7 @@
+# Security boundaries
+
+Identity password rules: minimum 10 characters, upper/lower/digit/symbol; lockout after 5 attempts for 15 minutes. Six roles, server authorization and leave relationship checks; cookies are HttpOnly, SameSite=Lax and Secure in Production. CSRF remains enabled for cookie-authenticated API writes. Deleted/inactive linked employee checks execute on cookie validation. Errors never expose SQL text through the conflict handler. Audit forbids secrets; phone changes record only field names.
+
+Some route tests use a test-only authentication handler. Separate SQL tests verify real Identity credentials/cookies, and Chrome acceptance exercises real login and operations against the published Production app over local HTTPS. Test writes target disposable databases. Development seeding requires explicit flags and caller-provided passwords.
+
+No external deployment or permission grants were made. Production hardening requires encrypted SQL, restricted DB roles/audit grants, protected Data Protection keys, reviewed package scan, HTTPS and backups. File upload features are optional and not implemented. Login and initial setup POSTs are limited to 10 requests per minute per remote IP; API v1 endpoints are limited to 120 requests per minute per authenticated user or remote IP. Exceeded limits return 429. Tune these limits against real traffic and configure trusted forwarded headers if deploying behind a reverse proxy. Identity lockout remains enabled.

@@ -1,0 +1,14 @@
+@model ErrorViewModel
+@{
+    ViewData["Title"] = T["Error"].Value;
+}
+
+<h1 class="text-danger">@T["Error"]</h1>
+<h2 class="text-danger">@T["RequestProcessingError"]</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>@T["RequestId"]:</strong> <code>@Model.RequestId</code>
+    </p>
+}

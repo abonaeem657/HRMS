@@ -1,0 +1,156 @@
+@using HRMS.Application.Identity
+@model HRMS.Models.Attendance.AttendanceListViewModel
+@{
+    ViewData["Title"] = T["Attendance"].Value;
+    var canManage = User.IsInRole(IdentityRoles.SystemAdministrator) ||
+                    User.IsInRole(IdentityRoles.HRManager) ||
+                    User.IsInRole(IdentityRoles.HROfficer);
+}
+
+<div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+    <div>
+        <h1 class="h3 mb-1">@T["Attendance"]</h1>
+        <p class="text-muted mb-0">@T["AttendanceUtcInfo"]</p>
+    </div>
+    @if (canManage)
+    {
+        <a asp-action="Correct" class="btn btn-outline-primary">@T["CorrectRecord"]</a>
+    }
+</div>
+
+@if (TempData["StatusMessage"] is string successMessage)
+{
+    <div class="alert alert-success" role="status">@successMessage</div>
+}
+@if (TempData["ErrorMessage"] is string errorMessage)
+{
+    <div class="alert alert-danger" role="alert">@errorMessage</div>
+}
+
+@if (ViewBag.CanRecordOwnAttendance == true)
+{
+    <div class="card mb-3">
+        <div class="card-body d-flex flex-wrap gap-2">
+            <form asp-action="CheckIn" method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-success">@T["CheckInNow"]</button>
+            </form>
+            <form asp-action="CheckOut" method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-outline-danger">@T["CheckOutNow"]</button>
+            </form>
+        </div>
+    </div>
+}
+
+<div class="row g-3 mb-3">
+    <div class="col-6 col-lg-2"><div class="card h-100"><div class="card-body"><div class="text-muted small">@T["Records"]</div><strong>@Model.Summary.TotalRecords</strong></div></div></div>
+    <div class="col-6 col-lg-2"><div class="card h-100"><div class="card-body"><div class="text-muted small">@T["Status.Present"]</div><strong>@Model.Summary.PresentCount</strong></div></div></div>
+    <div class="col-6 col-lg-2"><div class="card h-100"><div class="card-body"><div class="text-muted small">@T["Status.Late"]</div><strong>@Model.Summary.LateCount</strong></div></div></div>
+    <div class="col-6 col-lg-2"><div class="card h-100"><div class="card-body"><div class="text-muted small">@T["Status.Absent"]</div><strong>@Model.Summary.AbsentCount</strong></div></div></div>
+    <div class="col-6 col-lg-2"><div class="card h-100"><div class="card-body"><div class="text-muted small">@T["Status.HalfDay"]</div><strong>@Model.Summary.HalfDayCount</strong></div></div></div>
+    <div class="col-6 col-lg-2"><div class="card h-100"><div class="card-body"><div class="text-muted small">@T["Hours"]</div><strong>@Model.Summary.TotalHoursWorked.ToString("F2")</strong></div></div></div>
+</div>
+
+<form asp-action="Index" method="get" class="card card-body mb-3">
+    <div asp-validation-summary="All" class="text-danger mb-2"></div>
+    <div class="row g-2 align-items-end">
+        @if (canManage)
+        {
+            <div class="col-12 col-md-4">
+                <label asp-for="EmployeeId" class="form-label">@T["Employee"]</label>
+                <select asp-for="EmployeeId" asp-items="Model.Employees" class="form-select">
+                    <option value="">@T["AllEmployees"]</option>
+                </select>
+            </div>
+            <div class="col-12 col-md-3">
+                <label asp-for="DepartmentId" class="form-label">@T["Department"]</label>
+                <select asp-for="DepartmentId" asp-items="Model.Departments" class="form-select">
+                    <option value="">@T["AllDepartments"]</option>
+                </select>
+            </div>
+        }
+        <div class="col-6 col-md-2">
+            <label asp-for="FromDate" class="form-label">@T["FromDate"]</label>
+            <input asp-for="FromDate" class="form-control" />
+        </div>
+        <div class="col-6 col-md-2">
+            <label asp-for="ToDate" class="form-label">@T["ToDate"]</label>
+            <input asp-for="ToDate" class="form-control" />
+        </div>
+        <div class="col-12 col-md-2">
+            <label asp-for="Status" class="form-label">@T["Status"]</label>
+            <select asp-for="Status" class="form-select">
+                <option value="">@T["All"]</option>
+                <option value="Present">@T["Status.Present"]</option>
+                <option value="Late">@T["Status.Late"]</option>
+                <option value="Absent">@T["Status.Absent"]</option>
+                <option value="HalfDay">@T["Status.HalfDay"]</option>
+            </select>
+        </div>
+        <input type="hidden" name="Page" value="1" />
+        <div class="col-12"><button type="submit" class="btn btn-primary">@T["Filter"]</button></div>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+        <tr>
+            <th>@T["Date"]</th>
+            <th>@T["EmployeeNumber"]</th>
+            <th>@T["Employee"]</th>
+            <th>@T["Department"]</th>
+            <th>@T["CheckInUtc"]</th>
+            <th>@T["CheckOutUtc"]</th>
+            <th>@T["Hours"]</th>
+            <th>@T["Status"]</th>
+            <th>@T["Notes"]</th>
+            @if (canManage) { <th>@T["Actions"]</th> }
+        </tr>
+        </thead>
+        <tbody>
+        @if (Model.Records.Count == 0)
+        {
+            <tr><td colspan="@(canManage ? 10 : 9)" class="text-center text-muted py-4">@T["NoResults"]</td></tr>
+        }
+        @foreach (var record in Model.Records)
+        {
+            <tr>
+                <td>@record.WorkDate.ToString("yyyy-MM-dd")</td>
+                <td>@record.EmployeeNumber</td>
+                <td>@record.EmployeeName</td>
+                <td>@record.DepartmentName</td>
+                <td>@BusinessClock.ToLocal(record.CheckInUtc)?.ToString("HH:mm")</td>
+                <td>@BusinessClock.ToLocal(record.CheckOutUtc)?.ToString("HH:mm")</td>
+                <td>@record.TotalHours.ToString("F2")</td>
+                <td>
+                    @T["Status." + record.Status]
+                    @if (record.IsInvalid)
+                    {
+                        <span class="badge text-bg-danger">@T["InvalidRecord"]</span>
+                    }
+                    @if (record.CheckInUtc.HasValue && !record.CheckOutUtc.HasValue && record.WorkDate < (DateOnly)ViewBag.BusinessDate)
+                    {
+                        <span class="badge text-bg-warning">@T["MissingCheckOut"]</span>
+                    }
+                </td>
+                <td>@record.Notes</td>
+                @if (canManage) { <td><a asp-action="Correct" asp-route-id="@record.AttendanceId" class="btn btn-sm btn-outline-primary">@T["Edit"]</a></td> }
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+<nav aria-label="@T["AttendancePages"]">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(Model.Page <= 1 ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-EmployeeId="@Model.EmployeeId" asp-route-DepartmentId="@Model.DepartmentId" asp-route-FromDate="@Model.FromDate" asp-route-ToDate="@Model.ToDate" asp-route-Status="@Model.Status" asp-route-Page="@(Model.Page - 1)">@T["Previous"]</a>
+        </li>
+        <li class="page-item disabled"><span class="page-link">@Model.Page / @Model.TotalPages</span></li>
+        <li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-EmployeeId="@Model.EmployeeId" asp-route-DepartmentId="@Model.DepartmentId" asp-route-FromDate="@Model.FromDate" asp-route-ToDate="@Model.ToDate" asp-route-Status="@Model.Status" asp-route-Page="@(Model.Page + 1)">@T["Next"]</a>
+        </li>
+    </ul>
+</nav>

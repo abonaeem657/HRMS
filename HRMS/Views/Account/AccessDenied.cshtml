@@ -1,0 +1,8 @@
+@{
+    ViewData["Title"] = T["AccessDenied"].Value;
+}
+<div class="container py-5 text-center">
+    <h1 class="h2">@T["AccessDenied"]</h1>
+    <p class="text-muted">@T["AccessDeniedMessage"]</p>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">@T["BackHome"]</a>
+</div>

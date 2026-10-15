@@ -1,0 +1,42 @@
+@model HRMS.Models.Identity.UserAccountCreateViewModel
+@{
+    ViewData["Title"] = T["CreateUserAccount"].Value;
+}
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+        <h1 class="h2 mb-4">@T["CreateUserAccount"]</h1>
+        <form asp-action="Create" method="post" class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" autocomplete="username" dir="ltr" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control" autocomplete="new-password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <div class="form-text">@T["PasswordRules"]</div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="RoleName" class="form-label"></label>
+                    <select asp-for="RoleName" asp-items="Model.Roles" class="form-select"></select>
+                    <span asp-validation-for="RoleName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="EmployeeId" class="form-label"></label>
+                    <select asp-for="EmployeeId" asp-items="Model.Employees" class="form-select">
+                        <option value="">@T["NoLinkedEmployee"]</option>
+                    </select>
+                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="card-footer bg-transparent d-flex gap-2">
+                <button type="submit" class="btn btn-primary">@T["Create"]</button>
+                <a asp-action="Index" class="btn btn-outline-secondary">@T["Cancel"]</a>
+            </div>
+        </form>
+    </div>
+</div>
+

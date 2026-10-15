@@ -1,0 +1,264 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="Business000" xml:space="preserve">
+    <value>أعادت خدمة العطل الرسمية استجابة غير صالحة.</value>
+  </data>
+  <data name="Business001" xml:space="preserve">
+    <value>أعادت خدمة العطل الرسمية بيانات غير صالحة أو فارغة.</value>
+  </data>
+  <data name="Business002" xml:space="preserve">
+    <value>أوقات الحضور والانصراف غير صالحة.</value>
+  </data>
+  <data name="Business003" xml:space="preserve">
+    <value>اختر دورًا صالحًا.</value>
+  </data>
+  <data name="Business004" xml:space="preserve">
+    <value>البريد الإلكتروني مستخدم بالفعل.</value>
+  </data>
+  <data name="Business005" xml:space="preserve">
+    <value>السنة أو رمز الدولة غير صالح.</value>
+  </data>
+  <data name="Business006" xml:space="preserve">
+    <value>القسم المحدد غير موجود أو غير نشط.</value>
+  </data>
+  <data name="Business007" xml:space="preserve">
+    <value>القسم غير موجود.</value>
+  </data>
+  <data name="Business008" xml:space="preserve">
+    <value>المدير المحدد غير موجود أو تم تعطيله.</value>
+  </data>
+  <data name="Business009" xml:space="preserve">
+    <value>المنصب المحدد غير موجود أو غير نشط.</value>
+  </data>
+  <data name="Business010" xml:space="preserve">
+    <value>المنصب المحدد لا يتبع القسم المختار.</value>
+  </data>
+  <data name="Business011" xml:space="preserve">
+    <value>المنصب غير موجود.</value>
+  </data>
+  <data name="Business012" xml:space="preserve">
+    <value>الموظف المحدد مديرًا للقسم غير موجود أو معطّل.</value>
+  </data>
+  <data name="Business013" xml:space="preserve">
+    <value>الموظف غير موجود أو تاريخ الإجازة يسبق تاريخ التعيين.</value>
+  </data>
+  <data name="Business014" xml:space="preserve">
+    <value>الموظف غير موجود أو تم تعطيله.</value>
+  </data>
+  <data name="Business015" xml:space="preserve">
+    <value>الموظف غير موجود أو مرتبط بحساب آخر.</value>
+  </data>
+  <data name="Business016" xml:space="preserve">
+    <value>الموظف غير موجود.</value>
+  </data>
+  <data name="Business017" xml:space="preserve">
+    <value>بيانات تصحيح الحضور غير صالحة.</value>
+  </data>
+  <data name="Business018" xml:space="preserve">
+    <value>بيانات طلب الإجازة غير صالحة.</value>
+  </data>
+  <data name="Business019" xml:space="preserve">
+    <value>بيانات نوع الإجازة غير صالحة.</value>
+  </data>
+  <data name="Business020" xml:space="preserve">
+    <value>تاريخ البداية يجب ألا يتجاوز تاريخ النهاية.</value>
+  </data>
+  <data name="Business021" xml:space="preserve">
+    <value>تاريخ النهاية يجب ألا يسبق تاريخ البداية.</value>
+  </data>
+  <data name="Business022" xml:space="preserve">
+    <value>تاريخ تسجيل الحضور غير صالح.</value>
+  </data>
+  <data name="Business023" xml:space="preserve">
+    <value>تعذر الحصول على بيانات العطل الرسمية من الخدمة الخارجية.</value>
+  </data>
+  <data name="Business024" xml:space="preserve">
+    <value>تعذر الحفظ؛ قد يكون اسم نوع الإجازة مستخدمًا مسبقًا.</value>
+  </data>
+  <data name="Business025" xml:space="preserve">
+    <value>تعذر العثور على القسم.</value>
+  </data>
+  <data name="Business026" xml:space="preserve">
+    <value>تعذر العثور على المسمى الوظيفي.</value>
+  </data>
+  <data name="Business027" xml:space="preserve">
+    <value>تم إعداد حساب المسؤول الأول بالفعل.</value>
+  </data>
+  <data name="Business028" xml:space="preserve">
+    <value>تم تحديث القسم بنجاح.</value>
+  </data>
+  <data name="Business029" xml:space="preserve">
+    <value>تم تحديث المنصب بنجاح.</value>
+  </data>
+  <data name="Business030" xml:space="preserve">
+    <value>تم تسجيل الانصراف لهذا اليوم مسبقًا.</value>
+  </data>
+  <data name="Business031" xml:space="preserve">
+    <value>تم تسجيل الحضور لهذا اليوم بالفعل.</value>
+  </data>
+  <data name="Business032" xml:space="preserve">
+    <value>تم تعطيل القسم مع الاحتفاظ بسجلاته وموظفيه.</value>
+  </data>
+  <data name="Business033" xml:space="preserve">
+    <value>تم تعطيل المنصب مع الاحتفاظ بموظفيه.</value>
+  </data>
+  <data name="Business034" xml:space="preserve">
+    <value>تم تغيير الطلب بواسطة مستخدم آخر. أعد تحميل الصفحة.</value>
+  </data>
+  <data name="Business035" xml:space="preserve">
+    <value>تم تفعيل القسم.</value>
+  </data>
+  <data name="Business036" xml:space="preserve">
+    <value>تم تفعيل المنصب.</value>
+  </data>
+  <data name="Business037" xml:space="preserve">
+    <value>تمت إضافة القسم بنجاح.</value>
+  </data>
+  <data name="Business038" xml:space="preserve">
+    <value>تمت إضافة المنصب بنجاح.</value>
+  </data>
+  <data name="Business039" xml:space="preserve">
+    <value>تمت مراجعة هذا الطلب مسبقًا.</value>
+  </data>
+  <data name="Business040" xml:space="preserve">
+    <value>رقم الموظف مستخدم بالفعل.</value>
+  </data>
+  <data name="Business041" xml:space="preserve">
+    <value>سبب الرفض مطلوب ويجب ألا يتجاوز 1000 حرف.</value>
+  </data>
+  <data name="Business042" xml:space="preserve">
+    <value>سبب الرفض مطلوب.</value>
+  </data>
+  <data name="Business043" xml:space="preserve">
+    <value>طلب الإجازة غير موجود.</value>
+  </data>
+  <data name="Business044" xml:space="preserve">
+    <value>طلب تغيير حالة القسم غير صالح.</value>
+  </data>
+  <data name="Business045" xml:space="preserve">
+    <value>طلب تغيير حالة المسمى الوظيفي غير صالح.</value>
+  </data>
+  <data name="Business046" xml:space="preserve">
+    <value>كلمة المرور يجب أن تتكون من 10 أحرف على الأقل.</value>
+  </data>
+  <data name="Business047" xml:space="preserve">
+    <value>كلمة المرور يجب أن تحتوي على حرف صغير.</value>
+  </data>
+  <data name="Business048" xml:space="preserve">
+    <value>كلمة المرور يجب أن تحتوي على حرف كبير.</value>
+  </data>
+  <data name="Business049" xml:space="preserve">
+    <value>كلمة المرور يجب أن تحتوي على رقم.</value>
+  </data>
+  <data name="Business050" xml:space="preserve">
+    <value>كلمة المرور يجب أن تحتوي على رمز خاص.</value>
+  </data>
+  <data name="Business051" xml:space="preserve">
+    <value>لا يمكن إلغاء طلب تمت مراجعته.</value>
+  </data>
+  <data name="Business052" xml:space="preserve">
+    <value>لا يمكن اختيار الموظف مديرًا لنفسه.</value>
+  </data>
+  <data name="Business053" xml:space="preserve">
+    <value>لا يمكن تسجيل الانصراف قبل تسجيل الحضور.</value>
+  </data>
+  <data name="Business054" xml:space="preserve">
+    <value>لا يمكن تعطيل آخر مسؤول نظام نشط.</value>
+  </data>
+  <data name="Business055" xml:space="preserve">
+    <value>لا يمكن تغيير القسم المرتبط بالمنصب لأن له موظفين نشطين في أقسام أخرى.</value>
+  </data>
+  <data name="Business056" xml:space="preserve">
+    <value>لا يوجد تسجيل حضور لهذا اليوم.</value>
+  </data>
+  <data name="Business057" xml:space="preserve">
+    <value>لم يتم العثور على حساب المستخدم.</value>
+  </data>
+  <data name="Business058" xml:space="preserve">
+    <value>ملاحظات المراجعة يجب ألا تتجاوز 1000 حرف.</value>
+  </data>
+  <data name="Business059" xml:space="preserve">
+    <value>نوع الإجازة غير متاح.</value>
+  </data>
+  <data name="Business060" xml:space="preserve">
+    <value>نوع الإجازة غير موجود.</value>
+  </data>
+  <data name="Business061" xml:space="preserve">
+    <value>وقت الانصراف غير صالح أو يسبق وقت الحضور.</value>
+  </data>
+  <data name="Business062" xml:space="preserve">
+    <value>يتعارض الطلب مع إجازة معلّقة أو معتمدة لهذا الموظف.</value>
+  </data>
+  <data name="Business063" xml:space="preserve">
+    <value>يجب أن تكون السنة بين 2000 و2100.</value>
+  </data>
+  <data name="Business064" xml:space="preserve">
+    <value>يجب إبقاء مسؤول نظام نشط واحد على الأقل.</value>
+  </data>
+  <data name="Business065" xml:space="preserve">
+    <value>يجب إرسال أوقات الحضور والانصراف بصيغة UTC.</value>
+  </data>
+  <data name="Business066" xml:space="preserve">
+    <value>يجب إرسال وقت الانصراف بصيغة UTC.</value>
+  </data>
+  <data name="Business067" xml:space="preserve">
+    <value>يجب إرسال وقت الحضور بصيغة UTC.</value>
+  </data>
+  <data name="Business068" xml:space="preserve">
+    <value>يوجد سجل حضور لهذا الموظف والتاريخ بالفعل.</value>
+  </data>
+  <data name="Extra000" xml:space="preserve">
+    <value>الوصول غير مسموح.</value>
+  </data>
+  <data name="Extra001" xml:space="preserve">
+    <value>يجب إغلاق سجل الحضور المفتوح أو تصحيحه أولًا.</value>
+  </data>
+  <data name="Extra002" xml:space="preserve">
+    <value>عيّن مديرًا آخر للقسم قبل نقل هذا الموظف.</value>
+  </data>
+  <data name="Extra003" xml:space="preserve">
+    <value>رمز الوظيفة مطلوب ويجب ألا يتجاوز 50 حرفًا.</value>
+  </data>
+  <data name="Extra004" xml:space="preserve">
+    <value>رمز الوظيفة مستخدم بالفعل.</value>
+  </data>
+  <data name="Extra005" xml:space="preserve">
+    <value>المسمى الوظيفي مطلوب.</value>
+  </data>
+  <data name="Extra006" xml:space="preserve">
+    <value>وصف الوظيفة أو درجتها يتجاوز الحد المسموح.</value>
+  </data>
+  <data name="Extra007" xml:space="preserve">
+    <value>انتهت مهلة الاتصال بالخدمة الخارجية.</value>
+  </data>
+  <data name="HireDateRequired">
+    <value>تاريخ التعيين مطلوب.</value>
+  </data>
+  <data name="EmployeeNumberRequired">
+    <value>رقم الموظف مطلوب.</value>
+  </data>
+  <data name="FirstNameRequired">
+    <value>الاسم الأول مطلوب.</value>
+  </data>
+  <data name="LastNameRequired">
+    <value>اسم العائلة مطلوب.</value>
+  </data>
+  <data name="ValidEmailRequired">
+    <value>يرجى إدخال عنوان بريد إلكتروني صحيح.</value>
+  </data>
+  <data name="EmploymentStatusRequired">
+    <value>حالة التوظيف مطلوبة.</value>
+  </data>
+  <data name="EmploymentTypeRequired">
+    <value>نوع التوظيف مطلوب.</value>
+  </data>
+  <data name="CheckInWorkDate">
+    <value>يجب أن يكون وقت الدخول ضمن تاريخ الدوام المحدد.</value>
+  </data>
+  <data name="ConcurrentEdit">
+    <value>تم تعديل السجل. أعد تحميل الصفحة وحاول مرة أخرى.</value>
+  </data>
+  <data name="DuplicateIdentifier">
+    <value>يوجد سجل بهذا المعرّف بالفعل.</value>
+  </data>
+</root>

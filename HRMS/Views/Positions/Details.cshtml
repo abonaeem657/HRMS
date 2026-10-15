@@ -1,0 +1,38 @@
+@model HRMS.Models.Organization.PositionDetailsViewModel
+@{
+    ViewData["Title"] = T["PositionDetails"].Value;
+}
+<div>
+    @if (TempData["StatusMessage"] is string message)
+    {
+        <div class="alert alert-success" role="status">@message</div>
+    }
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h2">@T["PositionDetails"]</h1>
+        <div class="d-flex gap-2">
+            <a asp-action="Edit" asp-route-id="@Model.PositionId" class="btn btn-primary">@T["Edit"]</a>
+            <form asp-action="SetActive" asp-route-id="@Model.PositionId" method="post">
+                <input type="hidden" name="isActive" value="@(!Model.IsActive)" />
+                <button type="submit" class="btn btn-outline-warning">
+                    @(Model.IsActive ? T["Disable"].Value : T["Enable"].Value)
+                </button>
+            </form>
+        </div>
+    </div>
+    <dl class="row">
+        <dt class="col-sm-3">@T["Code"]</dt><dd class="col-sm-9">@Model.Code</dd>
+        <dt class="col-sm-3">@T["PositionTitle"]</dt><dd class="col-sm-9">@Model.Title</dd>
+        <dt class="col-sm-3">@T["Grade"]</dt><dd class="col-sm-9">@(Model.Grade ?? T["GradeUnavailable"].Value)</dd>
+        <dt class="col-sm-3">@T["Description"]</dt><dd class="col-sm-9">@(Model.Description ?? T["NoDescription"].Value)</dd>
+        <dt class="col-sm-3">@T["Department"]</dt><dd class="col-sm-9">@(Model.DepartmentName ?? T["GeneralPosition"].Value)</dd>
+        <dt class="col-sm-3">@T["ActiveEmployees"]</dt><dd class="col-sm-9">@Model.EmployeeCount</dd>
+        <dt class="col-sm-3">@T["Status"]</dt><dd class="col-sm-9">@(Model.IsActive ? T["Status.Active"].Value : T["Status.Inactive"].Value)</dd>
+    </dl>
+    @if (Model.EmployeeCount > 0)
+    {
+        <div class="alert alert-info" role="status">
+            @T["PositionHasEmployees"]
+        </div>
+    }
+    <a asp-action="Index" class="btn btn-outline-secondary">@T["BackToPositions"]</a>
+</div>

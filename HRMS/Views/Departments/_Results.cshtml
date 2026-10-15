@@ -1,0 +1,41 @@
+@model HRMS.Models.Organization.DepartmentListViewModel
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle mb-0 hrms-table">
+        <thead><tr><th>@T["Code"]</th><th>@T["DepartmentName"]</th><th>@T["Manager"]</th><th>@T["EmployeeCount"]</th><th>@T["Status"]</th><th>@T["Actions"]</th></tr></thead>
+        <tbody>
+            @if (Model.Departments.Count == 0)
+            {
+                <tr><td colspan="6" class="text-center text-muted py-4">@T["NoDepartmentsFound"]</td></tr>
+            }
+            else
+            {
+                @foreach (var department in Model.Departments)
+                {
+                    <tr>
+                        <td>@department.Code</td><td>@department.Name</td><td>@(department.ManagerName ?? "—")</td>
+                        <td>@department.EmployeeCount</td>
+                        <td><span class="badge status-badge @(department.IsActive ? "status-active" : "status-inactive")" data-record-status>@(department.IsActive ? T["Status.Active"].Value : T["Status.Inactive"].Value)</span></td>
+                        <td>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button type="button" class="btn btn-sm btn-outline-secondary"
+                                        data-modal-url="@Url.Action("Details", new { id = department.DepartmentId, modal = true })">@T["Details"]</button>
+                                @if (User.IsInRoles(IdentityRoles.ManageOrganization))
+                                {
+                                    <button type="button" class="btn btn-sm btn-outline-primary"
+                                            data-modal-url="@Url.Action("Edit", new { id = department.DepartmentId, modal = true })">@T["Edit"]</button>
+                                    <form asp-action="SetActive" asp-route-id="@department.DepartmentId" method="post" data-active-form>
+                                        <input type="hidden" name="isActive" value="@(department.IsActive ? "false" : "true")" />
+                                        <button type="submit" class="btn btn-sm btn-outline-@(department.IsActive ? "danger" : "success")">
+                                            <span class="spinner-border spinner-border-sm d-none" aria-hidden="true"></span>
+                                            @(department.IsActive ? T["Disable"].Value : T["Enable"].Value)
+                                        </button>
+                                    </form>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,59 @@
+@using System.Globalization
+@model HRMS.Models.Home.HomeDashboardViewModel
+@{
+    var arabic = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+    var record = Model.TodayAttendance;
+}
+<div class="dashboard-lower-grid personal-grid">
+    @if (Model.CanUseAttendance)
+    {
+        <section class="dashboard-panel" aria-labelledby="my-attendance-title">
+            <div class="panel-heading"><div><span class="section-kicker">@T["Today"]</span><h2 id="my-attendance-title">@T["MyAttendance"]</h2></div><a class="panel-link" asp-controller="Attendance" asp-action="Index">@T["AttendanceRecord"] ↗</a></div>
+            @if (Model.EmployeeId is null)
+            {
+                <div class="empty-guidance"><strong>@T["NoLinkedEmployee"]</strong><p>@T["LinkEmployeeForSelfService"]</p></div>
+            }
+            else
+            {
+                <div class="attendance-state">
+                    <div class="attendance-times"><div><span>@T["CheckIn"]</span><strong>@(BusinessClock.ToLocal(record?.CheckInUtc)?.ToString("t", CultureInfo.CurrentUICulture) ?? "—")</strong></div><div><span>@T["CheckOut"]</span><strong>@(BusinessClock.ToLocal(record?.CheckOutUtc)?.ToString("t", CultureInfo.CurrentUICulture) ?? "—")</strong></div><div><span>@T["TotalHours"]</span><strong>@(record?.TotalHours.ToString("N1", CultureInfo.CurrentUICulture) ?? "0")</strong></div></div>
+                    <div class="attendance-actions">
+                        @if (record?.CheckInUtc is null)
+                        {
+                            <form asp-controller="Attendance" asp-action="CheckIn" method="post"><button class="btn btn-primary" type="submit">@T["CheckIn"]</button></form>
+                        }
+                        else if (record.CheckOutUtc is null)
+                        {
+                            <form asp-controller="Attendance" asp-action="CheckOut" method="post"><button class="btn btn-outline-primary" type="submit">@T["CheckOut"]</button></form>
+                        }
+                        else { <form asp-controller="Attendance" asp-action="CheckIn" method="post"><button class="btn btn-primary" type="submit">@T["NewAttendanceSession"]</button></form> }
+                    </div>
+                </div>
+            }
+        </section>
+    }
+    @if (Model.CanUseLeaves)
+    {
+        <section class="dashboard-panel" aria-labelledby="my-leaves-title">
+            <div class="panel-heading"><div><span class="section-kicker">@T["MyWorkspace"]</span><h2 id="my-leaves-title">@T["MyLeaveRequests"]</h2></div><a class="panel-link" asp-controller="LeaveManagement" asp-action="Index">@T["ViewMyRequests"] ↗</a></div>
+            @if (Model.EmployeeId is null)
+            {
+                <div class="empty-guidance"><p>@T["NoLinkedEmployee"]</p></div>
+            }
+            else if (Model.MyLeaveRequests.Count == 0)
+            {
+                <div class="empty-guidance"><p>@T["NoLeaveRequestsThisYear"]</p><a class="btn btn-sm btn-primary" asp-controller="LeaveManagement" asp-action="Create">@T["RequestLeave"]</a></div>
+            }
+            else
+            {
+                <ul class="my-leave-list">
+                    @foreach (var leave in Model.MyLeaveRequests.OrderByDescending(x => x.AppliedAtUtc).Take(4))
+                    {
+                        <li><span><strong>@(arabic ? leave.LeaveTypeNameAr : leave.LeaveTypeName)</strong><small>@leave.StartDate.ToString("d", CultureInfo.CurrentUICulture) – @leave.EndDate.ToString("d", CultureInfo.CurrentUICulture)</small></span><span class="leave-status">@T["Status." + leave.Status]</span></li>
+                    }
+                </ul>
+                <a class="btn btn-sm btn-outline-secondary mt-3" asp-controller="LeaveManagement" asp-action="MyReport">@T["MyLeaveReport"]</a> <a class="btn btn-sm btn-outline-primary mt-3" asp-controller="LeaveManagement" asp-action="Create">@T["RequestLeave"]</a>
+            }
+        </section>
+    }
+</div>

@@ -1,0 +1,22 @@
+@using System.Globalization
+@model HRMS.Models.Reporting.LeaveDecisionReportViewModel
+@{
+    var arabic = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+    ViewData["Title"] = T["DecisionTitle"].Value;
+}
+<div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+    <div><h1 class="h2 mb-1">@T["DecisionTitle"]</h1><p class="text-muted mb-0">@T["DecisionIntro"]</p></div>
+    <a class="btn btn-outline-secondary" asp-action="Index">@T["BackToReports"]</a>
+</div>
+@if (TempData["ErrorMessage"] is string errorMessage) { <div class="alert alert-warning" role="alert">@errorMessage</div> }
+<form asp-action="LeaveDecisions" method="get" class="card border-0 shadow-sm mb-4"><div class="card-body row g-3 align-items-end">
+    <div class="col-md-4"><label asp-for="FromDate" class="form-label">@T["DecisionFrom"]</label><input asp-for="FromDate" type="date" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="ToDate" class="form-label">@T["DecisionTo"]</label><input asp-for="ToDate" type="date" class="form-control" /></div>
+    @if (Model.Departments.Count > 0) { <div class="col-md-3"><label asp-for="DepartmentId" class="form-label">@T["Department"]</label><select asp-for="DepartmentId" asp-items="Model.Departments" class="form-select"><option value="">@T["AllDepartments"]</option></select></div> }
+    <div class="col-md-auto"><button type="submit" class="btn btn-primary">@T["ApplyFilters"]</button></div>
+</div></form>
+<div class="row g-3">
+    <div class="col-md-6"><section class="card border-0 shadow-sm h-100"><div class="card-body"><div class="text-muted">@T["ApprovedRequests"]</div><div class="display-5 fw-semibold text-success">@Model.Summary.ApprovedCount</div></div></section></div>
+    <div class="col-md-6"><section class="card border-0 shadow-sm h-100"><div class="card-body"><div class="text-muted">@T["RejectedRequests"]</div><div class="display-5 fw-semibold text-danger">@Model.Summary.RejectedCount</div></div></section></div>
+</div>
+<p class="text-muted small mt-3">@T["Period"]: @Model.Summary.FromDate.ToString("d", CultureInfo.CurrentUICulture) – @Model.Summary.ToDate.ToString("d", CultureInfo.CurrentUICulture)</p>

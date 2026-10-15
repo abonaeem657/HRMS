@@ -1,0 +1,30 @@
+@model HRMS.Models.LeaveManagement.LeaveRequestFormViewModel
+@{
+    ViewData["Title"] = T["RequestLeave"].Value;
+}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <h1 class="h3 mb-3">@T["RequestLeave"]</h1>
+        <form asp-action="Create" method="post" class="card card-body">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <div class="mb-3">
+                <label asp-for="LeaveTypeId" class="form-label"></label>
+                <select asp-for="LeaveTypeId" asp-items="Model.LeaveTypes" class="form-select"><option value="">@T["SelectType"]</option></select>
+                <span asp-validation-for="LeaveTypeId" class="text-danger"></span>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-6 mb-3"><label asp-for="StartDate" class="form-label"></label><input asp-for="StartDate" type="date" asp-format="{0:yyyy-MM-dd}" class="form-control" /><span asp-validation-for="StartDate" class="text-danger"></span></div>
+                <div class="col-md-6 mb-3"><label asp-for="EndDate" class="form-label"></label><input asp-for="EndDate" type="date" asp-format="{0:yyyy-MM-dd}" class="form-control" /><span asp-validation-for="EndDate" class="text-danger"></span></div>
+            </div>
+            <div class="mb-3"><label asp-for="Reason" class="form-label"></label><textarea asp-for="Reason" class="form-control" rows="4"></textarea><span asp-validation-for="Reason" class="text-danger"></span></div>
+            <div class="row g-3 mb-3">
+                <div class="col-md-6"><label asp-for="StartTime" class="form-label"></label><input asp-for="StartTime" type="time" asp-format="{0:HH:mm}" class="form-control" /><span asp-validation-for="StartTime" class="text-danger"></span></div>
+                <div class="col-md-6"><label asp-for="EndTime" class="form-label"></label><input asp-for="EndTime" type="time" asp-format="{0:HH:mm}" class="form-control" /><span asp-validation-for="EndTime" class="text-danger"></span></div>
+            </div>
+            <p class="form-text">@T["LeaveTimeHint"]</p>
+            <div class="d-flex gap-2"><button type="submit" class="btn btn-primary">@T["SubmitRequest"]</button><a asp-action="Index" class="btn btn-outline-secondary">@T["Cancel"]</a></div>
+        </form>
+    </div>
+</div>
+

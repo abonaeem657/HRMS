@@ -1,0 +1,109 @@
+@model HRMS.Models.Employees.EmployeeListViewModel
+@{
+    ViewData["Title"] = T["EmployeesManagement"].Value;
+}
+
+<div>
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+            <h1 class="h2 mb-1">@T["EmployeesManagement"]</h1>
+            <p class="text-muted mb-0">@T["SearchEmployeesIntro"]</p>
+        </div>
+        @if (User.IsInRoles(IdentityRoles.ManageEmployees))
+        {
+            <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-outline-secondary" asp-action="Deleted">@T["DeletedEmployees"]</a>
+                <button type="button" class="btn btn-primary"
+                        data-modal-url="@Url.Action("Create", new { modal = true })">
+                    <span aria-hidden="true">+</span> @T["AddEmployee"]
+                </button>
+            </div>
+        }
+    </div>
+
+    <div id="pageStatus" class="alert d-none" role="status" aria-live="polite"></div>
+    @if (TempData["StatusMessage"] is string statusMessage)
+    {
+        <div class="alert alert-success" role="status">@statusMessage</div>
+    }
+
+    @if (Model.Departments.Count == 0)
+    {
+        <div class="alert alert-warning" role="status">
+            @T["DepartmentSetupRequired"]
+        </div>
+    }
+
+    <form asp-action="Index" method="get" class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <div class="row g-3 align-items-end">
+                <div class="col-12 col-lg-4">
+                    <label for="Search" class="form-label">@T["Search"]</label>
+                    <input asp-for="Search" class="form-control"
+                           placeholder="@T["SearchEmployees"]" />
+                </div>
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <label asp-for="DepartmentId" class="form-label">@T["Department"]</label>
+                    <select asp-for="DepartmentId" asp-items="Model.Departments" class="form-select">
+                        <option value="">@T["AllDepartments"]</option>
+                    </select>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <label asp-for="EmploymentStatus" class="form-label">@T["EmploymentStatus"]</label>
+                    <select asp-for="EmploymentStatus" class="form-select">
+                        <option value="">@T["ActiveEmployees"]</option>
+                        <option value="@HRMS.Application.Employees.EmployeeListQuery.AllStatuses">@T["AllEmployees"]</option>
+                        @foreach (var status in Model.EmploymentStatuses)
+                        {
+                            <option value="@status">@T.LocalizeValue("Employment.", status)</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <label for="SortBy" class="form-label">@T["SortBy"]</label>
+                    <select name="SortBy" id="SortBy" class="form-select">
+                        <option value="number" selected="@(Model.SortBy == "number")">@T["EmployeeNumber"]</option>
+                        <option value="name" selected="@(Model.SortBy == "name")">@T["Name"]</option>
+                        <option value="email" selected="@(Model.SortBy == "email")">@T["Email"]</option>
+                        <option value="department" selected="@(Model.SortBy == "department")">@T["Department"]</option>
+                        <option value="hireDate" selected="@(Model.SortBy == "hireDate")">@T["HireDate"]</option>
+                        <option value="status" selected="@(Model.SortBy == "status")">@T["Status"]</option>
+                    </select>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <label for="SortDescending" class="form-label">@T["SortDirection"]</label>
+                    <select name="SortDescending" id="SortDescending" class="form-select">
+                        <option value="false" selected="@(!Model.SortDescending)">@T["Ascending"]</option>
+                        <option value="true" selected="@(Model.SortDescending)">@T["Descending"]</option>
+                    </select>
+                </div>
+                <input type="hidden" name="PageSize" value="@Model.PageSize" />
+                <div class="col-12 d-flex gap-2">
+                    <button type="submit" class="btn btn-outline-primary">@T["SearchAndFilter"]</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">@T["Clear"]</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <section id="resultsContainer" class="card shadow-sm border-0" aria-live="polite">
+        <div class="card-body">
+            <partial name="_Results" model="Model" />
+        </div>
+    </section>
+</div>
+
+<div class="modal fade" id="hrmsModal" tabindex="-1" aria-labelledby="hrmsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div id="hrmsModalContent">
+            <div class="modal-content">
+                <div class="modal-body text-center py-5">
+                    <div class="spinner-border text-primary" role="status"><span class="visually-hidden">@T["Loading"]</span></div>
+                    <p class="mb-0 mt-3">@T["LoadingModal"]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

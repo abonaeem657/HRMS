@@ -1,0 +1,43 @@
+@model HRMS.Models.LeaveManagement.LeaveListViewModel
+@{
+    ViewData["Title"] = T["MyLeaveReport"].Value;
+    var ar = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+    <div><h1 class="h3">@T["MyLeaveReport"]</h1><p class="text-muted mb-0">@T["PersonalLeaveReportHint"]</p></div>
+    <a asp-action="Create" class="btn btn-primary">@T["RequestLeave"]</a>
+</div>
+@if (TempData["StatusMessage"] is string message) { <div class="alert alert-success" role="status">@message</div> }
+<form asp-action="MyReport" method="get" class="row g-2 align-items-end mb-4">
+    <div class="col-sm-4"><label for="year" class="form-label">@T["Year"]</label><select id="year" name="year" class="form-select">
+        @for (var y = 2100; y >= 2000; y--) { <option value="@y" selected="@(Model.Year == y)">@y</option> }
+    </select></div>
+    <div class="col-sm-4"><label for="status" class="form-label">@T["Status"]</label><select id="status" name="status" class="form-select">
+        <option value="">@T["All"]</option>
+        @foreach (var s in new[] { "Pending", "Approved", "Rejected", "Cancelled" }) { <option value="@s" selected="@(Model.Status == s)">@T["Status." + s]</option> }
+    </select></div>
+    <div class="col-sm-4"><button class="btn btn-outline-primary" type="submit">@T["Filter"]</button></div>
+</form>
+<section class="card card-body mb-4">
+    <h2 class="h5">@T["LeaveBalancesTitle", Model.Year ?? BusinessClock.Today.Year]</h2>
+    <div class="table-responsive"><table class="table align-middle mb-0">
+        <thead><tr><th>@T["LeaveType"]</th><th>@T["Allowed"]</th><th>@T["Used"]</th><th>@T["PendingDays"]</th><th>@T["Remaining"]</th></tr></thead>
+        <tbody>@foreach (var b in Model.Balances) { <tr><td>@(ar ? b.LeaveTypeNameAr : b.LeaveTypeName)</td><td>@b.TotalAllowedDays</td><td>@b.UsedDays</td><td>@b.PendingDays</td><td><strong>@b.RemainingDays</strong></td></tr> }</tbody>
+    </table></div>
+    <p class="form-text mb-0">@T["LeaveReservationCalculation"]</p>
+</section>
+<h2 class="h5">@T["MyLeaveRequests"] <span class="badge text-bg-light">@Model.Requests.Count</span></h2>
+<div class="table-responsive"><table class="table table-striped align-middle">
+    <thead><tr><th>@T["LeaveType"]</th><th>@T["Period"]</th><th>@T["Days"]</th><th>@T["Status"]</th><th>@T["Reason"]</th><th>@T["Review"]</th></tr></thead>
+    <tbody>
+    @if (Model.Requests.Count == 0) { <tr><td colspan="6" class="text-center py-4 text-muted">@T["NoLeaveRequests"]</td></tr> }
+    @foreach (var r in Model.Requests)
+    {
+        <tr><td>@(ar ? r.LeaveTypeNameAr : r.LeaveTypeName)</td>
+            <td>@r.StartDate.ToString("yyyy-MM-dd") @r.StartTime?.ToString("HH:mm") — @r.EndDate.ToString("yyyy-MM-dd") @r.EndTime?.ToString("HH:mm")</td>
+            <td>@r.TotalDays</td><td>@T["Status." + r.Status]</td><td>@r.Reason</td>
+            <td>@r.ReviewNotes @if (r.ReviewedAtUtc.HasValue) { <div class="small text-muted">@BusinessClock.ToLocal(r.ReviewedAtUtc)?.ToString("yyyy-MM-dd HH:mm") @T["JordanTime"]</div> }</td>
+        </tr>
+    }
+    </tbody>
+</table></div>

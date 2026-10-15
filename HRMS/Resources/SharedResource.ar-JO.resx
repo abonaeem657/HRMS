@@ -1,0 +1,1530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data name="Privacy Policy" xml:space="preserve">
+    <value>سياسة الخصوصية</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>ترتيب حسب</value>
+  </data>
+  <data name="ViewEmployeeDirectory" xml:space="preserve">
+    <value>عرض دليل الموظفين</value>
+  </data>
+  <data name="NoPositionsFound" xml:space="preserve">
+    <value>لا توجد مسميات وظيفية.</value>
+  </data>
+  <data name="CheckOutUtc" xml:space="preserve">
+    <value>الانصراف بتوقيت الأردن</value>
+  </data>
+  <data name="HomeEyebrow" xml:space="preserve">
+    <value>HRMS | إدارة الموارد البشرية</value>
+  </data>
+  <data name="GeneralPosition" xml:space="preserve">
+    <value>مسمى عام (دون قسم محدد)</value>
+  </data>
+  <data name="ConfirmDeactivateEmployee" xml:space="preserve">
+    <value>هل تريد تعطيل سجل هذا الموظف؟ سيبقى محفوظًا ويمكن استعادته.</value>
+  </data>
+  <data name="EmployeeCount" xml:space="preserve">
+    <value>عدد الموظفين</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>المستخدمون</value>
+  </data>
+  <data name="Changes" xml:space="preserve">
+    <value>التغييرات</value>
+  </data>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>اسم العائلة مطلوب.</value>
+  </data>
+  <data name="CheckInNow" xml:space="preserve">
+    <value>سجّل الحضور الآن</value>
+  </data>
+  <data name="NoAttendanceToday" xml:space="preserve">
+    <value>لا توجد سجلات حضور لهذا اليوم.</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>كلمة المرور مطلوبة.</value>
+  </data>
+  <data name="CreateDepartmentsHint" xml:space="preserve">
+    <value>أنشئ الأقسام ونظّم توزيع الموظفين</value>
+  </data>
+  <data name="PositionHasEmployees" xml:space="preserve">
+    <value>المسمى مرتبط بموظفين؛ تعطيله يخفيه من القوائم الجديدة مع الاحتفاظ بسجلات الموظفين.</value>
+  </data>
+  <data name="Label.FirstName" xml:space="preserve">
+    <value>الاسم الأول</value>
+  </data>
+  <data name="Status.Cancelled" xml:space="preserve">
+    <value>ملغى</value>
+  </data>
+  <data name="SystemSetup" xml:space="preserve">
+    <value>إعداد النظام</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="AuthorizedRecentActivity" xml:space="preserve">
+    <value>آخر العمليات</value>
+  </data>
+  <data name="Arabic" xml:space="preserve">
+    <value>العربية</value>
+  </data>
+  <data name="EmployeeId" xml:space="preserve">
+    <value>معرّف الموظف</value>
+  </data>
+  <data name="HeadcountSummary" xml:space="preserve">
+    <value>ملخص أعداد الموظفين</value>
+  </data>
+  <data name="NewHiresInPeriod" xml:space="preserve">
+    <value>الموظفون الجدد خلال الفترة</value>
+  </data>
+  <data name="MyWorkspace" xml:space="preserve">
+    <value>مساحة عملي</value>
+  </data>
+  <data name="InvalidLeaveYear" xml:space="preserve">
+    <value>يجب أن تكون السنة بين 2000 و2100.</value>
+  </data>
+  <data name="LeaveEndRequired" xml:space="preserve">
+    <value>تاريخ نهاية الإجازة مطلوب.</value>
+  </data>
+  <data name="OptionalNotes" xml:space="preserve">
+    <value>ملاحظات (اختياري)</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>السجل</value>
+  </data>
+  <data name="CheckOut" xml:space="preserve">
+    <value>تسجيل الانصراف</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>غير نشط</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="AttendanceTimezoneInfo" xml:space="preserve">
+    <value>أدخل أوقات الحضور والانصراف بتوقيت الأردن.</value>
+  </data>
+  <data name="SortDirection" xml:space="preserve">
+    <value>اتجاه الترتيب</value>
+  </data>
+  <data name="AttendanceCheckInSaved" xml:space="preserve">
+    <value>تم تسجيل الحضور.</value>
+  </data>
+  <data name="AddJobTitlesHint" xml:space="preserve">
+    <value>أضف المسميات الوظيفية لاستخدامها عند تسجيل الموظفين</value>
+  </data>
+  <data name="DashboardIntro" xml:space="preserve">
+    <value>نظرة موحدة على الموظفين والأقسام والحضور والإجازات</value>
+  </data>
+  <data name="InvalidRecord" xml:space="preserve">
+    <value>سجل غير صالح</value>
+  </data>
+  <data name="NoAdministratorYet" xml:space="preserve">
+    <value>لم يتم إنشاء حساب المدير بعد.</value>
+  </data>
+  <data name="JobTitle" xml:space="preserve">
+    <value>المسمى الوظيفي</value>
+  </data>
+  <data name="SelectJobTitle" xml:space="preserve">
+    <value>اختر المسمى الوظيفي</value>
+  </data>
+  <data name="Role.HROfficer" xml:space="preserve">
+    <value>مسؤول الموارد البشرية</value>
+  </data>
+  <data name="DirectManager" xml:space="preserve">
+    <value>المدير المباشر</value>
+  </data>
+  <data name="Attendance" xml:space="preserve">
+    <value>الحضور والانصراف</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>العدد</value>
+  </data>
+  <data name="LeaveTypeRequired" xml:space="preserve">
+    <value>يرجى اختيار نوع إجازة صحيح.</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>نظرة عامة</value>
+  </data>
+  <data name="NoManager" xml:space="preserve">
+    <value>لا يوجد مدير</value>
+  </data>
+  <data name="SignInTemporarilyLocked" xml:space="preserve">
+    <value>تم إيقاف تسجيل الدخول مؤقتًا بعد محاولات غير ناجحة.</value>
+  </data>
+  <data name="NoAccounts" xml:space="preserve">
+    <value>لا توجد حسابات.</value>
+  </data>
+  <data name="Status.Rejected" xml:space="preserve">
+    <value>مرفوض</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>الخصوصية</value>
+  </data>
+  <data name="NoDeletedEmployees" xml:space="preserve">
+    <value>لا يوجد موظفون محذوفون.</value>
+  </data>
+  <data name="ActiveEmployees" xml:space="preserve">
+    <value>موظفون نشطون</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>السابق</value>
+  </data>
+  <data name="BackToReports" xml:space="preserve">
+    <value>العودة إلى التقارير</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>لا</value>
+  </data>
+  <data name="DepartmentEnabled" xml:space="preserve">
+    <value>تم تفعيل القسم.</value>
+  </data>
+  <data name="ActiveEmployeeCount" xml:space="preserve">
+    <value>إجمالي الموظفين النشطين</value>
+  </data>
+  <data name="SetupAdministrator" xml:space="preserve">
+    <value>إنشاء حساب المدير</value>
+  </data>
+  <data name="LeaveEndBeforeStart" xml:space="preserve">
+    <value>تاريخ النهاية يجب ألا يسبق تاريخ البداية.</value>
+  </data>
+  <data name="EmployeeNumberRequired" xml:space="preserve">
+    <value>رقم الموظف مطلوب.</value>
+  </data>
+  <data name="Label.ReviewNotes" xml:space="preserve">
+    <value>ملاحظات المراجعة</value>
+  </data>
+  <data name="Allowed" xml:space="preserve">
+    <value>المستحق</value>
+  </data>
+  <data name="AuditLog" xml:space="preserve">
+    <value>سجل التدقيق</value>
+  </data>
+  <data name="WelcomeEyebrow" xml:space="preserve">
+    <value>نظام إدارة الموارد البشرية</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>البريد الإلكتروني مطلوب.</value>
+  </data>
+  <data name="Records" xml:space="preserve">
+    <value>سجلات</value>
+  </data>
+  <data name="AuditReadOnlyNote" xml:space="preserve">
+    <value>هذا السجل للعرض فقط.</value>
+  </data>
+  <data name="LeaveSubmitted" xml:space="preserve">
+    <value>تم تقديم طلب الإجازة للمراجعة.</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>إلى</value>
+  </data>
+  <data name="LeavePageTitle" xml:space="preserve">
+    <value>طلبات الإجازة</value>
+  </data>
+  <data name="Label.CurrentPassword" xml:space="preserve">
+    <value>كلمة المرور الحالية</value>
+  </data>
+  <data name="TemporaryPasswordAdvice" xml:space="preserve">
+    <value>أبلغ المستخدم بكلمة المرور المؤقتة عبر قناة آمنة</value>
+  </data>
+  <data name="DepartmentName" xml:space="preserve">
+    <value>اسم القسم</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>تصفية</value>
+  </data>
+  <data name="StatusLate" xml:space="preserve">
+    <value>متأخر</value>
+  </data>
+  <data name="Label.DepartmentManager" xml:space="preserve">
+    <value>مدير القسم</value>
+  </data>
+  <data name="ValidPositionRequired" xml:space="preserve">
+    <value>يرجى اختيار مسمى وظيفي صحيح.</value>
+  </data>
+  <data name="NoLeaveRequestsThisYear" xml:space="preserve">
+    <value>لا توجد طلبات إجازة لهذا العام.</value>
+  </data>
+  <data name="DepartmentScope" xml:space="preserve">
+    <value>بيانات هذا القسم فقط</value>
+  </data>
+  <data name="PositionCodeRequired" xml:space="preserve">
+    <value>رمز المسمى الوظيفي مطلوب.</value>
+  </data>
+  <data name="PositionId" xml:space="preserve">
+    <value>معرّف المسمى الوظيفي</value>
+  </data>
+  <data name="EnterRequiredEmployeeData" xml:space="preserve">
+    <value>أدخل بيانات الموظف المطلوبة</value>
+  </data>
+  <data name="AllEmployees" xml:space="preserve">
+    <value>كل الموظفين</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>السبب</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>معطّل</value>
+  </data>
+  <data name="AttendanceRecordsInPeriod" xml:space="preserve">
+    <value>سجلات الحضور في الفترة</value>
+  </data>
+  <data name="EmployeeEdit" xml:space="preserve">
+    <value>تعديل بيانات الموظف</value>
+  </data>
+  <data name="Label.WorkEmail" xml:space="preserve">
+    <value>البريد الوظيفي</value>
+  </data>
+  <data name="SelectEmployee" xml:space="preserve">
+    <value>اختر الموظف</value>
+  </data>
+  <data name="Verification" xml:space="preserve">
+    <value>التحقق</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>اليوم</value>
+  </data>
+  <data name="WorkEmail" xml:space="preserve">
+    <value>البريد الوظيفي</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>السنة</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>إعادة تعيين كلمة المرور</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>الإجمالي</value>
+  </data>
+  <data name="DepartmentEmployees" xml:space="preserve">
+    <value>موظفو القسم</value>
+  </data>
+  <data name="Label.LeaveTypeNameAr" xml:space="preserve">
+    <value>اسم نوع الإجازة بالعربية</value>
+  </data>
+  <data name="HireDate" xml:space="preserve">
+    <value>تاريخ التعيين</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="DepartmentUpdated" xml:space="preserve">
+    <value>تم تحديث القسم بنجاح.</value>
+  </data>
+  <data name="HiredAfter" xml:space="preserve">
+    <value>بعد تاريخ التعيين</value>
+  </data>
+  <data name="DeletedEmployeesIntro" xml:space="preserve">
+    <value>يمكن استعادة سجلات الموظفين المحذوفة منطقيًا.</value>
+  </data>
+  <data name="PositionManagementIntro" xml:space="preserve">
+    <value>إدارة المسميات وربطها اختياريًا بالأقسام.</value>
+  </data>
+  <data name="GradeUnavailable" xml:space="preserve">
+    <value>غير محددة</value>
+  </data>
+  <data name="NoLeaveRequests" xml:space="preserve">
+    <value>لا توجد طلبات إجازة.</value>
+  </data>
+  <data name="Ascending" xml:space="preserve">
+    <value>تصاعدي</value>
+  </data>
+  <data name="ToggleNavigation" xml:space="preserve">
+    <value>فتح أو إغلاق قائمة التنقل</value>
+  </data>
+  <data name="LeaveCancelled" xml:space="preserve">
+    <value>تم إلغاء الطلب.</value>
+  </data>
+  <data name="EmploymentStatusRequired" xml:space="preserve">
+    <value>حالة التوظيف مطلوبة.</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>الرمز</value>
+  </data>
+  <data name="InvalidLocalCheckIn" xml:space="preserve">
+    <value>أدخل وقت حضور محليًا صالحًا.</value>
+  </data>
+  <data name="PositionTitle" xml:space="preserve">
+    <value>المسمى الوظيفي</value>
+  </data>
+  <data name="ReportDateRangeInvalid" xml:space="preserve">
+    <value>تاريخ النهاية يجب ألا يسبق تاريخ البداية.</value>
+  </data>
+  <data name="EmployeesManagement" xml:space="preserve">
+    <value>إدارة الموظفين</value>
+  </data>
+  <data name="NewPasswordRequired" xml:space="preserve">
+    <value>كلمة المرور الجديدة مطلوبة.</value>
+  </data>
+  <data name="LeaveDecisionsSummary" xml:space="preserve">
+    <value>ملخص قرارات الإجازات</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>مسح</value>
+  </data>
+  <data name="PasswordMinimumLength" xml:space="preserve">
+    <value>يجب ألا تقل كلمة المرور عن 10 أحرف.</value>
+  </data>
+  <data name="EmployeeDistribution" xml:space="preserve">
+    <value>توزيع الموظفين</value>
+  </data>
+  <data name="Label.IsPaid" xml:space="preserve">
+    <value>إجازة مدفوعة الأجر</value>
+  </data>
+  <data name="Enable" xml:space="preserve">
+    <value>تفعيل</value>
+  </data>
+  <data name="NewHires" xml:space="preserve">
+    <value>موظفون جدد</value>
+  </data>
+  <data name="PositionUpdated" xml:space="preserve">
+    <value>تم تحديث المسمى الوظيفي بنجاح.</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>إغلاق</value>
+  </data>
+  <data name="SaveLeaveType" xml:space="preserve">
+    <value>حفظ نوع الإجازة</value>
+  </data>
+  <data name="Status.Active" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="ApprovedRequests" xml:space="preserve">
+    <value>الطلبات الموافق عليها</value>
+  </data>
+  <data name="EmployeeDetails" xml:space="preserve">
+    <value>تفاصيل الموظف</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>كلمتا المرور غير متطابقتين.</value>
+  </data>
+  <data name="FilterSummaryByPeriod" xml:space="preserve">
+    <value>تصفية الملخص حسب الفترة</value>
+  </data>
+  <data name="Label.WorkLocation" xml:space="preserve">
+    <value>موقع العمل</value>
+  </data>
+  <data name="RoleRequired" xml:space="preserve">
+    <value>الدور مطلوب.</value>
+  </data>
+  <data name="Label.Description" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
+  <data name="EmployeePages" xml:space="preserve">
+    <value>صفحات الموظفين</value>
+  </data>
+  <data name="Remaining" xml:space="preserve">
+    <value>المتبقي</value>
+  </data>
+  <data name="Label.RememberMe" xml:space="preserve">
+    <value>تذكرني</value>
+  </data>
+  <data name="CorrectAttendance" xml:space="preserve">
+    <value>تصحيح سجل الحضور</value>
+  </data>
+  <data name="ApplyFilters" xml:space="preserve">
+    <value>تطبيق التصفية</value>
+  </data>
+  <data name="RequestLeave" xml:space="preserve">
+    <value>تقديم طلب إجازة</value>
+  </data>
+  <data name="Status.Inactive" xml:space="preserve">
+    <value>غير نشط</value>
+  </data>
+  <data name="LeaveRejectReasonRequired" xml:space="preserve">
+    <value>سبب الرفض مطلوب.</value>
+  </data>
+  <data name="PasswordChanged" xml:space="preserve">
+    <value>تم تغيير كلمة المرور بنجاح.</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>غير متوفر</value>
+  </data>
+  <data name="AttendancePages" xml:space="preserve">
+    <value>صفحات الحضور</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>التفاصيل</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>من</value>
+  </data>
+  <data name="DepartmentSetupRequired" xml:space="preserve">
+    <value>أضف قسمًا واحدًا على الأقل قبل إضافة الموظفين.</value>
+  </data>
+  <data name="AddEmployee" xml:space="preserve">
+    <value>إضافة موظف</value>
+  </data>
+  <data name="DepartmentCreated" xml:space="preserve">
+    <value>تم إنشاء القسم بنجاح.</value>
+  </data>
+  <data name="AttendanceCheckOutSaved" xml:space="preserve">
+    <value>تم تسجيل الانصراف.</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>عام</value>
+  </data>
+  <data name="JobTitles" xml:space="preserve">
+    <value>المسميات الوظيفية</value>
+  </data>
+  <data name="SkipToContent" xml:space="preserve">
+    <value>انتقل إلى المحتوى</value>
+  </data>
+  <data name="CreateFirstAdministrator" xml:space="preserve">
+    <value>إنشاء المدير الأول</value>
+  </data>
+  <data name="LeaveRejected" xml:space="preserve">
+    <value>تم رفض طلب الإجازة.</value>
+  </data>
+  <data name="SelectType" xml:space="preserve">
+    <value>اختر النوع</value>
+  </data>
+  <data name="ReportPages" xml:space="preserve">
+    <value>صفحات التقارير</value>
+  </data>
+  <data name="Label.Email" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+  <data name="Label.EmployeeNumber" xml:space="preserve">
+    <value>رقم الموظف</value>
+  </data>
+  <data name="SaveCorrection" xml:space="preserve">
+    <value>حفظ التصحيح</value>
+  </data>
+  <data name="ToDate" xml:space="preserve">
+    <value>تاريخ النهاية</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>الساعات</value>
+  </data>
+  <data name="AuditPages" xml:space="preserve">
+    <value>صفحات سجل التدقيق</value>
+  </data>
+  <data name="Role.Auditor" xml:space="preserve">
+    <value>مدقق</value>
+  </data>
+  <data name="AttendanceRecord" xml:space="preserve">
+    <value>سجل الحضور</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>أحدث العمليات</value>
+  </data>
+  <data name="RejectReason" xml:space="preserve">
+    <value>سبب الرفض</value>
+  </data>
+  <data name="LeaveTypeSaved" xml:space="preserve">
+    <value>تم حفظ نوع الإجازة.</value>
+  </data>
+  <data name="PositionTitleRequired" xml:space="preserve">
+    <value>المسمى الوظيفي مطلوب.</value>
+  </data>
+  <data name="Descending" xml:space="preserve">
+    <value>تنازلي</value>
+  </data>
+  <data name="Manager" xml:space="preserve">
+    <value>المدير</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>الكل</value>
+  </data>
+  <data name="AllDepartments" xml:space="preserve">
+    <value>كل الأقسام</value>
+  </data>
+  <data name="YourDepartment" xml:space="preserve">
+    <value>قسمي</value>
+  </data>
+  <data name="LeaveApproved" xml:space="preserve">
+    <value>تمت الموافقة على طلب الإجازة.</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>العودة إلى القائمة</value>
+  </data>
+  <data name="CheckInUtc" xml:space="preserve">
+    <value>الحضور بتوقيت الأردن</value>
+  </data>
+  <data name="Grade" xml:space="preserve">
+    <value>الدرجة الوظيفية</value>
+  </data>
+  <data name="AttendanceTrendsHint" xml:space="preserve">
+    <value>راجع سجلات الحضور واتجاهاتها</value>
+  </data>
+  <data name="EmployeeNumber" xml:space="preserve">
+    <value>رقم الموظف</value>
+  </data>
+  <data name="BackToEmployees" xml:space="preserve">
+    <value>العودة إلى الموظفين</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="CreateAccountsHint" xml:space="preserve">
+    <value>أنشئ حسابات المستخدمين واربطها بالأدوار والموظفين</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>موافقة</value>
+  </data>
+  <data name="SetupOnlyBeforeFirstAccount" xml:space="preserve">
+    <value>متاح فقط قبل إنشاء أول حساب</value>
+  </data>
+  <data name="DecisionIntro" xml:space="preserve">
+    <value>يعرض القرارات المتخذة خلال الفترة حسب توقيت الأردن.</value>
+  </data>
+  <data name="RequestId" xml:space="preserve">
+    <value>معرّف الطلب</value>
+  </data>
+  <data name="UserEnabled" xml:space="preserve">
+    <value>تم تفعيل الحساب.</value>
+  </data>
+  <data name="UserUpdated" xml:space="preserve">
+    <value>تم تحديث حساب المستخدم بنجاح.</value>
+  </data>
+  <data name="PasswordConfirmationRequired" xml:space="preserve">
+    <value>تأكيد كلمة المرور مطلوب.</value>
+  </data>
+  <data name="LinkEmployeeForSelfService" xml:space="preserve">
+    <value>اطلب من مسؤول النظام ربط حسابك بملف موظف لاستخدام خدمات الحضور والإجازات.</value>
+  </data>
+  <data name="Label.EmploymentStatus" xml:space="preserve">
+    <value>حالة التوظيف</value>
+  </data>
+  <data name="AttendanceDayComplete" xml:space="preserve">
+    <value>اكتمل تسجيل اليوم</value>
+  </data>
+  <data name="LoginPrompt" xml:space="preserve">
+    <value>أدخل بياناتك لتسجيل الدخول إلى حسابك.</value>
+  </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>اختيار اللغة</value>
+  </data>
+  <data name="EmployeeReportTitle" xml:space="preserve">
+    <value>تقرير الموظفين</value>
+  </data>
+  <data name="HeadcountByDepartment" xml:space="preserve">
+    <value>أعداد الموظفين حسب القسم</value>
+  </data>
+  <data name="Role.Employee" xml:space="preserve">
+    <value>موظف</value>
+  </data>
+  <data name="AllPositions" xml:space="preserve">
+    <value>كل المسميات الوظيفية</value>
+  </data>
+  <data name="ConfirmDeactivate" xml:space="preserve">
+    <value>هل تريد تعطيل هذا السجل؟</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="AttendanceHoursPeriodHint" xml:space="preserve">
+    <value>ساعات الحضور ضمن الفترة المحددة</value>
+  </data>
+  <data name="Label.PositionCode" xml:space="preserve">
+    <value>رمز المسمى الوظيفي</value>
+  </data>
+  <data name="Results" xml:space="preserve">
+    <value>النتائج:</value>
+  </data>
+  <data name="MyLeaveRequests" xml:space="preserve">
+    <value>طلباتي</value>
+  </data>
+  <data name="EmploymentType" xml:space="preserve">
+    <value>نوع التوظيف</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="DepartmentSummary" xml:space="preserve">
+    <value>ملخص القسم</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>إعادة تعيين</value>
+  </data>
+  <data name="EmployeeDisabled" xml:space="preserve">
+    <value>تم تعطيل الموظف مع الاحتفاظ بسجله.</value>
+  </data>
+  <data name="EmployeeCountLabel" xml:space="preserve">
+    <value>موظفون</value>
+  </data>
+  <data name="Outcome.Failure" xml:space="preserve">
+    <value>فشل</value>
+  </data>
+  <data name="EmployeeDeactivate" xml:space="preserve">
+    <value>تعطيل الموظف</value>
+  </data>
+  <data name="Label.Reason" xml:space="preserve">
+    <value>السبب</value>
+  </data>
+  <data name="Period" xml:space="preserve">
+    <value>الفترة</value>
+  </data>
+  <data name="Workspace" xml:space="preserve">
+    <value>مساحة العمل</value>
+  </data>
+  <data name="UserPasswordReset" xml:space="preserve">
+    <value>تمت إعادة تعيين كلمة المرور. أبلغ المستخدم بها عبر قناة آمنة.</value>
+  </data>
+  <data name="AttendanceDateRequired" xml:space="preserve">
+    <value>تاريخ الحضور مطلوب.</value>
+  </data>
+  <data name="SubmitRequest" xml:space="preserve">
+    <value>إرسال الطلب</value>
+  </data>
+  <data name="SearchEmployees" xml:space="preserve">
+    <value>ابحث بالاسم أو الرقم أو البريد</value>
+  </data>
+  <data name="ValidEmailRequired" xml:space="preserve">
+    <value>يرجى إدخال عنوان بريد إلكتروني صحيح.</value>
+  </data>
+  <data name="Identifier" xml:space="preserve">
+    <value>المعرّف</value>
+  </data>
+  <data name="InvalidLocalCheckOut" xml:space="preserve">
+    <value>وقت الانصراف غير صالح. اختر تاريخ الانصراف وأدخل الوقت بصيغة ساعة ودقيقة.</value>
+  </data>
+  <data name="TotalHours" xml:space="preserve">
+    <value>إجمالي الساعات</value>
+  </data>
+  <data name="LoadingModal" xml:space="preserve">
+    <value>جارٍ تحميل النموذج</value>
+  </data>
+  <data name="NoDepartmentsFound" xml:space="preserve">
+    <value>لا توجد أقسام.</value>
+  </data>
+  <data name="CreateUserAccount" xml:space="preserve">
+    <value>إنشاء حساب المستخدم</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>رفض</value>
+  </data>
+  <data name="Label.LeaveType" xml:space="preserve">
+    <value>نوع الإجازة</value>
+  </data>
+  <data name="Paid" xml:space="preserve">
+    <value>مدفوعة</value>
+  </data>
+  <data name="AttendanceHours" xml:space="preserve">
+    <value>ساعات الحضور</value>
+  </data>
+  <data name="CheckIn" xml:space="preserve">
+    <value>تسجيل الحضور</value>
+  </data>
+  <data name="ReviewRecordedActions" xml:space="preserve">
+    <value>راجع العمليات المسجلة</value>
+  </data>
+  <data name="Label.AttendanceDate" xml:space="preserve">
+    <value>تاريخ الحضور</value>
+  </data>
+  <data name="WorkEmailRequired" xml:space="preserve">
+    <value>البريد الوظيفي مطلوب.</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>تطبيق</value>
+  </data>
+  <data name="AttendanceReportTitle" xml:space="preserve">
+    <value>تقرير الحضور</value>
+  </data>
+  <data name="BackHome" xml:space="preserve">
+    <value>العودة إلى الرئيسية</value>
+  </data>
+  <data name="Role.SystemAdministrator" xml:space="preserve">
+    <value>مسؤول النظام</value>
+  </data>
+  <data name="ReviewEmployeeData" xml:space="preserve">
+    <value>استعرض بيانات الموظفين</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>القسم</value>
+  </data>
+  <data name="PositionDetails" xml:space="preserve">
+    <value>تفاصيل المسمى الوظيفي</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>المراجعة</value>
+  </data>
+  <data name="Status.HalfDay" xml:space="preserve">
+    <value>نصف يوم</value>
+  </data>
+  <data name="UsersIntro" xml:space="preserve">
+    <value>إدارة حسابات المستخدمين وربطها بالأدوار والموظفين</value>
+  </data>
+  <data name="LeaveType" xml:space="preserve">
+    <value>نوع الإجازة</value>
+  </data>
+  <data name="RejectedRequests" xml:space="preserve">
+    <value>الطلبات المرفوضة</value>
+  </data>
+  <data name="NoDepartmentsForSummary" xml:space="preserve">
+    <value>لا توجد أقسام لعرضها. أضف أقسامًا وموظفين لعرض التوزيع.</value>
+  </data>
+  <data name="Label.PositionTitle" xml:space="preserve">
+    <value>المسمى الوظيفي</value>
+  </data>
+  <data name="TimeUtc" xml:space="preserve">
+    <value>الوقت بتوقيت الأردن</value>
+  </data>
+  <data name="PendingLeaveRequests" xml:space="preserve">
+    <value>طلبات الإجازة قيد المراجعة</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>العملية</value>
+  </data>
+  <data name="PositionDisabled" xml:space="preserve">
+    <value>تم تعطيل المسمى الوظيفي مع الاحتفاظ بسجلات الموظفين.</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="CurrentPasswordInvalid" xml:space="preserve">
+    <value>كلمة المرور الحالية غير صحيحة.</value>
+  </data>
+  <data name="Label.JobTitle" xml:space="preserve">
+    <value>المسمى الوظيفي</value>
+  </data>
+  <data name="BackToPositions" xml:space="preserve">
+    <value>العودة إلى المسميات الوظيفية</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>إنشاء حساب</value>
+  </data>
+  <data name="EmployeeUpdated" xml:space="preserve">
+    <value>تم تحديث بيانات الموظف بنجاح.</value>
+  </data>
+  <data name="EmployeesReport" xml:space="preserve">
+    <value>تقرير الموظفين</value>
+  </data>
+  <data name="DeletedAtUtc" xml:space="preserve">
+    <value>تاريخ الحذف بتوقيت الأردن</value>
+  </data>
+  <data name="EmployeeRestored" xml:space="preserve">
+    <value>تمت استعادة سجل الموظف وتسجيل العملية.</value>
+  </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>الاسم الأول مطلوب.</value>
+  </data>
+  <data name="PositionSearch" xml:space="preserve">
+    <value>البحث برمز المسمى الوظيفي أو اسمه</value>
+  </data>
+  <data name="FromDate" xml:space="preserve">
+    <value>تاريخ البداية</value>
+  </data>
+  <data name="Leave" xml:space="preserve">
+    <value>الإجازات</value>
+  </data>
+  <data name="AffectedRecord" xml:space="preserve">
+    <value>السجل المتأثر</value>
+  </data>
+  <data name="LeaveTypes" xml:space="preserve">
+    <value>أنواع الإجازات</value>
+  </data>
+  <data name="EmploymentTypeRequired" xml:space="preserve">
+    <value>نوع التوظيف مطلوب.</value>
+  </data>
+  <data name="Disable" xml:space="preserve">
+    <value>تعطيل</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>مفعّل</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>حدث خطأ</value>
+  </data>
+  <data name="SelectDepartment" xml:space="preserve">
+    <value>اختر القسم</value>
+  </data>
+  <data name="DepartmentCodeRequired" xml:space="preserve">
+    <value>رمز القسم مطلوب.</value>
+  </data>
+  <data name="AttendanceReport" xml:space="preserve">
+    <value>تقرير الحضور</value>
+  </data>
+  <data name="NoLinkedEmployee" xml:space="preserve">
+    <value>لا يوجد ملف موظف مرتبط بالحساب</value>
+  </data>
+  <data name="CurrentPasswordRequired" xml:space="preserve">
+    <value>كلمة المرور الحالية مطلوبة.</value>
+  </data>
+  <data name="PasswordRules" xml:space="preserve">
+    <value>قواعد كلمة المرور</value>
+  </data>
+  <data name="Used" xml:space="preserve">
+    <value>المستخدم</value>
+  </data>
+  <data name="Outcome.Success" xml:space="preserve">
+    <value>نجاح</value>
+  </data>
+  <data name="Label.LeaveTypeName" xml:space="preserve">
+    <value>اسم نوع الإجازة بالإنجليزية</value>
+  </data>
+  <data name="DepartmentsIntro" xml:space="preserve">
+    <value>أنشئ الأقسام وحدد المدير وراجع توزيع الموظفين.</value>
+  </data>
+  <data name="ViewAuditLog" xml:space="preserve">
+    <value>عرض سجل التدقيق</value>
+  </data>
+  <data name="Role.DepartmentManager" xml:space="preserve">
+    <value>مدير القسم</value>
+  </data>
+  <data name="DecisionTo" xml:space="preserve">
+    <value>تاريخ القرار إلى</value>
+  </data>
+  <data name="NoResults" xml:space="preserve">
+    <value>لا توجد نتائج.</value>
+  </data>
+  <data name="AttendanceSummary" xml:space="preserve">
+    <value>ملخص الحضور</value>
+  </data>
+  <data name="AccessDeniedMessage" xml:space="preserve">
+    <value>ليس لديك صلاحية للوصول إلى هذه الصفحة.</value>
+  </data>
+  <data name="BackToDepartments" xml:space="preserve">
+    <value>العودة إلى الأقسام</value>
+  </data>
+  <data name="TemporaryPasswordRequired" xml:space="preserve">
+    <value>كلمة المرور المؤقتة مطلوبة.</value>
+  </data>
+  <data name="HiredBefore" xml:space="preserve">
+    <value>قبل تاريخ التعيين</value>
+  </data>
+  <data name="NoDirectManager" xml:space="preserve">
+    <value>لا يوجد مدير مباشر</value>
+  </data>
+  <data name="EmployeeDeactivateInfo" xml:space="preserve">
+    <value>سيُعطّل سجل الموظف مع الاحتفاظ ببياناته.</value>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>التقارير</value>
+  </data>
+  <data name="PeriodSummary" xml:space="preserve">
+    <value>ملخص الفترة</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="LeaveStartRequired" xml:space="preserve">
+    <value>تاريخ بداية الإجازة مطلوب.</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+  <data name="AttendanceUtcInfo" xml:space="preserve">
+    <value>جميع الأوقات المعروضة بتوقيت الأردن.</value>
+  </data>
+  <data name="EmployeeRestoreNotFound" xml:space="preserve">
+    <value>تعذرت الاستعادة؛ السجل غير موجود ضمن السجلات المحذوفة.</value>
+  </data>
+  <data name="SavePassword" xml:space="preserve">
+    <value>حفظ كلمة المرور</value>
+  </data>
+  <data name="HireDateRequired" xml:space="preserve">
+    <value>تاريخ التعيين مطلوب.</value>
+  </data>
+  <data name="Role.HRManager" xml:space="preserve">
+    <value>مدير الموارد البشرية</value>
+  </data>
+  <data name="ViewHeadcountSummary" xml:space="preserve">
+    <value>عرض ملخص الأعداد</value>
+  </data>
+  <data name="Label.EmploymentType" xml:space="preserve">
+    <value>نوع التوظيف</value>
+  </data>
+  <data name="LeaveReasonRequired" xml:space="preserve">
+    <value>سبب الإجازة مطلوب.</value>
+  </data>
+  <data name="EmploymentStatus" xml:space="preserve">
+    <value>حالة التوظيف</value>
+  </data>
+  <data name="AppliedAtUtc" xml:space="preserve">
+    <value>تاريخ التقديم بتوقيت الأردن</value>
+  </data>
+  <data name="Label.Grade" xml:space="preserve">
+    <value>الدرجة الوظيفية</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>جارٍ التحميل</value>
+  </data>
+  <data name="MissingCheckOut" xml:space="preserve">
+    <value>انصراف مفقود</value>
+  </data>
+  <data name="ArabicLanguageShort" xml:space="preserve">
+    <value>ع</value>
+  </data>
+  <data name="AuditIntro" xml:space="preserve">
+    <value>سجل العمليات المتعلقة بإدارة الموارد البشرية.</value>
+  </data>
+  <data name="EmployeesByStatus" xml:space="preserve">
+    <value>الموظفون حسب الحالة</value>
+  </data>
+  <data name="Label.OptionalDepartment" xml:space="preserve">
+    <value>القسم (اختياري)</value>
+  </data>
+  <data name="Label.ConfirmPassword" xml:space="preserve">
+    <value>تأكيد كلمة المرور</value>
+  </data>
+  <data name="DepartmentDisabled" xml:space="preserve">
+    <value>تم تعطيل القسم مع الاحتفاظ بسجلاته وموظفيه.</value>
+  </data>
+  <data name="StartHere" xml:space="preserve">
+    <value>ابدأ من هنا</value>
+  </data>
+  <data name="ViewLeaveRequests" xml:space="preserve">
+    <value>عرض طلبات الإجازة</value>
+  </data>
+  <data name="AddDepartment" xml:space="preserve">
+    <value>إضافة قسم</value>
+  </data>
+  <data name="PositionCreated" xml:space="preserve">
+    <value>تمت إضافة المسمى الوظيفي بنجاح.</value>
+  </data>
+  <data name="LeaveTypeId" xml:space="preserve">
+    <value>معرّف نوع الإجازة</value>
+  </data>
+  <data name="ManageLeaveRequests" xml:space="preserve">
+    <value>إدارة طلبات الإجازة</value>
+  </data>
+  <data name="ValidDepartmentRequired" xml:space="preserve">
+    <value>يرجى اختيار قسم صحيح.</value>
+  </data>
+  <data name="LeaveReport" xml:space="preserve">
+    <value>تقرير الإجازات</value>
+  </data>
+  <data name="Label.DepartmentName" xml:space="preserve">
+    <value>اسم القسم</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>الإجراءات</value>
+  </data>
+  <data name="PositionNotFound" xml:space="preserve">
+    <value>تعذر العثور على المسمى الوظيفي.</value>
+  </data>
+  <data name="AddEmployeesHint" xml:space="preserve">
+    <value>أضف الموظفين وبياناتهم الوظيفية</value>
+  </data>
+  <data name="CancelRequest" xml:space="preserve">
+    <value>إلغاء الطلب</value>
+  </data>
+  <data name="NoActiveDepartmentEmployees" xml:space="preserve">
+    <value>لا يوجد موظفون نشطون في هذا القسم.</value>
+  </data>
+  <data name="LeaveBalanceCalculation" xml:space="preserve">
+    <value>يُحسب الرصيد وفق السنة المحددة ونوع الإجازة.</value>
+  </data>
+  <data name="WelcomeUser" xml:space="preserve">
+    <value>مرحبًا، {0}</value>
+  </data>
+  <data name="DepartmentCountLabel" xml:space="preserve">
+    <value>أقسام</value>
+  </data>
+  <data name="Label.Role" xml:space="preserve">
+    <value>الدور</value>
+  </data>
+  <data name="NoManagersAvailable" xml:space="preserve">
+    <value>لا يوجد مديرون متاحون</value>
+  </data>
+  <data name="EditJobTitle" xml:space="preserve">
+    <value>تعديل المسمى الوظيفي</value>
+  </data>
+  <data name="EmployeeOrganizationRequired" xml:space="preserve">
+    <value>يجب إضافة قسم ومسمى وظيفي قبل إنشاء الموظف.</value>
+  </data>
+  <data name="DeletedEmployees" xml:space="preserve">
+    <value>الموظفون المحذوفون</value>
+  </data>
+  <data name="Label.PhoneNumber" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+  <data name="EditDepartment" xml:space="preserve">
+    <value>تعديل القسم</value>
+  </data>
+  <data name="UsersManagement" xml:space="preserve">
+    <value>إدارة المستخدمين</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>ملغى</value>
+  </data>
+  <data name="TotalEmployees" xml:space="preserve">
+    <value>إجمالي الموظفين</value>
+  </data>
+  <data name="Label.IsActive" xml:space="preserve">
+    <value>مفعّل</value>
+  </data>
+  <data name="EditUserAccount" xml:space="preserve">
+    <value>تعديل حساب المستخدم</value>
+  </data>
+  <data name="EmployeeDirectory" xml:space="preserve">
+    <value>دليل الموظفين</value>
+  </data>
+  <data name="Status.Late" xml:space="preserve">
+    <value>متأخر</value>
+  </data>
+  <data name="AuditSearchPlaceholder" xml:space="preserve">
+    <value>ابحث باسم المستخدم أو العملية</value>
+  </data>
+  <data name="SignInFailed" xml:space="preserve">
+    <value>تعذر تسجيل الدخول بهذه البيانات.</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>الموظفون</value>
+  </data>
+  <data name="InitialSetupUnknown" xml:space="preserve">
+    <value>إعداد أولي</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>إنشاء</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>التالي</value>
+  </data>
+  <data name="Label.NewPassword" xml:space="preserve">
+    <value>كلمة المرور الجديدة</value>
+  </data>
+  <data name="Label.LinkedEmployee" xml:space="preserve">
+    <value>الموظف المرتبط (اختياري)</value>
+  </data>
+  <data name="Label.Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Unlinked" xml:space="preserve">
+    <value>غير مرتبط</value>
+  </data>
+  <data name="Label.HireDate" xml:space="preserve">
+    <value>تاريخ التعيين</value>
+  </data>
+  <data name="EmployeeNotLinked" xml:space="preserve">
+    <value>الحساب غير مرتبط بسجل موظف.</value>
+  </data>
+  <data name="EmployeesByDepartment" xml:space="preserve">
+    <value>الموظفون حسب القسم</value>
+  </data>
+  <data name="ReportYearInvalid" xml:space="preserve">
+    <value>تحقق من نطاق التاريخ؛ يجب أن تكون النهاية بعد البداية والسنة بين 2000 و2100.</value>
+  </data>
+  <data name="ViewMyRequests" xml:space="preserve">
+    <value>عرض طلباتي</value>
+  </data>
+  <data name="DepartmentNotFound" xml:space="preserve">
+    <value>تعذر العثور على القسم.</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="DateRangeInvalid" xml:space="preserve">
+    <value>تحقق من نطاق التاريخ المحدد.</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>الأيام</value>
+  </data>
+  <data name="UserDisabled" xml:space="preserve">
+    <value>تم تعطيل الحساب.</value>
+  </data>
+  <data name="Label.LeaveStart" xml:space="preserve">
+    <value>من تاريخ</value>
+  </data>
+  <data name="Status.Approved" xml:space="preserve">
+    <value>موافق عليه</value>
+  </data>
+  <data name="EmployeeRequired" xml:space="preserve">
+    <value>يرجى اختيار موظف صحيح.</value>
+  </data>
+  <data name="UserCreated" xml:space="preserve">
+    <value>تم إنشاء حساب المستخدم بنجاح.</value>
+  </data>
+  <data name="Invalid" xml:space="preserve">
+    <value>غير صالح</value>
+  </data>
+  <data name="Status.Pending" xml:space="preserve">
+    <value>قيد المراجعة</value>
+  </data>
+  <data name="Outcome" xml:space="preserve">
+    <value>النتيجة</value>
+  </data>
+  <data name="NoEmployeesInDepartment" xml:space="preserve">
+    <value>لا يوجد موظفون في هذا القسم</value>
+  </data>
+  <data name="Label.Department" xml:space="preserve">
+    <value>القسم</value>
+  </data>
+  <data name="Label.CheckOutLocal" xml:space="preserve">
+    <value>وقت الانصراف المحلي</value>
+  </data>
+  <data name="SearchDepartments" xml:space="preserve">
+    <value>ابحث عن الأقسام</value>
+  </data>
+  <data name="MyAttendance" xml:space="preserve">
+    <value>حضوري وانصرافي</value>
+  </data>
+  <data name="StatusAbsent" xml:space="preserve">
+    <value>غائب</value>
+  </data>
+  <data name="DepartmentId" xml:space="preserve">
+    <value>معرّف القسم</value>
+  </data>
+  <data name="DepartmentManagerSetupHint" xml:space="preserve">
+    <value>اطلب من مسؤول النظام ربط حسابك بملف موظف وتعيينك مديرًا للقسم.</value>
+  </data>
+  <data name="Label.Notes" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="Label.DirectManager" xml:space="preserve">
+    <value>المدير المباشر</value>
+  </data>
+  <data name="SearchAndFilter" xml:space="preserve">
+    <value>بحث وتصفية</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>الدور</value>
+  </data>
+  <data name="PositionEnabled" xml:space="preserve">
+    <value>تم تفعيل المسمى الوظيفي.</value>
+  </data>
+  <data name="StatusPresent" xml:space="preserve">
+    <value>حاضر</value>
+  </data>
+  <data name="Label.DepartmentCode" xml:space="preserve">
+    <value>رمز القسم</value>
+  </data>
+  <data name="AttendanceDateOrderInvalid" xml:space="preserve">
+    <value>تاريخ البداية يجب ألا يتجاوز تاريخ النهاية.</value>
+  </data>
+  <data name="DepartmentsManagement" xml:space="preserve">
+    <value>إدارة الأقسام</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="SystemUser" xml:space="preserve">
+    <value>مستخدم النظام</value>
+  </data>
+  <data name="AttendanceCorrectionSaved" xml:space="preserve">
+    <value>تم حفظ تصحيح سجل الحضور.</value>
+  </data>
+  <data name="AttendanceUtcResults" xml:space="preserve">
+    <value>النتائج بتوقيت الأردن:</value>
+  </data>
+  <data name="MainNavigation" xml:space="preserve">
+    <value>التنقل الرئيسي</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>استعادة</value>
+  </data>
+  <data name="EmployeeNumberTooLong" xml:space="preserve">
+    <value>رقم الموظف أطول من الحد المسموح.</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>تغيير كلمة المرور</value>
+  </data>
+  <data name="Label.CheckInLocal" xml:space="preserve">
+    <value>وقت الحضور المحلي</value>
+  </data>
+  <data name="Departments" xml:space="preserve">
+    <value>الأقسام</value>
+  </data>
+  <data name="DepartmentNameRequired" xml:space="preserve">
+    <value>اسم القسم مطلوب.</value>
+  </data>
+  <data name="Activity" xml:space="preserve">
+    <value>النشاط</value>
+  </data>
+  <data name="PositionManagement" xml:space="preserve">
+    <value>إدارة المسميات الوظيفية</value>
+  </data>
+  <data name="DepartmentDetails" xml:space="preserve">
+    <value>تفاصيل القسم</value>
+  </data>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>غير مصرح بالوصول</value>
+  </data>
+  <data name="ViewDepartments" xml:space="preserve">
+    <value>عرض الأقسام</value>
+  </data>
+  <data name="CheckOutNow" xml:space="preserve">
+    <value>سجّل الانصراف الآن</value>
+  </data>
+  <data name="DecisionFrom" xml:space="preserve">
+    <value>تاريخ القرار من</value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>الموظف</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
+  <data name="Actor" xml:space="preserve">
+    <value>منفذ العملية</value>
+  </data>
+  <data name="NoDescription" xml:space="preserve">
+    <value>لا يوجد وصف</value>
+  </data>
+  <data name="SearchEmployeesIntro" xml:space="preserve">
+    <value>ابحث عن الموظفين وصفِّ النتائج حسب القسم والحالة.</value>
+  </data>
+  <data name="Label.LeaveEnd" xml:space="preserve">
+    <value>إلى تاريخ</value>
+  </data>
+  <data name="Label.Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="CorrectRecord" xml:space="preserve">
+    <value>تصحيح السجل</value>
+  </data>
+  <data name="Label.LastName" xml:space="preserve">
+    <value>اسم العائلة</value>
+  </data>
+  <data name="HoursWorked" xml:space="preserve">
+    <value>ساعات العمل</value>
+  </data>
+  <data name="ArabicPortal" xml:space="preserve">
+    <value>بوابة الموارد البشرية</value>
+  </data>
+  <data name="DecisionTitle" xml:space="preserve">
+    <value>ملخص قرارات الإجازات</value>
+  </data>
+  <data name="Status.Present" xml:space="preserve">
+    <value>حاضر</value>
+  </data>
+  <data name="Status.Absent" xml:space="preserve">
+    <value>غائب</value>
+  </data>
+  <data name="NoActivity" xml:space="preserve">
+    <value>لا توجد أنشطة مسجلة.</value>
+  </data>
+  <data name="Label.DefaultDays" xml:space="preserve">
+    <value>الأيام السنوية</value>
+  </data>
+  <data name="NewLeaveType" xml:space="preserve">
+    <value>نوع إجازة جديد</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>لوحة المعلومات</value>
+  </data>
+  <data name="AvailableReports" xml:space="preserve">
+    <value>التقارير المتاحة</value>
+  </data>
+  <data name="AddJobTitle" xml:space="preserve">
+    <value>إضافة مسمى وظيفي</value>
+  </data>
+  <data name="EmployeeCreated" xml:space="preserve">
+    <value>تمت إضافة الموظف بنجاح.</value>
+  </data>
+  <data name="WorkLocation" xml:space="preserve">
+    <value>موقع العمل</value>
+  </data>
+  <data name="Headcount" xml:space="preserve">
+    <value>ملخص أعداد الموظفين</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="DepartmentManagement" xml:space="preserve">
+    <value>إدارة الأقسام</value>
+  </data>
+  <data name="LabelConfirmPassword" xml:space="preserve">
+    <value>تأكيد كلمة المرور</value>
+  </data>
+  <data name="LabelPassword" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="LeaveRequests" xml:space="preserve">
+    <value>طلبات الإجازة</value>
+  </data>
+  <data name="ReportAttendance" xml:space="preserve">
+    <value>تقرير الحضور</value>
+  </data>
+  <data name="ConfirmRestore" xml:space="preserve">
+    <value>هل تريد استعادة سجل هذا الموظف؟</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>هل أنت متأكد من حذف هذا السجل؟</value>
+  </data>
+  <data name="LabelRememberMe" xml:space="preserve">
+    <value>تذكرني</value>
+  </data>
+  <data name="DateRange" xml:space="preserve">
+    <value>الفترة</value>
+  </data>
+  <data name="LabelEmail" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+  <data name="Employment.Active" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="Employment.Inactive" xml:space="preserve">
+    <value>غير نشط</value>
+  </data>
+  <data name="LeaveBalancesTitle" xml:space="preserve">
+    <value>أرصدة الإجازات لعام {0}</value>
+  </data>
+  <data name="PrivacyPlaceholder" xml:space="preserve">
+    <value>تُعرض سياسة الخصوصية الخاصة بالمؤسسة في هذه الصفحة.</value>
+  </data>
+  <data name="RequestProcessingError" xml:space="preserve">
+    <value>حدث خطأ أثناء معالجة طلبك.</value>
+  </data>
+  <data name="ShowRange" xml:space="preserve">
+    <value>عرض {0}–{1} من أصل {2}</value>
+  </data>
+  <data name="Js0">
+    <value>تعذر تحديث قائمة البيانات.</value>
+  </data>
+  <data name="Js1">
+    <value>تعذر تحميل البيانات المطلوبة.</value>
+  </data>
+  <data name="Js2">
+    <value>حدث خطأ أثناء تحميل النافذة.</value>
+  </data>
+  <data name="Js3">
+    <value>تعذر تغيير حالة السجل.</value>
+  </data>
+  <data name="Js4">
+    <value>نشط</value>
+  </data>
+  <data name="Js5">
+    <value>معطل</value>
+  </data>
+  <data name="Js6">
+    <value>تعطيل</value>
+  </data>
+  <data name="Js7">
+    <value>تفعيل</value>
+  </data>
+  <data name="Js8">
+    <value>تم تغيير حالة السجل.</value>
+  </data>
+  <data name="Js9">
+    <value>تم تغيير الحالة، لكن تعذر تحديث النتائج. أعد تحميل الصفحة لعرضها.</value>
+  </data>
+  <data name="Js10">
+    <value>حدث خطأ أثناء تغيير حالة السجل.</value>
+  </data>
+  <data name="Js11">
+    <value>جارٍ الحفظ...</value>
+  </data>
+  <data name="Js12">
+    <value>تم الحفظ بنجاح.</value>
+  </data>
+  <data name="Js13">
+    <value>تم الحفظ، لكن تعذر تحديث الجدول. أعد تحميل الصفحة لعرض أحدث البيانات.</value>
+  </data>
+  <data name="Js14">
+    <value>تعذر حفظ البيانات. حاول مرة أخرى.</value>
+  </data>
+  <data name="Js15">
+    <value>حدث خطأ أثناء الحفظ.</value>
+  </data>
+  <data name="Js16">
+    <value>حفظ</value>
+  </data>
+  <data name="Js17">
+    <value>اختر المنصب</value>
+  </data>
+  <data name="Js18">
+    <value>تعذر تحميل المناصب.</value>
+  </data>
+  <data name="Js19">
+    <value>تعذر تحميل المناصب</value>
+  </data>
+  <data name="LoadingDialog">
+    <value>جارٍ تحميل النافذة...</value>
+  </data>
+  <data name="CheckOutNextDay">
+    <value>الانصراف في اليوم التالي</value>
+  </data>
+  <data name="EmploymentType.Contract" xml:space="preserve">
+    <value>عقد</value>
+  </data>
+  <data name="EmploymentType.FullTime" xml:space="preserve">
+    <value>دوام كامل</value>
+  </data>
+  <data name="EmploymentType.PartTime" xml:space="preserve">
+    <value>دوام جزئي</value>
+  </data>
+  <data name="EmploymentType.Internship" xml:space="preserve">
+    <value>تدريب</value>
+  </data>
+  <data name="EmploymentType.Temporary" xml:space="preserve">
+    <value>مؤقت</value>
+  </data>
+  <data name="JordanTime" xml:space="preserve">
+    <value>بتوقيت الأردن</value>
+  </data>
+  <data name="NewAttendanceSession">
+    <value>تسجيل حضور لفترة جديدة</value>
+  </data>
+  <data name="MyLeaveReport">
+    <value>تقرير إجازاتي</value>
+  </data>
+  <data name="LeaveStartTime">
+    <value>وقت البداية (اختياري، بتوقيت الأردن)</value>
+  </data>
+  <data name="LeaveReservationCalculation">
+    <value>يُحجز رصيد الطلب فور تقديمه. الموافقة تثبّت الخصم، والرفض أو الإلغاء يعيدان الأيام. الحساب بالأيام التقويمية ضمن السنة المختارة.</value>
+  </data>
+  <data name="LeaveEndTime">
+    <value>وقت النهاية (اختياري، بتوقيت الأردن)</value>
+  </data>
+  <data name="LeaveTimeOrder">
+    <value>يجب أن يكون وقت النهاية بعد وقت البداية.</value>
+  </data>
+  <data name="LeaveTimeHint">
+    <value>التاريخان مطلوبان، والوقتان اختياريان. يُملأ وقت البداية بالوقت الحالي ويمكن مسحه. يبقى وقت النهاية فارغًا. تُحسب الإجازة بالأيام التقويمية بما يشمل يوم البداية والنهاية، وليس بالساعات.</value>
+  </data>
+  <data name="PendingDays">
+    <value>محجوز للطلبات المعلقة</value>
+  </data>
+  <data name="PersonalLeaveReportHint">
+    <value>رصيدك وطلباتك الشخصية فقط. فلتر الحالة يخص الطلبات؛ الرصيد يشمل جميع طلبات السنة المختارة.</value>
+  </data>
+  <data name="CorrectionHelp">
+    <value>لتعديل سجل موجود: افتح الحضور واضغط تعديل بجانب الفترة المطلوبة. لإضافة سجل مفقود: اختر الموظف وتاريخ الدوام والوقت. تاريخ الانصراف الفارغ يعني نفس تاريخ الدوام.</value>
+  </data>
+  <data name="CorrectionEndDateHint">
+    <value>اتركه فارغًا لنفس يوم الدوام؛ اختر اليوم التالي للوردية الليلية.</value>
+  </data>
+  <data name="CorrectionCheckOutDate">
+    <value>تاريخ الانصراف</value>
+  </data>
+  <data name="CorrectionNeedsCheckIn">
+    <value>أدخل وقت الحضور قبل تحديد الانصراف.</value>
+  </data>
+  <data name="CorrectionTimeOrder">
+    <value>يجب أن يكون الانصراف بعد الحضور، وألا تتجاوز الفترة 24 ساعة. للدوام الليلي اختر تاريخ الانصراف التالي.</value>
+  </data>
+  <data name="EditingSession">
+    <value>تعديل فترة حضور محددة</value>
+  </data>
+  <data name="CorrectionFutureTime">
+    <value>لا يمكن تسجيل حضور أو انصراف في المستقبل. الأوقات بتوقيت الأردن.</value>
+  </data>
+  <data name="ProfileReadOnlyHint">
+    <value>هذا ملفك الوظيفي للعرض فقط. لتصحيح البيانات تواصل مع فريق الموارد البشرية.</value>
+  </data>
+  <data name="MyProfile">
+    <value>ملفي الشخصي</value>
+  </data>
+</root>

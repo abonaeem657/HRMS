@@ -1,0 +1,106 @@
+@using System.Globalization
+@using HRMS.Application.Identity
+@{
+    var arabic = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+    var currentUrl = Context.Request.Path + Context.Request.QueryString;
+    var canReadHr = User.IsInRoles(IdentityRoles.ReadHrData);
+    var canUseAttendance = User.IsInRoles(IdentityRoles.UseAttendance);
+    var canUseLeaves = User.IsInRoles(IdentityRoles.UseLeaves);
+    var canViewReports = User.IsInRoles(IdentityRoles.ViewReports);
+    var canViewAudit = User.IsInRoles(IdentityRoles.ViewAuditLogs);
+    var activeController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var activeAction = ViewContext.RouteData.Values["action"]?.ToString();
+    var signedIn = User.Identity?.IsAuthenticated == true;
+}
+<!DOCTYPE html>
+<html lang="@CultureInfo.CurrentUICulture.Name" dir="@(arabic ? "rtl" : "ltr")">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>@ViewData["Title"] - HRMS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/@(arabic ? "bootstrap.rtl.min.css" : "bootstrap.min.css")" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HRMS.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/workspace.css" asp-append-version="true" />
+</head>
+<body class="@(signedIn ? "workspace-layout" : "guest-layout")">
+    <a class="skip-link" href="#main-content">@T["SkipToContent"]</a>
+    @if (signedIn)
+    {
+        <div class="workspace-menu-bar">
+            <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#workspaceSidebar" aria-controls="workspaceSidebar" aria-expanded="false" aria-label="@T["ToggleNavigation"]"><span aria-hidden="true">☰</span> @T["MainNavigation"]</button>
+            <span class="fw-bold">HRMS</span>
+        </div>
+    }
+    <header id="@(signedIn ? "workspaceSidebar" : null)" class="app-header @(signedIn ? "offcanvas offcanvas-start" : "")" tabindex="@(signedIn ? "-1" : null)" aria-label="@T["MainNavigation"]">
+        <nav class="navbar navbar-light navbar-expand-lg" aria-label="@T["MainNavigation"]">
+            <div class="container-fluid app-shell">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><span class="brand-mark">H</span><span>HRMS<small>@T["ArabicPortal"]</small></span></a>
+                @if (signedIn)
+                { <button type="button" class="btn-close sidebar-close" data-bs-dismiss="offcanvas" aria-label="@T["Cancel"]"></button> }
+                else
+                { <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="@T["ToggleNavigation"]"><span class="navbar-toggler-icon"></span></button> }
+                <div class="@(signedIn ? "navbar-collapse d-flex" : "collapse navbar-collapse")" id="mainNavigation">
+                    <ul class="navbar-nav main-nav">
+                        <li class="nav-item"><a class="nav-link @(activeController == "Home" && activeAction == "Index" ? "active" : "")" asp-controller="Home" asp-action="Index">@T["Home"]</a></li>
+                        @if (canReadHr)
+                        {
+                            <li class="nav-section">@(arabic ? "الأفراد والمؤسسة" : "People & organization")</li>
+                            <li class="nav-item"><a class="nav-link @(activeController == "Employees" ? "active" : "")" asp-controller="Employees" asp-action="Index">@T["Employees"]</a></li>
+                            <li class="nav-item"><a class="nav-link @(activeController == "Departments" ? "active" : "")" asp-controller="Departments" asp-action="Index">@T["Departments"]</a></li>
+                            <li class="nav-item"><a class="nav-link @(activeController == "Positions" ? "active" : "")" asp-controller="Positions" asp-action="Index">@T["JobTitles"]</a></li>
+                        }
+                        @if (canUseAttendance || canUseLeaves) { <li class="nav-section">@(arabic ? "العمل اليومي" : "Daily work")</li> }
+                        @if (canUseAttendance) { <li class="nav-item"><a class="nav-link @(activeController == "Attendance" ? "active" : "")" asp-controller="Attendance" asp-action="Index">@T["Attendance"]</a></li> }
+                        @if (canUseLeaves) { <li class="nav-item"><a class="nav-link @(activeController == "LeaveManagement" && activeAction != "MyReport" ? "active" : "")" asp-controller="LeaveManagement" asp-action="Index">@T["Leave"]</a></li> }
+                        @if (canUseLeaves) { <li class="nav-item"><a class="nav-link @(activeController == "LeaveManagement" && activeAction == "MyReport" ? "active" : "")" asp-controller="LeaveManagement" asp-action="MyReport">@T["MyLeaveReport"]</a></li> }
+                        @if (canViewReports || canViewAudit) { <li class="nav-section">@(arabic ? "المتابعة والإدارة" : "Insights & administration")</li> }
+                        @if (canViewReports) { <li class="nav-item"><a class="nav-link @(activeController == "Reports" ? "active" : "")" asp-controller="Reports" asp-action="Index">@T["Reports"]</a></li> }
+                        @if (canViewAudit) { <li class="nav-item"><a class="nav-link @(activeController == "AuditLogs" ? "active" : "")" asp-controller="AuditLogs" asp-action="Index">@T["AuditLog"]</a></li> }
+                        @if (User.IsInRole(IdentityRoles.SystemAdministrator)) { <li class="nav-item"><a class="nav-link @(activeController == "UserAccounts" ? "active" : "")" asp-controller="UserAccounts" asp-action="Index">@T["Users"]</a></li> }
+                        @if (signedIn) {
+                            <li class="nav-section">@(arabic ? "المساعدة والحساب" : "Help & account")</li>
+                            <li class="nav-item"><a class="nav-link @(activeAction == "Guide" ? "active" : "")" asp-controller="Home" asp-action="Guide">@(arabic ? "دليل الاستخدام" : "Getting started")</a></li>
+                            <li class="nav-item"><a class="nav-link @(activeController == "MyProfile" ? "active" : "")" asp-controller="MyProfile" asp-action="Index">@T["MyProfile"]</a></li>
+                            <li class="nav-item"><a class="nav-link @(activeAction == "ChangePassword" ? "active" : "")" asp-controller="Account" asp-action="ChangePassword">@T["ChangePassword"]</a></li>
+                        }
+                    </ul>
+                    <div class="navbar-tools">
+                        <div class="language-switch" aria-label="@T["ChooseLanguage"]">
+                            <a asp-controller="Home" asp-action="SetLanguage" asp-route-culture="ar-JO" asp-route-returnUrl="@currentUrl" lang="ar" hreflang="ar" aria-current="@(arabic ? "true" : null)">@T["ArabicLanguageShort"]</a>
+                            <a asp-controller="Home" asp-action="SetLanguage" asp-route-culture="en-US" asp-route-returnUrl="@currentUrl" lang="en" hreflang="en" aria-current="@(!arabic ? "true" : null)">EN</a>
+                        </div>
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <span class="signed-in-name" title="@User.Identity.Name">@User.Identity.Name</span>
+                            <form asp-controller="Account" asp-action="Logout" method="post"><button type="submit" class="btn btn-sm btn-outline-secondary">@T["SignOut"]</button></form>
+                        }
+                        else { <a class="btn btn-sm btn-primary" asp-controller="Account" asp-action="Login">@T["SignIn"]</a> }
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main id="main-content" class="app-main" role="main">
+        <div class="container-fluid app-shell">
+            @if (signedIn)
+            {
+                <div class="workspace-topbar">
+                    <nav aria-label="@(arabic ? "مسار الصفحة" : "Breadcrumb")">@if (activeController != "Home" || activeAction != "Index") { <a asp-controller="Home" asp-action="Index">@T["Home"]</a><span aria-hidden="true"> / </span> }<span>@ViewData["Title"]</span></nav>
+                </div>
+                <partial name="_WorkspaceNavigation" />
+            }
+            @RenderBody()
+        </div>
+    </main>
+    <footer class="app-footer"><div class="container-fluid app-shell"><span>© @BusinessClock.Today.Year HRMS</span><a asp-controller="Home" asp-action="Privacy">@T["Privacy"]</a></div></footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script type="application/json" id="hrmsMessages">@Html.Raw(System.Text.Json.JsonSerializer.Serialize(new[] { "Js0", "Js1", "Js2", "Js3", "Js4", "Js5", "Js6", "Js7", "Js8", "Js9", "Js10", "Js11", "Js12", "Js13", "Js14", "Js15", "Js16", "Js17", "Js18", "Js19", "Loading", "LoadingDialog", "CheckOutNextDay" }.ToDictionary(key => key, key => T[key].Value)))</script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/workspace.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

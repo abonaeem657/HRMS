@@ -1,0 +1,18 @@
+@model HRMS.Models.Reporting.AttendanceReportViewModel
+@{
+    ViewData["Title"] = T["AttendanceReportTitle"].Value;
+}
+<h1 class="h3 mb-3">@T["AttendanceReport"]</h1>
+<form asp-action="Attendance" method="get" class="row g-2 align-items-end mb-3">
+    <div class="col-md-2"><label asp-for="DepartmentId" class="form-label">@T["Department"]</label><select asp-for="DepartmentId" class="form-select"><option value="">@T["All"]</option>@foreach (var option in Model.Options.Departments) { <option value="@option.Id">@option.Text</option> }</select></div>
+    <div class="col-md-2"><label asp-for="EmployeeId" class="form-label">@T["Employee"]</label><select asp-for="EmployeeId" class="form-select"><option value="">@T["All"]</option>@foreach (var option in Model.Options.Employees) { <option value="@option.Id">@option.Text</option> }</select></div>
+    <div class="col-md-2"><label asp-for="FromDate" class="form-label">@T["From"]</label><input asp-for="FromDate" type="date" class="form-control" /></div>
+    <div class="col-md-2"><label asp-for="ToDate" class="form-label">@T["To"]</label><input asp-for="ToDate" type="date" class="form-control" /></div>
+    <div class="col-md-2"><button class="btn btn-primary" type="submit">@T["Filter"]</button></div>
+</form>
+<p class="text-muted">@T["AttendanceUtcResults"] @Model.Results.TotalCount</p>
+<div class="table-responsive"><table class="table table-striped table-hover align-middle"><thead><tr><th>@T["Date"]</th><th>@T["EmployeeNumber"]</th><th>@T["Employee"]</th><th>@T["Department"]</th><th>@T["CheckInUtc"]</th><th>@T["CheckOutUtc"]</th><th>@T["Hours"]</th><th>@T["Verification"]</th></tr></thead><tbody>
+@if (Model.Results.Items.Count == 0) { <tr><td colspan="8" class="text-center text-muted">@T["NoResults"]</td></tr> }
+@foreach (var row in Model.Results.Items) { <tr><td>@row.WorkDate.ToString("yyyy-MM-dd")</td><td>@row.EmployeeNumber</td><td>@row.FullName</td><td>@row.DepartmentName</td><td>@BusinessClock.ToLocal(row.CheckInUtc)?.ToString("HH:mm")</td><td>@BusinessClock.ToLocal(row.CheckOutUtc)?.ToString("HH:mm")</td><td>@row.TotalHours.ToString("F2")</td><td>@T["Status." + row.Status] @if (row.IsInvalid) { <span class="badge text-bg-danger">@T["Invalid"]</span> }</td></tr> }
+</tbody></table></div>
+<partial name="_ReportPagination" model="@(new HRMS.Models.Reporting.ReportPaginationModel("Attendance", Model.Results.Page, Model.Results.TotalPages, Model.DepartmentId, null, null, null, null, Model.EmployeeId, Model.FromDate, Model.ToDate, null, null, PageSize: Model.PageSize))" />

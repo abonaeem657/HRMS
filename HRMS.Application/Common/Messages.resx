@@ -1,0 +1,264 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="Business000" xml:space="preserve">
+    <value>The holiday provider returned an invalid response.</value>
+  </data>
+  <data name="Business001" xml:space="preserve">
+    <value>The holiday provider returned invalid or empty data.</value>
+  </data>
+  <data name="Business002" xml:space="preserve">
+    <value>Attendance times are invalid.</value>
+  </data>
+  <data name="Business003" xml:space="preserve">
+    <value>Select a valid role.</value>
+  </data>
+  <data name="Business004" xml:space="preserve">
+    <value>This email address is already in use.</value>
+  </data>
+  <data name="Business005" xml:space="preserve">
+    <value>Invalid year or country code.</value>
+  </data>
+  <data name="Business006" xml:space="preserve">
+    <value>The selected department does not exist or is inactive.</value>
+  </data>
+  <data name="Business007" xml:space="preserve">
+    <value>Department not found.</value>
+  </data>
+  <data name="Business008" xml:space="preserve">
+    <value>The selected manager does not exist or is inactive.</value>
+  </data>
+  <data name="Business009" xml:space="preserve">
+    <value>The selected position does not exist or is inactive.</value>
+  </data>
+  <data name="Business010" xml:space="preserve">
+    <value>The selected position does not belong to this department.</value>
+  </data>
+  <data name="Business011" xml:space="preserve">
+    <value>Position not found.</value>
+  </data>
+  <data name="Business012" xml:space="preserve">
+    <value>Select an active manager who belongs to this department. Create the department before assigning a manager.</value>
+  </data>
+  <data name="Business013" xml:space="preserve">
+    <value>Employee not found or leave starts before the hire date.</value>
+  </data>
+  <data name="Business014" xml:space="preserve">
+    <value>Employee not found or inactive.</value>
+  </data>
+  <data name="Business015" xml:space="preserve">
+    <value>Employee not found or already linked to another account.</value>
+  </data>
+  <data name="Business016" xml:space="preserve">
+    <value>Employee not found.</value>
+  </data>
+  <data name="Business017" xml:space="preserve">
+    <value>Invalid attendance correction.</value>
+  </data>
+  <data name="Business018" xml:space="preserve">
+    <value>Invalid leave request.</value>
+  </data>
+  <data name="Business019" xml:space="preserve">
+    <value>Invalid leave type.</value>
+  </data>
+  <data name="Business020" xml:space="preserve">
+    <value>The start date cannot be after the end date.</value>
+  </data>
+  <data name="Business021" xml:space="preserve">
+    <value>The end date cannot be before the start date.</value>
+  </data>
+  <data name="Business022" xml:space="preserve">
+    <value>Invalid attendance date.</value>
+  </data>
+  <data name="Business023" xml:space="preserve">
+    <value>The external holiday service is unavailable.</value>
+  </data>
+  <data name="Business024" xml:space="preserve">
+    <value>Unable to save. The leave type name may already exist.</value>
+  </data>
+  <data name="Business025" xml:space="preserve">
+    <value>Department not found.</value>
+  </data>
+  <data name="Business026" xml:space="preserve">
+    <value>Position not found.</value>
+  </data>
+  <data name="Business027" xml:space="preserve">
+    <value>The first administrator has already been configured.</value>
+  </data>
+  <data name="Business028" xml:space="preserve">
+    <value>Department updated successfully.</value>
+  </data>
+  <data name="Business029" xml:space="preserve">
+    <value>Position updated successfully.</value>
+  </data>
+  <data name="Business030" xml:space="preserve">
+    <value>Check-out has already been recorded.</value>
+  </data>
+  <data name="Business031" xml:space="preserve">
+    <value>Attendance is already recorded for this date.</value>
+  </data>
+  <data name="Business032" xml:space="preserve">
+    <value>Department deactivated; its records and employees are preserved.</value>
+  </data>
+  <data name="Business033" xml:space="preserve">
+    <value>Position deactivated; employee records are preserved.</value>
+  </data>
+  <data name="Business034" xml:space="preserve">
+    <value>Another user changed this request. Reload the page.</value>
+  </data>
+  <data name="Business035" xml:space="preserve">
+    <value>Department activated.</value>
+  </data>
+  <data name="Business036" xml:space="preserve">
+    <value>Position activated.</value>
+  </data>
+  <data name="Business037" xml:space="preserve">
+    <value>Department created successfully.</value>
+  </data>
+  <data name="Business038" xml:space="preserve">
+    <value>Position created successfully.</value>
+  </data>
+  <data name="Business039" xml:space="preserve">
+    <value>This request has already been reviewed.</value>
+  </data>
+  <data name="Business040" xml:space="preserve">
+    <value>Employee number is already in use.</value>
+  </data>
+  <data name="Business041" xml:space="preserve">
+    <value>A rejection reason is required and cannot exceed 1000 characters.</value>
+  </data>
+  <data name="Business042" xml:space="preserve">
+    <value>A rejection reason is required.</value>
+  </data>
+  <data name="Business043" xml:space="preserve">
+    <value>Leave request not found.</value>
+  </data>
+  <data name="Business044" xml:space="preserve">
+    <value>Invalid department status change.</value>
+  </data>
+  <data name="Business045" xml:space="preserve">
+    <value>Invalid position status change.</value>
+  </data>
+  <data name="Business046" xml:space="preserve">
+    <value>Password must contain at least 10 characters.</value>
+  </data>
+  <data name="Business047" xml:space="preserve">
+    <value>Password must contain a lowercase letter.</value>
+  </data>
+  <data name="Business048" xml:space="preserve">
+    <value>Password must contain an uppercase letter.</value>
+  </data>
+  <data name="Business049" xml:space="preserve">
+    <value>Password must contain a digit.</value>
+  </data>
+  <data name="Business050" xml:space="preserve">
+    <value>Password must contain a special character.</value>
+  </data>
+  <data name="Business051" xml:space="preserve">
+    <value>A reviewed request cannot be cancelled.</value>
+  </data>
+  <data name="Business052" xml:space="preserve">
+    <value>An employee cannot be their own manager.</value>
+  </data>
+  <data name="Business053" xml:space="preserve">
+    <value>Check-in is required before check-out.</value>
+  </data>
+  <data name="Business054" xml:space="preserve">
+    <value>The last active administrator cannot be deactivated.</value>
+  </data>
+  <data name="Business055" xml:space="preserve">
+    <value>Reassign the position's employees before changing its department.</value>
+  </data>
+  <data name="Business056" xml:space="preserve">
+    <value>No open attendance record was found.</value>
+  </data>
+  <data name="Business057" xml:space="preserve">
+    <value>User account not found.</value>
+  </data>
+  <data name="Business058" xml:space="preserve">
+    <value>Review notes cannot exceed 1000 characters.</value>
+  </data>
+  <data name="Business059" xml:space="preserve">
+    <value>This leave type is unavailable.</value>
+  </data>
+  <data name="Business060" xml:space="preserve">
+    <value>Leave type not found.</value>
+  </data>
+  <data name="Business061" xml:space="preserve">
+    <value>Invalid check-out: it must follow check-in and the interval cannot exceed 24 hours.</value>
+  </data>
+  <data name="Business062" xml:space="preserve">
+    <value>This request overlaps a pending or approved leave.</value>
+  </data>
+  <data name="Business063" xml:space="preserve">
+    <value>Year must be between 2000 and 2100.</value>
+  </data>
+  <data name="Business064" xml:space="preserve">
+    <value>At least one active administrator is required.</value>
+  </data>
+  <data name="Business065" xml:space="preserve">
+    <value>Attendance times must use UTC.</value>
+  </data>
+  <data name="Business066" xml:space="preserve">
+    <value>Check-out must use UTC.</value>
+  </data>
+  <data name="Business067" xml:space="preserve">
+    <value>Check-in must use UTC.</value>
+  </data>
+  <data name="Business068" xml:space="preserve">
+    <value>Attendance already exists for this employee and date.</value>
+  </data>
+  <data name="Extra000" xml:space="preserve">
+    <value>Access denied.</value>
+  </data>
+  <data name="Extra001" xml:space="preserve">
+    <value>An open attendance record must be closed or corrected first.</value>
+  </data>
+  <data name="Extra002" xml:space="preserve">
+    <value>Reassign the department manager before transferring this employee.</value>
+  </data>
+  <data name="Extra003" xml:space="preserve">
+    <value>Position code is required and must not exceed 50 characters.</value>
+  </data>
+  <data name="Extra004" xml:space="preserve">
+    <value>Position code already exists.</value>
+  </data>
+  <data name="Extra005" xml:space="preserve">
+    <value>Position title is required.</value>
+  </data>
+  <data name="Extra006" xml:space="preserve">
+    <value>Position description or grade is too long.</value>
+  </data>
+  <data name="Extra007" xml:space="preserve">
+    <value>External service timeout.</value>
+  </data>
+  <data name="HireDateRequired">
+    <value>Hire date is required.</value>
+  </data>
+  <data name="EmployeeNumberRequired">
+    <value>Employee number is required.</value>
+  </data>
+  <data name="FirstNameRequired">
+    <value>First name is required.</value>
+  </data>
+  <data name="LastNameRequired">
+    <value>Last name is required.</value>
+  </data>
+  <data name="ValidEmailRequired">
+    <value>Enter a valid email address.</value>
+  </data>
+  <data name="EmploymentStatusRequired">
+    <value>Employment status is required.</value>
+  </data>
+  <data name="EmploymentTypeRequired">
+    <value>Employment type is required.</value>
+  </data>
+  <data name="CheckInWorkDate">
+    <value>Check-in must belong to the selected work date.</value>
+  </data>
+  <data name="ConcurrentEdit">
+    <value>This record changed. Reload and retry.</value>
+  </data>
+  <data name="DuplicateIdentifier">
+    <value>A record with this identifier already exists.</value>
+  </data>
+</root>

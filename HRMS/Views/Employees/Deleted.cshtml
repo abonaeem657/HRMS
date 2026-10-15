@@ -1,0 +1,24 @@
+@using System.Globalization
+@model HRMS.Application.Employees.DeletedEmployeePage
+@{
+    ViewData["Title"] = T["DeletedEmployees"].Value;
+}
+<div class="page-heading d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+    <div>
+        <h1 class="h2 mb-1">@T["DeletedEmployees"]</h1>
+        <p class="text-muted mb-0">@T["DeletedEmployeesIntro"]</p>
+    </div>
+    <a class="btn btn-outline-secondary" asp-action="Index">@T["BackToEmployees"]</a>
+</div>
+@if (TempData["StatusMessage"] is string statusMessage) { <div class="alert alert-info" role="status">@statusMessage</div> }
+<div class="card border-0 shadow-sm"><div class="table-responsive"><table class="table align-middle mb-0">
+    <thead><tr><th scope="col">@T["EmployeeNumber"]</th><th scope="col">@T["Name"]</th><th scope="col">@T["Department"]</th><th scope="col">@T["DeletedAtUtc"]</th><th scope="col">@T["Action"]</th></tr></thead>
+    <tbody>
+    @if (Model.Items.Count == 0) { <tr><td colspan="5" class="text-center text-muted py-5">@T["NoDeletedEmployees"]</td></tr> }
+    @foreach (var employee in Model.Items)
+    {
+        <tr><td><code dir="ltr">@employee.EmployeeNumber</code></td><td>@employee.FullName</td><td>@employee.DepartmentName</td><td dir="ltr">@(BusinessClock.ToLocal(employee.DeletedAtUtc)?.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) ?? T["Unavailable"].Value)</td><td><form asp-action="Restore" asp-route-id="@employee.EmployeeId" method="post"><button class="btn btn-sm btn-outline-primary" type="submit">@T["Restore"]</button></form></td></tr>
+    }
+    </tbody>
+</table></div>
+<div class="d-flex justify-content-between align-items-center gap-2 p-3"><span class="small text-muted">@Model.TotalCount</span><nav aria-label="@T["EmployeePages"]"><ul class="pagination pagination-sm mb-0"><li class="page-item @(Model.Page <= 1 ? "disabled" : "")"><a class="page-link" asp-action="Deleted" asp-route-page="@(Model.Page - 1)" asp-route-pageSize="@Model.PageSize">‹</a></li><li class="page-item disabled"><span class="page-link">@Model.Page / @Model.TotalPages</span></li><li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : "")"><a class="page-link" asp-action="Deleted" asp-route-page="@(Model.Page + 1)" asp-route-pageSize="@Model.PageSize">›</a></li></ul></nav></div></div>

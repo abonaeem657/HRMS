@@ -1,0 +1,72 @@
+@model HRMS.Models.Attendance.AttendanceCorrectionViewModel
+@{
+    ViewData["Title"] = T["CorrectAttendance"].Value;
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <h1 class="h3 mb-3">@T["CorrectAttendance"]</h1>
+        <div class="alert alert-info">
+            @T["AttendanceTimezoneInfo"]
+            <p class="mb-0 mt-2">@T["CorrectionHelp"]</p>
+        </div>
+        <form asp-action="Correct" method="post" class="card card-body">
+            @Html.AntiForgeryToken()
+            <input asp-for="AttendanceId" type="hidden" />
+            <input type="hidden" name="RowVersion" value="@(Model.RowVersion is null ? "" : Convert.ToBase64String(Model.RowVersion))" />
+            @if (Model.AttendanceId.HasValue) { <p class="badge text-bg-light align-self-start">@T["EditingSession"] #@Model.AttendanceId</p> }
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <div class="mb-3">
+                <label asp-for="EmployeeId" class="form-label"></label>
+                @if (Model.AttendanceId.HasValue) { <input asp-for="EmployeeId" type="hidden" /> }
+                <select asp-for="EmployeeId" asp-items="Model.Employees" class="form-select" disabled="@(Model.AttendanceId.HasValue)">
+                    <option value="">@T["SelectEmployee"]</option>
+                </select>
+                <span asp-validation-for="EmployeeId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="WorkDate" class="form-label"></label>
+                <input asp-for="WorkDate" type="date" asp-format="{0:yyyy-MM-dd}" readonly="@(Model.AttendanceId.HasValue)" class="form-control" />
+                <span asp-validation-for="WorkDate" class="text-danger"></span>
+            </div>
+            <div class="row g-3">
+                <div class="col-12 mb-3">
+                    <label asp-for="CheckOutDate" class="form-label">@T["CorrectionCheckOutDate"]</label>
+                    <input asp-for="CheckOutDate" type="date" asp-format="{0:yyyy-MM-dd}" class="form-control" />
+                    <span class="form-text">@T["CorrectionEndDateHint"]</span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="CheckInLocal" class="form-label"></label>
+                    <input asp-for="CheckInLocal" type="time" class="form-control" />
+                    <span asp-validation-for="CheckInLocal" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="CheckOutLocal" class="form-label"></label>
+                    <input asp-for="CheckOutLocal" type="time" class="form-control" />
+                    <span asp-validation-for="CheckOutLocal" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Status" class="form-label"></label>
+                <select asp-for="Status" class="form-select">
+                    <option value="Present">@T["Status.Present"]</option>
+                    <option value="Late">@T["Status.Late"]</option>
+                    <option value="Absent">@T["Status.Absent"]</option>
+                    <option value="HalfDay">@T["Status.HalfDay"]</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Notes" class="form-label"></label>
+                <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">@T["SaveCorrection"]</button>
+                <a asp-action="Index" class="btn btn-outline-secondary">@T["Cancel"]</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+

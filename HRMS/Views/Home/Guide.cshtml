@@ -1,0 +1,114 @@
+@using HRMS.Application.Identity
+@{
+    var ar = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+    ViewData["Title"] = ar ? "دليل عملي حسب دورك" : "Your role guide";
+    var steps = new List<(string Title, string Text, string Controller, string Action)>();
+    void Add(string titleAr, string titleEn, string textAr, string textEn, string controller, string action) =>
+        steps.Add((ar ? titleAr : titleEn, ar ? textAr : textEn, controller, action));
+    var administrator = User.IsInRole(IdentityRoles.SystemAdministrator);
+    var hrManager = User.IsInRole(IdentityRoles.HRManager);
+    var hrOfficer = User.IsInRole(IdentityRoles.HROfficer);
+    var managerOnly = User.IsInRole(IdentityRoles.DepartmentManager) && !User.IsInRoles(IdentityRoles.ManageEmployees);
+    var auditorOnly = User.IsInRole(IdentityRoles.Auditor) && !User.IsInRoles(IdentityRoles.UseLeaves);
+    var employeeOnly = User.IsInRole(IdentityRoles.Employee) && !User.IsInRoles(IdentityRoles.ManageLeaves);
+    Add("راجع ملفك الوظيفي", "Read your employee profile", "افتح ملفي الشخصي للاطلاع على بياناتك الوظيفية والقسم والمسمّى والمدير. البيانات للعرض فقط؛ اطلب تصحيحها من الموارد البشرية.", "Open My profile to read your employment details, department, job title and manager. Ask HR to correct this read-only record.", "MyProfile", "Index");
+    if (User.IsInRoles(IdentityRoles.ManageOrganization))
+    {
+        Add("جهّز الأقسام والمسميات", "Prepare departments and titles",
+            "ابدأ بالأقسام، ثم أضف المسميات الوظيفية من قائمتها. بعد إضافة الموظفين، عد إلى تعديل القسم وعيّن مديرًا نشطًا من نفس القسم. تستطيع تعديل البيانات وتعطيل القسم أو المسمّى عند الحاجة.",
+            "Create departments, then job titles. After adding employees, edit each department to assign an active manager from that department. You can edit or deactivate departments and titles.", "Departments", "Index");
+    }
+    if (User.IsInRoles(IdentityRoles.ManageEmployees))
+    {
+        Add("أضف الموظفين وتابع ملفاتهم", "Manage employee records",
+            "من الموظفين اضغط إضافة، وحدد القسم ثم المسمّى، وأكمل الرقم والبريد وتاريخ التعيين. العرض الافتراضي للنشطين؛ اختر كل الموظفين لرؤية غير النشطين. يمكن تعديل الملفات وحذفها منطقيًا واستعادتها من الموظفين المحذوفين.",
+            "Choose Add employee, select department then title, and enter number, email and hire date. The default list shows active employees; select All employees to include inactive records. Records can be edited, soft-deleted and restored.", "Employees", "Index");
+    }
+    if (administrator)
+    {
+        Add("اربط الحسابات وأعطِ الصلاحيات", "Link accounts and permissions",
+            "افتح المستخدمين ثم إنشاء أو تعديل. اختر دور الحساب واربطه بموظف مختلف. دور الحساب يحدد الصلاحيات؛ المسمّى الوظيفي يصف وظيفة الموظف. يمكنك تعطيل الحساب وتفعيله وإعادة تعيين كلمة مروره. ربط مدير القسم يتطلب تعيينه مديرًا في بيانات القسم أيضًا.",
+            "Open Users, then Create or Edit. Choose the role and link a distinct employee. Roles grant permissions; job titles describe employment. You can deactivate, reactivate and reset passwords. A department manager must also be assigned in department details.", "UserAccounts", "Index");
+    }
+    if (User.IsInRoles(IdentityRoles.ManageLeaveTypes))
+    {
+        Add("اضبط أنواع الإجازة", "Configure leave types",
+            "افتح أنواع الإجازات وحدد الاسم بالعربية والإنجليزية والرصيد السنوي وهل النوع مدفوع ونشط. القيم الأولية قابلة للتعديل وفق سياسة مؤسستك. النوع غير النشط لا يظهر في طلب جديد.",
+            "Set the Arabic and English names, annual allowance, paid flag and active flag. Starter values are editable under your organization policy. Inactive types are unavailable for new requests.", "LeaveManagement", "Types");
+    }
+    if (User.IsInRoles(IdentityRoles.UseAttendance))
+    {
+        Add("سجّل حضورك وانصرافك", "Record your attendance",
+            "اضغط تسجيل حضور عند بدء العمل وانصراف عند الانتهاء. بعد الانصراف يمكنك بدء فترة جديدة في اليوم نفسه؛ لا تفتح فترتين معًا. الأوقات بتوقيت الأردن. إذا احتجت تصحيحًا، اطلبه من فريق الموارد البشرية.",
+            "Check in when starting work and out when finishing. After checking out you can start another session the same day; only one session can remain open. Times use Jordan time. Ask HR to correct mistakes.", "Attendance", "Index");
+    }
+    if (User.IsInRoles(IdentityRoles.ManageAttendance))
+    {
+        Add("صحّح فترة دوام محددة", "Correct an attendance session",
+            "في جدول الحضور ابحث عن الموظف والتاريخ واضغط تعديل بجانب الفترة المطلوبة. صحّح وقت الحضور والانصراف واحفظ. للوردية الليلية اختر تاريخ الانصراف التالي. لا تدخل وقتًا مستقبليًا أو فترة تتجاوز 24 ساعة أو تتداخل مع فترة أخرى. زر تصحيح الحضور العام مخصص أيضًا لإضافة سجل مفقود؛ عند تعدد الفترات استخدم تعديل بجانب الفترة.",
+            "Find the employee and date in Attendance and choose Edit beside the required session. Set check-in and check-out and save. For overnight work choose the following check-out date. Avoid future times, intervals above 24 hours, or overlaps. The general correction form can also add a missing record; use the row's Edit button when multiple sessions exist.", "Attendance", "Index");
+    }
+    if (User.IsInRoles(IdentityRoles.UseLeaves))
+    {
+        Add("قدّم طلب إجازة وتابع حالته", "Submit and track leave",
+            "اختر النوع وتاريخ البداية والنهاية واكتب السبب. الوقت اختياري؛ البداية تُملأ بالوقت الحالي ويمكن مسحها، والنهاية تبقى فارغة. الحساب بالأيام التقويمية وليس بالساعات. بعد الإرسال يُحجز الرصيد؛ الموافقة تثبّت الخصم والرفض أو إلغاء الطلب المعلّق يعيدان الأيام. ألغِ طلبك المعلّق من صفحة الإجازات.",
+            "Choose type, start and end dates, and reason. Times are optional; start defaults to now and can be cleared, while end stays blank. Allowance uses calendar days, not hours. Submission reserves days, approval confirms the deduction, and rejection or pending cancellation releases them. Cancel your pending request from Leave.", "LeaveManagement", "Create");
+        Add("راجع تقرير إجازاتك", "Read your personal leave report",
+            "افتح تقرير إجازاتي من القائمة. اختر السنة والحالة لتشاهد طلباتك وقراراتها وملاحظات المراجعة. جدول الرصيد يعرض المسموح والمستخدم والمحجوز والمتبقي للسنة كاملة؛ فلتر الحالة يغير قائمة الطلبات فقط. التقرير يعرض بياناتك وحدك.",
+            "Open My leave report in navigation. Select year and status to review your requests, decisions and notes. Balances show allowance, used, reserved and remaining for the whole year; status only filters the request list. This report contains only your own data.", "LeaveManagement", "MyReport");
+    }
+    if (User.IsInRoles(IdentityRoles.ManageLeaves))
+    {
+        Add("راجع طلبات الإجازة", "Review leave requests",
+            managerOnly
+                ? "افتح الإجازات واختر الحالة معلّق. راجع طلبات قسمك ووافق أو ارفض مع سبب. لا تعتمد طلبك الشخصي؛ يراجعه فريق الموارد البشرية. إذا لم تظهر بيانات قسمك، اطلب من مسؤول النظام التأكد من ربط حسابك بموظف وتعيينه مديرًا للقسم."
+                : "افتح الإجازات واختر الحالة معلّق. راجع الموظف والنوع والفترة والسبب، ثم وافق أو ارفض مع سبب واضح. لديك نطاق المؤسسة؛ تأكد من الطلب قبل اتخاذ القرار. القرار محفوظ في سجل التدقيق.",
+            managerOnly
+                ? "Filter Leave to Pending. Review your department and approve or reject with a reason. HR reviews your own request. If your department is unavailable, ask the administrator to check your employee link and department manager assignment."
+                : "Filter Leave to Pending. Check employee, type, period and reason, then approve or reject with a clear reason. Your scope covers the organization. Decisions are recorded in audit history.", "LeaveManagement", "Index");
+    }
+    if (User.IsInRoles(IdentityRoles.ViewReports))
+    {
+        Add("افتح التقرير المناسب", "Choose a report",
+            managerOnly
+                ? "التقارير تعرض قسمك فقط: الموظفون والحضور والإجازات وقراراتها وأعداد الموظفين. حدد الأسماء والتواريخ ثم صفِّ النتائج. شاشة الحضور اليومية تعرض حضورك الشخصي؛ متابعة فريقك تكون من تقرير الحضور."
+                : "من التقارير اختر الموظفين أو الحضور أو الإجازات أو قرارات الإجازة أو أعداد الموظفين. حدد القسم والموظف والتاريخ عند الحاجة. عرض التقرير لا ينشئ سجلات جديدة.",
+            managerOnly
+                ? "Reports cover only your department: employees, attendance, leave, decisions and headcount. Filter by names and dates. Daily Attendance shows your personal records; use Attendance report for your team."
+                : "Choose employees, attendance, leave, decisions or headcount, and filter by department, employee and date. Reading a report does not create records.", "Reports", "Index");
+    }
+    if (User.IsInRoles(IdentityRoles.ViewAuditLogs))
+    {
+        Add("راجع سجل التدقيق", "Read audit history",
+            "استخدم حقل البحث ثم راجع العملية والمستخدم والتاريخ لمعرفة ما تغيّر ونتيجته. السجل للقراءة ولا توجد أزرار لتغيير أحداث التدقيق أو حذفها.",
+            "Use the search field, then review each operation, actor, timestamp, change and outcome. Audit events are read-only and have no edit or delete actions.", "AuditLogs", "Index");
+    }
+    Add("حدّث كلمة مرورك", "Change your password",
+        "من تغيير كلمة المرور أدخل الحالية ثم الجديدة وأكّدها. سجل الخروج عند الانتهاء من جهاز مشترك.",
+        "Enter your current password, then the new password and its confirmation. Sign out when finished on a shared device.", "Account", "ChangePassword");
+}
+<section class="guide-hero">
+    <span class="guide-role">@foreach (var role in IdentityRoles.All.Where(r => User.IsInRole(r.Name))) { <span class="badge text-bg-light me-1">@T[role.DisplayName]</span> }</span>
+    <h1 class="mt-3">@ViewData["Title"]</h1>
+    <p>@(ar ? "هذه خطوات العمل المتاحة لحسابك، مع روابط مباشرة لتنفيذها." : "These steps match your account permissions and link directly to each task.")</p>
+</section>
+@if (managerOnly || auditorOnly || employeeOnly || (hrOfficer && !administrator && !hrManager) || (hrManager && !administrator))
+{
+    <aside class="alert alert-info">
+        @if (managerOnly) { <p class="mb-0">@(ar ? "نطاقك: قسمك في التقارير والطلبات، وبياناتك الشخصية في الخدمات الذاتية. إدارة الموظفين والحسابات وتصحيح الحضور غير متاحة لدور مدير القسم." : "Your scope is your department in reports and reviews, plus personal self-service. Department managers cannot manage employee records, accounts or attendance corrections.")</p> }
+        @if (auditorOnly) { <p class="mb-0">@(ar ? "دورك للقراءة: ملفك الشخصي والتقارير وسجل التدقيق. لا يمكنك تعديل الموظفين أو الدوام أو الإجازات أو إدارة الحسابات." : "Your role is read-only: your profile, reports and audit history. You cannot edit employees, attendance or leave, or manage accounts.")</p> }
+        @if (employeeOnly) { <p class="mb-0">@(ar ? "نطاقك الشخصي: حضورك وطلبات إجازتك وتقرير إجازاتك. لا تظهر لك ملفات الزملاء أو تقارير المؤسسة أو الموافقات أو إدارة الحسابات." : "Your scope is personal: attendance, leave requests and your leave report. Other employees, organization reports, approvals and account administration are unavailable.")</p> }
+        @if (hrOfficer && !administrator && !hrManager) { <p class="mb-0">@(ar ? "يمكنك إدارة الموظفين والدوام والطلبات والتقارير. الأقسام والمسميات للقراءة؛ تعديلها وأنواع الإجازة وإدارة الحسابات وسجل التدقيق ليست من صلاحيات هذا الدور." : "You can manage employees, attendance, requests and reports. Departments and titles are read-only. Organization changes, leave types, accounts and audit history are unavailable to this role.")</p> }
+        @if (hrManager && !administrator) { <p class="mb-0">@(ar ? "يمكنك إدارة شؤون الموارد البشرية ومراجعة سجل التدقيق. إدارة حسابات الدخول والأدوار وإعادة تعيين كلمات مرور الآخرين لمسؤول النظام." : "You can manage HR operations and read audit history. Login account administration, role assignments and other users' password resets belong to the system administrator.")</p> }
+    </aside>
+}
+<div class="guide-grid">
+@for (var i = 0; i < steps.Count; i++)
+{
+    var step = steps[i];
+    <section class="guide-step">
+        <span class="guide-number">@(i + 1)</span><h2>@step.Title</h2><p>@step.Text</p>
+        <a asp-controller="@step.Controller" asp-action="@step.Action" class="btn btn-sm btn-outline-primary">@(ar ? "افتح الصفحة" : "Open page")</a>
+    </section>
+}
+</div>

@@ -1,0 +1,53 @@
+<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8">
+<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css"><link rel="stylesheet" href="/css/workspace.css"></head>
+<body class="workspace-layout">
+<div class="workspace-menu-bar"><button id="toggle" data-bs-toggle="offcanvas" data-bs-target="#workspaceSidebar">Menu</button></div>
+<header class="app-header offcanvas offcanvas-start" id="workspaceSidebar" tabindex="-1"><button id="close" data-bs-dismiss="offcanvas">Close</button><nav class="main-nav"><a href="/UserAccounts">Users</a></nav></header>
+<main id="main-content"><div class="app-shell"><h1>Initial</h1><a id="users" href="/UserAccounts">Users</a></div></main>
+<script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/site.js"></script><script src="/js/workspace.js"></script>
+<script>
+const results = [];
+const check = (name, condition) => { results.push({name, passed: !!condition}); if (!condition) throw Error(name); };
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+let requests = 0, postToken = null;
+const page = content => '<html lang="en"><head><title>Updated</title></head><body class="workspace-layout"><nav class="main-nav"><a href="/UserAccounts" class="active">Users</a></nav><main id="main-content"><div class="app-shell">' + content + '</div></main></body></html>';
+window.fetch = async (target, options = {}) => {
+    requests++;
+    const url = new URL(target, location.href);
+    if (url.pathname === '/fragment') return new Response('<div class="modal-content"><div class="modal-body">Loaded modal</div></div>', {headers:{'Content-Type':'text/html'}});
+    if (url.searchParams.has('rate')) return new Response('{}', {status:429,headers:{'Content-Type':'application/problem+json','Retry-After':'17'}});
+    let content;
+    if (options.method === 'POST') {
+        postToken = options.body.get('__RequestVerificationToken');
+        content = '<h1>Saved user</h1><a id="rate" href="/Reports?rate=1">Rate limit</a>';
+    } else {
+        content = '<h1>Users loaded</h1><form id="filter" action="/UserAccounts" method="get"><input name="search" value="Ali"><button type="submit">Filter</button></form><form id="save" method="post" action="/UserAccounts/SetActive"><input type="hidden" name="__RequestVerificationToken" value="fixture-token"><button type="submit">Save</button></form><button id="open-modal" data-modal-url="/fragment">Modal</button><div id="hrmsModal" class="modal" tabindex="-1"><div class="modal-dialog" id="hrmsModalContent"></div></div>';
+    }
+    const response = new Response(page(content), {headers:{'Content-Type':'text/html'}});
+    Object.defineProperty(response, 'url', {value: options.method === 'POST' ? location.origin + '/UserAccounts' : url.href});
+    return response;
+};
+(async () => {
+    try {
+        check('drawer initially hidden', getComputedStyle(document.getElementById('workspaceSidebar')).visibility === 'hidden');
+        document.getElementById('toggle').click(); await sleep(400);
+        check('menu button opens drawer', document.getElementById('workspaceSidebar').classList.contains('show'));
+        document.getElementById('close').click(); await sleep(400);
+        check('close button hides drawer', !document.getElementById('workspaceSidebar').classList.contains('show'));
+        document.getElementById('users').click(); await sleep(100);
+        check('navigation replaces only page content', document.querySelector('h1').textContent === 'Users loaded' && requests === 1 && location.pathname === '/UserAccounts');
+        document.getElementById('filter').requestSubmit(); await sleep(100);
+        check('filter uses AJAX and updates URL', location.search === '?search=Ali' && requests === 2);
+        document.getElementById('open-modal').click(); await sleep(400);
+        check('existing modal works after AJAX navigation', document.getElementById('hrmsModal').classList.contains('show') && document.getElementById('hrmsModalContent').textContent.includes('Loaded modal'));
+        bootstrap.Modal.getInstance(document.getElementById('hrmsModal')).hide(); await sleep(400);
+        document.getElementById('save').requestSubmit(); await sleep(100);
+        check('POST preserves CSRF token and follows resulting page', postToken === 'fixture-token' && document.querySelector('h1').textContent === 'Saved user');
+        document.getElementById('rate').click(); await sleep(100);
+        check('429 shows retry time and preserves content', document.querySelector('.workspace-request-status').textContent.includes('17') && document.querySelector('h1').textContent === 'Saved user');
+    } catch (error) { results.push({error: error.message, passed:false}); }
+    const output = document.createElement('pre'); output.id = 'smoke-results'; output.textContent = JSON.stringify(results); document.body.append(output);
+    document.documentElement.dataset.smoke = results.every(r => r.passed) ? 'passed' : 'failed';
+})();
+</script></body></html>

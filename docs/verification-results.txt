@@ -1,0 +1,81 @@
+HISTORICAL OUTPUT: see ACCEPTANCE_AR.md and artifacts/test-results for the current acceptance run.
+PASS BusinessRulesTests.OvernightShiftCalculatesHours()
+PASS BusinessRulesTests.CheckoutRequiresCheckin()
+PASS BusinessRulesTests.ReversedIntervalRejected()
+PASS BusinessRulesTests.ExcessiveShiftRejected()
+PASS BusinessRulesTests.DuplicateCheckoutRejected()
+PASS BusinessRulesTests.MissingCheckoutPreserved()
+PASS BusinessRulesTests.HoursRoundedToTwoDecimals()
+PASS BusinessRulesTests.NonUtcRejected()
+PASS BusinessRulesTests.InvalidLeaveDatesRejected()
+PASS BusinessRulesTests.RepeatedApprovalRejected()
+PASS BusinessRulesTests.RejectionStoresReason()
+PASS BusinessRulesTests.RejectionRequiresReason()
+PASS BusinessRulesTests.InclusiveLeaveDays()
+PASS BusinessRulesTests.EmployeeRequiresNumber()
+PASS BusinessRulesTests.EmployeeRequiresHireDate()
+PASS BusinessRulesTests.EmployeeRejectsInvalidEmail()
+PASS BusinessRulesTests.RecordAuthorization(False,False,False,False,False,True,False)
+PASS BusinessRulesTests.RecordAuthorization(True,False,False,True,False,False,True)
+PASS BusinessRulesTests.RecordAuthorization(True,False,False,False,False,False,False)
+PASS BusinessRulesTests.RecordAuthorization(True,False,True,False,True,True,True)
+PASS BusinessRulesTests.RecordAuthorization(True,False,True,False,False,True,False)
+PASS BusinessRulesTests.RecordAuthorization(True,False,True,True,True,True,False)
+PASS BusinessRulesTests.RecordAuthorization(True,True,False,False,False,True,True)
+PASS BusinessRulesTests.BusinessMessagesLocalized(en-US,Employee not found.)
+PASS BusinessRulesTests.BusinessMessagesLocalized(ar-JO,الموظف غير موجود.)
+PASS ExternalApiTests.ValidResponseMapped()
+PASS ExternalApiTests.InvalidResponseRejected()
+PASS ExternalApiTests.UnsuccessfulHttpRejected()
+PASS ExternalApiTests.InvalidJsonRejected()
+PASS ExternalApiTests.InvalidCountryRejected()
+PASS ExternalApiTests.CancellationPropagates()
+PASS BoundaryTests.DomainHasNoOuterLayerDependency()
+PASS BoundaryTests.ApplicationHasNoPersistenceOrPresentationDependency()
+PASS BoundaryTests.ControllersDoNotDependOnDbContext()
+PASS BoundaryTests.MigrationSnapshotMatchesModel()
+PASS BoundaryTests.EmployeeAndAttendanceHaveConcurrencyAndSoftDeleteFilters()
+info: HRMS.IntegrationTests.TestAuth[12]
+      AuthenticationScheme: Test was challenged.
+PASS HttpTests.ApiRequiresLogin()
+info: HRMS.Authorization.AuditAuthorizationMiddlewareResultHandler[0]
+      Authorization denied for user test-user on /api/v1/employees.
+info: HRMS.IntegrationTests.TestAuth[13]
+      AuthenticationScheme: Test was forbidden.
+PASS HttpTests.EmployeeDirectoryRejectsUnauthorizedRoles(Employee)
+info: HRMS.Authorization.AuditAuthorizationMiddlewareResultHandler[0]
+      Authorization denied for user test-user on /api/v1/employees.
+info: HRMS.IntegrationTests.TestAuth[13]
+      AuthenticationScheme: Test was forbidden.
+PASS HttpTests.EmployeeDirectoryRejectsUnauthorizedRoles(DepartmentManager)
+info: HRMS.Authorization.AuditAuthorizationMiddlewareResultHandler[0]
+      Authorization denied for user test-user on /api/v1/employees.
+info: HRMS.IntegrationTests.TestAuth[13]
+      AuthenticationScheme: Test was forbidden.
+PASS HttpTests.EmployeeDirectoryRejectsUnauthorizedRoles(Auditor)
+PASS HttpTests.EmployeeDirectoryAllowsHr(SystemAdministrator)
+PASS HttpTests.EmployeeDirectoryAllowsHr(HRManager)
+PASS HttpTests.EmployeeDirectoryAllowsHr(HROfficer)
+PASS HttpTests.UnknownEmployeeReturns404()
+info: HRMS.IntegrationTests.TestAuth[13]
+      AuthenticationScheme: Test was forbidden.
+PASS HttpTests.EmployeeCannotReadOtherLeave()
+info: HRMS.Authorization.AuditAuthorizationMiddlewareResultHandler[0]
+      Authorization denied for user test-user on /AuditLogs.
+info: HRMS.IntegrationTests.TestAuth[13]
+      AuthenticationScheme: Test was forbidden.
+PASS HttpTests.HrOfficerCannotOpenAudit()
+warn: HRMS.Controllers.Api.V1.HrmsApiController[0]
+      Public holidays provider timed out for JO in 2026.
+PASS HttpTests.ExternalTimeoutReturns504()
+PASS HttpTests.MissingHireDateReturns400()
+PASS HttpTests.MutationsRequireAntiforgery()
+PASS HttpTests.LoginRendersRequestedCulture(en-US,ltr)
+PASS HttpTests.LoginRendersRequestedCulture(ar-JO,rtl)
+PASS HttpTests.OpenApiDocumentAvailableInDevelopment()
+SKIP SqlWorkflowTests.MigrationsCreateDatabase(): SQL Server unavailable: set HRMS_TEST_SQLSERVER. This is an unverified acceptance gate.
+SKIP SqlWorkflowTests.EmployeeWorkflowPersistsAuditsAndRestores(): SQL Server unavailable: set HRMS_TEST_SQLSERVER. This is an unverified acceptance gate.
+SKIP SqlWorkflowTests.PositionCodeUniqueInSql(): SQL Server unavailable: set HRMS_TEST_SQLSERVER. This is an unverified acceptance gate.
+SKIP SqlWorkflowTests.InvalidEmployeeReferencesRejected(): SQL Server unavailable: set HRMS_TEST_SQLSERVER. This is an unverified acceptance gate.
+SKIP SqlWorkflowTests.ActiveListExcludesInactive(): SQL Server unavailable: set HRMS_TEST_SQLSERVER. This is an unverified acceptance gate.
+RESULT passed=52 failed=0 skipped=5

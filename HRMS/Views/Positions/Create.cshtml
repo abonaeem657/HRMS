@@ -1,0 +1,11 @@
+@model HRMS.Models.Organization.PositionFormViewModel
+@{
+    ViewData["Title"] = T["AddJobTitle"].Value;
+}
+<div>
+    <h1 class="h2">@T["AddJobTitle"]</h1>
+    <form asp-action="Create" method="post">
+        <partial name="_Form" model="Model" />
+    </form>
+</div>
+

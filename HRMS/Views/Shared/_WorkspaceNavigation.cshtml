@@ -1,0 +1,23 @@
+@using HRMS.Application.Identity
+@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    var action = ViewContext.RouteData.Values["action"]?.ToString();
+}
+@if (controller == "Reports" && action != "Index")
+{
+    <nav class="workspace-tabs" aria-label="@T["Reports"]">
+        @foreach (var tab in new[] { ("Index", "Overview"), ("Employees", "EmployeesReport"), ("Attendance", "AttendanceReport"), ("Leaves", "LeaveReport"), ("LeaveDecisions", "Leave"), ("Headcount", "HeadcountSummary") })
+        {
+            <a asp-controller="Reports" asp-action="@tab.Item1" class="@(action == tab.Item1 ? "selected" : "")" aria-current="@(action == tab.Item1 ? "page" : null)">@(tab.Item1 == "LeaveDecisions" ? (System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "قرارات الإجازات" : "Leave decisions") : T[tab.Item2].Value)</a>
+        }
+    </nav>
+}
+@if (controller == "LeaveManagement" && action != "Index" && action != "MyReport")
+{
+    <nav class="workspace-tabs" aria-label="@T["Leave"]">
+        <a asp-controller="LeaveManagement" asp-action="Index" class="@(action == "Index" ? "selected" : "")">@T["LeaveRequests"]</a>
+        <a asp-controller="LeaveManagement" asp-action="Create" class="@(action == "Create" ? "selected" : "")">@T["RequestLeave"]</a>
+        @if (User.IsInRoles(IdentityRoles.ManageLeaveTypes))
+        { <a asp-controller="LeaveManagement" asp-action="Types" class="@(action == "Types" ? "selected" : "")">@T["LeaveTypes"]</a> }
+    </nav>
+}

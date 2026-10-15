@@ -1,0 +1,106 @@
+@using HRMS.Application.Identity
+@model HRMS.Models.LeaveManagement.LeaveListViewModel
+@{
+    ViewData["Title"] = T["LeavePageTitle"].Value;
+    var canReview = (User.IsInRole(IdentityRoles.SystemAdministrator) ||
+                    User.IsInRole(IdentityRoles.HRManager) ||
+                    User.IsInRole(IdentityRoles.HROfficer) ||
+                    User.IsInRole(IdentityRoles.DepartmentManager));
+}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+    <h1 class="h3 mb-0">@T["Leave"]</h1>
+    <div class="d-flex gap-2">
+        <a asp-action="Create" class="btn btn-primary">@T["RequestLeave"]</a>
+        @if (User.IsInRole(IdentityRoles.SystemAdministrator) || User.IsInRole(IdentityRoles.HRManager))
+        {
+            <a asp-action="Types" class="btn btn-outline-secondary">@T["LeaveTypes"]</a>
+        }
+    </div>
+</div>
+
+@if (TempData["StatusMessage"] is string successMessage)
+{
+    <div class="alert alert-success" role="status">@successMessage</div>
+}
+@if (TempData["ErrorMessage"] is string errorMessage)
+{
+    <div class="alert alert-danger" role="alert">@errorMessage</div>
+}
+
+<form asp-action="Index" method="get" class="row g-2 align-items-end mb-3">
+    <div class="col-12 col-sm-4">
+        <label for="status" class="form-label">@T["Status"]</label>
+        <select id="status" name="status" class="form-select">
+            <option value="">@T["All"]</option>
+            <option value="Pending" selected="@(Model.Status == "Pending")">@T["Status.Pending"]</option>
+            <option value="Approved" selected="@(Model.Status == "Approved")">@T["Status.Approved"]</option>
+            <option value="Rejected" selected="@(Model.Status == "Rejected")">@T["Status.Rejected"]</option>
+            <option value="Cancelled" selected="@(Model.Status == "Cancelled")">@T["Cancelled"]</option>
+        </select>
+    </div>
+    <div class="col-12 col-sm-3">
+        <label for="year" class="form-label">@T["Year"]</label>
+        <select id="year" name="year" class="form-select"><option value="">@T["All"]</option>@for (var year = 2100; year >= 2000; year--) { <option value="@year" selected="@(Model.Year == year)">@year</option> }</select>
+    </div>
+    <div class="col-12 col-sm-2"><button type="submit" class="btn btn-outline-primary">@T["Filter"]</button></div>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead><tr><th>@T["Employee"]</th><th>@T["Department"]</th><th>@T["LeaveType"]</th><th>@T["Period"]</th><th>@T["Days"]</th><th>@T["Status"]</th><th>@T["Reason"]</th><th>@T["Review"]</th><th>@T["Actions"]</th></tr></thead>
+        <tbody>
+        @if (Model.Requests.Count == 0)
+        {
+            <tr><td colspan="9" class="text-center text-muted py-4">@T["NoLeaveRequests"]</td></tr>
+        }
+        @foreach (var request in Model.Requests)
+        {
+            <tr>
+                <td>@request.EmployeeNumber - @request.EmployeeName</td>
+                <td>@request.DepartmentName</td>
+                <td>@request.LeaveTypeNameAr (@request.LeaveTypeName)</td>
+                <td>@request.StartDate.ToString("yyyy-MM-dd") @request.StartTime?.ToString("HH:mm") — @request.EndDate.ToString("yyyy-MM-dd") @request.EndTime?.ToString("HH:mm")</td>
+                <td>@request.TotalDays</td>
+                <td>@T["Status." + request.Status]</td>
+                <td class="text-break">@request.Reason</td>
+                <td>
+                    @if (request.ReviewedAtUtc.HasValue)
+                    {
+                        <span>@request.ReviewedByName · @BusinessClock.ToLocal(request.ReviewedAtUtc)?.ToString("yyyy-MM-dd HH:mm") @T["JordanTime"]</span>
+                        @if (!string.IsNullOrWhiteSpace(request.ReviewNotes))
+                        {
+                            <div class="small text-muted">@request.ReviewNotes</div>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (request.Status == "Pending" && canReview && !(User.IsInRole(IdentityRoles.DepartmentManager) && !User.IsInRoles(IdentityRoles.ManageEmployees) && request.EmployeeId == ViewBag.CurrentEmployeeId))
+                    {
+                        <form asp-action="Approve" method="post" class="mb-2">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="LeaveRequestId" value="@request.LeaveRequestId" />
+                            <input type="text" name="Notes" class="form-control form-control-sm mb-1" maxlength="1000" placeholder="@T["OptionalNotes"]" />
+                            <button type="submit" class="btn btn-sm btn-success">@T["Approve"]</button>
+                        </form>
+                        <form asp-action="Reject" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="LeaveRequestId" value="@request.LeaveRequestId" />
+                            <input type="text" name="Notes" required class="form-control form-control-sm mb-1" maxlength="1000" placeholder="@T["RejectReason"]" />
+                            <button type="submit" class="btn btn-sm btn-outline-danger">@T["Reject"]</button>
+                        </form>
+                    }
+                    @if (request.Status == "Pending" && request.EmployeeId == ViewBag.CurrentEmployeeId)
+                    {
+                        <form asp-action="Cancel" method="post" class="mt-2">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@request.LeaveRequestId" />
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">@T["CancelRequest"]</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

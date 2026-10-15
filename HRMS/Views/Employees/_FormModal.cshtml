@@ -1,0 +1,28 @@
+@model HRMS.Models.Employees.EmployeeFormViewModel
+@{
+    var hasId = int.TryParse(ViewData["EmployeeId"]?.ToString(), out var employeeId);
+    ViewData["InModal"] = true;
+}
+<div class="modal-content">
+    <form asp-action="@(hasId ? "Edit" : "Create")"
+          asp-route-id="@(hasId ? employeeId : null)"
+          method="post"
+          data-hrms-modal-form
+          data-position-url="@Url.Action("PositionsForDepartment", "Employees")">
+        <div class="modal-header">
+            <h2 class="modal-title fs-5" id="hrmsModalLabel">@(hasId ? T["EmployeeEdit"].Value : T["AddEmployee"].Value)</h2>
+            <button type="button" class="btn-close ms-0 me-auto" data-bs-dismiss="modal" aria-label="@T["Close"].Value"></button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger d-none" role="alert" data-form-error></div>
+            <partial name="_Form" model="Model" />
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">@T["Cancel"]</button>
+            <button type="submit" class="btn btn-primary" disabled="@(Model.Departments.Count == 0 || Model.Positions.Count == 0)">
+                <span class="spinner-border spinner-border-sm d-none" aria-hidden="true"></span>
+                <span class="submit-label">@T["Save"]</span>
+            </button>
+        </div>
+    </form>
+</div>

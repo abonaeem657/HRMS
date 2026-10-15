@@ -1,0 +1,1530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data name="Privacy Policy" xml:space="preserve">
+    <value>Privacy policy</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sort by</value>
+  </data>
+  <data name="ViewEmployeeDirectory" xml:space="preserve">
+    <value>View employee directory</value>
+  </data>
+  <data name="NoPositionsFound" xml:space="preserve">
+    <value>No job titles found.</value>
+  </data>
+  <data name="CheckOutUtc" xml:space="preserve">
+    <value>Check-out (Jordan)</value>
+  </data>
+  <data name="HomeEyebrow" xml:space="preserve">
+    <value>HRMS | Human Resources Management</value>
+  </data>
+  <data name="GeneralPosition" xml:space="preserve">
+    <value>General (no department assigned)</value>
+  </data>
+  <data name="ConfirmDeactivateEmployee" xml:space="preserve">
+    <value>Do you want to disable this employee record? It will be retained and can be restored.</value>
+  </data>
+  <data name="EmployeeCount" xml:space="preserve">
+    <value>Employee count</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="Changes" xml:space="preserve">
+    <value>Changes</value>
+  </data>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>Last name is required.</value>
+  </data>
+  <data name="CheckInNow" xml:space="preserve">
+    <value>Check in now</value>
+  </data>
+  <data name="NoAttendanceToday" xml:space="preserve">
+    <value>No attendance records for today.</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Password is required.</value>
+  </data>
+  <data name="CreateDepartmentsHint" xml:space="preserve">
+    <value>Create departments and organize employee assignments</value>
+  </data>
+  <data name="PositionHasEmployees" xml:space="preserve">
+    <value>This job title is assigned to employees. Disabling it hides it from new selections while retaining employee records.</value>
+  </data>
+  <data name="Label.FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="Status.Cancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="SystemSetup" xml:space="preserve">
+    <value>System setup</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="AuthorizedRecentActivity" xml:space="preserve">
+    <value>Recent activity</value>
+  </data>
+  <data name="Arabic" xml:space="preserve">
+    <value>Arabic</value>
+  </data>
+  <data name="EmployeeId" xml:space="preserve">
+    <value>Employee ID</value>
+  </data>
+  <data name="HeadcountSummary" xml:space="preserve">
+    <value>Headcount summary</value>
+  </data>
+  <data name="NewHiresInPeriod" xml:space="preserve">
+    <value>New hires in this period</value>
+  </data>
+  <data name="MyWorkspace" xml:space="preserve">
+    <value>My workspace</value>
+  </data>
+  <data name="InvalidLeaveYear" xml:space="preserve">
+    <value>The year must be between 2000 and 2100.</value>
+  </data>
+  <data name="LeaveEndRequired" xml:space="preserve">
+    <value>Leave end date is required.</value>
+  </data>
+  <data name="OptionalNotes" xml:space="preserve">
+    <value>Optional notes</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>Record</value>
+  </data>
+  <data name="CheckOut" xml:space="preserve">
+    <value>Check out</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="AttendanceTimezoneInfo" xml:space="preserve">
+    <value>Enter check-in and check-out times in Jordan time.</value>
+  </data>
+  <data name="SortDirection" xml:space="preserve">
+    <value>Sort direction</value>
+  </data>
+  <data name="AttendanceCheckInSaved" xml:space="preserve">
+    <value>Check-in recorded.</value>
+  </data>
+  <data name="AddJobTitlesHint" xml:space="preserve">
+    <value>Add job titles to use when creating employee records</value>
+  </data>
+  <data name="DashboardIntro" xml:space="preserve">
+    <value>A unified view of employees, departments, attendance, and leave</value>
+  </data>
+  <data name="InvalidRecord" xml:space="preserve">
+    <value>Invalid record</value>
+  </data>
+  <data name="NoAdministratorYet" xml:space="preserve">
+    <value>No administrator account has been created yet.</value>
+  </data>
+  <data name="JobTitle" xml:space="preserve">
+    <value>Job title</value>
+  </data>
+  <data name="SelectJobTitle" xml:space="preserve">
+    <value>Select job title</value>
+  </data>
+  <data name="Role.HROfficer" xml:space="preserve">
+    <value>HR officer</value>
+  </data>
+  <data name="DirectManager" xml:space="preserve">
+    <value>Direct manager</value>
+  </data>
+  <data name="Attendance" xml:space="preserve">
+    <value>Attendance</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="LeaveTypeRequired" xml:space="preserve">
+    <value>Select a valid leave type.</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="NoManager" xml:space="preserve">
+    <value>No manager</value>
+  </data>
+  <data name="SignInTemporarilyLocked" xml:space="preserve">
+    <value>Sign-in has been temporarily locked after failed attempts.</value>
+  </data>
+  <data name="NoAccounts" xml:space="preserve">
+    <value>No accounts found.</value>
+  </data>
+  <data name="Status.Rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="NoDeletedEmployees" xml:space="preserve">
+    <value>No deleted employees found.</value>
+  </data>
+  <data name="ActiveEmployees" xml:space="preserve">
+    <value>Active employees</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="BackToReports" xml:space="preserve">
+    <value>Back to reports</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="DepartmentEnabled" xml:space="preserve">
+    <value>Department enabled.</value>
+  </data>
+  <data name="ActiveEmployeeCount" xml:space="preserve">
+    <value>Total active employees</value>
+  </data>
+  <data name="SetupAdministrator" xml:space="preserve">
+    <value>Set up administrator</value>
+  </data>
+  <data name="LeaveEndBeforeStart" xml:space="preserve">
+    <value>The end date must not be earlier than the start date.</value>
+  </data>
+  <data name="EmployeeNumberRequired" xml:space="preserve">
+    <value>Employee number is required.</value>
+  </data>
+  <data name="Label.ReviewNotes" xml:space="preserve">
+    <value>Review notes</value>
+  </data>
+  <data name="Allowed" xml:space="preserve">
+    <value>Allowed</value>
+  </data>
+  <data name="AuditLog" xml:space="preserve">
+    <value>Audit log</value>
+  </data>
+  <data name="WelcomeEyebrow" xml:space="preserve">
+    <value>Human resources management system</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Email is required.</value>
+  </data>
+  <data name="Records" xml:space="preserve">
+    <value>Records</value>
+  </data>
+  <data name="AuditReadOnlyNote" xml:space="preserve">
+    <value>This log is read-only.</value>
+  </data>
+  <data name="LeaveSubmitted" xml:space="preserve">
+    <value>Leave request submitted for review.</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>to</value>
+  </data>
+  <data name="LeavePageTitle" xml:space="preserve">
+    <value>Leave requests</value>
+  </data>
+  <data name="Label.CurrentPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="TemporaryPasswordAdvice" xml:space="preserve">
+    <value>Notify the user of the temporary password through a secure channel</value>
+  </data>
+  <data name="DepartmentName" xml:space="preserve">
+    <value>Department name</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="StatusLate" xml:space="preserve">
+    <value>Late</value>
+  </data>
+  <data name="Label.DepartmentManager" xml:space="preserve">
+    <value>Department manager</value>
+  </data>
+  <data name="ValidPositionRequired" xml:space="preserve">
+    <value>Select a valid job title.</value>
+  </data>
+  <data name="NoLeaveRequestsThisYear" xml:space="preserve">
+    <value>No leave requests for this year.</value>
+  </data>
+  <data name="DepartmentScope" xml:space="preserve">
+    <value>Data for this department only</value>
+  </data>
+  <data name="PositionCodeRequired" xml:space="preserve">
+    <value>Job title code is required.</value>
+  </data>
+  <data name="PositionId" xml:space="preserve">
+    <value>Job title ID</value>
+  </data>
+  <data name="EnterRequiredEmployeeData" xml:space="preserve">
+    <value>Enter the required employee data</value>
+  </data>
+  <data name="AllEmployees" xml:space="preserve">
+    <value>All employees</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="AttendanceRecordsInPeriod" xml:space="preserve">
+    <value>Attendance records in period</value>
+  </data>
+  <data name="EmployeeEdit" xml:space="preserve">
+    <value>Edit employee</value>
+  </data>
+  <data name="Label.WorkEmail" xml:space="preserve">
+    <value>Work email</value>
+  </data>
+  <data name="SelectEmployee" xml:space="preserve">
+    <value>Select employee</value>
+  </data>
+  <data name="Verification" xml:space="preserve">
+    <value>Verification</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="WorkEmail" xml:space="preserve">
+    <value>Work email</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="DepartmentEmployees" xml:space="preserve">
+    <value>Department employees</value>
+  </data>
+  <data name="Label.LeaveTypeNameAr" xml:space="preserve">
+    <value>Leave type name (Arabic)</value>
+  </data>
+  <data name="HireDate" xml:space="preserve">
+    <value>Hire date</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="DepartmentUpdated" xml:space="preserve">
+    <value>Department updated successfully.</value>
+  </data>
+  <data name="HiredAfter" xml:space="preserve">
+    <value>Hired after</value>
+  </data>
+  <data name="DeletedEmployeesIntro" xml:space="preserve">
+    <value>You can restore soft-deleted employee records.</value>
+  </data>
+  <data name="PositionManagementIntro" xml:space="preserve">
+    <value>Manage job titles and optionally assign them to departments.</value>
+  </data>
+  <data name="GradeUnavailable" xml:space="preserve">
+    <value>Not specified</value>
+  </data>
+  <data name="NoLeaveRequests" xml:space="preserve">
+    <value>No leave requests found.</value>
+  </data>
+  <data name="Ascending" xml:space="preserve">
+    <value>Ascending</value>
+  </data>
+  <data name="ToggleNavigation" xml:space="preserve">
+    <value>Toggle navigation</value>
+  </data>
+  <data name="LeaveCancelled" xml:space="preserve">
+    <value>Request cancelled.</value>
+  </data>
+  <data name="EmploymentStatusRequired" xml:space="preserve">
+    <value>Employment status is required.</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="InvalidLocalCheckIn" xml:space="preserve">
+    <value>Enter a valid local check-in time.</value>
+  </data>
+  <data name="PositionTitle" xml:space="preserve">
+    <value>Job title</value>
+  </data>
+  <data name="ReportDateRangeInvalid" xml:space="preserve">
+    <value>The end date must not be earlier than the start date.</value>
+  </data>
+  <data name="EmployeesManagement" xml:space="preserve">
+    <value>Employee management</value>
+  </data>
+  <data name="NewPasswordRequired" xml:space="preserve">
+    <value>New password is required.</value>
+  </data>
+  <data name="LeaveDecisionsSummary" xml:space="preserve">
+    <value>Leave decisions summary</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="PasswordMinimumLength" xml:space="preserve">
+    <value>Password must be at least 10 characters long.</value>
+  </data>
+  <data name="EmployeeDistribution" xml:space="preserve">
+    <value>Employee distribution</value>
+  </data>
+  <data name="Label.IsPaid" xml:space="preserve">
+    <value>Paid leave</value>
+  </data>
+  <data name="Enable" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="NewHires" xml:space="preserve">
+    <value>New hires</value>
+  </data>
+  <data name="PositionUpdated" xml:space="preserve">
+    <value>Job title updated successfully.</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="SaveLeaveType" xml:space="preserve">
+    <value>Save leave type</value>
+  </data>
+  <data name="Status.Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="ApprovedRequests" xml:space="preserve">
+    <value>Approved requests</value>
+  </data>
+  <data name="EmployeeDetails" xml:space="preserve">
+    <value>Employee details</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>The passwords do not match.</value>
+  </data>
+  <data name="FilterSummaryByPeriod" xml:space="preserve">
+    <value>Filter summary by period</value>
+  </data>
+  <data name="Label.WorkLocation" xml:space="preserve">
+    <value>Work location</value>
+  </data>
+  <data name="RoleRequired" xml:space="preserve">
+    <value>Role is required.</value>
+  </data>
+  <data name="Label.Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="EmployeePages" xml:space="preserve">
+    <value>Employee pages</value>
+  </data>
+  <data name="Remaining" xml:space="preserve">
+    <value>Remaining</value>
+  </data>
+  <data name="Label.RememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="CorrectAttendance" xml:space="preserve">
+    <value>Correct attendance</value>
+  </data>
+  <data name="ApplyFilters" xml:space="preserve">
+    <value>Apply filters</value>
+  </data>
+  <data name="RequestLeave" xml:space="preserve">
+    <value>Request leave</value>
+  </data>
+  <data name="Status.Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="LeaveRejectReasonRequired" xml:space="preserve">
+    <value>A rejection reason is required.</value>
+  </data>
+  <data name="PasswordChanged" xml:space="preserve">
+    <value>Password changed successfully.</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="AttendancePages" xml:space="preserve">
+    <value>Attendance pages</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="DepartmentSetupRequired" xml:space="preserve">
+    <value>Create at least one department before adding employees.</value>
+  </data>
+  <data name="AddEmployee" xml:space="preserve">
+    <value>Add employee</value>
+  </data>
+  <data name="DepartmentCreated" xml:space="preserve">
+    <value>Department created successfully.</value>
+  </data>
+  <data name="AttendanceCheckOutSaved" xml:space="preserve">
+    <value>Check-out recorded.</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="JobTitles" xml:space="preserve">
+    <value>Job titles</value>
+  </data>
+  <data name="SkipToContent" xml:space="preserve">
+    <value>Skip to content</value>
+  </data>
+  <data name="CreateFirstAdministrator" xml:space="preserve">
+    <value>Create first administrator</value>
+  </data>
+  <data name="LeaveRejected" xml:space="preserve">
+    <value>Leave request rejected.</value>
+  </data>
+  <data name="SelectType" xml:space="preserve">
+    <value>Select type</value>
+  </data>
+  <data name="ReportPages" xml:space="preserve">
+    <value>Report pages</value>
+  </data>
+  <data name="Label.Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Label.EmployeeNumber" xml:space="preserve">
+    <value>Employee number</value>
+  </data>
+  <data name="SaveCorrection" xml:space="preserve">
+    <value>Save correction</value>
+  </data>
+  <data name="ToDate" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>Hours</value>
+  </data>
+  <data name="AuditPages" xml:space="preserve">
+    <value>Audit log pages</value>
+  </data>
+  <data name="Role.Auditor" xml:space="preserve">
+    <value>Auditor</value>
+  </data>
+  <data name="AttendanceRecord" xml:space="preserve">
+    <value>Attendance record</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Recent activity</value>
+  </data>
+  <data name="RejectReason" xml:space="preserve">
+    <value>Rejection reason</value>
+  </data>
+  <data name="LeaveTypeSaved" xml:space="preserve">
+    <value>Leave type saved.</value>
+  </data>
+  <data name="PositionTitleRequired" xml:space="preserve">
+    <value>Job title is required.</value>
+  </data>
+  <data name="Descending" xml:space="preserve">
+    <value>Descending</value>
+  </data>
+  <data name="Manager" xml:space="preserve">
+    <value>Manager</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="AllDepartments" xml:space="preserve">
+    <value>All departments</value>
+  </data>
+  <data name="YourDepartment" xml:space="preserve">
+    <value>My department</value>
+  </data>
+  <data name="LeaveApproved" xml:space="preserve">
+    <value>Leave request approved.</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Back to list</value>
+  </data>
+  <data name="CheckInUtc" xml:space="preserve">
+    <value>Check-in (Jordan)</value>
+  </data>
+  <data name="Grade" xml:space="preserve">
+    <value>Job grade</value>
+  </data>
+  <data name="AttendanceTrendsHint" xml:space="preserve">
+    <value>Review attendance records and trends</value>
+  </data>
+  <data name="EmployeeNumber" xml:space="preserve">
+    <value>Employee number</value>
+  </data>
+  <data name="BackToEmployees" xml:space="preserve">
+    <value>Back to employees</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="CreateAccountsHint" xml:space="preserve">
+    <value>Create user accounts and link them to roles and employees</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="SetupOnlyBeforeFirstAccount" xml:space="preserve">
+    <value>Available only before the first account is created</value>
+  </data>
+  <data name="DecisionIntro" xml:space="preserve">
+    <value>Shows decisions made during the selected period in Jordan time.</value>
+  </data>
+  <data name="RequestId" xml:space="preserve">
+    <value>Request ID</value>
+  </data>
+  <data name="UserEnabled" xml:space="preserve">
+    <value>Account enabled.</value>
+  </data>
+  <data name="UserUpdated" xml:space="preserve">
+    <value>User account updated successfully.</value>
+  </data>
+  <data name="PasswordConfirmationRequired" xml:space="preserve">
+    <value>Password confirmation is required.</value>
+  </data>
+  <data name="LinkEmployeeForSelfService" xml:space="preserve">
+    <value>Ask your system administrator to link your account to an employee profile to use attendance and leave services.</value>
+  </data>
+  <data name="Label.EmploymentStatus" xml:space="preserve">
+    <value>Employment status</value>
+  </data>
+  <data name="AttendanceDayComplete" xml:space="preserve">
+    <value>Today is complete</value>
+  </data>
+  <data name="LoginPrompt" xml:space="preserve">
+    <value>Enter your credentials to sign in to your account.</value>
+  </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>Choose language</value>
+  </data>
+  <data name="EmployeeReportTitle" xml:space="preserve">
+    <value>Employee report</value>
+  </data>
+  <data name="HeadcountByDepartment" xml:space="preserve">
+    <value>Headcount by department</value>
+  </data>
+  <data name="Role.Employee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="AllPositions" xml:space="preserve">
+    <value>All job titles</value>
+  </data>
+  <data name="ConfirmDeactivate" xml:space="preserve">
+    <value>Do you want to disable this record?</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="AttendanceHoursPeriodHint" xml:space="preserve">
+    <value>Attendance hours for the selected period</value>
+  </data>
+  <data name="Label.PositionCode" xml:space="preserve">
+    <value>Job title code</value>
+  </data>
+  <data name="Results" xml:space="preserve">
+    <value>Results:</value>
+  </data>
+  <data name="MyLeaveRequests" xml:space="preserve">
+    <value>My leave requests</value>
+  </data>
+  <data name="EmploymentType" xml:space="preserve">
+    <value>Employment type</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="DepartmentSummary" xml:space="preserve">
+    <value>Department summary</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="EmployeeDisabled" xml:space="preserve">
+    <value>Employee disabled; the record was retained.</value>
+  </data>
+  <data name="EmployeeCountLabel" xml:space="preserve">
+    <value>employees</value>
+  </data>
+  <data name="Outcome.Failure" xml:space="preserve">
+    <value>Failure</value>
+  </data>
+  <data name="EmployeeDeactivate" xml:space="preserve">
+    <value>Disable employee</value>
+  </data>
+  <data name="Label.Reason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="Period" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="Workspace" xml:space="preserve">
+    <value>Workspace</value>
+  </data>
+  <data name="UserPasswordReset" xml:space="preserve">
+    <value>Password reset. Notify the user through a secure channel.</value>
+  </data>
+  <data name="AttendanceDateRequired" xml:space="preserve">
+    <value>Attendance date is required.</value>
+  </data>
+  <data name="SubmitRequest" xml:space="preserve">
+    <value>Submit request</value>
+  </data>
+  <data name="SearchEmployees" xml:space="preserve">
+    <value>Search by name, number, or email</value>
+  </data>
+  <data name="ValidEmailRequired" xml:space="preserve">
+    <value>Enter a valid email address.</value>
+  </data>
+  <data name="Identifier" xml:space="preserve">
+    <value>Identifier</value>
+  </data>
+  <data name="InvalidLocalCheckOut" xml:space="preserve">
+    <value>Invalid check-out time. Select its date and enter hours and minutes.</value>
+  </data>
+  <data name="TotalHours" xml:space="preserve">
+    <value>Total hours</value>
+  </data>
+  <data name="LoadingModal" xml:space="preserve">
+    <value>Loading form</value>
+  </data>
+  <data name="NoDepartmentsFound" xml:space="preserve">
+    <value>No departments found.</value>
+  </data>
+  <data name="CreateUserAccount" xml:space="preserve">
+    <value>Create user account</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="Label.LeaveType" xml:space="preserve">
+    <value>Leave type</value>
+  </data>
+  <data name="Paid" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="AttendanceHours" xml:space="preserve">
+    <value>Attendance hours</value>
+  </data>
+  <data name="CheckIn" xml:space="preserve">
+    <value>Check in</value>
+  </data>
+  <data name="ReviewRecordedActions" xml:space="preserve">
+    <value>Review recorded actions</value>
+  </data>
+  <data name="Label.AttendanceDate" xml:space="preserve">
+    <value>Attendance date</value>
+  </data>
+  <data name="WorkEmailRequired" xml:space="preserve">
+    <value>Work email is required.</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="AttendanceReportTitle" xml:space="preserve">
+    <value>Attendance report</value>
+  </data>
+  <data name="BackHome" xml:space="preserve">
+    <value>Back to home</value>
+  </data>
+  <data name="Role.SystemAdministrator" xml:space="preserve">
+    <value>System administrator</value>
+  </data>
+  <data name="ReviewEmployeeData" xml:space="preserve">
+    <value>Review employee data</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="PositionDetails" xml:space="preserve">
+    <value>Job title details</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="Status.HalfDay" xml:space="preserve">
+    <value>Half day</value>
+  </data>
+  <data name="UsersIntro" xml:space="preserve">
+    <value>Manage user accounts and link them to roles and employees</value>
+  </data>
+  <data name="LeaveType" xml:space="preserve">
+    <value>Leave type</value>
+  </data>
+  <data name="RejectedRequests" xml:space="preserve">
+    <value>Rejected requests</value>
+  </data>
+  <data name="NoDepartmentsForSummary" xml:space="preserve">
+    <value>There are no departments to display. Add departments and employees to see the distribution.</value>
+  </data>
+  <data name="Label.PositionTitle" xml:space="preserve">
+    <value>Job title</value>
+  </data>
+  <data name="TimeUtc" xml:space="preserve">
+    <value>Time (Jordan)</value>
+  </data>
+  <data name="PendingLeaveRequests" xml:space="preserve">
+    <value>Pending leave requests</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="PositionDisabled" xml:space="preserve">
+    <value>Job title disabled; employee records were retained.</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="CurrentPasswordInvalid" xml:space="preserve">
+    <value>The current password is incorrect.</value>
+  </data>
+  <data name="Label.JobTitle" xml:space="preserve">
+    <value>Job title</value>
+  </data>
+  <data name="BackToPositions" xml:space="preserve">
+    <value>Back to job titles</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="EmployeeUpdated" xml:space="preserve">
+    <value>Employee details updated successfully.</value>
+  </data>
+  <data name="EmployeesReport" xml:space="preserve">
+    <value>Employee report</value>
+  </data>
+  <data name="DeletedAtUtc" xml:space="preserve">
+    <value>Deleted at (Jordan)</value>
+  </data>
+  <data name="EmployeeRestored" xml:space="preserve">
+    <value>Employee record restored and the action was logged.</value>
+  </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>First name is required.</value>
+  </data>
+  <data name="PositionSearch" xml:space="preserve">
+    <value>Search by job title code or name</value>
+  </data>
+  <data name="FromDate" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="Leave" xml:space="preserve">
+    <value>Leave</value>
+  </data>
+  <data name="AffectedRecord" xml:space="preserve">
+    <value>Affected record</value>
+  </data>
+  <data name="LeaveTypes" xml:space="preserve">
+    <value>Leave types</value>
+  </data>
+  <data name="EmploymentTypeRequired" xml:space="preserve">
+    <value>Employment type is required.</value>
+  </data>
+  <data name="Disable" xml:space="preserve">
+    <value>Disable</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>An error occurred</value>
+  </data>
+  <data name="SelectDepartment" xml:space="preserve">
+    <value>Select department</value>
+  </data>
+  <data name="DepartmentCodeRequired" xml:space="preserve">
+    <value>Department code is required.</value>
+  </data>
+  <data name="AttendanceReport" xml:space="preserve">
+    <value>Attendance report</value>
+  </data>
+  <data name="NoLinkedEmployee" xml:space="preserve">
+    <value>No employee profile is linked to this account</value>
+  </data>
+  <data name="CurrentPasswordRequired" xml:space="preserve">
+    <value>Current password is required.</value>
+  </data>
+  <data name="PasswordRules" xml:space="preserve">
+    <value>Password rules</value>
+  </data>
+  <data name="Used" xml:space="preserve">
+    <value>Used</value>
+  </data>
+  <data name="Outcome.Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Label.LeaveTypeName" xml:space="preserve">
+    <value>Leave type name (English)</value>
+  </data>
+  <data name="DepartmentsIntro" xml:space="preserve">
+    <value>Create departments, assign managers, and review employee distribution.</value>
+  </data>
+  <data name="ViewAuditLog" xml:space="preserve">
+    <value>View audit log</value>
+  </data>
+  <data name="Role.DepartmentManager" xml:space="preserve">
+    <value>Department manager</value>
+  </data>
+  <data name="DecisionTo" xml:space="preserve">
+    <value>Decision date to</value>
+  </data>
+  <data name="NoResults" xml:space="preserve">
+    <value>No results found.</value>
+  </data>
+  <data name="AttendanceSummary" xml:space="preserve">
+    <value>Attendance summary</value>
+  </data>
+  <data name="AccessDeniedMessage" xml:space="preserve">
+    <value>You do not have permission to access this page.</value>
+  </data>
+  <data name="BackToDepartments" xml:space="preserve">
+    <value>Back to departments</value>
+  </data>
+  <data name="TemporaryPasswordRequired" xml:space="preserve">
+    <value>Temporary password is required.</value>
+  </data>
+  <data name="HiredBefore" xml:space="preserve">
+    <value>Hired before</value>
+  </data>
+  <data name="NoDirectManager" xml:space="preserve">
+    <value>No direct manager</value>
+  </data>
+  <data name="EmployeeDeactivateInfo" xml:space="preserve">
+    <value>The employee record will be disabled while its data is retained.</value>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="PeriodSummary" xml:space="preserve">
+    <value>Period summary</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="LeaveStartRequired" xml:space="preserve">
+    <value>Leave start date is required.</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="AttendanceUtcInfo" xml:space="preserve">
+    <value>All displayed times use Jordan time.</value>
+  </data>
+  <data name="EmployeeRestoreNotFound" xml:space="preserve">
+    <value>Unable to restore: the record was not found among deleted employees.</value>
+  </data>
+  <data name="SavePassword" xml:space="preserve">
+    <value>Save password</value>
+  </data>
+  <data name="HireDateRequired" xml:space="preserve">
+    <value>Hire date is required.</value>
+  </data>
+  <data name="Role.HRManager" xml:space="preserve">
+    <value>HR manager</value>
+  </data>
+  <data name="ViewHeadcountSummary" xml:space="preserve">
+    <value>View headcount summary</value>
+  </data>
+  <data name="Label.EmploymentType" xml:space="preserve">
+    <value>Employment type</value>
+  </data>
+  <data name="LeaveReasonRequired" xml:space="preserve">
+    <value>Leave reason is required.</value>
+  </data>
+  <data name="EmploymentStatus" xml:space="preserve">
+    <value>Employment status</value>
+  </data>
+  <data name="AppliedAtUtc" xml:space="preserve">
+    <value>Applied at (Jordan)</value>
+  </data>
+  <data name="Label.Grade" xml:space="preserve">
+    <value>Job grade</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading</value>
+  </data>
+  <data name="MissingCheckOut" xml:space="preserve">
+    <value>Missing check-out</value>
+  </data>
+  <data name="ArabicLanguageShort" xml:space="preserve">
+    <value>AR</value>
+  </data>
+  <data name="AuditIntro" xml:space="preserve">
+    <value>Audit log of human resources management actions.</value>
+  </data>
+  <data name="EmployeesByStatus" xml:space="preserve">
+    <value>Employees by status</value>
+  </data>
+  <data name="Label.OptionalDepartment" xml:space="preserve">
+    <value>Department (optional)</value>
+  </data>
+  <data name="Label.ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="DepartmentDisabled" xml:space="preserve">
+    <value>Department disabled; its records and employees were retained.</value>
+  </data>
+  <data name="StartHere" xml:space="preserve">
+    <value>Start here</value>
+  </data>
+  <data name="ViewLeaveRequests" xml:space="preserve">
+    <value>View leave requests</value>
+  </data>
+  <data name="AddDepartment" xml:space="preserve">
+    <value>Add department</value>
+  </data>
+  <data name="PositionCreated" xml:space="preserve">
+    <value>Job title added successfully.</value>
+  </data>
+  <data name="LeaveTypeId" xml:space="preserve">
+    <value>Leave type ID</value>
+  </data>
+  <data name="ManageLeaveRequests" xml:space="preserve">
+    <value>Manage leave requests</value>
+  </data>
+  <data name="ValidDepartmentRequired" xml:space="preserve">
+    <value>Select a valid department.</value>
+  </data>
+  <data name="LeaveReport" xml:space="preserve">
+    <value>Leave report</value>
+  </data>
+  <data name="Label.DepartmentName" xml:space="preserve">
+    <value>Department name</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="PositionNotFound" xml:space="preserve">
+    <value>Job title not found.</value>
+  </data>
+  <data name="AddEmployeesHint" xml:space="preserve">
+    <value>Add employees and their job details</value>
+  </data>
+  <data name="CancelRequest" xml:space="preserve">
+    <value>Cancel request</value>
+  </data>
+  <data name="NoActiveDepartmentEmployees" xml:space="preserve">
+    <value>No active employees in this department.</value>
+  </data>
+  <data name="LeaveBalanceCalculation" xml:space="preserve">
+    <value>Balances are calculated for the selected year and leave type.</value>
+  </data>
+  <data name="WelcomeUser" xml:space="preserve">
+    <value>Welcome, {0}</value>
+  </data>
+  <data name="DepartmentCountLabel" xml:space="preserve">
+    <value>departments</value>
+  </data>
+  <data name="Label.Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="NoManagersAvailable" xml:space="preserve">
+    <value>No managers available</value>
+  </data>
+  <data name="EditJobTitle" xml:space="preserve">
+    <value>Edit job title</value>
+  </data>
+  <data name="EmployeeOrganizationRequired" xml:space="preserve">
+    <value>Create a department and job title before adding an employee.</value>
+  </data>
+  <data name="DeletedEmployees" xml:space="preserve">
+    <value>Deleted employees</value>
+  </data>
+  <data name="Label.PhoneNumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="EditDepartment" xml:space="preserve">
+    <value>Edit department</value>
+  </data>
+  <data name="UsersManagement" xml:space="preserve">
+    <value>User management</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="TotalEmployees" xml:space="preserve">
+    <value>Total employees</value>
+  </data>
+  <data name="Label.IsActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="EditUserAccount" xml:space="preserve">
+    <value>Edit user account</value>
+  </data>
+  <data name="EmployeeDirectory" xml:space="preserve">
+    <value>Employee directory</value>
+  </data>
+  <data name="Status.Late" xml:space="preserve">
+    <value>Late</value>
+  </data>
+  <data name="AuditSearchPlaceholder" xml:space="preserve">
+    <value>Search by user or action</value>
+  </data>
+  <data name="SignInFailed" xml:space="preserve">
+    <value>Unable to sign in with these credentials.</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="InitialSetupUnknown" xml:space="preserve">
+    <value>Initial setup</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Label.NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="Label.LinkedEmployee" xml:space="preserve">
+    <value>Linked employee (optional)</value>
+  </data>
+  <data name="Label.Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Unlinked" xml:space="preserve">
+    <value>Unlinked</value>
+  </data>
+  <data name="Label.HireDate" xml:space="preserve">
+    <value>Hire date</value>
+  </data>
+  <data name="EmployeeNotLinked" xml:space="preserve">
+    <value>This account is not linked to an employee record.</value>
+  </data>
+  <data name="EmployeesByDepartment" xml:space="preserve">
+    <value>Employees by department</value>
+  </data>
+  <data name="ReportYearInvalid" xml:space="preserve">
+    <value>Check the date range: the end must follow the start and the year must be between 2000 and 2100.</value>
+  </data>
+  <data name="ViewMyRequests" xml:space="preserve">
+    <value>View my requests</value>
+  </data>
+  <data name="DepartmentNotFound" xml:space="preserve">
+    <value>Department not found.</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="DateRangeInvalid" xml:space="preserve">
+    <value>Check the selected date range.</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Days</value>
+  </data>
+  <data name="UserDisabled" xml:space="preserve">
+    <value>Account disabled.</value>
+  </data>
+  <data name="Label.LeaveStart" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="Status.Approved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="EmployeeRequired" xml:space="preserve">
+    <value>Select a valid employee.</value>
+  </data>
+  <data name="UserCreated" xml:space="preserve">
+    <value>User account created successfully.</value>
+  </data>
+  <data name="Invalid" xml:space="preserve">
+    <value>Invalid</value>
+  </data>
+  <data name="Status.Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="Outcome" xml:space="preserve">
+    <value>Outcome</value>
+  </data>
+  <data name="NoEmployeesInDepartment" xml:space="preserve">
+    <value>No employees in this department</value>
+  </data>
+  <data name="Label.Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="Label.CheckOutLocal" xml:space="preserve">
+    <value>Local check-out time</value>
+  </data>
+  <data name="SearchDepartments" xml:space="preserve">
+    <value>Search departments</value>
+  </data>
+  <data name="MyAttendance" xml:space="preserve">
+    <value>My attendance</value>
+  </data>
+  <data name="StatusAbsent" xml:space="preserve">
+    <value>Absent</value>
+  </data>
+  <data name="DepartmentId" xml:space="preserve">
+    <value>Department ID</value>
+  </data>
+  <data name="DepartmentManagerSetupHint" xml:space="preserve">
+    <value>Ask your system administrator to link your account to an employee profile and assign you as department manager.</value>
+  </data>
+  <data name="Label.Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Label.DirectManager" xml:space="preserve">
+    <value>Direct manager</value>
+  </data>
+  <data name="SearchAndFilter" xml:space="preserve">
+    <value>Search and filter</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="PositionEnabled" xml:space="preserve">
+    <value>Job title enabled.</value>
+  </data>
+  <data name="StatusPresent" xml:space="preserve">
+    <value>Present</value>
+  </data>
+  <data name="Label.DepartmentCode" xml:space="preserve">
+    <value>Department code</value>
+  </data>
+  <data name="AttendanceDateOrderInvalid" xml:space="preserve">
+    <value>The start date must not be after the end date.</value>
+  </data>
+  <data name="DepartmentsManagement" xml:space="preserve">
+    <value>Department management</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SystemUser" xml:space="preserve">
+    <value>System user</value>
+  </data>
+  <data name="AttendanceCorrectionSaved" xml:space="preserve">
+    <value>Attendance record correction saved.</value>
+  </data>
+  <data name="AttendanceUtcResults" xml:space="preserve">
+    <value>Results in Jordan time:</value>
+  </data>
+  <data name="MainNavigation" xml:space="preserve">
+    <value>Main navigation</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="EmployeeNumberTooLong" xml:space="preserve">
+    <value>Employee number exceeds the maximum length.</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="Label.CheckInLocal" xml:space="preserve">
+    <value>Local check-in time</value>
+  </data>
+  <data name="Departments" xml:space="preserve">
+    <value>Departments</value>
+  </data>
+  <data name="DepartmentNameRequired" xml:space="preserve">
+    <value>Department name is required.</value>
+  </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Activity</value>
+  </data>
+  <data name="PositionManagement" xml:space="preserve">
+    <value>Job title management</value>
+  </data>
+  <data name="DepartmentDetails" xml:space="preserve">
+    <value>Department details</value>
+  </data>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="ViewDepartments" xml:space="preserve">
+    <value>View departments</value>
+  </data>
+  <data name="CheckOutNow" xml:space="preserve">
+    <value>Check out now</value>
+  </data>
+  <data name="DecisionFrom" xml:space="preserve">
+    <value>Decision date from</value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Actor" xml:space="preserve">
+    <value>Actor</value>
+  </data>
+  <data name="NoDescription" xml:space="preserve">
+    <value>No description provided</value>
+  </data>
+  <data name="SearchEmployeesIntro" xml:space="preserve">
+    <value>Search employees and filter by department and status.</value>
+  </data>
+  <data name="Label.LeaveEnd" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="Label.Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="CorrectRecord" xml:space="preserve">
+    <value>Correct record</value>
+  </data>
+  <data name="Label.LastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="HoursWorked" xml:space="preserve">
+    <value>Working hours</value>
+  </data>
+  <data name="ArabicPortal" xml:space="preserve">
+    <value>Human Resources Portal</value>
+  </data>
+  <data name="DecisionTitle" xml:space="preserve">
+    <value>Leave decisions summary</value>
+  </data>
+  <data name="Status.Present" xml:space="preserve">
+    <value>Present</value>
+  </data>
+  <data name="Status.Absent" xml:space="preserve">
+    <value>Absent</value>
+  </data>
+  <data name="NoActivity" xml:space="preserve">
+    <value>No activity recorded.</value>
+  </data>
+  <data name="Label.DefaultDays" xml:space="preserve">
+    <value>Annual days</value>
+  </data>
+  <data name="NewLeaveType" xml:space="preserve">
+    <value>New leave type</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="AvailableReports" xml:space="preserve">
+    <value>Available reports</value>
+  </data>
+  <data name="AddJobTitle" xml:space="preserve">
+    <value>Add job title</value>
+  </data>
+  <data name="EmployeeCreated" xml:space="preserve">
+    <value>Employee added successfully.</value>
+  </data>
+  <data name="WorkLocation" xml:space="preserve">
+    <value>Work location</value>
+  </data>
+  <data name="Headcount" xml:space="preserve">
+    <value>Headcount summary</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DepartmentManagement" xml:space="preserve">
+    <value>Department management</value>
+  </data>
+  <data name="LabelConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="LabelPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="LeaveRequests" xml:space="preserve">
+    <value>Leave requests</value>
+  </data>
+  <data name="ReportAttendance" xml:space="preserve">
+    <value>Attendance report</value>
+  </data>
+  <data name="ConfirmRestore" xml:space="preserve">
+    <value>Do you want to restore this employee record?</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete this record?</value>
+  </data>
+  <data name="LabelRememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="DateRange" xml:space="preserve">
+    <value>Date range</value>
+  </data>
+  <data name="LabelEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Employment.Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Employment.Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="LeaveBalancesTitle" xml:space="preserve">
+    <value>Leave balances for {0}</value>
+  </data>
+  <data name="PrivacyPlaceholder" xml:space="preserve">
+    <value>This page provides the privacy policy for your organization.</value>
+  </data>
+  <data name="RequestProcessingError" xml:space="preserve">
+    <value>An error occurred while processing your request.</value>
+  </data>
+  <data name="ShowRange" xml:space="preserve">
+    <value>Showing {0}–{1} of {2}</value>
+  </data>
+  <data name="Js0">
+    <value>Unable to refresh data.</value>
+  </data>
+  <data name="Js1">
+    <value>Unable to load the requested data.</value>
+  </data>
+  <data name="Js2">
+    <value>Unable to load the dialog.</value>
+  </data>
+  <data name="Js3">
+    <value>Unable to change record status.</value>
+  </data>
+  <data name="Js4">
+    <value>Active</value>
+  </data>
+  <data name="Js5">
+    <value>Inactive</value>
+  </data>
+  <data name="Js6">
+    <value>Deactivate</value>
+  </data>
+  <data name="Js7">
+    <value>Activate</value>
+  </data>
+  <data name="Js8">
+    <value>Record status changed.</value>
+  </data>
+  <data name="Js9">
+    <value>Status changed, but refresh failed. Reload the page.</value>
+  </data>
+  <data name="Js10">
+    <value>Unable to change record status.</value>
+  </data>
+  <data name="Js11">
+    <value>Saving…</value>
+  </data>
+  <data name="Js12">
+    <value>Saved successfully.</value>
+  </data>
+  <data name="Js13">
+    <value>Saved, but refresh failed. Reload the page.</value>
+  </data>
+  <data name="Js14">
+    <value>Unable to save. Try again.</value>
+  </data>
+  <data name="Js15">
+    <value>An error occurred while saving.</value>
+  </data>
+  <data name="Js16">
+    <value>Save</value>
+  </data>
+  <data name="Js17">
+    <value>Select position</value>
+  </data>
+  <data name="Js18">
+    <value>Unable to load positions.</value>
+  </data>
+  <data name="Js19">
+    <value>Unable to load positions</value>
+  </data>
+  <data name="LoadingDialog">
+    <value>Loading dialog…</value>
+  </data>
+  <data name="CheckOutNextDay">
+    <value>Check-out is on the following day</value>
+  </data>
+  <data name="EmploymentType.Contract" xml:space="preserve">
+    <value>Contract</value>
+  </data>
+  <data name="EmploymentType.FullTime" xml:space="preserve">
+    <value>Full time</value>
+  </data>
+  <data name="EmploymentType.PartTime" xml:space="preserve">
+    <value>Part time</value>
+  </data>
+  <data name="EmploymentType.Internship" xml:space="preserve">
+    <value>Internship</value>
+  </data>
+  <data name="EmploymentType.Temporary" xml:space="preserve">
+    <value>Temporary</value>
+  </data>
+  <data name="JordanTime" xml:space="preserve">
+    <value>Jordan time</value>
+  </data>
+  <data name="NewAttendanceSession">
+    <value>Check in for a new session</value>
+  </data>
+  <data name="MyLeaveReport">
+    <value>My leave report</value>
+  </data>
+  <data name="LeaveStartTime">
+    <value>Start time (optional, Jordan)</value>
+  </data>
+  <data name="LeaveReservationCalculation">
+    <value>Pending requests reserve days immediately. Approval confirms the deduction; rejection or cancellation releases it. Calendar days are counted within the selected year.</value>
+  </data>
+  <data name="LeaveEndTime">
+    <value>End time (optional, Jordan)</value>
+  </data>
+  <data name="LeaveTimeOrder">
+    <value>End time must be after start time.</value>
+  </data>
+  <data name="LeaveTimeHint">
+    <value>Both dates are required; times are optional. Start time defaults to now and can be cleared. End time stays blank. Leave uses inclusive calendar days, not hours.</value>
+  </data>
+  <data name="PendingDays">
+    <value>Reserved for pending requests</value>
+  </data>
+  <data name="PersonalLeaveReportHint">
+    <value>Your personal balances and requests. Status filters the requests; balances include all requests in the selected year.</value>
+  </data>
+  <data name="CorrectionHelp">
+    <value>To fix an existing session, choose Edit beside it in Attendance. To add a missing record, select employee, work date and times. Blank check-out date uses the work date.</value>
+  </data>
+  <data name="CorrectionEndDateHint">
+    <value>Leave blank for the same work date; choose the next date for an overnight session.</value>
+  </data>
+  <data name="CorrectionCheckOutDate">
+    <value>Check-out date</value>
+  </data>
+  <data name="CorrectionNeedsCheckIn">
+    <value>Enter check-in before check-out.</value>
+  </data>
+  <data name="CorrectionTimeOrder">
+    <value>Check-out must follow check-in within 24 hours. For overnight work select the next check-out date.</value>
+  </data>
+  <data name="EditingSession">
+    <value>Editing attendance session</value>
+  </data>
+  <data name="CorrectionFutureTime">
+    <value>Attendance times cannot be in the future. Times use Jordan time.</value>
+  </data>
+  <data name="ProfileReadOnlyHint">
+    <value>Your employment record is read-only. Contact HR to correct its details.</value>
+  </data>
+  <data name="MyProfile">
+    <value>My profile</value>
+  </data>
+</root>

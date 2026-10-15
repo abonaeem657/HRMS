@@ -1,0 +1,16 @@
+@model HRMS.Models.Employees.EmployeeDetailsViewModel
+@{
+    ViewData["Title"] = T["EmployeeDeactivate"].Value;
+}
+
+<div>
+    <h1 class="h2">@T["EmployeeDeactivate"]</h1>
+    <div class="alert alert-warning" role="alert">
+        @T["EmployeeDeactivateInfo"]
+    </div>
+    <p>@T["ConfirmDeactivateEmployee"] <strong>@Model.FirstName @Model.LastName</strong> (@Model.EmployeeNumber)?</p>
+    <form asp-action="Delete" asp-route-id="@Model.EmployeeId" method="post">
+        <button type="submit" class="btn btn-danger">@T["ConfirmDeactivate"]</button>
+        <a asp-action="Details" asp-route-id="@Model.EmployeeId" class="btn btn-outline-secondary">@T["Cancel"]</a>
+    </form>
+</div>

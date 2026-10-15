@@ -1,0 +1,70 @@
+@model HRMS.Models.Employees.EmployeeListViewModel
+@{
+    var firstItem = Model.TotalCount == 0 ? 0 : ((Model.Page - 1) * Model.PageSize) + 1;
+    var lastItem = Math.Min(Model.Page * Model.PageSize, Model.TotalCount);
+}
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle hrms-table">
+        <thead>
+            <tr>
+                <th scope="col">@T["EmployeeNumber"]</th><th scope="col">@T["Name"]</th><th scope="col">@T["WorkEmail"]</th>
+                <th scope="col">@T["Department"]</th><th scope="col">@T["JobTitle"]</th><th scope="col">@T["Status"]</th>
+                <th scope="col">@T["HireDate"]</th><th scope="col">@T["Actions"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Employees.Count == 0)
+            {
+                <tr><td colspan="8" class="text-center text-muted py-4">@T["NoResults"]</td></tr>
+            }
+            else
+            {
+                @foreach (var employee in Model.Employees)
+                {
+                    <tr>
+                        <td>@employee.EmployeeNumber</td><td>@employee.FullName</td><td>@employee.WorkEmail</td>
+                        <td>@employee.DepartmentName</td><td>@employee.PositionTitle</td>
+                        <td><span class="badge text-bg-light status-badge">@T.LocalizeValue("Employment.", employee.EmploymentStatus)</span></td>
+                        <td>@employee.HireDate.ToString("d")</td>
+                        <td>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button type="button" class="btn btn-sm btn-outline-secondary"
+                                        data-modal-url="@Url.Action("Details", new { id = employee.EmployeeId, modal = true })">@T["Details"]</button>
+                                @if (User.IsInRoles(IdentityRoles.ManageEmployees))
+                                {
+                                <button type="button" class="btn btn-sm btn-outline-primary"
+                                        data-modal-url="@Url.Action("Edit", new { id = employee.EmployeeId, modal = true })">@T["Edit"]</button>
+                                <form asp-action="Delete" asp-route-id="@employee.EmployeeId" method="post" data-active-form>
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <span class="spinner-border spinner-border-sm d-none" aria-hidden="true"></span>
+                                        @T["Disable"]
+                                    </button>
+                                </form>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+    <span class="text-muted">@T["ShowRange", firstItem, lastItem, Model.TotalCount]</span>
+    <nav aria-label="@T["EmployeePages"]">
+        <ul class="pagination mb-0">
+            <li class="page-item @(Model.Page <= 1 ? "disabled" : "")">
+                <a class="page-link" asp-route-Search="@Model.Search" asp-route-DepartmentId="@Model.DepartmentId"
+                   asp-route-EmploymentStatus="@Model.EmploymentStatus" asp-route-SortBy="@Model.SortBy"
+                   asp-route-SortDescending="@Model.SortDescending" asp-route-Page="@(Model.Page - 1)"
+                   asp-route-PageSize="@Model.PageSize">@T["Previous"]</a>
+            </li>
+            <li class="page-item @(Model.Page >= Model.PageCount ? "disabled" : "")">
+                <a class="page-link" asp-route-Search="@Model.Search" asp-route-DepartmentId="@Model.DepartmentId"
+                   asp-route-EmploymentStatus="@Model.EmploymentStatus" asp-route-SortBy="@Model.SortBy"
+                   asp-route-SortDescending="@Model.SortDescending" asp-route-Page="@(Model.Page + 1)"
+                   asp-route-PageSize="@Model.PageSize">@T["Next"]</a>
+            </li>
+        </ul>
+    </nav>
+</div>

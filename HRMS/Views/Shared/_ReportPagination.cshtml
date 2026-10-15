@@ -1,0 +1,26 @@
+@model HRMS.Models.Reporting.ReportPaginationModel
+<nav aria-label="@T["ReportPages"]">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(Model.Page <= 1 ? "disabled" : "")">
+            <a class="page-link" asp-controller="Reports" asp-action="@Model.Action"
+               asp-route-DepartmentId="@Model.DepartmentId" asp-route-PositionId="@Model.PositionId"
+               asp-route-Status="@Model.Status" asp-route-HiredAfter="@Model.HiredAfter"
+               asp-route-HiredBefore="@Model.HiredBefore" asp-route-EmployeeId="@Model.EmployeeId"
+               asp-route-FromDate="@Model.FromDate" asp-route-ToDate="@Model.ToDate"
+               asp-route-LeaveTypeId="@Model.LeaveTypeId" asp-route-Year="@Model.Year"
+               asp-route-SortBy="@Model.SortBy" asp-route-SortDescending="@Model.SortDescending" asp-route-PageSize="@Model.PageSize"
+               asp-route-Page="@(Model.Page - 1)">@T["Previous"]</a>
+        </li>
+        <li class="page-item disabled"><span class="page-link">@Model.Page / @Model.TotalPages</span></li>
+        <li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : "")">
+            <a class="page-link" asp-controller="Reports" asp-action="@Model.Action"
+               asp-route-DepartmentId="@Model.DepartmentId" asp-route-PositionId="@Model.PositionId"
+               asp-route-Status="@Model.Status" asp-route-HiredAfter="@Model.HiredAfter"
+               asp-route-HiredBefore="@Model.HiredBefore" asp-route-EmployeeId="@Model.EmployeeId"
+               asp-route-FromDate="@Model.FromDate" asp-route-ToDate="@Model.ToDate"
+               asp-route-LeaveTypeId="@Model.LeaveTypeId" asp-route-Year="@Model.Year"
+               asp-route-SortBy="@Model.SortBy" asp-route-SortDescending="@Model.SortDescending" asp-route-PageSize="@Model.PageSize"
+               asp-route-Page="@(Model.Page + 1)">@T["Next"]</a>
+        </li>
+    </ul>
+</nav>

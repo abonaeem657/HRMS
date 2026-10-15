@@ -1,0 +1,33 @@
+@model HRMS.Models.Organization.DepartmentFormViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+<div class="row g-3">
+    <div class="col-md-6">
+        <label asp-for="Code" class="form-label"></label>
+        <input asp-for="Code" class="form-control" />
+        <span asp-validation-for="Code" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="ManagerEmployeeId" class="form-label"></label>
+        <select asp-for="ManagerEmployeeId" asp-items="Model.Managers" class="form-select">
+            <option value="">@T["NoManager"]</option>
+        </select>
+        <span asp-validation-for="ManagerEmployeeId" class="text-danger"></span>
+    </div>
+</div>
+@if (Model.Managers.Count == 0)
+{
+    <p class="form-text">@T["NoManagersAvailable"]</p>
+}
+@if (ViewData["InModal"] as bool? != true)
+{
+    <div class="mt-4 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">@T["Save"]</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">@T["Cancel"]</a>
+    </div>
+}

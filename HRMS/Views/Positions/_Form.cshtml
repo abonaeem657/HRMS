@@ -1,0 +1,38 @@
+@model HRMS.Models.Organization.PositionFormViewModel
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+<div class="row g-3">
+    <div class="col-md-6">
+        <label asp-for="Code" class="form-label"></label>
+        <input asp-for="Code" class="form-control" />
+        <span asp-validation-for="Code" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="DepartmentId" class="form-label"></label>
+        <select asp-for="DepartmentId" asp-items="Model.Departments" class="form-select">
+            <option value="">@T["GeneralPosition"]</option>
+        </select>
+        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Grade" class="form-label"></label>
+        <input asp-for="Grade" class="form-control" />
+        <span asp-validation-for="Grade" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+</div>
+@if (ViewData["InModal"] as bool? != true)
+{
+    <div class="mt-4 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">@T["Save"]</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">@T["Cancel"]</a>
+    </div>
+}

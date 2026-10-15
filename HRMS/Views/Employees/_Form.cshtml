@@ -1,0 +1,106 @@
+@model HRMS.Models.Employees.EmployeeFormViewModel
+
+<input type="hidden" name="RowVersion" value="@(Model.RowVersion is null ? "" : Convert.ToBase64String(Model.RowVersion))" />
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+<div class="row g-3">
+    <div class="col-md-6">
+        <label asp-for="EmployeeNumber" class="form-label"></label>
+        <input asp-for="EmployeeNumber" class="form-control" autocomplete="off" />
+        <span asp-validation-for="EmployeeNumber" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="WorkEmail" class="form-label"></label>
+        <input asp-for="WorkEmail" class="form-control" type="email" autocomplete="email" />
+        <span asp-validation-for="WorkEmail" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="FirstName" class="form-label"></label>
+        <input asp-for="FirstName" class="form-control" autocomplete="given-name" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="LastName" class="form-label"></label>
+        <input asp-for="LastName" class="form-control" autocomplete="family-name" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="PhoneNumber" class="form-label"></label>
+        <input asp-for="PhoneNumber" class="form-control" type="tel" autocomplete="tel" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="HireDate" class="form-label"></label>
+        <input asp-for="HireDate" class="form-control" type="date" />
+        <span asp-validation-for="HireDate" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="EmploymentStatus" class="form-label"></label>
+        <select asp-for="EmploymentStatus" class="form-select">
+            <option value="Active">@T["Employment.Active"]</option>
+            <option value="Inactive">@T["Employment.Inactive"]</option>
+            @if (!string.IsNullOrWhiteSpace(Model.EmploymentStatus) && Model.EmploymentStatus != "Active" && Model.EmploymentStatus != "Inactive")
+            {
+                <option value="@Model.EmploymentStatus">@T.LocalizeValue("Employment.", Model.EmploymentStatus)</option>
+            }
+        </select>
+        <span asp-validation-for="EmploymentStatus" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="EmploymentType" class="form-label"></label>
+        <select asp-for="EmploymentType" class="form-select">
+            @foreach (var type in new[] { "FullTime", "PartTime", "Contract", "Temporary", "Internship" })
+            {
+                <option value="@type">@T["EmploymentType." + type]</option>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.EmploymentType) && !new[] { "FullTime", "PartTime", "Contract", "Temporary", "Internship" }.Contains(Model.EmploymentType))
+            {
+                <option value="@Model.EmploymentType">@Model.EmploymentType</option>
+            }
+        </select>
+        <span asp-validation-for="EmploymentType" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="DepartmentId" class="form-label"></label>
+        <select asp-for="DepartmentId" asp-items="Model.Departments" class="form-select">
+            <option value="">@T["SelectDepartment"]</option>
+        </select>
+        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="PositionId" class="form-label"></label>
+        <select asp-for="PositionId" asp-items="Model.Positions" class="form-select">
+            <option value="">@T["SelectJobTitle"]</option>
+        </select>
+        <span asp-validation-for="PositionId" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="ManagerEmployeeId" class="form-label"></label>
+        <select asp-for="ManagerEmployeeId" asp-items="Model.Managers" class="form-select">
+            <option value="">@T["NoDirectManager"]</option>
+        </select>
+        <span asp-validation-for="ManagerEmployeeId" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="WorkLocation" class="form-label"></label>
+        <input asp-for="WorkLocation" class="form-control" />
+        <span asp-validation-for="WorkLocation" class="text-danger"></span>
+    </div>
+</div>
+
+@if (Model.Departments.Count == 0 || Model.Positions.Count == 0)
+{
+    <div class="alert alert-warning mt-3" role="status">
+        @T["EmployeeOrganizationRequired"]
+    </div>
+}
+
+@if (ViewData["InModal"] as bool? != true)
+{
+    <div class="mt-4 d-flex gap-2">
+        <button type="submit" class="btn btn-primary"
+                disabled="@(Model.Departments.Count == 0 || Model.Positions.Count == 0)">
+            @T["Save"]
+        </button>
+        <a asp-action="Index" class="btn btn-outline-secondary">@T["Cancel"]</a>
+    </div>
+}
