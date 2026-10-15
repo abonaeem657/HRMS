@@ -8,6 +8,11 @@ public class ExternalApiTests
     private static PublicHolidaysService Service(string json,HttpStatusCode status=HttpStatusCode.OK)=>new(new HttpClient(new Handler((_,_)=>Task.FromResult(new HttpResponseMessage(status){Content=new StringContent(json)}))){BaseAddress=new Uri("https://example.test/")});
     [Fact] public async Task ValidResponseMapped() { var rows=await Service("[{\"date\":\"2026-01-01\",\"localName\":\"عطلة\",\"name\":\"Holiday\",\"countryCode\":\"JO\"}]").GetHolidaysAsync(2026);Assert.Single(rows); }
     [Fact] public async Task InvalidResponseRejected()=>await Assert.ThrowsAsync<InvalidDataException>(()=>Service("[{}]").GetHolidaysAsync(2026));
+    [Theory]
+    [InlineData("2027-01-01", "JO")]
+    [InlineData("2026-01-01", "US")]
+    public async Task ResponseMustMatchRequestedYearAndCountry(string date, string country) =>
+        await Assert.ThrowsAsync<InvalidDataException>(() => Service($"[{{\"date\":\"{date}\",\"localName\":\"عطلة\",\"name\":\"Holiday\",\"countryCode\":\"{country}\"}}]").GetHolidaysAsync(2026, "JO"));
     [Fact] public async Task UnsuccessfulHttpRejected()=>await Assert.ThrowsAsync<HttpRequestException>(()=>Service("{}",HttpStatusCode.ServiceUnavailable).GetHolidaysAsync(2026));
     [Fact] public async Task InvalidJsonRejected()=>await Assert.ThrowsAsync<System.Text.Json.JsonException>(()=>Service("not json").GetHolidaysAsync(2026));
     [Fact] public async Task InvalidCountryRejected()=>await Assert.ThrowsAsync<ArgumentException>(()=>Service("[]").GetHolidaysAsync(2026,"../"));

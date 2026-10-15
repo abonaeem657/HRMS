@@ -25,7 +25,7 @@ Example employee body (for PUT additionally include rowVersion from GET):
 {"employeeNumber":"E-101","firstName":"Ahmad","lastName":"Example","workEmail":"ahmad@example.test","hireDate":"2026-01-01","employmentStatus":"Active","employmentType":"FullTime","departmentId":1,"positionId":1}
 ```
 
-The holiday client validates inputs and response data, uses a 15-second timeout and propagates request cancellation. No external response can mutate HR data. Mock handler tests cover success, bad JSON/data, HTTP failure and cancellation; an HTTP endpoint test covers provider timeout.
+The holiday client validates inputs and response data (including the requested country and year), uses a 15-second timeout and propagates request cancellation. No external response can mutate HR data. Mock handler tests cover success, bad JSON/data, HTTP failure and cancellation; an HTTP endpoint test covers provider timeout.
 
 ## Web request limits and asynchronous navigation
 

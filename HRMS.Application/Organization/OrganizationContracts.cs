@@ -1,6 +1,7 @@
 namespace HRMS.Application.Organization;
 
-public sealed record DepartmentListQuery(string? Search, bool? IsActive, int? Page = null, int PageSize = 25);
+public sealed record DepartmentListQuery(string? Search, bool? IsActive, int? Page = null, int PageSize = 25,
+    string? SortBy = null, bool SortDescending = false);
 
 public sealed record DepartmentListItem(
     int DepartmentId,
@@ -28,7 +29,8 @@ public sealed record DepartmentDetails(
 
 public sealed record DepartmentInput(string Code, string Name, int? ManagerEmployeeId);
 
-public sealed record PositionListQuery(string? Search, int? DepartmentId, bool? IsActive);
+public sealed record PositionListQuery(string? Search, int? DepartmentId, bool? IsActive,
+    string? SortBy = null, bool SortDescending = false);
 
 public sealed record PositionListItem(
     int PositionId,

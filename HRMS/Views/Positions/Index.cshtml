@@ -25,6 +25,7 @@
     <input type="hidden" name="ShowAll" value="@DisplayPagination.IsShowAll(Context.Request).ToString().ToLowerInvariant()" />
         <div class="card-body">
             <div class="row g-3 align-items-end">
+                <partial name="_ReportSort" model="@(new Dictionary<string, string> { ["title"] = "Label.PositionTitle", ["code"] = "Label.PositionCode", ["department"] = "Department", ["employees"] = "Employees", ["status"] = "Status" })" />
                 <div class="col-12 col-lg-5">
                     <label asp-for="Search" class="form-label">@T["PositionSearch"]</label>
                     <input asp-for="Search" class="form-control" />

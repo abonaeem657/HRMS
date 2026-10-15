@@ -42,8 +42,20 @@ public sealed class PositionService(
             positions = positions.Where(position => position.IsActive == isActive);
         }
 
+        positions = (query.SortBy?.ToLowerInvariant(), query.SortDescending) switch
+        {
+            ("code", false) => positions.OrderBy(p => p.Code).ThenBy(p => p.PositionId),
+            ("code", true) => positions.OrderByDescending(p => p.Code).ThenBy(p => p.PositionId),
+            ("department", false) => positions.OrderBy(p => p.Department == null ? "" : p.Department.Name).ThenBy(p => p.PositionId),
+            ("department", true) => positions.OrderByDescending(p => p.Department == null ? "" : p.Department.Name).ThenBy(p => p.PositionId),
+            ("employees", false) => positions.OrderBy(p => p.Employees.Count(e => !e.IsDeleted)).ThenBy(p => p.PositionId),
+            ("employees", true) => positions.OrderByDescending(p => p.Employees.Count(e => !e.IsDeleted)).ThenBy(p => p.PositionId),
+            ("status", false) => positions.OrderBy(p => p.IsActive).ThenBy(p => p.PositionId),
+            ("status", true) => positions.OrderByDescending(p => p.IsActive).ThenBy(p => p.PositionId),
+            (_, true) => positions.OrderByDescending(p => p.Title).ThenBy(p => p.PositionId),
+            _ => positions.OrderBy(p => p.Title).ThenBy(p => p.PositionId)
+        };
         return positions
-            .OrderBy(position => position.Title).ThenBy(position => position.PositionId)
             .Select(position => new PositionListItem(
                 position.PositionId,
                 position.Code,

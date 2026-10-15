@@ -38,7 +38,17 @@ public sealed class DepartmentService(
             departments = departments.Where(department => department.IsActive == isActive);
         }
 
-        departments = departments.OrderBy(department => department.Name).ThenBy(department => department.DepartmentId);
+        departments = (query.SortBy?.ToLowerInvariant(), query.SortDescending) switch
+        {
+            ("code", false) => departments.OrderBy(d => d.Code).ThenBy(d => d.DepartmentId),
+            ("code", true) => departments.OrderByDescending(d => d.Code).ThenBy(d => d.DepartmentId),
+            ("employees", false) => departments.OrderBy(d => d.Employees.Count(e => !e.IsDeleted)).ThenBy(d => d.DepartmentId),
+            ("employees", true) => departments.OrderByDescending(d => d.Employees.Count(e => !e.IsDeleted)).ThenBy(d => d.DepartmentId),
+            ("status", false) => departments.OrderBy(d => d.IsActive).ThenBy(d => d.DepartmentId),
+            ("status", true) => departments.OrderByDescending(d => d.IsActive).ThenBy(d => d.DepartmentId),
+            (_, true) => departments.OrderByDescending(d => d.Name).ThenBy(d => d.DepartmentId),
+            _ => departments.OrderBy(d => d.Name).ThenBy(d => d.DepartmentId)
+        };
         return departments
             .Select(department => new DepartmentListItem(
                 department.DepartmentId,

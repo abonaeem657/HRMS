@@ -38,7 +38,8 @@ public sealed class PublicHolidaysService(HttpClient httpClient) : IPublicHolida
                     out var date) ||
                 string.IsNullOrWhiteSpace(item.LocalName) ||
                 string.IsNullOrWhiteSpace(item.Name) ||
-                string.IsNullOrWhiteSpace(item.CountryCode))
+                date.Year != year ||
+                !string.Equals(item.CountryCode, countryCode, StringComparison.OrdinalIgnoreCase))
             {
                 throw new InvalidDataException("The public holidays API returned an invalid holiday item.");
             }

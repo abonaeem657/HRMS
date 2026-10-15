@@ -2,11 +2,13 @@
 
 ASP.NET Core MVC, SQL Server, EF Core, Identity, Arabic/English. Start with `docs/DELIVERY_AR.md` for the repair summary and limitations. Current acceptance evidence and deployment scope are documented in docs/ACCEPTANCE_AR.md.
 
+For the itemized SRS comparison, evidence and unresolved acceptance items, read [the detailed Arabic review](docs/PDF_DETAILED_REVIEW_AR.md). Passing tests is not a declaration of complete SRS acceptance.
+
 ## Prerequisites and setup
 
 For the complete Arabic A–Z walkthrough of setup, all six roles, attendance, leave, reports and account recovery, read [USER_WALKTHROUGH_AR.md](docs/USER_WALKTHROUGH_AR.md). A shorter bilingual guide is available after sign-in under **Getting started / دليل الاستخدام** (`/Home/Guide`).
 
-.NET 8 target, ASP.NET Core/EF/Identity 8.0.31, SQL Server 2019+ / LocalDB on Windows. The current build uses SDK 9.0.318 targeting net8.0 and runtime 8.0.31. The owner explicitly selected .NET 8 on 15 October 2026 under the SRS supported-alternative clause. No .NET 10 upgrade is required for this delivery. IIS requires the .NET 8 hosting bundle; the published application is also verified locally on Kestrel in Production over HTTPS.
+.NET 8 target, ASP.NET Core/EF/Identity 8.0.31, SQL Server 2019+ / LocalDB on Windows. The current build uses SDK 9.0.318 targeting net8.0 and runtime 8.0.31. The owner explicitly selected .NET 8 on 15 October 2026 under the SRS supported-alternative clause. The project remains on the owner-selected .NET 8; Microsoft support ends on 10 November 2026, so a later delivery must revisit the supported-version requirement. IIS requires the .NET 8 hosting bundle; the published application is also verified locally on Kestrel in Production over HTTPS.
 
 From this directory:
 

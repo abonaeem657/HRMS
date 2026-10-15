@@ -18,7 +18,7 @@ public sealed class PositionsController(IPositionService positionService) : Cont
         CancellationToken cancellationToken)
     {
         var result = await positionService.SearchAsync(
-            new PositionListQuery(query.Search, query.DepartmentId, query.IsActive),
+            new PositionListQuery(query.Search, query.DepartmentId, query.IsActive, query.SortBy, query.SortDescending),
             DisplayPagination.Request(Request),
             cancellationToken);
 
@@ -26,6 +26,7 @@ public sealed class PositionsController(IPositionService positionService) : Cont
             includeInactive: true, cancellationToken: cancellationToken);
 
         ViewData["Pagination"] = DisplayPagination.Create(Request, result.TotalCount, result.Page);
+        ViewData["SortDescending"] = query.SortDescending;
         query.Positions = result.Items.Select(position => new PositionListItemViewModel(
             position.PositionId,
             position.Code,

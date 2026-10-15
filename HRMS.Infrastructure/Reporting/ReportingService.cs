@@ -48,32 +48,11 @@ public sealed class ReportingService(
             throw new ArgumentException("Dashboard end date cannot be before its start date.");
         }
 
-        var activeEmployees = dbContext.Employees
-            .AsNoTracking()
-            .Where(employee => !employee.IsDeleted && ActiveStatusValues.Contains(employee.EmploymentStatus));
-        if (departmentId is int activeDepartmentId)
-        {
-            activeEmployees = activeEmployees.Where(employee => employee.DepartmentId == activeDepartmentId);
-        }
-        var totalActive = await activeEmployees.CountAsync(cancellationToken);
-        var newHiresQuery = dbContext.Employees
-            .AsNoTracking()
-            .Where(employee => !employee.IsDeleted && employee.HireDate >= fromDate && employee.HireDate <= toDate);
-        if (departmentId is int newHireDepartmentId)
-        {
-            newHiresQuery = newHiresQuery.Where(employee => employee.DepartmentId == newHireDepartmentId);
-        }
-        var newHires = await newHiresQuery.CountAsync(cancellationToken);
-        var statusQuery = dbContext.Employees
-            .AsNoTracking()
-            .Where(employee => !employee.IsDeleted);
-        if (departmentId is int statusDepartmentId)
-        {
-            statusQuery = statusQuery.Where(employee => employee.DepartmentId == statusDepartmentId);
-        }
+        var employees = dbContext.Employees.AsNoTracking();
+        var totalActive = await DashboardMetrics.ActiveEmployees(employees, departmentId).CountAsync(cancellationToken);
+        var newHires = await DashboardMetrics.NewHires(employees, departmentId, fromDate, toDate).CountAsync(cancellationToken);
         var statusRequest = paging?.Statuses ?? new PageRequest(ShowAll: true);
-        var statusPage = await PageAsync(statusQuery.GroupBy(employee => employee.EmploymentStatus).OrderBy(group => group.Key)
-            .Select(group => new StatusHeadcountItem(group.Key, group.Count())),
+        var statusPage = await PageAsync(DashboardMetrics.StatusCounts(employees, departmentId),
             statusRequest.Page, statusRequest.PageSize, cancellationToken, statusRequest.ShowAll);
         var statusGroups = statusPage.Items.ToDictionary(group => group.Status, group => group.Count);
         var pendingLeaveQuery = dbContext.LeaveRequests
@@ -92,6 +71,7 @@ public sealed class ReportingService(
         var recentActivityQuery = dbContext.AuditLogs
             .AsNoTracking()
             .OrderByDescending(log => log.OccurredAtUtc)
+            .ThenByDescending(log => log.AuditLogId)
             .Take(10)
             .Select(log => new RecentHrActivity(
                 log.AuditLogId,

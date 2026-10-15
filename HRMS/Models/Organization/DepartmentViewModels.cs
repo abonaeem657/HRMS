@@ -9,6 +9,10 @@ public sealed class DepartmentListViewModel
 
     public bool? IsActive { get; set; }
 
+    public string? SortBy { get; set; }
+
+    public bool SortDescending { get; set; }
+
     public IReadOnlyList<DepartmentListItemViewModel> Departments { get; set; } =
         Array.Empty<DepartmentListItemViewModel>();
 }

@@ -20,6 +20,34 @@ namespace HRMS.IntegrationTests;
 
 public partial class SqlWorkflowTests
 {
+    [SqlFact]
+    public async Task ConflictingLeaveDecisionCannotOverwriteApprovedRequest() => await WithDatabase(async db =>
+    {
+        var (department, position) = await Organization(db);
+        var reviewer = new HRMSUser { Id = "decision-reviewer", UserName = "reviewer@example.test", IsActive = true };
+        db.Users.Add(reviewer);
+        var employee = new Employee("DECISION", "Test", "Employee", "decision@example.test", new(2026, 1, 1), "Active", department, position, "FullTime");
+        var type = new LeaveType("Decision", "اختبار القرار", 14);
+        db.AddRange(employee, type); await db.SaveChangesAsync();
+        var request = new LeaveRequest(employee.EmployeeId, type.LeaveTypeId, new(2027, 1, 1), new(2027, 1, 2), "Concurrent review");
+        db.LeaveRequests.Add(request); await db.SaveChangesAsync();
+        await using var second = new HRMSDbContext(new DbContextOptionsBuilder<HRMSDbContext>().UseSqlServer(db.Database.GetConnectionString()).Options);
+        // Both reviewers read the same version before the first decision commits.
+        await second.LeaveRequests.SingleAsync(r => r.LeaveRequestId == request.LeaveRequestId);
+        var access = new Mock<IRecordAccess>();
+        access.SetupGet(a => a.UserId).Returns(reviewer.Id);
+        access.Setup(a => a.CanAccessEmployeeAsync(employee.EmployeeId, true, It.IsAny<CancellationToken>())).ReturnsAsync(true);
+        LeaveService ServiceFor(HRMSDbContext context) => new(new ModuleData(context), new AuditLogService(context, new HttpContextAccessor()), NullLogger<LeaveService>.Instance, access.Object);
+        Assert.True((await ServiceFor(db).ApproveLeaveRequestAsync(request.LeaveRequestId, reviewer.Id)).Succeeded);
+        Assert.False((await ServiceFor(second).RejectLeaveRequestAsync(request.LeaveRequestId, reviewer.Id, "Stale decision")).Succeeded);
+        db.ChangeTracker.Clear();
+        var saved = await db.LeaveRequests.SingleAsync(r => r.LeaveRequestId == request.LeaveRequestId);
+        Assert.Equal("Approved", saved.Status);
+        Assert.Null(saved.ReviewNotes);
+        Assert.Equal(1, await db.AuditLogs.CountAsync(a => a.Action == "Leave.Approved"));
+        Assert.False(await db.AuditLogs.AnyAsync(a => a.Action == "Leave.Rejected"));
+    });
+
     private sealed class SqlReadCapture : DbCommandInterceptor
     {
         public List<string> Commands { get; } = [];
@@ -65,6 +93,10 @@ public partial class SqlWorkflowTests
         Assert.Equal(9, departmentPage.TotalCount); Assert.Equal(3, departmentPage.Items.Count); capture.AssertPaged();
         var positionPage = await positions.SearchAsync(new(null, null, null), page);
         Assert.Equal(9, positionPage.TotalCount); Assert.Equal(3, positionPage.Items.Count); capture.AssertPaged();
+        var sortedDepartments = await departments.SearchAsync(new(null, null, SortBy: "code", SortDescending: true), new(1, 6));
+        Assert.Equal("TEST", sortedDepartments.Items[0].Code); capture.AssertPaged();
+        var sortedPositions = await positions.SearchAsync(new(null, departmentId, null, "code", true), new(1, 6));
+        Assert.Equal("TEST", sortedPositions.Items[0].Code); capture.AssertPaged();
         var accountPage = await accounts.SearchAccountsAsync(page);
         Assert.Equal(8, accountPage.TotalCount); Assert.Equal(2, accountPage.Items.Count);
         Assert.Equal(2, capture.Commands.Count); // count + one page query, no per-account role lookups

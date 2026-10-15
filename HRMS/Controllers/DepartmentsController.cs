@@ -17,11 +17,12 @@ public sealed class DepartmentsController(IDepartmentService departmentService) 
         CancellationToken cancellationToken)
     {
         var result = await departmentService.SearchAsync(
-            new DepartmentListQuery(query.Search, query.IsActive),
+            new DepartmentListQuery(query.Search, query.IsActive, SortBy: query.SortBy, SortDescending: query.SortDescending),
             DisplayPagination.Request(Request),
             cancellationToken);
 
         ViewData["Pagination"] = DisplayPagination.Create(Request, result.TotalCount, result.Page);
+        ViewData["SortDescending"] = query.SortDescending;
         query.Departments = result.Items
             .Select(department => new DepartmentListItemViewModel(
                 department.DepartmentId,
@@ -103,7 +104,7 @@ public sealed class DepartmentsController(IDepartmentService departmentService) 
     [Authorize(Roles = IdentityRoles.ManageOrganization)]
     public async Task<IActionResult> Edit(int id, CancellationToken cancellationToken)
     {
-        var department = await departmentService.GetByIdAsync(id, cancellationToken);
+        var department = await departmentService.GetByIdAsync(id, cancellationToken, includeEmployees: false);
         if (department is null)
         {
             return NotFound();
