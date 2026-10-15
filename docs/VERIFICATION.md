@@ -1,6 +1,6 @@
 # Current verification — 15 October 2026
 
-SDK 9.0.318 targeting net8.0; runtime/EF/Identity 8.0.31. The owner explicitly selected .NET 8. See ACCEPTANCE_AR.md for final counts. Older raw historical logs do not describe this run.
+SDK 9.0.318 targeting net8.0; runtime/EF/Identity 8.0.31. The owner explicitly selected .NET 8. See ACCEPTANCE_AR.md for final counts. Obsolete raw logs and the former reflection-based runner were removed; use the TRX reports produced by the commands below.
 
 ## Reproduce
 

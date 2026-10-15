@@ -87,14 +87,26 @@ dotnet test HRMS.sln --logger trx
 
 Without HRMS_TEST_SQLSERVER, SQL tests are explicitly skipped, not passed. The handoff requires the SQL gate. Use `scripts/verify.ps1` to reject a missing SQL connection before running acceptance checks.
 
-An earlier sandbox could not launch VSTest. The current local repair ran `dotnet test` successfully with the five SQL tests explicitly skipped. `tools/VerificationRunner` remains a serial fallback that invokes the same xUnit test methods and InlineData rows, keeps class fixtures, reports skips, and returns nonzero for failures. It is not a replacement for VSTest in normal CI and supports only the patterns used in this solution:
-
-```powershell
-dotnet run --project tools/VerificationRunner
-```
+For the complete published-app acceptance gate, including SQL Server and Chrome, run scripts/verify-published.ps1. See docs/VERIFICATION.md for prerequisites.
 
 See `docs/VERIFICATION.md` for the actual method/results, `docs/REQUIREMENTS_TRACEABILITY.md` for acceptance gaps, `docs/DATABASE.md` for migration preflight, and `docs/DEPLOYMENT.md` for IIS deployment.
 
 
 ## Organization starter data and role permissions
 See [Arabic role and access comparison](docs/ROLES_AND_ACCESS_AR.md). Development-only command: dotnet run --project HRMS --configuration Release --launch-profile http -- --seed-organization-data. It links existing users and fills departments, job titles and employees with equal department headcounts; it does not create passwords, attendance or leave requests.
+
+## تنظيم ملفات المشروع
+
+الأسماء Data وViewModels اصطلاحات تنظيمية؛ المشروع يستخدم تقسيمًا إلى طبقات ووحدات:
+
+| المطلوب | مكانه الحالي | وظيفته |
+|---|---|---|
+| بيانات القاعدة، أي Data | HRMS.Infrastructure/Persistence | سياق EF Core، الوصول للبيانات، المهاجرات وتجهيز البيانات |
+| نماذج العرض، أي ViewModels | HRMS/Models | بيانات النماذج والشاشات؛ مثل Employees/EmployeeFormViewModel.cs |
+| صفحات الموقع | HRMS/Views | قوالب Razor المقسّمة حسب الشاشة |
+| استقبال الطلبات | HRMS/Controllers | ربط واجهة الموقع بخدمات التطبيق |
+| قواعد العمل | HRMS.Application | خدمات الموظفين والإجازات والحضور والصلاحيات وعقود البيانات |
+| كيانات النظام | HRMS.Domain | تعريف الموظف والقسم والإجازة والكيانات الأساسية |
+| الاختبارات | tests | اختبارات الوحدات والمعمارية والتكامل والمتصفح |
+
+تعديل الترجمات يكون في ملفات SharedResource.ar-JO.resx وSharedResource.en-US.resx داخل HRMS/Resources، ورسائل الخدمات في HRMS.Application/Common/Messages*.resx. مكتبات الواجهة داخل wwwroot/lib تحتوي النسخ المستخدمة فعليًا وخرائطها وتراخيصها. ملفات المهاجرات وملفات Designer وModelSnapshot ضرورية وليست نسخًا مكررة. نماذج العرض الكاملة والجزئية تخدم الصفحات والنوافذ المنبثقة؛ لا تُحذف لمجرد تشابه أسمائها.
