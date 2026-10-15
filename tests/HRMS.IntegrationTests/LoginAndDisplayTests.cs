@@ -134,6 +134,10 @@ public partial class SqlWorkflowTests
         Assert.Equal(6, Regex.Matches(Regex.Match(departments, @"<tbody>([\s\S]*?)</tbody>").Value, @"<tr\b").Count);
         var allDepartments = await client.GetStringAsync("/Departments?ShowAll=true");
         Assert.Equal(8, Regex.Matches(Regex.Match(allDepartments, @"<tbody>([\s\S]*?)</tbody>").Value, @"<tr\b").Count);
+        var dashboard = await client.GetStringAsync("/Reports?DepartmentsPage=2");
+        Assert.Equal(2, Regex.Matches(Regex.Match(dashboard, @"<tbody>([\s\S]*?)</tbody>").Value, @"<tr\b").Count);
+        var headcount = await client.GetStringAsync("/Reports/Headcount?Page=2");
+        Assert.Equal(2, Regex.Matches(Regex.Match(headcount, @"<tbody>([\s\S]*?)</tbody>").Value, @"<tr\b").Count);
         await using var scope = app.Services.CreateAsyncScope();
         var service = scope.ServiceProvider.GetRequiredService<IEmployeeService>();
         var capped = await service.SearchAsync(new(null, department, null, null, false, 1, 1000));

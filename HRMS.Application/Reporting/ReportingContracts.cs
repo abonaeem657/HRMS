@@ -29,7 +29,7 @@ public sealed record AttendanceReportFilter(
     DateOnly? FromDate = null,
     DateOnly? ToDate = null,
     int Page = 1,
-    int PageSize = 25, bool ShowAll = false);
+    int PageSize = 25, bool ShowAll = false, string? SortBy = null, bool SortDescending = true);
 
 public sealed record AttendanceReportItem(
     string EmployeeNumber,
@@ -50,7 +50,7 @@ public sealed record LeaveReportFilter(
     string? Status = null,
     int? Year = null,
     int Page = 1,
-    int PageSize = 25, bool ShowAll = false);
+    int PageSize = 25, bool ShowAll = false, string? SortBy = null, bool SortDescending = true);
 
 public sealed record LeaveReportItem(
     string EmployeeNumber,
@@ -82,7 +82,7 @@ public sealed record DashboardSummary(
     IReadOnlyDictionary<string, int> EmployeesByStatus,
     int PendingLeaveRequests,
     HRMS.Application.Attendance.AttendanceSummaryDto Attendance,
-    IReadOnlyList<RecentHrActivity> RecentActivity);
+    IReadOnlyList<RecentHrActivity> RecentActivity, DashboardPages? Pages = null);
 
 public sealed record RecentHrActivity(
     long AuditLogId,
@@ -100,3 +100,7 @@ public sealed record ReportPage<T>(
 {
     public int TotalPages => Math.Max(1, (int)Math.Ceiling(TotalCount / (double)PageSize));
 }
+
+public sealed record StatusHeadcountItem(string Status, int Count);
+public sealed record DashboardPaging(HRMS.Application.Common.PageRequest Departments, HRMS.Application.Common.PageRequest Statuses, HRMS.Application.Common.PageRequest Activity);
+public sealed record DashboardPages(int DepartmentsCount, int DepartmentsPage, int StatusesCount, int StatusesPage, int ActivityCount, int ActivityPage);

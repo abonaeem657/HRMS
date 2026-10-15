@@ -1,3 +1,4 @@
+using HRMS.Application.Common;
 using System.Text;
 using HRMS.Application.Attendance;
 using HRMS.Application.Reporting;
@@ -40,7 +41,7 @@ public sealed class ReportingService(
         DateOnly toDate,
         int? departmentId = null,
         bool includeRecentActivity = true,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default, DashboardPaging? paging = null)
     {
         if (toDate < fromDate)
         {
@@ -70,10 +71,11 @@ public sealed class ReportingService(
         {
             statusQuery = statusQuery.Where(employee => employee.DepartmentId == statusDepartmentId);
         }
-        var statusGroups = await statusQuery
-            .GroupBy(employee => employee.EmploymentStatus)
-            .Select(group => new { Status = group.Key, Count = group.Count() })
-            .ToDictionaryAsync(group => group.Status, group => group.Count, cancellationToken);
+        var statusRequest = paging?.Statuses ?? new PageRequest(ShowAll: true);
+        var statusPage = await PageAsync(statusQuery.GroupBy(employee => employee.EmploymentStatus).OrderBy(group => group.Key)
+            .Select(group => new StatusHeadcountItem(group.Key, group.Count())),
+            statusRequest.Page, statusRequest.PageSize, cancellationToken, statusRequest.ShowAll);
+        var statusGroups = statusPage.Items.ToDictionary(group => group.Status, group => group.Count);
         var pendingLeaveQuery = dbContext.LeaveRequests
             .AsNoTracking()
             .Where(request => request.Status == "Pending" && !request.Employee!.IsDeleted);
@@ -82,7 +84,8 @@ public sealed class ReportingService(
             pendingLeaveQuery = pendingLeaveQuery.Where(request => request.Employee!.DepartmentId == pendingDepartmentId);
         }
         var pendingLeaves = await pendingLeaveQuery.CountAsync(cancellationToken);
-        var headcount = await GetDepartmentHeadcountReportAsync(departmentId, cancellationToken);
+        var departmentPage = await GetDepartmentHeadcountPageAsync(departmentId, paging?.Departments ?? new PageRequest(ShowAll: true), cancellationToken);
+        var headcount = departmentPage.Items;
         var attendance = await attendanceService.GetSummaryAsync(
             new AttendanceFilter(DepartmentId: departmentId, FromDate: fromDate, ToDate: toDate),
             cancellationToken);
@@ -99,10 +102,11 @@ public sealed class ReportingService(
                 log.EntityName,
                 log.EntityId,
                 log.OccurredAtUtc));
-        IReadOnlyList<RecentHrActivity> recentActivity = includeRecentActivity
-            ? await recentActivityQuery.ToListAsync(cancellationToken)
-            : Array.Empty<RecentHrActivity>();
-
+        var activityRequest = paging?.Activity ?? new PageRequest(ShowAll: true);
+        var activityPage = includeRecentActivity
+            ? await PageAsync(recentActivityQuery, activityRequest.Page, activityRequest.PageSize, cancellationToken, activityRequest.ShowAll)
+            : new ReportPage<RecentHrActivity>(Array.Empty<RecentHrActivity>(), 0, 1, activityRequest.PageSize);
+        var recentActivity = activityPage.Items;
         return new DashboardSummary(
             totalActive,
             headcount,
@@ -110,7 +114,7 @@ public sealed class ReportingService(
             statusGroups,
             pendingLeaves,
             attendance,
-            recentActivity);
+            recentActivity, new DashboardPages(departmentPage.TotalCount, departmentPage.Page, statusPage.TotalCount, statusPage.Page, activityPage.TotalCount, activityPage.Page));
     }
 
     public async Task<ReportPage<EmployeeReportItem>> GetEmployeeDirectoryReportAsync(
@@ -141,7 +145,7 @@ public sealed class ReportingService(
             query = query.Where(employee => employee.HireDate <= hiredBefore);
         }
 
-        query = filter.SortBy?.ToLowerInvariant() switch
+        var ordered = filter.SortBy?.ToLowerInvariant() switch
         {
             "name" => filter.SortDescending
                 ? query.OrderByDescending(employee => employee.LastName).ThenByDescending(employee => employee.FirstName)
@@ -156,7 +160,7 @@ public sealed class ReportingService(
                 ? query.OrderByDescending(employee => employee.EmployeeNumber)
                 : query.OrderBy(employee => employee.EmployeeNumber)
         };
-        return await PageAsync(query
+        return await PageAsync(ordered.ThenBy(employee => employee.EmployeeId)
             .Select(employee => new EmployeeReportItem(
                 employee.EmployeeNumber,
                 employee.FirstName + " " + employee.LastName,
@@ -196,10 +200,18 @@ public sealed class ReportingService(
             query = query.Where(record => record.WorkDate <= toDate);
         }
 
-        return await PageAsync(query
-            .OrderByDescending(record => record.WorkDate)
-            .ThenBy(record => record.Employee!.EmployeeNumber)
-            .Select(record => new AttendanceReportItem(
+        var ordered = (filter.SortBy?.ToLowerInvariant(), filter.SortDescending) switch
+        {
+            ("employee", false) => query.OrderBy(r => r.Employee!.EmployeeNumber),
+            ("employee", true) => query.OrderByDescending(r => r.Employee!.EmployeeNumber),
+            ("hours", false) => query.OrderBy(r => r.TotalHours),
+            ("hours", true) => query.OrderByDescending(r => r.TotalHours),
+            ("status", false) => query.OrderBy(r => r.Status),
+            ("status", true) => query.OrderByDescending(r => r.Status),
+            (_, false) => query.OrderBy(r => r.WorkDate),
+            _ => query.OrderByDescending(r => r.WorkDate)
+        };
+        return await PageAsync(ordered.ThenBy(r => r.Employee!.EmployeeNumber).ThenBy(r => r.AttendanceId)            .Select(record => new AttendanceReportItem(
                 record.Employee!.EmployeeNumber,
                 record.Employee.FirstName + " " + record.Employee.LastName,
                 record.Employee.Department!.Name,
@@ -255,9 +267,18 @@ public sealed class ReportingService(
             query = query.Where(request => request.StartDate <= yearEnd && request.EndDate >= yearStart);
         }
 
-        return await PageAsync(query
-            .OrderByDescending(request => request.AppliedAtUtc)
-            .Select(request => new LeaveReportItem(
+        var ordered = (filter.SortBy?.ToLowerInvariant(), filter.SortDescending) switch
+        {
+            ("employee", false) => query.OrderBy(r => r.Employee!.EmployeeNumber),
+            ("employee", true) => query.OrderByDescending(r => r.Employee!.EmployeeNumber),
+            ("start", false) => query.OrderBy(r => r.StartDate),
+            ("start", true) => query.OrderByDescending(r => r.StartDate),
+            ("status", false) => query.OrderBy(r => r.Status),
+            ("status", true) => query.OrderByDescending(r => r.Status),
+            (_, false) => query.OrderBy(r => r.AppliedAtUtc),
+            _ => query.OrderByDescending(r => r.AppliedAtUtc)
+        };
+        return await PageAsync(ordered.ThenBy(r => r.LeaveRequestId)            .Select(request => new LeaveReportItem(
                 request.Employee!.EmployeeNumber,
                 request.Employee.FirstName + " " + request.Employee.LastName,
                 request.Employee.Department!.Name,
@@ -272,14 +293,25 @@ public sealed class ReportingService(
             filter.PageSize, cancellationToken, filter.ShowAll);
     }
 
-    public async Task<IReadOnlyList<DepartmentHeadcountItem>> GetDepartmentHeadcountReportAsync(
-        int? departmentId = null,
-        CancellationToken cancellationToken = default) =>
-        await dbContext.Departments
-            .AsNoTracking()
-            .Where(department => !departmentId.HasValue || department.DepartmentId == departmentId.Value)
-            .OrderBy(department => department.Name)
-            .Select(department => new DepartmentHeadcountItem(
+    public async Task<IReadOnlyList<DepartmentHeadcountItem>> GetDepartmentHeadcountReportAsync(int? departmentId = null, CancellationToken cancellationToken = default) =>
+        await HeadcountQuery(departmentId).ToListAsync(cancellationToken);
+
+    public Task<ReportPage<DepartmentHeadcountItem>> GetDepartmentHeadcountPageAsync(int? departmentId, PageRequest page, CancellationToken cancellationToken = default, string? sortBy = null, bool sortDescending = false) =>
+        PageAsync(HeadcountQuery(departmentId, sortBy, sortDescending), page.Page, page.PageSize, cancellationToken, page.ShowAll);
+
+    private IQueryable<DepartmentHeadcountItem> HeadcountQuery(int? departmentId, string? sortBy = null, bool descending = false)
+    {
+        var query = dbContext.Departments.AsNoTracking().Where(department => !departmentId.HasValue || department.DepartmentId == departmentId.Value);
+        var ordered = (sortBy?.ToLowerInvariant(), descending) switch
+        {
+            ("employees", false) => query.OrderBy(d => d.Employees.Count(e => !e.IsDeleted)),
+            ("employees", true) => query.OrderByDescending(d => d.Employees.Count(e => !e.IsDeleted)),
+            ("active", false) => query.OrderBy(d => d.Employees.Count(e => !e.IsDeleted && ActiveStatusValues.Contains(e.EmploymentStatus))),
+            ("active", true) => query.OrderByDescending(d => d.Employees.Count(e => !e.IsDeleted && ActiveStatusValues.Contains(e.EmploymentStatus))),
+            (_, true) => query.OrderByDescending(d => d.Name),
+            _ => query.OrderBy(d => d.Name)
+        };
+        return ordered.ThenBy(d => d.DepartmentId)            .Select(department => new DepartmentHeadcountItem(
                 department.DepartmentId,
                 department.Name,
                 department.Manager == null
@@ -289,8 +321,9 @@ public sealed class ReportingService(
                 department.Employees.Count(employee => !employee.IsDeleted && ActiveStatusValues.Contains(employee.EmploymentStatus)),
                 department.Employees.Count(employee => !employee.IsDeleted && !ActiveStatusValues.Contains(employee.EmploymentStatus)),
                 dbContext.Positions.Count(position =>
-                    position.DepartmentId == department.DepartmentId && position.IsActive)))
-            .ToListAsync(cancellationToken);
+                    position.DepartmentId == department.DepartmentId && position.IsActive)));
+
+    }
 
     public async Task<LeaveDecisionSummary> GetLeaveDecisionSummaryAsync(
         DateOnly fromDate,

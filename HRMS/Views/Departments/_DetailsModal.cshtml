@@ -1,5 +1,4 @@
 @model HRMS.Models.Organization.DepartmentDetailsViewModel
-@{ var listing = DisplayPagination.Slice(Model.Employees, Context.Request); }
 <div class="modal-content">
     <div class="modal-header">
         <h2 class="modal-title fs-5" id="hrmsModalLabel">@T["DepartmentDetails"]</h2>
@@ -17,7 +16,7 @@
             </tbody>
         </table>
     </div>
-        <h3 class="h6 mt-4">@T["Employees"] (@Model.Employees.Count)</h3>
+        <h3 class="h6 mt-4">@T["Employees"] (@(((DisplayPagination)ViewData["Pagination"]!).TotalCount))</h3>
         @if (Model.Employees.Count == 0)
         {
             <p class="text-muted mb-0">@T["NoEmployeesInDepartment"]</p>
@@ -28,7 +27,7 @@
                 <table class="table table-sm align-middle mb-0">
                     <thead><tr><th>@T["EmployeeNumber"]</th><th>@T["Name"]</th><th>@T["JobTitle"]</th><th>@T["Status"]</th></tr></thead>
                     <tbody>
-                        @foreach (var employee in listing.Items)
+                        @foreach (var employee in Model.Employees)
                         {
                             <tr><td>@employee.EmployeeNumber</td><td>@employee.FullName</td><td>@employee.PositionTitle</td><td>@T.LocalizeValue("Employment.", employee.EmploymentStatus)</td></tr>
                         }
@@ -37,6 +36,6 @@
             </div>
         }
     </div>
-    <div class="px-3"><partial name="_ListPagination" model="listing.Pagination" /></div>
+    <div class="px-3"><partial name="_ListPagination" model="@(ViewData["Pagination"])" /></div>
     <div class="modal-footer"><button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">@T["Close"]</button></div>
 </div>

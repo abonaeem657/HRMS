@@ -2,6 +2,9 @@ namespace HRMS.Application.Organization;
 
 public interface IPositionService
 {
+    Task<int> CountAsync(CancellationToken cancellationToken = default);
+    Task<HRMS.Application.Common.PageResult<PositionListItem>> SearchAsync(PositionListQuery query, HRMS.Application.Common.PageRequest page, CancellationToken cancellationToken = default);
+
     Task<IReadOnlyList<PositionListItem>> GetListAsync(
         PositionListQuery query,
         CancellationToken cancellationToken = default);

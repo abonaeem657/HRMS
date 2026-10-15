@@ -1542,4 +1542,82 @@
   <data name="ShowAllResults" xml:space="preserve">
     <value>عرض الكل</value>
   </data>
+  <data name="UiBootstrapMinCss" xml:space="preserve"><value>bootstrap.rtl.min.css</value></data>
+  <data name="UiBreadcrumb" xml:space="preserve"><value>مسار الصفحة</value></data>
+  <data name="UiCheckInAndOutAndTrackYour" xml:space="preserve"><value>سجّل الحضور والانصراف، وتابع طلبات إجازتك من مساحة العمل الشخصية.</value></data>
+  <data name="UiConnectJobTitlesToDepartmentsBeforeAdding" xml:space="preserve"><value>اربط المسميات بالأقسام حتى تتمكن من إضافة الموظفين.</value></data>
+  <data name="UiCreateTheEmployeeRecordThenAskAn" xml:space="preserve"><value>أكمل بيانات الموظف، ثم اربط حساب دخوله من إدارة المستخدمين بواسطة الأدمن.</value></data>
+  <data name="UiCreateYourFirstDepartmentThenAJob" xml:space="preserve"><value>أضف القسم الأول، ثم المسمّى الوظيفي، وبعدها أضف الموظفين.</value></data>
+  <data name="UiDailyWork" xml:space="preserve"><value>العمل اليومي</value></data>
+  <data name="UiGettingStarted" xml:space="preserve"><value>دليل الاستخدام</value></data>
+  <data name="UiHelpAccount" xml:space="preserve"><value>المساعدة والحساب</value></data>
+  <data name="UiInsightsAdministration" xml:space="preserve"><value>المتابعة والإدارة</value></data>
+  <data name="UiKeepYourTeamSRequestsMoving" xml:space="preserve"><value>تابع طلبات الفريق</value></data>
+  <data name="UiLtr" xml:space="preserve"><value>rtl</value></data>
+  <data name="UiNextDefineJobTitles" xml:space="preserve"><value>الخطوة التالية: المسميات الوظيفية</value></data>
+  <data name="UiOpenPage" xml:space="preserve"><value>افتح الصفحة</value></data>
+  <data name="UiOpenTheGuide" xml:space="preserve"><value>افتح الدليل</value></data>
+  <data name="UiOpenTheGuideToExploreYourRole" xml:space="preserve"><value>ابدأ من دليل الاستخدام لمعرفة مهام دورك وخطوات العمل.</value></data>
+  <data name="UiOrganizationSummary" xml:space="preserve"><value>ملخص المؤسسة</value></data>
+  <data name="UiPeopleOrganization" xml:space="preserve"><value>الأفراد والمؤسسة</value></data>
+  <data name="UiRequestsAwaitingYourReview" xml:space="preserve"><value>طلبات تحتاج مراجعتك</value></data>
+  <data name="UiReviewPendingLeaveRequestsAndRecordA" xml:space="preserve"><value>راجع طلبات الإجازة المعلّقة وسجّل الموافقة أو سبب الرفض.</value></data>
+  <data name="UiReviewPendingRequestsAndTakeActionOr" xml:space="preserve"><value>راجع الطلبات المعلّقة واتخذ القرار، أو استخدم القائمة للوصول إلى الموظفين والحضور والتقارير.</value></data>
+  <data name="UiReviewReportsAndAuditHistoryWithoutEditing" xml:space="preserve"><value>استعرض التقارير وسجل التدقيق دون تعديل بيانات الموظفين.</value></data>
+  <data name="UiReviewRequests" xml:space="preserve"><value>مراجعة الطلبات</value></data>
+  <data name="UiReviewWorkspace" xml:space="preserve"><value>مساحة المراجعة</value></data>
+  <data name="UiStartWithYourOrganization" xml:space="preserve"><value>لنبدأ بتأسيس المؤسسة</value></data>
+  <data name="UiStartYourDayWithACheckIn" xml:space="preserve"><value>ابدأ يومك بتسجيل الحضور</value></data>
+  <data name="UiTheInformationYouNeedToReview" xml:space="preserve"><value>البيانات التي تحتاجها للمراجعة</value></data>
+  <data name="UiThereAreNoPendingLeaveRequestsIn" xml:space="preserve"><value>لا توجد طلبات إجازة معلّقة ضمن نطاقك حاليًا.</value></data>
+  <data name="UiTheseStepsMatchYourAccountPermissionsAnd" xml:space="preserve"><value>هذه خطوات العمل المتاحة لحسابك، مع روابط مباشرة لتنفيذها.</value></data>
+  <data name="UiUseReportsToAnalyzeOrganizationDataOr" xml:space="preserve"><value>اختر «التقارير» لتحليل بيانات المؤسسة، أو «سجل التدقيق» لمراجعة العمليات. حسابك مخصص للاطلاع دون تعديل البيانات.</value></data>
+  <data name="UiUseTheNavigationForYourTasksSetup" xml:space="preserve"><value>انتقل بين مهامك من القائمة. شرح الإعداد والأدوار متوفر في «دليل الاستخدام».</value></data>
+  <data name="UiWelcomeYourFirstTeamMember" xml:space="preserve"><value>أضف أول عضو في الفريق</value></data>
+  <data name="UiWhatYouNeedToStartYourDay" xml:space="preserve"><value>أهم ما تحتاجه لبدء يومك، في مكان واحد.</value></data>
+  <data name="UiYouCanManageEmployeesAttendanceRequestsAnd" xml:space="preserve"><value>يمكنك إدارة الموظفين والدوام والطلبات والتقارير. الأقسام والمسميات للقراءة؛ تعديلها وأنواع الإجازة وإدارة الحسابات وسجل التدقيق ليست من صلاحيات هذا الدور.</value></data>
+  <data name="UiYouCanManageHROperationsAndRead" xml:space="preserve"><value>يمكنك إدارة شؤون الموارد البشرية ومراجعة سجل التدقيق. إدارة حسابات الدخول والأدوار وإعادة تعيين كلمات مرور الآخرين لمسؤول النظام.</value></data>
+  <data name="UiYOURNEXTSTEP" xml:space="preserve"><value>خطوتك التالية</value></data>
+  <data name="UiYourRoleGuide" xml:space="preserve"><value>دليل عملي حسب دورك</value></data>
+  <data name="UiYourRoleIsReadOnlyYourProfile" xml:space="preserve"><value>دورك للقراءة: ملفك الشخصي والتقارير وسجل التدقيق. لا يمكنك تعديل الموظفين أو الدوام أو الإجازات أو إدارة الحسابات.</value></data>
+  <data name="UiYourScopeIsPersonalAttendanceLeaveRequests" xml:space="preserve"><value>نطاقك الشخصي: حضورك وطلبات إجازتك وتقرير إجازاتك. لا تظهر لك ملفات الزملاء أو تقارير المؤسسة أو الموافقات أو إدارة الحسابات.</value></data>
+  <data name="UiYourScopeIsYourDepartmentInReports" xml:space="preserve"><value>نطاقك: قسمك في التقارير والطلبات، وبياناتك الشخصية في الخدمات الذاتية. إدارة الموظفين والحسابات وتصحيح الحضور غير متاحة لدور مدير القسم.</value></data>
+  <data name="UiYourWorkspaceIsReady" xml:space="preserve"><value>مساحة عملك جاهزة</value></data>
+  <data name="DefaultOrder" xml:space="preserve"><value>الترتيب الافتراضي</value></data>
+  <data name="GuideChangeYourPasswordText" xml:space="preserve"><value>من تغيير كلمة المرور أدخل الحالية ثم الجديدة وأكّدها. سجل الخروج عند الانتهاء من جهاز مشترك.</value></data>
+  <data name="GuideChangeYourPasswordTitle" xml:space="preserve"><value>حدّث كلمة مرورك</value></data>
+  <data name="GuideConfigureLeaveTypesText" xml:space="preserve"><value>افتح أنواع الإجازات وحدد الاسم بالعربية والإنجليزية والرصيد السنوي وهل النوع مدفوع ونشط. القيم الأولية قابلة للتعديل وفق سياسة مؤسستك. النوع غير النشط لا يظهر في طلب جديد.</value></data>
+  <data name="GuideConfigureLeaveTypesTitle" xml:space="preserve"><value>اضبط أنواع الإجازة</value></data>
+  <data name="GuideCorrectAnAttendanceSessionText" xml:space="preserve"><value>في جدول الحضور ابحث عن الموظف والتاريخ واضغط تعديل بجانب الفترة المطلوبة. صحّح وقت الحضور والانصراف واحفظ. للوردية الليلية اختر تاريخ الانصراف التالي. لا تدخل وقتًا مستقبليًا أو فترة تتجاوز 24 ساعة أو تتداخل مع فترة أخرى. زر تصحيح الحضور العام مخصص أيضًا لإضافة سجل مفقود؛ عند تعدد الفترات استخدم تعديل بجانب الفترة.</value></data>
+  <data name="GuideCorrectAnAttendanceSessionTitle" xml:space="preserve"><value>صحّح فترة دوام محددة</value></data>
+  <data name="GuideLinkAccountsAndPermissionsText" xml:space="preserve"><value>افتح المستخدمين ثم إنشاء أو تعديل. اختر دور الحساب واربطه بموظف مختلف. دور الحساب يحدد الصلاحيات؛ المسمّى الوظيفي يصف وظيفة الموظف. يمكنك تعطيل الحساب وتفعيله وإعادة تعيين كلمة مروره. ربط مدير القسم يتطلب تعيينه مديرًا في بيانات القسم أيضًا.</value></data>
+  <data name="GuideLinkAccountsAndPermissionsTitle" xml:space="preserve"><value>اربط الحسابات وأعطِ الصلاحيات</value></data>
+  <data name="GuideManageEmployeeRecordsText" xml:space="preserve"><value>من الموظفين اضغط إضافة، وحدد القسم ثم المسمّى، وأكمل الرقم والبريد وتاريخ التعيين. العرض الافتراضي للنشطين؛ اختر كل الموظفين لرؤية غير النشطين. يمكن تعديل الملفات وحذفها منطقيًا واستعادتها من الموظفين المحذوفين.</value></data>
+  <data name="GuideManageEmployeeRecordsTitle" xml:space="preserve"><value>أضف الموظفين وتابع ملفاتهم</value></data>
+  <data name="GuidePrepareDepartmentsAndTitlesText" xml:space="preserve"><value>ابدأ بالأقسام، ثم أضف المسميات الوظيفية من قائمتها. بعد إضافة الموظفين، عد إلى تعديل القسم وعيّن مديرًا نشطًا من نفس القسم. تستطيع تعديل البيانات وتعطيل القسم أو المسمّى عند الحاجة.</value></data>
+  <data name="GuidePrepareDepartmentsAndTitlesTitle" xml:space="preserve"><value>جهّز الأقسام والمسميات</value></data>
+  <data name="GuideReadAuditHistoryText" xml:space="preserve"><value>استخدم حقل البحث ثم راجع العملية والمستخدم والتاريخ لمعرفة ما تغيّر ونتيجته. السجل للقراءة ولا توجد أزرار لتغيير أحداث التدقيق أو حذفها.</value></data>
+  <data name="GuideReadAuditHistoryTitle" xml:space="preserve"><value>راجع سجل التدقيق</value></data>
+  <data name="GuideReadYourEmployeeProfileText" xml:space="preserve"><value>افتح ملفي الشخصي للاطلاع على بياناتك الوظيفية والقسم والمسمّى والمدير. البيانات للعرض فقط؛ اطلب تصحيحها من الموارد البشرية.</value></data>
+  <data name="GuideReadYourEmployeeProfileTitle" xml:space="preserve"><value>راجع ملفك الوظيفي</value></data>
+  <data name="GuideReadYourPersonalLeaveReportText" xml:space="preserve"><value>افتح تقرير إجازاتي من القائمة. اختر السنة والحالة لتشاهد طلباتك وقراراتها وملاحظات المراجعة. جدول الرصيد يعرض المسموح والمستخدم والمحجوز والمتبقي للسنة كاملة؛ فلتر الحالة يغير قائمة الطلبات فقط. التقرير يعرض بياناتك وحدك.</value></data>
+  <data name="GuideReadYourPersonalLeaveReportTitle" xml:space="preserve"><value>راجع تقرير إجازاتك</value></data>
+  <data name="GuideRecordYourAttendanceText" xml:space="preserve"><value>اضغط تسجيل حضور عند بدء العمل وانصراف عند الانتهاء. بعد الانصراف يمكنك بدء فترة جديدة في اليوم نفسه؛ لا تفتح فترتين معًا. الأوقات بتوقيت الأردن. إذا احتجت تصحيحًا، اطلبه من فريق الموارد البشرية.</value></data>
+  <data name="GuideRecordYourAttendanceTitle" xml:space="preserve"><value>سجّل حضورك وانصرافك</value></data>
+  <data name="GuideSubmitAndTrackLeaveText" xml:space="preserve"><value>اختر النوع وتاريخ البداية والنهاية واكتب السبب. الوقت اختياري؛ البداية تُملأ بالوقت الحالي ويمكن مسحها، والنهاية تبقى فارغة. الحساب بالأيام التقويمية وليس بالساعات. بعد الإرسال يُحجز الرصيد؛ الموافقة تثبّت الخصم والرفض أو إلغاء الطلب المعلّق يعيدان الأيام. ألغِ طلبك المعلّق من صفحة الإجازات.</value></data>
+  <data name="GuideSubmitAndTrackLeaveTitle" xml:space="preserve"><value>قدّم طلب إجازة وتابع حالته</value></data>
+  <data name="GuideChooseScopedReportHr" xml:space="preserve"><value>من التقارير اختر الموظفين أو الحضور أو الإجازات أو قرارات الإجازة أو أعداد الموظفين. حدد القسم والموظف والتاريخ عند الحاجة. عرض التقرير لا ينشئ سجلات جديدة.</value></data>
+  <data name="GuideReviewScopedLeaveManager" xml:space="preserve"><value>افتح الإجازات واختر الحالة معلّق. راجع طلبات قسمك ووافق أو ارفض مع سبب. لا تعتمد طلبك الشخصي؛ يراجعه فريق الموارد البشرية. إذا لم تظهر بيانات قسمك، اطلب من مسؤول النظام التأكد من ربط حسابك بموظف وتعيينه مديرًا للقسم.</value></data>
+  <data name="GuideReviewScopedLeaveHr" xml:space="preserve"><value>افتح الإجازات واختر الحالة معلّق. راجع الموظف والنوع والفترة والسبب، ثم وافق أو ارفض مع سبب واضح. لديك نطاق المؤسسة؛ تأكد من الطلب قبل اتخاذ القرار. القرار محفوظ في سجل التدقيق.</value></data>
+  <data name="GuideReviewScopedLeaveTitle" xml:space="preserve"><value>راجع طلبات الإجازة</value></data>
+  <data name="GuideChooseScopedReportTitle" xml:space="preserve"><value>افتح التقرير المناسب</value></data>
+  <data name="GuideChooseScopedReportManager" xml:space="preserve"><value>التقارير تعرض قسمك فقط: الموظفون والحضور والإجازات وقراراتها وأعداد الموظفين. حدد الأسماء والتواريخ ثم صفِّ النتائج. شاشة الحضور اليومية تعرض حضورك الشخصي؛ متابعة فريقك تكون من تقرير الحضور.</value></data>
+  <data name="ValidationMaxLength" xml:space="preserve"><value>الحد الأقصى لطول الحقل {0} هو {1} حرفًا.</value></data>
+  <data name="ValidationPhone" xml:space="preserve"><value>أدخل رقم هاتف صحيحًا.</value></data>
+  <data name="ValidationRequired" xml:space="preserve"><value>الحقل {0} مطلوب.</value></data>
+  <data name="ValidationEmail" xml:space="preserve"><value>أدخل بريدًا إلكترونيًا صحيحًا.</value></data>
+  <data name="InvalidFieldValue" xml:space="preserve"><value>قيمة الحقل {0} غير صحيحة.</value></data>
+  <data name="FieldRequired" xml:space="preserve"><value>هذا الحقل مطلوب.</value></data>
+  <data name="ValidationFailedTitle" xml:space="preserve"><value>يرجى تصحيح بيانات الطلب.</value></data>
+  <data name="ValidationRange" xml:space="preserve"><value>يجب أن تكون قيمة {0} بين {1} و{2}.</value></data>
 </root>

@@ -1,3 +1,4 @@
+using HRMS.Models;
 using HRMS.Application.Organization;
 using HRMS.Application.Identity;
 using HRMS.Models.Organization;
@@ -15,11 +16,13 @@ public sealed class DepartmentsController(IDepartmentService departmentService) 
         [FromQuery] DepartmentListViewModel query,
         CancellationToken cancellationToken)
     {
-        var departments = await departmentService.GetListAsync(
+        var result = await departmentService.SearchAsync(
             new DepartmentListQuery(query.Search, query.IsActive),
+            DisplayPagination.Request(Request),
             cancellationToken);
 
-        query.Departments = departments
+        ViewData["Pagination"] = DisplayPagination.Create(Request, result.TotalCount, result.Page);
+        query.Departments = result.Items
             .Select(department => new DepartmentListItemViewModel(
                 department.DepartmentId,
                 department.Code,
@@ -37,13 +40,15 @@ public sealed class DepartmentsController(IDepartmentService departmentService) 
     [Authorize(Roles = IdentityRoles.ReadHrData)]
     public async Task<IActionResult> Details(int id, CancellationToken cancellationToken)
     {
-        var department = await departmentService.GetByIdAsync(id, cancellationToken);
+        var department = await departmentService.GetByIdAsync(id, cancellationToken, includeEmployees: false);
         if (department is null)
         {
             return NotFound();
         }
 
-        var model = ToDetailsViewModel(department);
+        var employees = await departmentService.GetEmployeesAsync(id, DisplayPagination.Request(Request), cancellationToken);
+        ViewData["Pagination"] = DisplayPagination.Create(Request, employees.TotalCount, employees.Page);
+        var model = ToDetailsViewModel(department with { Employees = employees.Items });
         return IsModalRequest()
             ? PartialView("_DetailsModal", model)
             : View(model);

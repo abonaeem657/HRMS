@@ -20,13 +20,11 @@ public sealed record DisplayPagination(int TotalCount, int Page, bool ShowAll, s
         return new(totalCount, showAll ? 1 : Math.Clamp(page, 1, pages), showAll, prefix);
     }
 
-    public static DisplayPage<T> Slice<T>(IReadOnlyList<T> items, HttpRequest request, string prefix = "")
+    public static HRMS.Application.Common.PageRequest Request(HttpRequest request, string prefix = "")
     {
-        var pagination = Create(request, items.Count, prefix: prefix);
-        var visible = pagination.ShowAll ? items : items.Skip((pagination.Page - 1) * PageSize).Take(PageSize).ToArray();
-        return new(visible, pagination);
+        int.TryParse(request.Query[prefix + "Page"], out var page);
+        return new(Math.Max(1, page), PageSize, IsShowAll(request, prefix));
     }
-
     public string Link(HttpRequest request, int page, bool showAll)
     {
         var query = request.Query.ToDictionary(pair => pair.Key, pair => (string?)pair.Value.ToString(), StringComparer.OrdinalIgnoreCase);
@@ -38,5 +36,3 @@ public sealed record DisplayPagination(int TotalCount, int Page, bool ShowAll, s
         return QueryHelpers.AddQueryString(request.PathBase.Add(request.Path).Value!, query);
     }
 }
-
-public sealed record DisplayPage<T>(IReadOnlyList<T> Items, DisplayPagination Pagination);

@@ -68,7 +68,7 @@ public class HttpTests : IClassFixture<HttpFactory>
         using var preview = factory.WithWebHostBuilder(builder => builder.ConfigureServices(services =>
         {
             var reporting = new Mock<IReportingService>();
-            reporting.Setup(x => x.GetDashboardAsync(It.IsAny<DateOnly>(), It.IsAny<DateOnly>(), It.IsAny<int?>(), It.IsAny<bool>(), It.IsAny<CancellationToken>()))
+            reporting.Setup(x => x.GetDashboardAsync(It.IsAny<DateOnly>(), It.IsAny<DateOnly>(), It.IsAny<int?>(), It.IsAny<bool>(), It.IsAny<CancellationToken>(), It.IsAny<DashboardPaging?>()))
                 .ReturnsAsync(new DashboardSummary(12, [], 0, new Dictionary<string, int>(), 2, new(0, 0, 0, 0, 0, 0), []));
             services.AddSingleton(reporting.Object);
             var departments = new Mock<IDepartmentService>();
@@ -152,5 +152,19 @@ public class HttpTests : IClassFixture<HttpFactory>
             Assert.Equal(HttpStatusCode.Unauthorized, (await client.GetAsync("/api/v1/employees")).StatusCode);
         Assert.Equal(HttpStatusCode.TooManyRequests,
             (await client.GetAsync("/api/v1/employees")).StatusCode);
+    }
+    [Theory]
+    [InlineData("en-US", "The HireDate field is required.")]
+    [InlineData("ar-JO", "الحقل HireDate مطلوب.")]
+    public async Task ApiRequiredFieldErrorsFollowRequestCulture(string culture, string expected)
+    {
+        using var client = Client("HRManager");
+        client.DefaultRequestHeaders.Add("Accept-Language", culture);
+        var token = await client.GetFromJsonAsync<Dictionary<string, string>>("/api/v1/antiforgery");
+        client.DefaultRequestHeaders.Add("X-CSRF-TOKEN", token!["requestToken"]);
+        var response = await client.PostAsJsonAsync("/api/v1/employees", new { employeeNumber = "1", firstName = "A", lastName = "B", workEmail = "a@example.test", employmentStatus = "Active", employmentType = "FullTime", departmentId = 1, positionId = 1 });
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        using var body = System.Text.Json.JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+        Assert.Equal(expected, body.RootElement.GetProperty("errors").GetProperty("HireDate")[0].GetString());
     }
 }

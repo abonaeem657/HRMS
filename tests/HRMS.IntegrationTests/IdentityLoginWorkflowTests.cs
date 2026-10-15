@@ -79,7 +79,10 @@ public partial class SqlWorkflowTests
             }));
             Assert.Equal(HttpStatusCode.Redirect, login.StatusCode);
             Assert.Equal("/", login.Headers.Location!.OriginalString);
-            Assert.Contains("workspace-layout", await client.GetStringAsync("/"));
+            using var homeResponse = await client.GetAsync("/");
+            var homeBody = await homeResponse.Content.ReadAsStringAsync();
+            Assert.True(homeResponse.IsSuccessStatusCode, homeBody);
+            Assert.Contains("workspace-layout", homeBody);
             Assert.Contains("guide-step", await client.GetStringAsync("/Home/Guide"));
             var profile = await client.GetStringAsync("/MyProfile?employeeId=999999");
             var profileBody = profile[profile.IndexOf("<main", StringComparison.Ordinal)..profile.IndexOf("</main>", StringComparison.Ordinal)];

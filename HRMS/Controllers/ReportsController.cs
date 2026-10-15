@@ -54,7 +54,11 @@ public sealed class ReportsController(
             model.ToDate,
             departmentId,
             includeRecentActivity: IdentityRoles.ViewAuditLogs.Split(',').Any(User.IsInRole),
-            cancellationToken);
+            cancellationToken, new DashboardPaging(DisplayPagination.Request(Request, "Departments"), DisplayPagination.Request(Request, "Statuses"), DisplayPagination.Request(Request, "Activity")));
+        var pages = model.Summary.Pages!;
+        ViewData["DepartmentsPagination"] = DisplayPagination.Create(Request, pages.DepartmentsCount, pages.DepartmentsPage, "Departments");
+        ViewData["StatusesPagination"] = DisplayPagination.Create(Request, pages.StatusesCount, pages.StatusesPage, "Statuses");
+        ViewData["ActivityPagination"] = DisplayPagination.Create(Request, pages.ActivityCount, pages.ActivityPage, "Activity");
         return View(model);
     }
 
@@ -86,6 +90,7 @@ public sealed class ReportsController(
                 DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request)),
             cancellationToken);
         ViewData["Pagination"] = DisplayPagination.Create(Request, model.Results.TotalCount, model.Results.Page);
+        ViewData["SortDescending"] = model.SortDescending;
         return View(model);
     }
 
@@ -99,7 +104,7 @@ public sealed class ReportsController(
             return BadRequest(new ProblemDetails
             {
                 Status = StatusCodes.Status400BadRequest,
-                Title = "Invalid date range",
+                Title = HRMS.Application.Common.Messages.Get("InvalidDateRangeTitle"),
                 Detail = HRMS.Application.Common.Messages.Get("Business020")
             });
         }
@@ -120,9 +125,10 @@ public sealed class ReportsController(
                 model.FromDate,
                 model.ToDate,
                 model.Page <= 0 ? 1 : model.Page,
-                DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request)),
+                DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request), model.SortBy, model.SortDescending),
             cancellationToken);
         ViewData["Pagination"] = DisplayPagination.Create(Request, model.Results.TotalCount, model.Results.Page);
+        ViewData["SortDescending"] = model.SortDescending;
         return View(model);
     }
 
@@ -136,7 +142,7 @@ public sealed class ReportsController(
             return BadRequest(new ProblemDetails
             {
                 Status = StatusCodes.Status400BadRequest,
-                Title = "Invalid year",
+                Title = HRMS.Application.Common.Messages.Get("InvalidYearTitle"),
                 Detail = HRMS.Application.Common.Messages.Get("Business063")
             });
         }
@@ -158,9 +164,10 @@ public sealed class ReportsController(
                 model.Status,
                 model.Year,
                 model.Page <= 0 ? 1 : model.Page,
-                DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request)),
+                DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request), model.SortBy, model.SortDescending),
             cancellationToken);
         ViewData["Pagination"] = DisplayPagination.Create(Request, model.Results.TotalCount, model.Results.Page);
+        ViewData["SortDescending"] = model.SortDescending;
         return View(model);
     }
 
@@ -211,7 +218,7 @@ public sealed class ReportsController(
     }
 
     [HttpGet]
-    public async Task<IActionResult> Headcount(CancellationToken cancellationToken)
+    public async Task<IActionResult> Headcount(CancellationToken cancellationToken, string? sortBy = null, bool sortDescending = false)
     {
         var departmentId = User.IsInRole(IdentityRoles.DepartmentManager) && !CanViewAll()
             ? await GetActorDepartmentIdAsync(cancellationToken)
@@ -220,9 +227,10 @@ public sealed class ReportsController(
         {
             return Forbid();
         }
-        return View(await reportingService.GetDepartmentHeadcountReportAsync(
-            departmentId,
-            cancellationToken));
+        var page = await reportingService.GetDepartmentHeadcountPageAsync(departmentId, DisplayPagination.Request(Request), cancellationToken, sortBy, sortDescending);
+        ViewData["SortDescending"] = sortDescending;
+        ViewData["Pagination"] = DisplayPagination.Create(Request, page.TotalCount, page.Page);
+        return View(page.Items);
     }
 
     private bool CanViewAll() =>

@@ -38,6 +38,8 @@ public sealed class AttendanceReportViewModel
     public int? EmployeeId { get; set; }
     public DateOnly? FromDate { get; set; }
     public DateOnly? ToDate { get; set; }
+    public string? SortBy { get; set; }
+    public bool SortDescending { get; set; } = true;
     public int Page { get; set; }
     public int PageSize { get; set; } = 6;
     public ReportPage<AttendanceReportItem> Results { get; set; } =
@@ -52,6 +54,8 @@ public sealed class LeaveReportViewModel
     public int? LeaveTypeId { get; set; }
     public string? Status { get; set; }
     public int? Year { get; set; }
+    public string? SortBy { get; set; }
+    public bool SortDescending { get; set; } = true;
     public int Page { get; set; }
     public int PageSize { get; set; } = 6;
     public ReportPage<LeaveReportItem> Results { get; set; } =

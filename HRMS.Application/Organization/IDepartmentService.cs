@@ -2,13 +2,17 @@ namespace HRMS.Application.Organization;
 
 public interface IDepartmentService
 {
+    Task<int> CountAsync(CancellationToken cancellationToken = default);
+    Task<HRMS.Application.Common.PageResult<DepartmentListItem>> SearchAsync(DepartmentListQuery query, HRMS.Application.Common.PageRequest page, CancellationToken cancellationToken = default);
+    Task<HRMS.Application.Common.PageResult<DepartmentEmployeeItem>> GetEmployeesAsync(int departmentId, HRMS.Application.Common.PageRequest page, CancellationToken cancellationToken = default);
+
     Task<IReadOnlyList<DepartmentListItem>> GetListAsync(
         DepartmentListQuery query,
         CancellationToken cancellationToken = default);
 
     Task<DepartmentDetails?> GetByIdAsync(
         int departmentId,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default, bool includeEmployees = true);
 
     Task<OrganizationOptions> GetFormOptionsAsync(
         int? excludeManagerEmployeeId = null,

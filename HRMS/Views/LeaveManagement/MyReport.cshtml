@@ -1,5 +1,4 @@
 @model HRMS.Models.LeaveManagement.LeaveListViewModel
-@{ var listing = DisplayPagination.Slice(Model.Requests, Context.Request); }
 @{
     ViewData["Title"] = T["MyLeaveReport"].Value;
     var ar = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
@@ -22,28 +21,27 @@
 </form>
 <section class="card card-body mb-4">
     <h2 class="h5">@T["LeaveBalancesTitle", Model.Year ?? BusinessClock.Today.Year]</h2>
-    @{ var balancePage = DisplayPagination.Slice(Model.Balances, Context.Request, "Balance"); }
     <div class="table-responsive"><table class="table align-middle mb-0">
         <thead><tr><th>@T["LeaveType"]</th><th>@T["Allowed"]</th><th>@T["Used"]</th><th>@T["PendingDays"]</th><th>@T["Remaining"]</th></tr></thead>
-        <tbody>@foreach (var b in balancePage.Items) { <tr><td>@(ar ? b.LeaveTypeNameAr : b.LeaveTypeName)</td><td>@b.TotalAllowedDays</td><td>@b.UsedDays</td><td>@b.PendingDays</td><td><strong>@b.RemainingDays</strong></td></tr> }</tbody>
+        <tbody>@foreach (var b in Model.Balances) { <tr><td>@(ar ? b.LeaveTypeNameAr : b.LeaveTypeName)</td><td>@b.TotalAllowedDays</td><td>@b.UsedDays</td><td>@b.PendingDays</td><td><strong>@b.RemainingDays</strong></td></tr> }</tbody>
     </table></div>
-    <partial name="_ListPagination" model="balancePage.Pagination" />
+    <partial name="_ListPagination" model="@(ViewData["BalancePagination"])" />
     <p class="form-text mb-0">@T["LeaveReservationCalculation"]</p>
 </section>
-<h2 class="h5">@T["MyLeaveRequests"] <span class="badge text-bg-light">@Model.Requests.Count</span></h2>
+<h2 class="h5">@T["MyLeaveRequests"] <span class="badge text-bg-light">@(((DisplayPagination)ViewData["Pagination"]!).TotalCount)</span></h2>
 <div class="table-responsive"><table class="table table-striped align-middle">
     <thead><tr><th>@T["LeaveType"]</th><th>@T["Period"]</th><th>@T["Days"]</th><th>@T["Status"]</th><th>@T["Reason"]</th><th>@T["Review"]</th></tr></thead>
     <tbody>
     @if (Model.Requests.Count == 0) { <tr><td colspan="6" class="text-center py-4 text-muted">@T["NoLeaveRequests"]</td></tr> }
-    @foreach (var r in listing.Items)
+    @foreach (var r in Model.Requests)
     {
         <tr><td>@(ar ? r.LeaveTypeNameAr : r.LeaveTypeName)</td>
-            <td>@r.StartDate.ToString("yyyy-MM-dd") @r.StartTime?.ToString("HH:mm") — @r.EndDate.ToString("yyyy-MM-dd") @r.EndTime?.ToString("HH:mm")</td>
+            <td>@r.StartDate.ToString("d", System.Globalization.CultureInfo.CurrentCulture) @r.StartTime?.ToString("t", System.Globalization.CultureInfo.CurrentCulture) — @r.EndDate.ToString("d", System.Globalization.CultureInfo.CurrentCulture) @r.EndTime?.ToString("t", System.Globalization.CultureInfo.CurrentCulture)</td>
             <td>@r.TotalDays</td><td>@T["Status." + r.Status]</td><td>@r.Reason</td>
-            <td>@r.ReviewNotes @if (r.ReviewedAtUtc.HasValue) { <div class="small text-muted">@BusinessClock.ToLocal(r.ReviewedAtUtc)?.ToString("yyyy-MM-dd HH:mm") @T["JordanTime"]</div> }</td>
+            <td>@r.ReviewNotes @if (r.ReviewedAtUtc.HasValue) { <div class="small text-muted">@BusinessClock.ToLocal(r.ReviewedAtUtc)?.ToString("g", System.Globalization.CultureInfo.CurrentCulture) @T["JordanTime"]</div> }</td>
         </tr>
     }
     </tbody>
 </table></div>
 
-<partial name="_ListPagination" model="listing.Pagination" />
+<partial name="_ListPagination" model="@(ViewData["Pagination"])" />

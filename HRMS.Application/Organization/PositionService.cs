@@ -11,9 +11,17 @@ public sealed class PositionService(
     IOrganizationData dbContext,
     IAuditLogService auditLogService) : IPositionService
 {
-    public async Task<IReadOnlyList<PositionListItem>> GetListAsync(
-        PositionListQuery query,
-        CancellationToken cancellationToken = default)
+    public Task<int> CountAsync(CancellationToken cancellationToken = default) => dbContext.Positions.CountAsync(cancellationToken);
+    public async Task<IReadOnlyList<PositionListItem>> GetListAsync(PositionListQuery query, CancellationToken cancellationToken = default)
+    {
+        var rows = ListQuery(query);
+
+        return await rows.ToListAsync(cancellationToken);
+    }
+
+    public Task<PageResult<PositionListItem>> SearchAsync(PositionListQuery query, PageRequest page, CancellationToken cancellationToken = default) => ListQuery(query).ToPageAsync(page, cancellationToken);
+
+    private IQueryable<PositionListItem> ListQuery(PositionListQuery query)
     {
         var positions = dbContext.Positions.ForRead();
 
@@ -22,7 +30,7 @@ public sealed class PositionService(
             var search = query.Search.Trim();
             positions = positions.Where(position =>
                 position.Code.Contains(search) || position.Title.Contains(search));
-        }
+    }
 
         if (query.DepartmentId is int departmentId)
         {
@@ -34,8 +42,8 @@ public sealed class PositionService(
             positions = positions.Where(position => position.IsActive == isActive);
         }
 
-        return await positions
-            .OrderBy(position => position.Title)
+        return positions
+            .OrderBy(position => position.Title).ThenBy(position => position.PositionId)
             .Select(position => new PositionListItem(
                 position.PositionId,
                 position.Code,
@@ -43,10 +51,8 @@ public sealed class PositionService(
                 position.Department == null ? null : position.Department.Name,
                 position.Employees.Count(employee => !employee.IsDeleted),
                 position.IsActive,
-                position.Grade))
-            .ToListAsync(cancellationToken);
+                position.Grade));
     }
-
     public async Task<PositionDetails?> GetByIdAsync(
         int positionId,
         CancellationToken cancellationToken = default)
@@ -159,7 +165,7 @@ public sealed class PositionService(
                     field,
                     Convert.ToString(before, System.Globalization.CultureInfo.InvariantCulture),
                     Convert.ToString(after, System.Globalization.CultureInfo.InvariantCulture)));
-            }
+    }
         }
     }
 

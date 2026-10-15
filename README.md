@@ -110,3 +110,5 @@ See [Arabic role and access comparison](docs/ROLES_AND_ACCESS_AR.md). Developmen
 | الاختبارات | tests | اختبارات الوحدات والمعمارية والتكامل والمتصفح |
 
 تعديل الترجمات يكون في ملفات SharedResource.ar-JO.resx وSharedResource.en-US.resx داخل HRMS/Resources، ورسائل الخدمات في HRMS.Application/Common/Messages*.resx. مكتبات الواجهة داخل wwwroot/lib تحتوي النسخ المستخدمة فعليًا وخرائطها وتراخيصها. ملفات المهاجرات وملفات Designer وModelSnapshot ضرورية وليست نسخًا مكررة. نماذج العرض الكاملة والجزئية تخدم الصفحات والنوافذ المنبثقة؛ لا تُحذف لمجرد تشابه أسمائها.
+
+راجع [مراجعة شروط ملف المواصفات والتعديلات](docs/PDF_CHANGE_AUDIT_AR.md) لتمييز الشروط الإلزامية عن الخيارات والسياسات والبنود المؤجلة.

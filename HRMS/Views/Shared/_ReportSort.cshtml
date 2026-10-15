@@ -1,0 +1,13 @@
+@model IReadOnlyDictionary<string, string>
+@{ var descending = ViewData["SortDescending"] is true; }
+<div class="col-md-3">
+    <label for="SortBy" class="form-label">@T["SortBy"]</label>
+    <select id="SortBy" name="SortBy" class="form-select">
+        <option value="">@T["DefaultOrder"]</option>
+        @foreach (var item in Model) { <option value="@item.Key" selected="@(string.Equals(Context.Request.Query["SortBy"], item.Key, StringComparison.OrdinalIgnoreCase))">@T[item.Value]</option> }
+    </select>
+</div>
+<div class="col-md-3">
+    <label for="SortDescending" class="form-label">@T["SortDirection"]</label>
+    <select id="SortDescending" name="SortDescending" class="form-select"><option value="false" selected="@(!descending)">@T["Ascending"]</option><option value="true" selected="@descending">@T["Descending"]</option></select>
+</div>

@@ -37,7 +37,7 @@ public sealed class LeaveRequestFormViewModel
     public DateOnly? EndDate { get; set; }
 
     [Required(ErrorMessage = "LeaveReasonRequired")]
-    [StringLength(1000)]
+    [StringLength(1000, ErrorMessage = "ValidationMaxLength")]
     [Display(Name = "Label.Reason")]
     public string Reason { get; set; } = string.Empty;
 
@@ -48,7 +48,7 @@ public sealed class LeaveDecisionViewModel
 {
     public int LeaveRequestId { get; set; }
 
-    [StringLength(1000)]
+    [StringLength(1000, ErrorMessage = "ValidationMaxLength")]
     [Display(Name = "Label.ReviewNotes")]
     public string? Notes { get; set; }
 }
@@ -57,15 +57,15 @@ public sealed class LeaveTypeFormViewModel
 {
     public int? LeaveTypeId { get; set; }
 
-    [Required, StringLength(100)]
+    [Required(ErrorMessage = "ValidationRequired"), StringLength(100, ErrorMessage = "ValidationMaxLength")]
     [Display(Name = "Label.LeaveTypeName")]
     public string Name { get; set; } = string.Empty;
 
-    [Required, StringLength(100)]
+    [Required(ErrorMessage = "ValidationRequired"), StringLength(100, ErrorMessage = "ValidationMaxLength")]
     [Display(Name = "Label.LeaveTypeNameAr")]
     public string NameAr { get; set; } = string.Empty;
 
-    [Range(0, 366)]
+    [Range(0, 366, ErrorMessage = "ValidationRange")]
     [Display(Name = "Label.DefaultDays")]
     public int DefaultDaysPerYear { get; set; }
 

@@ -25,3 +25,8 @@ This publishes Release to artifacts/publish and runs all test projects with Loca
 - GitHub publication is deferred at the owner's request.
 
 Test passwords are generated in memory and not included in evidence or screenshots. Existing HRMSnew passwords are unavailable locally and were not reset or tested. Use your own known credentials for those accounts.
+## PDF alignment verification
+
+The current full gate passed 85 tests: 35 unit, 7 architecture and 43 integration/SQL/HTTP/browser, with zero failures and skips. PdfRequirementsTests captures actual SQL commands to verify OFFSET/FETCH before materialization for organization, accounts, leave types, requests and balances; account paging uses two read commands rather than a role lookup per user. HTTP tests verify localized API validation errors. Report tests cover database paging for dashboard/headcount and ascending/descending leave dates. No new migration or main database changes are involved.
+
+See PDF_CHANGE_AUDIT_AR.md for the distinction between mandatory requirements, allowed UI choices and policy/delivery decisions still awaiting agreement. The current NuGet vulnerability check reported no vulnerable packages in the configured feeds; it is not an independent security assessment.

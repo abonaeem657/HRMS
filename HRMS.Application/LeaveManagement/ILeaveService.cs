@@ -2,6 +2,10 @@ namespace HRMS.Application.LeaveManagement;
 
 public interface ILeaveService
 {
+    Task<HRMS.Application.Common.PageResult<LeaveTypeDto>> SearchTypesAsync(bool onlyActive, HRMS.Application.Common.PageRequest page, CancellationToken cancellationToken = default);
+    Task<HRMS.Application.Common.PageResult<LeaveRequestDto>> SearchRequestsAsync(LeaveFilter filter, HRMS.Application.Common.PageRequest page, CancellationToken cancellationToken = default);
+    Task<HRMS.Application.Common.PageResult<LeaveBalanceDto>> SearchBalancesAsync(int employeeId, int year, HRMS.Application.Common.PageRequest page, CancellationToken cancellationToken = default);
+
     Task<IReadOnlyList<LeaveTypeDto>> GetLeaveTypesAsync(
         bool onlyActive = true,
         CancellationToken cancellationToken = default);

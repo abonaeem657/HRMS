@@ -62,12 +62,12 @@ public sealed class AttendanceCorrectionViewModel
     [Display(Name = "Label.CheckOutLocal")]
     public string? CheckOutLocal { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "ValidationRequired")]
     [RegularExpression("Present|Late|Absent|HalfDay")]
     [Display(Name = "Label.Status")]
     public string Status { get; set; } = "Present";
 
-    [StringLength(1000)]
+    [StringLength(1000, ErrorMessage = "ValidationMaxLength")]
     [Display(Name = "Label.Notes")]
     public string? Notes { get; set; }
 

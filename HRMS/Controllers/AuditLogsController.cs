@@ -16,8 +16,9 @@ public sealed class AuditLogsController(IAuditLogService auditLogService) : Cont
         CancellationToken cancellationToken)
     {
         var result = await auditLogService.SearchAsync(
-            new AuditLogQuery(model.Search, model.Page, DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request)),
+            new AuditLogQuery(model.Search, model.Page, DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request), model.SortBy, model.SortDescending),
             cancellationToken);
+        ViewData["SortDescending"] = model.SortDescending;
         model.Items = result.Items;
         model.TotalCount = result.TotalCount;
         ViewData["Pagination"] = DisplayPagination.Create(Request, result.TotalCount, result.Page);

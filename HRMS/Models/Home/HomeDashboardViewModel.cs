@@ -66,6 +66,4 @@ public sealed class HomeDashboardViewModel
 
     public IReadOnlyList<LeaveRequestDto> MyLeaveRequests { get; init; } =
         Array.Empty<LeaveRequestDto>();
-
-    public int MyPendingLeaveCount => MyLeaveRequests.Count(request => request.Status == "Pending");
 }

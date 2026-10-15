@@ -2,6 +2,10 @@ namespace HRMS.Application.Identity;
 
 public interface IUserAccountService
 {
+    Task<UserAccountSummary?> GetAccountAsync(string userId, CancellationToken cancellationToken = default);
+    Task<int> CountAsync(CancellationToken cancellationToken = default);
+    Task<HRMS.Application.Common.PageResult<UserAccountSummary>> SearchAccountsAsync(HRMS.Application.Common.PageRequest page, CancellationToken cancellationToken = default);
+
     Task<bool> AnyAccountsAsync(CancellationToken cancellationToken = default);
 
     Task<UserAccountOperationResult> CreateFirstAdministratorAsync(

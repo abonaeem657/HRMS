@@ -77,49 +77,28 @@ public sealed class UserAccountService(
         return UserAccountOperationResult.Success(user.Id);
     }
 
-    public async Task<IReadOnlyList<UserAccountSummary>> GetAccountsAsync(
-        CancellationToken cancellationToken = default)
-    {
-        var rows = await userManager.Users
-            .ForRead()
-            .OrderBy(user => user.Email)
-            .Select(user => new
-            {
-                user.Id,
-                user.Email,
+    public Task<UserAccountSummary?> GetAccountAsync(string userId, CancellationToken cancellationToken = default) =>
+        AccountQuery(userId).SingleOrDefaultAsync(cancellationToken);
+
+    public Task<int> CountAsync(CancellationToken cancellationToken = default) => dbContext.Users.CountAsync(cancellationToken);
+
+    public async Task<IReadOnlyList<UserAccountSummary>> GetAccountsAsync(CancellationToken cancellationToken = default) =>
+        await AccountQuery().ToListAsync(cancellationToken);
+
+    public Task<PageResult<UserAccountSummary>> SearchAccountsAsync(PageRequest page, CancellationToken cancellationToken = default) =>
+        AccountQuery().ToPageAsync(page, cancellationToken);
+
+    private IQueryable<UserAccountSummary> AccountQuery(string? userId = null) =>
+        dbContext.Users.Where(user => userId == null || user.Id == userId).OrderBy(user => user.Email).ThenBy(user => user.Id)
+            .Select(user => new UserAccountSummary(
+                user.Id, user.Email ?? "",
+                dbContext.UserRoles.Where(link => link.UserId == user.Id)
+                    .Join(dbContext.Roles, link => link.RoleId, role => role.Id, (link, role) => role.Name)
+                    .OrderBy(name => name).FirstOrDefault() ?? "",
                 user.IsActive,
-                Employee = dbContext.Employees
-                    .Where(employee => employee.IdentityUserId == user.Id)
-                    .Select(employee => new
-                    {
-                        employee.EmployeeId,
-                        employee.EmployeeNumber,
-                        Name = employee.FirstName + " " + employee.LastName
-                    })
-                    .FirstOrDefault()
-            })
-            .ToListAsync(cancellationToken);
-
-        var summaries = new List<UserAccountSummary>(rows.Count);
-        foreach (var row in rows)
-        {
-            var user = await userManager.FindByIdAsync(row.Id);
-            var roles = user is null
-                ? Array.Empty<string>()
-                : (await userManager.GetRolesAsync(user)).ToArray();
-            summaries.Add(new UserAccountSummary(
-                row.Id,
-                row.Email ?? string.Empty,
-                roles.FirstOrDefault() ?? string.Empty,
-                row.IsActive,
-                row.Employee?.EmployeeId,
-                row.Employee?.EmployeeNumber,
-                row.Employee?.Name));
-        }
-
-        return summaries;
-    }
-
+                dbContext.Employees.Where(e => e.IdentityUserId == user.Id).Select(e => (int?)e.EmployeeId).FirstOrDefault(),
+                dbContext.Employees.Where(e => e.IdentityUserId == user.Id).Select(e => e.EmployeeNumber).FirstOrDefault(),
+                dbContext.Employees.Where(e => e.IdentityUserId == user.Id).Select(e => e.FirstName + " " + e.LastName).FirstOrDefault()));
     public async Task<IReadOnlyList<EmployeeAccountOption>> GetAvailableEmployeesAsync(
         string? excludeUserId = null,
         int? includeEmployeeId = null,

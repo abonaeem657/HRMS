@@ -1,5 +1,4 @@
 @model HRMS.Models.Identity.UserAccountListViewModel
-@{ var listing = DisplayPagination.Slice(Model.Accounts, Context.Request); }
 @{
     ViewData["Title"] = T["UsersManagement"].Value;
 }
@@ -32,7 +31,7 @@
                 }
                 else
                 {
-                    @foreach (var account in listing.Items)
+                    @foreach (var account in Model.Accounts)
                     {
                         <tr>
                             <td dir="ltr">@account.Email</td>
@@ -63,4 +62,4 @@
     </div>
 </div>
 
-<partial name="_ListPagination" model="listing.Pagination" />
+<partial name="_ListPagination" model="@(ViewData["Pagination"])" />

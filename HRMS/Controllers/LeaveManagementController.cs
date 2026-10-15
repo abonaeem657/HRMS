@@ -1,3 +1,4 @@
+using HRMS.Models;
 using System.Security.Claims;
 using HRMS.Application.Employees;
 using HRMS.Application.Identity;
@@ -28,7 +29,7 @@ public sealed class LeaveManagementController(
             return BadRequest(new ProblemDetails
             {
                 Status = StatusCodes.Status400BadRequest,
-                Title = "Invalid year",
+                Title = HRMS.Application.Common.Messages.Get("InvalidYearTitle"),
                 Detail = HRMS.Application.Common.Messages.Get("Business063")
             });
         }
@@ -52,11 +53,13 @@ public sealed class LeaveManagementController(
             DepartmentId: managerDepartmentId,
             Status: status,
             Year: year);
+        var requests = await leaveService.SearchRequestsAsync(filter, DisplayPagination.Request(Request), cancellationToken);
+        ViewData["Pagination"] = DisplayPagination.Create(Request, requests.TotalCount, requests.Page);
         var model = new LeaveListViewModel
         {
             Status = status,
             Year = year,
-            Requests = await leaveService.GetLeaveRequestsAsync(filter, cancellationToken)
+            Requests = requests.Items
         };
         ViewBag.CurrentEmployeeId = employeeId;
         return View(model);
@@ -69,12 +72,13 @@ public sealed class LeaveManagementController(
         var employeeId = await GetEmployeeIdAsync(cancellationToken);
         if (employeeId is null) return Forbid();
         var reportYear = year ?? businessClock.Today.Year;
+        var requests = await leaveService.SearchRequestsAsync(new LeaveFilter(EmployeeId: employeeId.Value, Status: status, Year: reportYear), DisplayPagination.Request(Request), cancellationToken);
+        var balances = await leaveService.SearchBalancesAsync(employeeId.Value, reportYear, DisplayPagination.Request(Request, "Balance"), cancellationToken);
+        ViewData["Pagination"] = DisplayPagination.Create(Request, requests.TotalCount, requests.Page);
+        ViewData["BalancePagination"] = DisplayPagination.Create(Request, balances.TotalCount, balances.Page, "Balance");
         return View(new LeaveListViewModel
         {
-            Year = reportYear,
-            Status = status,
-            Requests = await leaveService.GetLeaveRequestsAsync(new LeaveFilter(EmployeeId: employeeId.Value, Status: status, Year: reportYear), cancellationToken),
-            Balances = await leaveService.GetEmployeeLeaveBalancesAsync(employeeId.Value, reportYear, cancellationToken)
+            Year = reportYear, Status = status, Requests = requests.Items, Balances = balances.Items
         });
     }
 
@@ -202,9 +206,11 @@ public sealed class LeaveManagementController(
     [Authorize(Roles = IdentityRoles.ManageLeaveTypes)]
     public async Task<IActionResult> Types(CancellationToken cancellationToken)
     {
+        var types = await leaveService.SearchTypesAsync(false, DisplayPagination.Request(Request), cancellationToken);
+        ViewData["Pagination"] = DisplayPagination.Create(Request, types.TotalCount, types.Page);
         var model = new LeaveTypeFormViewModel
         {
-            Types = await leaveService.GetLeaveTypesAsync(onlyActive: false, cancellationToken)
+            Types = types.Items
         };
         return View(model);
     }
@@ -218,7 +224,9 @@ public sealed class LeaveManagementController(
     {
         if (!ModelState.IsValid)
         {
-            model.Types = await leaveService.GetLeaveTypesAsync(onlyActive: false, cancellationToken);
+            var types = await leaveService.SearchTypesAsync(false, DisplayPagination.Request(Request), cancellationToken);
+            model.Types = types.Items;
+            ViewData["Pagination"] = DisplayPagination.Create(Request, types.TotalCount, types.Page);
             return View("Types", model);
         }
 

@@ -245,12 +245,12 @@ public sealed class AttendanceService(
                 (!attendanceId.HasValue || candidate.AttendanceId == attendanceId.Value))
             .Take(2).ToListAsync(cancellationToken);
         if (matches.Count > 1 || (attendanceId.HasValue && matches.Count == 0))
-            return AttendanceOperationResult.Failure("اختر الفترة المطلوبة من سجل الحضور لتصحيحها. / Select the session from the attendance list to correct it.");
+            return AttendanceOperationResult.Failure(Messages.Get("AttendanceSelectSession"));
         var record = matches.SingleOrDefault();
         if (record is not null)
         {
             if (!attendanceId.HasValue)
-                return AttendanceOperationResult.Failure("اختر تعديل بجانب الفترة الموجودة في جدول الحضور. / Choose Edit beside the existing attendance session.");
+                return AttendanceOperationResult.Failure(Messages.Get("AttendanceEditExistingSession"));
             if (rowVersion is null || !rowVersion.SequenceEqual(record.RowVersion))
                 return AttendanceOperationResult.Failure(HRMS.Application.Common.Messages.Get("Business034"));
             dbContext.ExpectVersion(record, rowVersion);
@@ -260,7 +260,7 @@ public sealed class AttendanceService(
                 other.EmployeeId == employeeId && other.AttendanceId != excludedId && other.CheckInUtc != null &&
                 (!checkOutUtc.HasValue || other.CheckInUtc < checkOutUtc.Value) &&
                 (other.CheckOutUtc == null || other.CheckOutUtc > checkInUtc.Value), cancellationToken))
-            return AttendanceOperationResult.Failure("الفترة تتداخل مع فترة حضور أخرى؛ صحّح الفترة الموجودة أولًا. / This interval overlaps another attendance session.");
+            return AttendanceOperationResult.Failure(Messages.Get("AttendanceOverlappingSession"));
         var isNew = record is null;
         var previousCheckIn = record?.CheckInUtc;
         var previousCheckOut = record?.CheckOutUtc;

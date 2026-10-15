@@ -17,6 +17,7 @@
                    placeholder="@T["AuditSearchPlaceholder"]" />
         </div>
         <input type="hidden" name="PageSize" value="@Model.PageSize" />
+        <partial name="_ReportSort" model="@(new Dictionary<string, string> { ["time"] = "Date", ["action"] = "Action", ["entity"] = "Record" })" />
         <div class="col-auto">
             <button type="submit" class="btn btn-primary">@T["Search"]</button>
         </div>
@@ -51,7 +52,7 @@
                     @foreach (var entry in Model.Items)
                     {
                         <tr>
-                            <td dir="ltr">@BusinessClock.ToLocal(entry.OccurredAtUtc)?.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                            <td dir="ltr">@BusinessClock.ToLocal(entry.OccurredAtUtc)?.ToString("G", System.Globalization.CultureInfo.CurrentCulture)</td>
                             <td dir="ltr" class="text-break">@(entry.ActorUserId ?? T["InitialSetupUnknown"].Value)</td>
                             <td><code>@entry.Action</code></td>
                             <td><span>@entry.EntityName</span> <span dir="ltr">#@entry.EntityId</span></td>

@@ -72,7 +72,7 @@ public sealed class AttendanceController(
         if (CanManageAttendance())
         {
             var employees = await employeeService.SearchAsync(
-                new EmployeeListQuery(null, model.DepartmentId, null, "EmployeeNumber", false, 1, 100),
+                new EmployeeListQuery(null, model.DepartmentId, null, "EmployeeNumber", false, 1, 100, ShowAll: true),
                 cancellationToken);
             model.Employees = employees.Items.Select(employee =>
                 new SelectListItem($"{employee.EmployeeNumber} - {employee.FullName}", employee.EmployeeId.ToString()))
@@ -218,7 +218,7 @@ public sealed class AttendanceController(
         CancellationToken cancellationToken)
     {
         var employees = await employeeService.SearchAsync(
-            new EmployeeListQuery(null, null, EmployeeListQuery.AllStatuses, "EmployeeNumber", false, 1, 100),
+            new EmployeeListQuery(null, null, EmployeeListQuery.AllStatuses, "EmployeeNumber", false, 1, 100, ShowAll: true),
             cancellationToken);
         model.Employees = employees.Items
             .Select(employee => new SelectListItem(

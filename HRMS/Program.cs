@@ -20,6 +20,21 @@ builder.Services.AddControllersWithViews(options => { options.Filters.Add<HRMS.I
     {
         options.DataAnnotationLocalizerProvider = (_, factory) => factory.Create(typeof(SharedResource));
     });
+builder.Services.Configure<Microsoft.AspNetCore.Mvc.ApiBehaviorOptions>(options =>
+{
+    options.InvalidModelStateResponseFactory = context => new Microsoft.AspNetCore.Mvc.BadRequestObjectResult(
+        new Microsoft.AspNetCore.Mvc.ValidationProblemDetails(context.ModelState)
+        {
+            Status = 400,
+            Title = HRMS.Application.Common.Messages.Get("ValidationFailedTitle")
+        });
+});
+builder.Services.Configure<Microsoft.AspNetCore.Mvc.MvcOptions>(options =>
+{
+    options.ModelBindingMessageProvider.SetAttemptedValueIsInvalidAccessor((_, name) =>
+        string.Format(CultureInfo.CurrentCulture, HRMS.Application.Common.Messages.Get("InvalidFieldValue"), name));
+    options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(_ => HRMS.Application.Common.Messages.Get("FieldRequired"));
+});
 builder.Services.AddProblemDetails();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -50,8 +65,8 @@ builder.Services.AddRateLimiter(options =>
             rejected.HttpContext.Response.Headers.RetryAfter = Math.Max(1, (int)Math.Ceiling(retryAfter.TotalSeconds)).ToString(CultureInfo.InvariantCulture);
         await Results.Json(new Microsoft.AspNetCore.Mvc.ProblemDetails
             {
-                Status = 429, Title = "Too many requests",
-                Detail = "طلبات كثيرة؛ انتظر قليلًا ثم حاول مجددًا. / Please wait before trying again."
+                Status = 429, Title = HRMS.Application.Common.Messages.Get("RateLimitTitle"),
+                Detail = HRMS.Application.Common.Messages.Get("RateLimitDetail")
             }, statusCode: 429, contentType: "application/problem+json")
             .ExecuteAsync(rejected.HttpContext);
     };
@@ -135,6 +150,19 @@ if (app.Environment.IsDevelopment())
 }
 
 
+var supportedCultures = new[] { new CultureInfo("ar-JO"), new CultureInfo("en-US") };
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("ar-JO"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures,
+    RequestCultureProviders =
+    [
+        new CookieRequestCultureProvider(),
+        new AcceptLanguageHeaderRequestCultureProvider()
+    ]
+});
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -152,23 +180,10 @@ app.UseStatusCodePages(async statusContext =>
     var http = statusContext.HttpContext;
     if (http.Request.Path.StartsWithSegments("/api"))
         await Results.Problem(statusCode: http.Response.StatusCode,
-            title: "Request failed", extensions: new Dictionary<string, object?> { ["traceId"] = http.TraceIdentifier }).ExecuteAsync(http);
+            title: HRMS.Application.Common.Messages.Get("RequestFailedTitle"), extensions: new Dictionary<string, object?> { ["traceId"] = http.TraceIdentifier }).ExecuteAsync(http);
 });
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
-var supportedCultures = new[] { new CultureInfo("ar-JO"), new CultureInfo("en-US") };
-app.UseRequestLocalization(new RequestLocalizationOptions
-{
-    DefaultRequestCulture = new RequestCulture("ar-JO"),
-    SupportedCultures = supportedCultures,
-    SupportedUICultures = supportedCultures,
-    RequestCultureProviders =
-    [
-        new CookieRequestCultureProvider(),
-        new AcceptLanguageHeaderRequestCultureProvider()
-    ]
-});
 
 app.UseRouting();
 

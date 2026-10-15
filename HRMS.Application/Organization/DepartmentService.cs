@@ -11,9 +11,18 @@ public sealed class DepartmentService(
     IOrganizationData dbContext,
     IAuditLogService auditLogService) : IDepartmentService
 {
-    public async Task<IReadOnlyList<DepartmentListItem>> GetListAsync(
-        DepartmentListQuery query,
-        CancellationToken cancellationToken = default)
+    public Task<int> CountAsync(CancellationToken cancellationToken = default) => dbContext.Departments.CountAsync(cancellationToken);
+    public async Task<IReadOnlyList<DepartmentListItem>> GetListAsync(DepartmentListQuery query, CancellationToken cancellationToken = default)
+    {
+        var rows = ListQuery(query);
+        if (query.Page is int requestedPage)
+            rows = rows.Skip((Math.Clamp(requestedPage, 1, 100000) - 1) * Math.Clamp(query.PageSize, 1, 100)).Take(Math.Clamp(query.PageSize, 1, 100));
+        return await rows.ToListAsync(cancellationToken);
+    }
+
+    public Task<PageResult<DepartmentListItem>> SearchAsync(DepartmentListQuery query, PageRequest page, CancellationToken cancellationToken = default) => ListQuery(query).ToPageAsync(page, cancellationToken);
+
+    private IQueryable<DepartmentListItem> ListQuery(DepartmentListQuery query)
     {
         var departments = dbContext.Departments.ForRead();
 
@@ -22,7 +31,7 @@ public sealed class DepartmentService(
             var search = query.Search.Trim();
             departments = departments.Where(department =>
                 department.Code.Contains(search) || department.Name.Contains(search));
-        }
+    }
 
         if (query.IsActive is bool isActive)
         {
@@ -30,10 +39,7 @@ public sealed class DepartmentService(
         }
 
         departments = departments.OrderBy(department => department.Name).ThenBy(department => department.DepartmentId);
-        if (query.Page is int page)
-            departments = departments.Skip((Math.Clamp(page, 1, 100000) - 1) * Math.Clamp(query.PageSize, 1, 100))
-                .Take(Math.Clamp(query.PageSize, 1, 100));
-        return await departments
+        return departments
             .Select(department => new DepartmentListItem(
                 department.DepartmentId,
                 department.Code,
@@ -42,13 +48,16 @@ public sealed class DepartmentService(
                     ? null
                     : department.Manager.FirstName + " " + department.Manager.LastName,
                 department.Employees.Count(employee => !employee.IsDeleted),
-                department.IsActive))
-            .ToListAsync(cancellationToken);
+                department.IsActive));
     }
-
+    public Task<PageResult<DepartmentEmployeeItem>> GetEmployeesAsync(int departmentId, PageRequest page, CancellationToken cancellationToken = default) =>
+        dbContext.Employees.Where(e => !e.IsDeleted && e.DepartmentId == departmentId)
+            .OrderBy(e => e.EmployeeNumber).ThenBy(e => e.EmployeeId)
+            .Select(e => new DepartmentEmployeeItem(e.EmployeeId, e.EmployeeNumber, e.FirstName + " " + e.LastName, e.Position!.Title, e.EmploymentStatus))
+            .ToPageAsync(page, cancellationToken);
     public async Task<DepartmentDetails?> GetByIdAsync(
         int departmentId,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default, bool includeEmployees = true)
     {
         return await dbContext.Departments
             .ForRead()
@@ -63,7 +72,7 @@ public sealed class DepartmentService(
                     : department.Manager.FirstName + " " + department.Manager.LastName,
                 department.IsActive,
                 department.Employees
-                    .Where(employee => !employee.IsDeleted)
+                    .Where(employee => includeEmployees && !employee.IsDeleted)
                     .OrderBy(employee => employee.EmployeeNumber)
                     .Select(employee => new DepartmentEmployeeItem(
                         employee.EmployeeId,
@@ -183,7 +192,7 @@ public sealed class DepartmentService(
                     field,
                     Convert.ToString(before, System.Globalization.CultureInfo.InvariantCulture),
                     Convert.ToString(after, System.Globalization.CultureInfo.InvariantCulture)));
-            }
+    }
         }
     }
 

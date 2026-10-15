@@ -261,4 +261,23 @@
   <data name="DuplicateIdentifier">
     <value>يوجد سجل بهذا المعرّف بالفعل.</value>
   </data>
+  <data name="AttendanceEditExistingSession" xml:space="preserve"><value>اختر تعديل بجانب الفترة الموجودة في جدول الحضور.</value></data>
+  <data name="AttendanceOverlappingSession" xml:space="preserve"><value>الفترة تتداخل مع فترة حضور أخرى؛ صحّح الفترة الموجودة أولًا.</value></data>
+  <data name="AttendanceSelectSession" xml:space="preserve"><value>اختر الفترة المطلوبة من سجل الحضور لتصحيحها.</value></data>
+  <data name="LeaveTimeOrderInvalid" xml:space="preserve"><value>وقت النهاية يجب أن يكون بعد البداية عند تحديد الوقتين.</value></data>
+  <data name="RateLimitDetail" xml:space="preserve"><value>انتظر قليلًا ثم حاول مجددًا.</value></data>
+  <data name="ResourceNotFoundTitle" xml:space="preserve"><value>السجل غير موجود</value></data>
+  <data name="RequestFailedTitle" xml:space="preserve"><value>تعذر تنفيذ الطلب</value></data>
+  <data name="RateLimitTitle" xml:space="preserve"><value>طلبات كثيرة</value></data>
+  <data name="InvalidDateRangeTitle" xml:space="preserve"><value>الفترة غير صحيحة</value></data>
+  <data name="InvalidYearTitle" xml:space="preserve"><value>السنة غير صحيحة</value></data>
+  <data name="DataConflictTitle" xml:space="preserve"><value>تعارض في البيانات</value></data>
+  <data name="ValidationMaxLength" xml:space="preserve"><value>الحد الأقصى لطول الحقل {0} هو {1} حرفًا.</value></data>
+  <data name="ValidationPhone" xml:space="preserve"><value>أدخل رقم هاتف صحيحًا.</value></data>
+  <data name="ValidationRequired" xml:space="preserve"><value>الحقل {0} مطلوب.</value></data>
+  <data name="ValidationEmail" xml:space="preserve"><value>أدخل بريدًا إلكترونيًا صحيحًا.</value></data>
+  <data name="InvalidFieldValue" xml:space="preserve"><value>قيمة الحقل {0} غير صحيحة.</value></data>
+  <data name="FieldRequired" xml:space="preserve"><value>هذا الحقل مطلوب.</value></data>
+  <data name="ValidationFailedTitle" xml:space="preserve"><value>يرجى تصحيح بيانات الطلب.</value></data>
+  <data name="ValidationRange" xml:space="preserve"><value>يجب أن تكون قيمة {0} بين {1} و{2}.</value></data>
 </root>

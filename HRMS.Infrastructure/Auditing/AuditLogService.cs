@@ -85,10 +85,16 @@ public sealed class AuditLogService(
         if (query.ShowAll) pageSize = Math.Max(1, totalCount);
         var totalPages = Math.Max(1, (int)Math.Ceiling(totalCount / (double)pageSize));
         var page = Math.Min(requestedPage, totalPages);
-        var items = await logs
-            .OrderByDescending(log => log.OccurredAtUtc)
-            .ThenByDescending(log => log.AuditLogId)
-            .Skip((page - 1) * pageSize)
+        var ordered = (query.SortBy?.ToLowerInvariant(), query.SortDescending) switch
+        {
+            ("action", false) => logs.OrderBy(log => log.Action),
+            ("action", true) => logs.OrderByDescending(log => log.Action),
+            ("entity", false) => logs.OrderBy(log => log.EntityName),
+            ("entity", true) => logs.OrderByDescending(log => log.EntityName),
+            (_, false) => logs.OrderBy(log => log.OccurredAtUtc),
+            _ => logs.OrderByDescending(log => log.OccurredAtUtc)
+        };
+        var items = await ordered.ThenByDescending(log => log.AuditLogId)            .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .Select(log => new AuditLogEntry(
                 log.AuditLogId,

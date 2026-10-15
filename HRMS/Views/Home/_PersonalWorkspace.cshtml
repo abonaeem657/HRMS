@@ -47,7 +47,7 @@
             else
             {
                 <ul class="my-leave-list">
-                    @foreach (var leave in Model.MyLeaveRequests.OrderByDescending(x => x.AppliedAtUtc).Take(4))
+                    @foreach (var leave in Model.MyLeaveRequests)
                     {
                         <li><span><strong>@(arabic ? leave.LeaveTypeNameAr : leave.LeaveTypeName)</strong><small>@leave.StartDate.ToString("d", CultureInfo.CurrentUICulture) – @leave.EndDate.ToString("d", CultureInfo.CurrentUICulture)</small></span><span class="leave-status">@T["Status." + leave.Status]</span></li>
                     }

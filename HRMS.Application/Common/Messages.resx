@@ -261,4 +261,23 @@
   <data name="DuplicateIdentifier">
     <value>A record with this identifier already exists.</value>
   </data>
+  <data name="AttendanceEditExistingSession" xml:space="preserve"><value>Choose Edit beside the existing attendance session.</value></data>
+  <data name="AttendanceOverlappingSession" xml:space="preserve"><value>This interval overlaps another attendance session.</value></data>
+  <data name="AttendanceSelectSession" xml:space="preserve"><value>Select the session from the attendance list to correct it.</value></data>
+  <data name="LeaveTimeOrderInvalid" xml:space="preserve"><value>End time must follow start time when both are specified.</value></data>
+  <data name="RateLimitDetail" xml:space="preserve"><value>Please wait before trying again.</value></data>
+  <data name="ResourceNotFoundTitle" xml:space="preserve"><value>Resource not found</value></data>
+  <data name="RequestFailedTitle" xml:space="preserve"><value>Request failed</value></data>
+  <data name="RateLimitTitle" xml:space="preserve"><value>Too many requests</value></data>
+  <data name="InvalidDateRangeTitle" xml:space="preserve"><value>Invalid date range</value></data>
+  <data name="InvalidYearTitle" xml:space="preserve"><value>Invalid year</value></data>
+  <data name="DataConflictTitle" xml:space="preserve"><value>Data conflict</value></data>
+  <data name="ValidationMaxLength" xml:space="preserve"><value>The field {0} must not exceed {1} characters.</value></data>
+  <data name="ValidationPhone" xml:space="preserve"><value>Enter a valid phone number.</value></data>
+  <data name="ValidationRequired" xml:space="preserve"><value>The {0} field is required.</value></data>
+  <data name="ValidationEmail" xml:space="preserve"><value>Enter a valid email address.</value></data>
+  <data name="InvalidFieldValue" xml:space="preserve"><value>The value for {0} is invalid.</value></data>
+  <data name="FieldRequired" xml:space="preserve"><value>This field is required.</value></data>
+  <data name="ValidationFailedTitle" xml:space="preserve"><value>Please correct the request data.</value></data>
+  <data name="ValidationRange" xml:space="preserve"><value>The field {0} must be between {1} and {2}.</value></data>
 </root>

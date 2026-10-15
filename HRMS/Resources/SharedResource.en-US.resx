@@ -1542,4 +1542,82 @@
   <data name="ShowAllResults" xml:space="preserve">
     <value>Show all</value>
   </data>
+  <data name="UiBootstrapMinCss" xml:space="preserve"><value>bootstrap.min.css</value></data>
+  <data name="UiBreadcrumb" xml:space="preserve"><value>Breadcrumb</value></data>
+  <data name="UiCheckInAndOutAndTrackYour" xml:space="preserve"><value>Check in and out, and track your leave requests in your personal workspace.</value></data>
+  <data name="UiConnectJobTitlesToDepartmentsBeforeAdding" xml:space="preserve"><value>Connect job titles to departments before adding employees.</value></data>
+  <data name="UiCreateTheEmployeeRecordThenAskAn" xml:space="preserve"><value>Create the employee record, then ask an administrator to link their login account.</value></data>
+  <data name="UiCreateYourFirstDepartmentThenAJob" xml:space="preserve"><value>Create your first department, then a job title, then add employees.</value></data>
+  <data name="UiDailyWork" xml:space="preserve"><value>Daily work</value></data>
+  <data name="UiGettingStarted" xml:space="preserve"><value>Getting started</value></data>
+  <data name="UiHelpAccount" xml:space="preserve"><value>Help &amp; account</value></data>
+  <data name="UiInsightsAdministration" xml:space="preserve"><value>Insights &amp; administration</value></data>
+  <data name="UiKeepYourTeamSRequestsMoving" xml:space="preserve"><value>Keep your team&apos;s requests moving</value></data>
+  <data name="UiLtr" xml:space="preserve"><value>ltr</value></data>
+  <data name="UiNextDefineJobTitles" xml:space="preserve"><value>Next: define job titles</value></data>
+  <data name="UiOpenPage" xml:space="preserve"><value>Open page</value></data>
+  <data name="UiOpenTheGuide" xml:space="preserve"><value>Open the guide</value></data>
+  <data name="UiOpenTheGuideToExploreYourRole" xml:space="preserve"><value>Open the guide to explore your role and everyday tasks.</value></data>
+  <data name="UiOrganizationSummary" xml:space="preserve"><value>Organization summary</value></data>
+  <data name="UiPeopleOrganization" xml:space="preserve"><value>People &amp; organization</value></data>
+  <data name="UiRequestsAwaitingYourReview" xml:space="preserve"><value>Requests awaiting your review</value></data>
+  <data name="UiReviewPendingLeaveRequestsAndRecordA" xml:space="preserve"><value>Review pending leave requests and record a decision.</value></data>
+  <data name="UiReviewPendingRequestsAndTakeActionOr" xml:space="preserve"><value>Review pending requests and take action, or use the navigation to reach people, attendance and reports.</value></data>
+  <data name="UiReviewReportsAndAuditHistoryWithoutEditing" xml:space="preserve"><value>Review reports and audit history without editing employee records.</value></data>
+  <data name="UiReviewRequests" xml:space="preserve"><value>Review requests</value></data>
+  <data name="UiReviewWorkspace" xml:space="preserve"><value>Review workspace</value></data>
+  <data name="UiStartWithYourOrganization" xml:space="preserve"><value>Start with your organization</value></data>
+  <data name="UiStartYourDayWithACheckIn" xml:space="preserve"><value>Start your day with a check-in</value></data>
+  <data name="UiTheInformationYouNeedToReview" xml:space="preserve"><value>The information you need to review</value></data>
+  <data name="UiThereAreNoPendingLeaveRequestsIn" xml:space="preserve"><value>There are no pending leave requests in your scope.</value></data>
+  <data name="UiTheseStepsMatchYourAccountPermissionsAnd" xml:space="preserve"><value>These steps match your account permissions and link directly to each task.</value></data>
+  <data name="UiUseReportsToAnalyzeOrganizationDataOr" xml:space="preserve"><value>Use Reports to analyze organization data, or Audit log to review recorded operations. Your account provides read access without modifying records.</value></data>
+  <data name="UiUseTheNavigationForYourTasksSetup" xml:space="preserve"><value>Use the navigation for your tasks. Setup instructions and role guidance are in Getting started.</value></data>
+  <data name="UiWelcomeYourFirstTeamMember" xml:space="preserve"><value>Welcome your first team member</value></data>
+  <data name="UiWhatYouNeedToStartYourDay" xml:space="preserve"><value>What you need to start your day, in one place.</value></data>
+  <data name="UiYouCanManageEmployeesAttendanceRequestsAnd" xml:space="preserve"><value>You can manage employees, attendance, requests and reports. Departments and titles are read-only. Organization changes, leave types, accounts and audit history are unavailable to this role.</value></data>
+  <data name="UiYouCanManageHROperationsAndRead" xml:space="preserve"><value>You can manage HR operations and read audit history. Login account administration, role assignments and other users&apos; password resets belong to the system administrator.</value></data>
+  <data name="UiYOURNEXTSTEP" xml:space="preserve"><value>YOUR NEXT STEP</value></data>
+  <data name="UiYourRoleGuide" xml:space="preserve"><value>Your role guide</value></data>
+  <data name="UiYourRoleIsReadOnlyYourProfile" xml:space="preserve"><value>Your role is read-only: your profile, reports and audit history. You cannot edit employees, attendance or leave, or manage accounts.</value></data>
+  <data name="UiYourScopeIsPersonalAttendanceLeaveRequests" xml:space="preserve"><value>Your scope is personal: attendance, leave requests and your leave report. Other employees, organization reports, approvals and account administration are unavailable.</value></data>
+  <data name="UiYourScopeIsYourDepartmentInReports" xml:space="preserve"><value>Your scope is your department in reports and reviews, plus personal self-service. Department managers cannot manage employee records, accounts or attendance corrections.</value></data>
+  <data name="UiYourWorkspaceIsReady" xml:space="preserve"><value>Your workspace is ready</value></data>
+  <data name="DefaultOrder" xml:space="preserve"><value>Default order</value></data>
+  <data name="GuideChangeYourPasswordText" xml:space="preserve"><value>Enter your current password, then the new password and its confirmation. Sign out when finished on a shared device.</value></data>
+  <data name="GuideChangeYourPasswordTitle" xml:space="preserve"><value>Change your password</value></data>
+  <data name="GuideConfigureLeaveTypesText" xml:space="preserve"><value>Set the Arabic and English names, annual allowance, paid flag and active flag. Starter values are editable under your organization policy. Inactive types are unavailable for new requests.</value></data>
+  <data name="GuideConfigureLeaveTypesTitle" xml:space="preserve"><value>Configure leave types</value></data>
+  <data name="GuideCorrectAnAttendanceSessionText" xml:space="preserve"><value>Find the employee and date in Attendance and choose Edit beside the required session. Set check-in and check-out and save. For overnight work choose the following check-out date. Avoid future times, intervals above 24 hours, or overlaps. The general correction form can also add a missing record; use the row&apos;s Edit button when multiple sessions exist.</value></data>
+  <data name="GuideCorrectAnAttendanceSessionTitle" xml:space="preserve"><value>Correct an attendance session</value></data>
+  <data name="GuideLinkAccountsAndPermissionsText" xml:space="preserve"><value>Open Users, then Create or Edit. Choose the role and link a distinct employee. Roles grant permissions; job titles describe employment. You can deactivate, reactivate and reset passwords. A department manager must also be assigned in department details.</value></data>
+  <data name="GuideLinkAccountsAndPermissionsTitle" xml:space="preserve"><value>Link accounts and permissions</value></data>
+  <data name="GuideManageEmployeeRecordsText" xml:space="preserve"><value>Choose Add employee, select department then title, and enter number, email and hire date. The default list shows active employees; select All employees to include inactive records. Records can be edited, soft-deleted and restored.</value></data>
+  <data name="GuideManageEmployeeRecordsTitle" xml:space="preserve"><value>Manage employee records</value></data>
+  <data name="GuidePrepareDepartmentsAndTitlesText" xml:space="preserve"><value>Create departments, then job titles. After adding employees, edit each department to assign an active manager from that department. You can edit or deactivate departments and titles.</value></data>
+  <data name="GuidePrepareDepartmentsAndTitlesTitle" xml:space="preserve"><value>Prepare departments and titles</value></data>
+  <data name="GuideReadAuditHistoryText" xml:space="preserve"><value>Use the search field, then review each operation, actor, timestamp, change and outcome. Audit events are read-only and have no edit or delete actions.</value></data>
+  <data name="GuideReadAuditHistoryTitle" xml:space="preserve"><value>Read audit history</value></data>
+  <data name="GuideReadYourEmployeeProfileText" xml:space="preserve"><value>Open My profile to read your employment details, department, job title and manager. Ask HR to correct this read-only record.</value></data>
+  <data name="GuideReadYourEmployeeProfileTitle" xml:space="preserve"><value>Read your employee profile</value></data>
+  <data name="GuideReadYourPersonalLeaveReportText" xml:space="preserve"><value>Open My leave report in navigation. Select year and status to review your requests, decisions and notes. Balances show allowance, used, reserved and remaining for the whole year; status only filters the request list. This report contains only your own data.</value></data>
+  <data name="GuideReadYourPersonalLeaveReportTitle" xml:space="preserve"><value>Read your personal leave report</value></data>
+  <data name="GuideRecordYourAttendanceText" xml:space="preserve"><value>Check in when starting work and out when finishing. After checking out you can start another session the same day; only one session can remain open. Times use Jordan time. Ask HR to correct mistakes.</value></data>
+  <data name="GuideRecordYourAttendanceTitle" xml:space="preserve"><value>Record your attendance</value></data>
+  <data name="GuideSubmitAndTrackLeaveText" xml:space="preserve"><value>Choose type, start and end dates, and reason. Times are optional; start defaults to now and can be cleared, while end stays blank. Allowance uses calendar days, not hours. Submission reserves days, approval confirms the deduction, and rejection or pending cancellation releases them. Cancel your pending request from Leave.</value></data>
+  <data name="GuideSubmitAndTrackLeaveTitle" xml:space="preserve"><value>Submit and track leave</value></data>
+  <data name="GuideChooseScopedReportHr" xml:space="preserve"><value>Choose employees, attendance, leave, decisions or headcount, and filter by department, employee and date. Reading a report does not create records.</value></data>
+  <data name="GuideReviewScopedLeaveManager" xml:space="preserve"><value>Filter Leave to Pending. Review your department and approve or reject with a reason. HR reviews your own request. If your department is unavailable, ask the administrator to check your employee link and department manager assignment.</value></data>
+  <data name="GuideReviewScopedLeaveHr" xml:space="preserve"><value>Filter Leave to Pending. Check employee, type, period and reason, then approve or reject with a clear reason. Your scope covers the organization. Decisions are recorded in audit history.</value></data>
+  <data name="GuideReviewScopedLeaveTitle" xml:space="preserve"><value>Review leave requests</value></data>
+  <data name="GuideChooseScopedReportTitle" xml:space="preserve"><value>Choose a report</value></data>
+  <data name="GuideChooseScopedReportManager" xml:space="preserve"><value>Reports cover only your department: employees, attendance, leave, decisions and headcount. Filter by names and dates. Daily Attendance shows your personal records; use Attendance report for your team.</value></data>
+  <data name="ValidationMaxLength" xml:space="preserve"><value>The field {0} must not exceed {1} characters.</value></data>
+  <data name="ValidationPhone" xml:space="preserve"><value>Enter a valid phone number.</value></data>
+  <data name="ValidationRequired" xml:space="preserve"><value>The {0} field is required.</value></data>
+  <data name="ValidationEmail" xml:space="preserve"><value>Enter a valid email address.</value></data>
+  <data name="InvalidFieldValue" xml:space="preserve"><value>The value for {0} is invalid.</value></data>
+  <data name="FieldRequired" xml:space="preserve"><value>This field is required.</value></data>
+  <data name="ValidationFailedTitle" xml:space="preserve"><value>Please correct the request data.</value></data>
+  <data name="ValidationRange" xml:space="preserve"><value>The field {0} must be between {1} and {2}.</value></data>
 </root>

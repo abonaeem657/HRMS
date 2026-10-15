@@ -1,3 +1,4 @@
+using HRMS.Models;
 
 using HRMS.Application.Organization;
 using HRMS.Application.Identity;
@@ -16,14 +17,16 @@ public sealed class PositionsController(IPositionService positionService) : Cont
         [FromQuery] PositionListViewModel query,
         CancellationToken cancellationToken)
     {
-        var positions = await positionService.GetListAsync(
+        var result = await positionService.SearchAsync(
             new PositionListQuery(query.Search, query.DepartmentId, query.IsActive),
+            DisplayPagination.Request(Request),
             cancellationToken);
 
         var departments = await positionService.GetDepartmentsAsync(
             includeInactive: true, cancellationToken: cancellationToken);
 
-        query.Positions = positions.Select(position => new PositionListItemViewModel(
+        ViewData["Pagination"] = DisplayPagination.Create(Request, result.TotalCount, result.Page);
+        query.Positions = result.Items.Select(position => new PositionListItemViewModel(
             position.PositionId,
             position.Code,
             position.Title,

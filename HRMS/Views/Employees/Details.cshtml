@@ -25,7 +25,7 @@
                 <tr><th scope="row">@T["Name"]</th><td><bdi dir="auto">@Model.FirstName @Model.LastName</bdi></td></tr>
                 <tr><th scope="row">@T["WorkEmail"]</th><td><bdi dir="ltr">@Model.WorkEmail</bdi></td></tr>
                 <tr><th scope="row">@T["Phone"]</th><td><bdi dir="ltr">@(Model.PhoneNumber ?? "—")</bdi></td></tr>
-                <tr><th scope="row">@T["HireDate"]</th><td><bdi dir="ltr">@Model.HireDate.ToString("yyyy-MM-dd")</bdi></td></tr>
+                <tr><th scope="row">@T["HireDate"]</th><td><bdi dir="auto">@Model.HireDate.ToString("d", System.Globalization.CultureInfo.CurrentCulture)</bdi></td></tr>
                 <tr><th scope="row">@T["EmploymentStatus"]</th><td><bdi dir="auto">@T.LocalizeValue("Employment.", Model.EmploymentStatus)</bdi></td></tr>
                 <tr><th scope="row">@T["EmploymentType"]</th><td><bdi dir="auto">@T.LocalizeValue("EmploymentType.", Model.EmploymentType)</bdi></td></tr>
                 <tr><th scope="row">@T["Department"]</th><td><bdi dir="auto">@Model.DepartmentName</bdi></td></tr>

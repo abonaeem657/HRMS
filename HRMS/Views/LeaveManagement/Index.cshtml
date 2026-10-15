@@ -1,5 +1,4 @@
 @using HRMS.Application.Identity
-@{ var listing = DisplayPagination.Slice(Model.Requests, Context.Request); }
 @model HRMS.Models.LeaveManagement.LeaveListViewModel
 @{
     ViewData["Title"] = T["LeavePageTitle"].Value;
@@ -56,20 +55,20 @@
         {
             <tr><td colspan="9" class="text-center text-muted py-4">@T["NoLeaveRequests"]</td></tr>
         }
-        @foreach (var request in listing.Items)
+        @foreach (var request in Model.Requests)
         {
             <tr>
                 <td>@request.EmployeeNumber - @request.EmployeeName</td>
                 <td>@request.DepartmentName</td>
                 <td>@request.LeaveTypeNameAr (@request.LeaveTypeName)</td>
-                <td>@request.StartDate.ToString("yyyy-MM-dd") @request.StartTime?.ToString("HH:mm") — @request.EndDate.ToString("yyyy-MM-dd") @request.EndTime?.ToString("HH:mm")</td>
+                <td>@request.StartDate.ToString("d", System.Globalization.CultureInfo.CurrentCulture) @request.StartTime?.ToString("t", System.Globalization.CultureInfo.CurrentCulture) — @request.EndDate.ToString("d", System.Globalization.CultureInfo.CurrentCulture) @request.EndTime?.ToString("t", System.Globalization.CultureInfo.CurrentCulture)</td>
                 <td>@request.TotalDays</td>
                 <td>@T["Status." + request.Status]</td>
                 <td class="text-break">@request.Reason</td>
                 <td>
                     @if (request.ReviewedAtUtc.HasValue)
                     {
-                        <span>@request.ReviewedByName · @BusinessClock.ToLocal(request.ReviewedAtUtc)?.ToString("yyyy-MM-dd HH:mm") @T["JordanTime"]</span>
+                        <span>@request.ReviewedByName · @BusinessClock.ToLocal(request.ReviewedAtUtc)?.ToString("g", System.Globalization.CultureInfo.CurrentCulture) @T["JordanTime"]</span>
                         @if (!string.IsNullOrWhiteSpace(request.ReviewNotes))
                         {
                             <div class="small text-muted">@request.ReviewNotes</div>
@@ -107,4 +106,4 @@
     </table>
 </div>
 
-<partial name="_ListPagination" model="listing.Pagination" />
+<partial name="_ListPagination" model="@(ViewData["Pagination"])" />

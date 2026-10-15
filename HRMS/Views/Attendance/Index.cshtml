@@ -118,12 +118,12 @@
         @foreach (var record in Model.Records)
         {
             <tr>
-                <td>@record.WorkDate.ToString("yyyy-MM-dd")</td>
+                <td>@record.WorkDate.ToString("d", System.Globalization.CultureInfo.CurrentCulture)</td>
                 <td>@record.EmployeeNumber</td>
                 <td>@record.EmployeeName</td>
                 <td>@record.DepartmentName</td>
-                <td>@BusinessClock.ToLocal(record.CheckInUtc)?.ToString("HH:mm")</td>
-                <td>@BusinessClock.ToLocal(record.CheckOutUtc)?.ToString("HH:mm")</td>
+                <td>@BusinessClock.ToLocal(record.CheckInUtc)?.ToString("t", System.Globalization.CultureInfo.CurrentCulture)</td>
+                <td>@BusinessClock.ToLocal(record.CheckOutUtc)?.ToString("t", System.Globalization.CultureInfo.CurrentCulture)</td>
                 <td>@record.TotalHours.ToString("F2")</td>
                 <td>
                     @T["Status." + record.Status]

@@ -74,7 +74,7 @@ public sealed class HomeController(
         var managerScopeValid = false;
         if (isDepartmentManager && linkedEmployee is not null)
         {
-            var department = await departmentService.GetByIdAsync(linkedEmployee.DepartmentId, cancellationToken);
+            var department = await departmentService.GetByIdAsync(linkedEmployee.DepartmentId, cancellationToken, includeEmployees: false);
             managerScopeValid = department?.ManagerEmployeeId == linkedEmployee.EmployeeId;
             if (managerScopeValid)
             {
@@ -88,7 +88,7 @@ public sealed class HomeController(
         var model = new HomeDashboardViewModel
         {
             DisplayName = linkedEmployee is null
-                ? (User.Identity?.Name?.Split('@')[0] ?? "مستخدم النظام")
+                ? (User.Identity?.Name?.Split('@')[0] ?? localizer["SystemUser"].Value)
                 : $"{linkedEmployee.FirstName} {linkedEmployee.LastName}",
             Email = User.Identity?.Name ?? string.Empty,
             RoleName = roleName,
@@ -118,17 +118,17 @@ public sealed class HomeController(
             model = model.WithSummary(await reportingService.GetDashboardAsync(
                 from, to, isDepartmentManager ? departmentId : null,
                 includeRecentActivity: canViewAudit,
-                cancellationToken));
+                cancellationToken, new DashboardPaging(new(1, 1), new(1, 1), new(1, 1))));
         }
 
         if (canViewHrData)
         {
             var employeePage = await employeeService.SearchAsync(
                 new EmployeeListQuery(null, null, null, "EmployeeNumber", false, 1, 1), cancellationToken);
-            var departments = await departmentService.GetListAsync(new DepartmentListQuery(null, null), cancellationToken);
-            var positions = await positionService.GetListAsync(new PositionListQuery(null, null, null), cancellationToken);
-            model = model.WithCounts(employeePage.TotalCount, departments.Count, positions.Count,
-                isAdmin ? (await userAccountService.GetAccountsAsync(cancellationToken)).Count : 0);
+            var departmentCount = await departmentService.CountAsync(cancellationToken);
+            var positionCount = await positionService.CountAsync(cancellationToken);
+            model = model.WithCounts(employeePage.TotalCount, departmentCount, positionCount,
+                isAdmin ? await userAccountService.CountAsync(cancellationToken) : 0);
         }
 
         if (linkedEmployee is not null && (isEmployee || isDepartmentManager))
@@ -140,7 +140,7 @@ public sealed class HomeController(
                     FromDate: new DateOnly(today.Year, today.Month, 1),
                     ToDate: today), cancellationToken),
                 await leaveService.GetLeaveRequestsAsync(new LeaveFilter(
-                    EmployeeId: linkedEmployee.EmployeeId, Year: today.Year), cancellationToken));
+                    EmployeeId: linkedEmployee.EmployeeId, Year: today.Year, Page: 1, PageSize: 4), cancellationToken));
         }
 
         return View(model);

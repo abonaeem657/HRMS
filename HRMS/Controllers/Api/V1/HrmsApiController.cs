@@ -294,23 +294,23 @@ public sealed class HrmsApiController(
         new()
         {
             Status = status,
-            Title = status == 404 ? "Resource not found" : "Request failed",
+            Title = status == 404 ? HRMS.Application.Common.Messages.Get("ResourceNotFoundTitle") : HRMS.Application.Common.Messages.Get("RequestFailedTitle"),
             Detail = detail
         };
 }
 
 public sealed class CreateLeaveRequestRequest
 {
-    [System.ComponentModel.DataAnnotations.Range(1, int.MaxValue)]
+    [System.ComponentModel.DataAnnotations.Range(1, int.MaxValue, ErrorMessage = "ValidationRange")]
     public int LeaveTypeId { get; set; }
 
-    [System.ComponentModel.DataAnnotations.Required]
+    [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "ValidationRequired")]
     public DateOnly StartDate { get; set; }
 
-    [System.ComponentModel.DataAnnotations.Required]
+    [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "ValidationRequired")]
     public DateOnly EndDate { get; set; }
 
-    [System.ComponentModel.DataAnnotations.Required]
-    [System.ComponentModel.DataAnnotations.StringLength(1000)]
+    [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "ValidationRequired")]
+    [System.ComponentModel.DataAnnotations.StringLength(1000, ErrorMessage = "ValidationMaxLength")]
     public string Reason { get; set; } = string.Empty;
 }

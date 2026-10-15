@@ -10,7 +10,7 @@ public sealed class PersistenceExceptionFilter : IExceptionFilter
         var concurrency = context.Exception is DbUpdateConcurrencyException or HRMS.Application.Common.DataConcurrencyException;
         var duplicate = context.Exception is DbUpdateException { InnerException: SqlException { Number: 2601 or 2627 } } or HRMS.Application.Common.DataWriteException { IsUnique: true };
         if (!concurrency && !duplicate) return;
-        context.Result = new ObjectResult(new ProblemDetails { Status = 409, Title = "Data conflict",
+        context.Result = new ObjectResult(new ProblemDetails { Status = 409, Title = HRMS.Application.Common.Messages.Get("DataConflictTitle"),
             Detail = concurrency ? HRMS.Application.Common.Messages.Get("ConcurrentEdit") : HRMS.Application.Common.Messages.Get("DuplicateIdentifier") }) { StatusCode = 409 };
         context.ExceptionHandled = true;
     }

@@ -5,6 +5,8 @@ namespace HRMS.Models.Auditing;
 public sealed class AuditLogListViewModel
 {
     public string? Search { get; set; }
+    public string? SortBy { get; set; }
+    public bool SortDescending { get; set; } = true;
 
     public IReadOnlyList<AuditLogEntry> Items { get; set; } =
         Array.Empty<AuditLogEntry>();

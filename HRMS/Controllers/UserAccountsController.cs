@@ -1,3 +1,4 @@
+using HRMS.Models;
 using HRMS.Application.Identity;
 using HRMS.Models.Identity;
 using HRMS.Resources;
@@ -19,11 +20,12 @@ public sealed class UserAccountsController(
             role => role.Name,
             role => localizer[role.DisplayName].Value);
 
-        var accounts = await userAccountService.GetAccountsAsync(cancellationToken);
+        var result = await userAccountService.SearchAccountsAsync(DisplayPagination.Request(Request), cancellationToken);
+        ViewData["Pagination"] = DisplayPagination.Create(Request, result.TotalCount, result.Page);
 
         return View(new UserAccountListViewModel
         {
-            Accounts = accounts.Select(account => new UserAccountRowViewModel(
+            Accounts = result.Items.Select(account => new UserAccountRowViewModel(
                 account.UserId,
                 account.Email,
                 roleNames.GetValueOrDefault(account.RoleName, account.RoleName),
@@ -69,8 +71,7 @@ public sealed class UserAccountsController(
 
     public async Task<IActionResult> Edit(string id, CancellationToken cancellationToken)
     {
-        var account = (await userAccountService.GetAccountsAsync(cancellationToken))
-            .SingleOrDefault(item => item.UserId == id);
+        var account = await userAccountService.GetAccountAsync(id, cancellationToken);
 
         if (account is null)
             return NotFound();
@@ -148,8 +149,7 @@ public sealed class UserAccountsController(
         string id,
         CancellationToken cancellationToken)
     {
-        var account = (await userAccountService.GetAccountsAsync(cancellationToken))
-            .SingleOrDefault(item => item.UserId == id);
+        var account = await userAccountService.GetAccountAsync(id, cancellationToken);
 
         return account is null
             ? NotFound()

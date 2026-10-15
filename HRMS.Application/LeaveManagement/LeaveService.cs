@@ -17,35 +17,30 @@ public sealed class LeaveService(
     ILogger<LeaveService> logger,
     HRMS.Application.Identity.IRecordAccess access) : ILeaveService
 {
-    public async Task<IReadOnlyList<LeaveTypeDto>> GetLeaveTypesAsync(
-        bool onlyActive = true,
-        CancellationToken cancellationToken = default) =>
-        await dbContext.LeaveTypes
-            .ForRead()
-            .Where(type => !onlyActive || type.IsActive)
-            .OrderBy(type => type.Name)
-            .Select(type => new LeaveTypeDto(
-                type.LeaveTypeId,
-                type.Name,
-                type.NameAr,
-                type.DefaultDaysPerYear,
-                type.IsPaid,
-                type.IsActive))
-            .ToListAsync(cancellationToken);
+    private IQueryable<LeaveTypeDto> TypeQuery(bool onlyActive) => dbContext.LeaveTypes.ForRead()
+        .Where(type => !onlyActive || type.IsActive).OrderBy(type => type.Name).ThenBy(type => type.LeaveTypeId)
+        .Select(type => new LeaveTypeDto(type.LeaveTypeId, type.Name, type.NameAr, type.DefaultDaysPerYear, type.IsPaid, type.IsActive));
 
-    public async Task<IReadOnlyList<LeaveRequestDto>> GetLeaveRequestsAsync(
-        LeaveFilter filter,
-        CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<LeaveTypeDto>> GetLeaveTypesAsync(bool onlyActive = true, CancellationToken cancellationToken = default) =>
+        await TypeQuery(onlyActive).ToListAsync(cancellationToken);
+
+    public Task<PageResult<LeaveTypeDto>> SearchTypesAsync(bool onlyActive, PageRequest page, CancellationToken cancellationToken = default) =>
+        TypeQuery(onlyActive).ToPageAsync(page, cancellationToken);
+
+    private IQueryable<LeaveRequestDto> RequestQuery(LeaveFilter filter) =>
+        ApplyFilter(dbContext.LeaveRequests.ForRead(), filter)
+            .OrderByDescending(request => request.AppliedAtUtc).ThenByDescending(request => request.LeaveRequestId).Select(ToDto());
+
+    public async Task<IReadOnlyList<LeaveRequestDto>> GetLeaveRequestsAsync(LeaveFilter filter, CancellationToken cancellationToken = default)
     {
-        var query = ApplyFilter(dbContext.LeaveRequests.ForRead(), filter);
-        query = query.OrderByDescending(request => request.AppliedAtUtc).ThenByDescending(request => request.LeaveRequestId);
+        var query = RequestQuery(filter);
         if (filter.Page is int page)
             query = query.Skip((Math.Clamp(page, 1, 100000) - 1) * Math.Clamp(filter.PageSize, 1, 100)).Take(Math.Clamp(filter.PageSize, 1, 100));
-        return await query
-            .Select(ToDto())
-            .ToListAsync(cancellationToken);
+        return await query.ToListAsync(cancellationToken);
     }
 
+    public Task<PageResult<LeaveRequestDto>> SearchRequestsAsync(LeaveFilter filter, PageRequest page, CancellationToken cancellationToken = default) =>
+        RequestQuery(filter).ToPageAsync(page, cancellationToken);
     public async Task<LeaveRequestDto?> GetLeaveRequestByIdAsync(
         int id,
         CancellationToken cancellationToken = default) =>
@@ -62,7 +57,7 @@ public sealed class LeaveService(
         if (!await access.CanAccessEmployeeAsync(command.EmployeeId, false, cancellationToken))
             return LeaveOperationResult.Failure(HRMS.Application.Common.Messages.Get("Extra000"));
         if (command.StartDate == command.EndDate && command.StartTime.HasValue && command.EndTime.HasValue && command.EndTime <= command.StartTime)
-            return LeaveOperationResult.Failure("وقت النهاية يجب أن يكون بعد البداية عند تحديد الوقتين. / End time must follow start time when both are specified.");
+            return LeaveOperationResult.Failure(Messages.Get("LeaveTimeOrderInvalid"));
         if (command.StartDate == default || command.EndDate < command.StartDate ||
             string.IsNullOrWhiteSpace(command.Reason) || command.Reason.Trim().Length > 1000)
         {
@@ -196,11 +191,13 @@ public sealed class LeaveService(
         }
     }
 
-    public async Task<IReadOnlyList<LeaveBalanceDto>> GetEmployeeLeaveBalancesAsync(
-        int employeeId,
-        int year,
-        CancellationToken cancellationToken = default)
-    {
+    public async Task<IReadOnlyList<LeaveBalanceDto>> GetEmployeeLeaveBalancesAsync(int employeeId, int year, CancellationToken cancellationToken = default) =>
+        (await BalancePageAsync(employeeId, year, new PageRequest(ShowAll: true), cancellationToken)).Items;
+
+    public Task<PageResult<LeaveBalanceDto>> SearchBalancesAsync(int employeeId, int year, PageRequest page, CancellationToken cancellationToken = default) =>
+        BalancePageAsync(employeeId, year, page, cancellationToken);
+
+    private async Task<PageResult<LeaveBalanceDto>> BalancePageAsync(int employeeId, int year, PageRequest page, CancellationToken cancellationToken)    {
         if (year is < 2000 or > 2100)
         {
             throw new ArgumentOutOfRangeException(nameof(year), "Leave balance year must be between 2000 and 2100.");
@@ -208,9 +205,9 @@ public sealed class LeaveService(
 
         var yearStart = new DateOnly(year, 1, 1);
         var yearEnd = new DateOnly(year, 12, 31);
-        var types = await dbContext.LeaveTypes
+        var typePage = await dbContext.LeaveTypes
             .ForRead()
-            .Where(type => type.IsActive)
+            .Where(type => type.IsActive).OrderBy(type => type.Name).ThenBy(type => type.LeaveTypeId)
             .Select(type => new
             {
                 type.LeaveTypeId,
@@ -218,12 +215,14 @@ public sealed class LeaveService(
                 type.NameAr,
                 type.DefaultDaysPerYear
             })
-            .ToListAsync(cancellationToken);
+            .ToPageAsync(page, cancellationToken);
+        var types = typePage.Items;
+        var typeIds = types.Select(type => type.LeaveTypeId).ToArray();
 
         var reserved = await dbContext.LeaveRequests
             .ForRead()
             .Where(request =>
-                request.EmployeeId == employeeId &&
+                request.EmployeeId == employeeId && typeIds.Contains(request.LeaveTypeId) &&
                 (request.Status == "Approved" || request.Status == "Pending") &&
                 request.StartDate <= yearEnd &&
                 request.EndDate >= yearStart)
@@ -236,7 +235,7 @@ public sealed class LeaveService(
             })
             .ToListAsync(cancellationToken);
 
-        return types.Select(type =>
+        var items = types.Select(type =>
         {
             var used = reserved
                 .Where(request => request.LeaveTypeId == type.LeaveTypeId && request.Status == "Approved")
@@ -252,6 +251,7 @@ public sealed class LeaveService(
                 used,
                 Math.Max(0, type.DefaultDaysPerYear - used - pending), pending);
         }).ToList();
+        return new(items, typePage.TotalCount, typePage.Page, typePage.PageSize);
     }
 
     public async Task<LeaveOperationResult> CreateLeaveTypeAsync(

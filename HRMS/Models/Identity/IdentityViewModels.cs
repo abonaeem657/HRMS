@@ -108,7 +108,7 @@ public sealed class UserAccountCreateViewModel
 
 public sealed class UserAccountEditViewModel
 {
-    [Required]
+    [Required(ErrorMessage = "ValidationRequired")]
     public string UserId { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "EmailRequired")]
@@ -132,7 +132,7 @@ public sealed class UserAccountEditViewModel
 
 public sealed class ResetPasswordViewModel
 {
-    [Required]
+    [Required(ErrorMessage = "ValidationRequired")]
     public string UserId { get; set; } = string.Empty;
 
     public string Email { get; set; } = string.Empty;

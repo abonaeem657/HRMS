@@ -13,13 +13,13 @@
     var signedIn = User.Identity?.IsAuthenticated == true;
 }
 <!DOCTYPE html>
-<html lang="@CultureInfo.CurrentUICulture.Name" dir="@(arabic ? "rtl" : "ltr")">
+<html lang="@CultureInfo.CurrentUICulture.Name" dir="@(T["UiLtr"].Value)">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
     <title>@ViewData["Title"] - HRMS</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/@(arabic ? "bootstrap.rtl.min.css" : "bootstrap.min.css")" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/@(T["UiBootstrapMinCss"].Value)" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HRMS.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/workspace.css" asp-append-version="true" />
@@ -46,22 +46,22 @@
                         <li class="nav-item"><a class="nav-link @(activeController == "Home" && activeAction == "Index" ? "active" : "")" asp-controller="Home" asp-action="Index">@T["Home"]</a></li>
                         @if (canReadHr)
                         {
-                            <li class="nav-section">@(arabic ? "الأفراد والمؤسسة" : "People & organization")</li>
+                            <li class="nav-section">@(T["UiPeopleOrganization"].Value)</li>
                             <li class="nav-item"><a class="nav-link @(activeController == "Employees" ? "active" : "")" asp-controller="Employees" asp-action="Index">@T["Employees"]</a></li>
                             <li class="nav-item"><a class="nav-link @(activeController == "Departments" ? "active" : "")" asp-controller="Departments" asp-action="Index">@T["Departments"]</a></li>
                             <li class="nav-item"><a class="nav-link @(activeController == "Positions" ? "active" : "")" asp-controller="Positions" asp-action="Index">@T["JobTitles"]</a></li>
                         }
-                        @if (canUseAttendance || canUseLeaves) { <li class="nav-section">@(arabic ? "العمل اليومي" : "Daily work")</li> }
+                        @if (canUseAttendance || canUseLeaves) { <li class="nav-section">@(T["UiDailyWork"].Value)</li> }
                         @if (canUseAttendance) { <li class="nav-item"><a class="nav-link @(activeController == "Attendance" ? "active" : "")" asp-controller="Attendance" asp-action="Index">@T["Attendance"]</a></li> }
                         @if (canUseLeaves) { <li class="nav-item"><a class="nav-link @(activeController == "LeaveManagement" && activeAction != "MyReport" ? "active" : "")" asp-controller="LeaveManagement" asp-action="Index">@T["Leave"]</a></li> }
                         @if (canUseLeaves) { <li class="nav-item"><a class="nav-link @(activeController == "LeaveManagement" && activeAction == "MyReport" ? "active" : "")" asp-controller="LeaveManagement" asp-action="MyReport">@T["MyLeaveReport"]</a></li> }
-                        @if (canViewReports || canViewAudit) { <li class="nav-section">@(arabic ? "المتابعة والإدارة" : "Insights & administration")</li> }
+                        @if (canViewReports || canViewAudit) { <li class="nav-section">@(T["UiInsightsAdministration"].Value)</li> }
                         @if (canViewReports) { <li class="nav-item"><a class="nav-link @(activeController == "Reports" ? "active" : "")" asp-controller="Reports" asp-action="Index">@T["Reports"]</a></li> }
                         @if (canViewAudit) { <li class="nav-item"><a class="nav-link @(activeController == "AuditLogs" ? "active" : "")" asp-controller="AuditLogs" asp-action="Index">@T["AuditLog"]</a></li> }
                         @if (User.IsInRole(IdentityRoles.SystemAdministrator)) { <li class="nav-item"><a class="nav-link @(activeController == "UserAccounts" ? "active" : "")" asp-controller="UserAccounts" asp-action="Index">@T["Users"]</a></li> }
                         @if (signedIn) {
-                            <li class="nav-section">@(arabic ? "المساعدة والحساب" : "Help & account")</li>
-                            <li class="nav-item"><a class="nav-link @(activeAction == "Guide" ? "active" : "")" asp-controller="Home" asp-action="Guide">@(arabic ? "دليل الاستخدام" : "Getting started")</a></li>
+                            <li class="nav-section">@(T["UiHelpAccount"].Value)</li>
+                            <li class="nav-item"><a class="nav-link @(activeAction == "Guide" ? "active" : "")" asp-controller="Home" asp-action="Guide">@(T["UiGettingStarted"].Value)</a></li>
                             <li class="nav-item"><a class="nav-link @(activeController == "MyProfile" ? "active" : "")" asp-controller="MyProfile" asp-action="Index">@T["MyProfile"]</a></li>
                             <li class="nav-item"><a class="nav-link @(activeAction == "ChangePassword" ? "active" : "")" asp-controller="Account" asp-action="ChangePassword">@T["ChangePassword"]</a></li>
                         }
@@ -87,7 +87,7 @@
             @if (signedIn)
             {
                 <div class="workspace-topbar">
-                    <nav aria-label="@(arabic ? "مسار الصفحة" : "Breadcrumb")">@if (activeController != "Home" || activeAction != "Index") { <a asp-controller="Home" asp-action="Index">@T["Home"]</a><span aria-hidden="true"> / </span> }<span>@ViewData["Title"]</span></nav>
+                    <nav aria-label="@(T["UiBreadcrumb"].Value)">@if (activeController != "Home" || activeAction != "Index") { <a asp-controller="Home" asp-action="Index">@T["Home"]</a><span aria-hidden="true"> / </span> }<span>@ViewData["Title"]</span></nav>
                 </div>
                 <partial name="_WorkspaceNavigation" />
             }

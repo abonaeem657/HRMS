@@ -10,7 +10,7 @@ public interface IReportingService
         DateOnly toDate,
         int? departmentId = null,
         bool includeRecentActivity = true,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default, DashboardPaging? paging = null);
 
     Task<ReportPage<EmployeeReportItem>> GetEmployeeDirectoryReportAsync(
         EmployeeReportFilter filter,
@@ -27,6 +27,8 @@ public interface IReportingService
     Task<IReadOnlyList<DepartmentHeadcountItem>> GetDepartmentHeadcountReportAsync(
         int? departmentId = null,
         CancellationToken cancellationToken = default);
+
+    Task<ReportPage<DepartmentHeadcountItem>> GetDepartmentHeadcountPageAsync(int? departmentId, HRMS.Application.Common.PageRequest page, CancellationToken cancellationToken = default, string? sortBy = null, bool sortDescending = false);
 
     Task<LeaveDecisionSummary> GetLeaveDecisionSummaryAsync(
         DateOnly fromDate,
