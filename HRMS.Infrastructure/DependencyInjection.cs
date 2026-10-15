@@ -56,7 +56,7 @@ public static class DependencyInjection
                 options.Password.RequireNonAlphanumeric = true;
                 options.Lockout.AllowedForNewUsers = true;
                 options.Lockout.MaxFailedAccessAttempts = 5;
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromHours(1);
                 options.SignIn.RequireConfirmedAccount = false;
             })
             .AddEntityFrameworkStores<HRMSDbContext>()

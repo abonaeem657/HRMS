@@ -26,7 +26,7 @@ public sealed class EmployeeReportViewModel
     public string? SortBy { get; set; }
     public bool SortDescending { get; set; }
     public int Page { get; set; }
-    public int PageSize { get; set; }
+    public int PageSize { get; set; } = 6;
     public ReportPage<EmployeeReportItem> Results { get; set; } =
         new(Array.Empty<EmployeeReportItem>(), 0, 1, 25);
 }
@@ -39,7 +39,7 @@ public sealed class AttendanceReportViewModel
     public DateOnly? FromDate { get; set; }
     public DateOnly? ToDate { get; set; }
     public int Page { get; set; }
-    public int PageSize { get; set; }
+    public int PageSize { get; set; } = 6;
     public ReportPage<AttendanceReportItem> Results { get; set; } =
         new(Array.Empty<AttendanceReportItem>(), 0, 1, 25);
 }
@@ -53,7 +53,7 @@ public sealed class LeaveReportViewModel
     public string? Status { get; set; }
     public int? Year { get; set; }
     public int Page { get; set; }
-    public int PageSize { get; set; }
+    public int PageSize { get; set; } = 6;
     public ReportPage<LeaveReportItem> Results { get; set; } =
         new(Array.Empty<LeaveReportItem>(), 0, 1, 25);
 }

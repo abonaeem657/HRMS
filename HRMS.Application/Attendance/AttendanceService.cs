@@ -45,6 +45,7 @@ public sealed class AttendanceService(
         var query = FilterRecords(filter);
         var pageSize = Math.Clamp(filter.PageSize, 1, MaximumPageSize);
         var totalCount = await query.CountAsync(cancellationToken);
+        if (filter.ShowAll) pageSize = Math.Max(1, totalCount);
         var totalPages = Math.Max(1, (int)Math.Ceiling(totalCount / (double)pageSize));
         var page = Math.Clamp(filter.Page, 1, totalPages);
         var records = await query

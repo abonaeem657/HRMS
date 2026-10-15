@@ -9,7 +9,7 @@ public sealed record EmployeeReportFilter(
     string? SortBy = null,
     bool SortDescending = false,
     int Page = 1,
-    int PageSize = 25);
+    int PageSize = 25, bool ShowAll = false);
 
 public sealed record EmployeeReportItem(
     string EmployeeNumber,
@@ -29,7 +29,7 @@ public sealed record AttendanceReportFilter(
     DateOnly? FromDate = null,
     DateOnly? ToDate = null,
     int Page = 1,
-    int PageSize = 25);
+    int PageSize = 25, bool ShowAll = false);
 
 public sealed record AttendanceReportItem(
     string EmployeeNumber,
@@ -50,7 +50,7 @@ public sealed record LeaveReportFilter(
     string? Status = null,
     int? Year = null,
     int Page = 1,
-    int PageSize = 25);
+    int PageSize = 25, bool ShowAll = false);
 
 public sealed record LeaveReportItem(
     string EmployeeNumber,

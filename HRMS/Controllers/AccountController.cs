@@ -79,11 +79,20 @@ public sealed class AccountController(
                 user.Id,
                 [],
                 "Failure"), cancellationToken);
-            ModelState.AddModelError(
-                string.Empty,
-                result.IsLockedOut
-                    ? T["SignInTemporarilyLocked"].Value
-                    : T["SignInFailed"].Value);
+            if (result.IsLockedOut)
+            {
+                var until = await userManager.GetLockoutEndDateAsync(user);
+                var minutes = Math.Max(1, (int)Math.Ceiling(((until ?? DateTimeOffset.UtcNow.AddHours(1)) - DateTimeOffset.UtcNow).TotalMinutes));
+                ModelState.AddModelError(string.Empty, T["LoginLockedMinutes", minutes].Value);
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, T["SignInFailed"].Value);
+                var failures = await userManager.GetAccessFailedCountAsync(user);
+                var remaining = Math.Max(0, userManager.Options.Lockout.MaxFailedAccessAttempts - failures);
+                if (failures >= 2 && remaining > 0)
+                    model.AttemptWarning = T["LoginAttemptsWarning", remaining].Value;
+            }
             return View(model);
         }
 

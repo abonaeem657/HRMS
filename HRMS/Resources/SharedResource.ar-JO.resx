@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -1526,5 +1526,20 @@
   </data>
   <data name="MyProfile">
     <value>ملفي الشخصي</value>
+  </data>
+  <data name="ResultPages" xml:space="preserve">
+    <value>صفحات النتائج</value>
+  </data>
+  <data name="LoginAttemptsWarning" xml:space="preserve">
+    <value>بقيت لك {0} محاولات. بعد استنفادها سيُقفل تسجيل الدخول إلى هذا الحساب لمدة ساعة.</value>
+  </data>
+  <data name="ShowSixPerPage" xml:space="preserve">
+    <value>عرض ٦ بكل صفحة</value>
+  </data>
+  <data name="LoginLockedMinutes" xml:space="preserve">
+    <value>تسجيل الدخول إلى هذا الحساب مقفل مؤقتًا بسبب المحاولات الخاطئة. يمكنك المحاولة بعد {0} دقيقة.</value>
+  </data>
+  <data name="ShowAllResults" xml:space="preserve">
+    <value>عرض الكل</value>
   </data>
 </root>

@@ -145,6 +145,19 @@ public partial class SqlWorkflowTests
                 }
                 if (role.Name == IdentityRoles.SystemAdministrator)
                 {
+                    await page.GotoAsync(address + "/Employees");
+                    Assert.Equal(6, await page.Locator("#resultsContainer tbody tr").CountAsync());
+                    await page.EvaluateAsync("window.__pagingMarker = 'preserved'");
+                    await page.Locator(".list-pagination a[href*='Page=2']").ClickAsync();
+                    await page.WaitForURLAsync("**/*Page=2*");
+                    Assert.Equal(1, await page.Locator("#resultsContainer tbody tr").CountAsync());
+                    Assert.Equal("preserved", await page.EvaluateAsync<string>("window.__pagingMarker"));
+                    await page.Locator(".list-pagination a[href*='ShowAll=true']").ClickAsync();
+                    await page.WaitForURLAsync("**/*ShowAll=true*");
+                    Assert.Equal(7, await page.Locator("#resultsContainer tbody tr").CountAsync());
+                    await page.Locator(".list-pagination a[href*='ShowAll=false']").ClickAsync();
+                    await page.WaitForURLAsync("**/*ShowAll=false*");
+                    Assert.Equal(6, await page.Locator("#resultsContainer tbody tr").CountAsync());
                     await page.GotoAsync(address + "/UserAccounts/Create");
                     await page.Locator("#Email").FillAsync("browser-created@example.test");
                     await page.Locator("#Password").FillAsync(password);

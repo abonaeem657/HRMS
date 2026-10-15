@@ -7,7 +7,7 @@ public sealed record EmployeeListQuery(
     string? SortBy,
     bool SortDescending,
     int Page,
-    int PageSize)
+    int PageSize, bool ShowAll = false)
 {
     public const string AllStatuses = "__all__";
 }

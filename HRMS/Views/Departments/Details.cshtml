@@ -1,4 +1,5 @@
 @model HRMS.Models.Organization.DepartmentDetailsViewModel
+@{ var listing = DisplayPagination.Slice(Model.Employees, Context.Request); }
 @{
     ViewData["Title"] = T["DepartmentDetails"].Value;
 }
@@ -43,7 +44,7 @@
                 }
                 else
                 {
-                    @foreach (var employee in Model.Employees)
+                    @foreach (var employee in listing.Items)
                     {
                         <tr>
                             <td>@employee.EmployeeNumber</td>
@@ -58,3 +59,5 @@
     </div>
     <a asp-action="Index" class="btn btn-outline-secondary">@T["BackToDepartments"]</a>
 </div>
+
+<partial name="_ListPagination" model="listing.Pagination" />

@@ -1,4 +1,5 @@
 @model HRMS.Models.Organization.PositionListViewModel
+@{ var listing = DisplayPagination.Slice(Model.Positions, Context.Request); }
 <div class="table-responsive">
     <table class="table table-striped table-hover align-middle mb-0 hrms-table">
         <thead><tr><th>@T["Code"]</th><th>@T["PositionTitle"]</th><th>@T["Department"]</th><th>@T["Employees"]</th><th>@T["Status"]</th><th>@T["Actions"]</th></tr></thead>
@@ -9,7 +10,7 @@
             }
             else
             {
-                @foreach (var position in Model.Positions)
+                @foreach (var position in listing.Items)
                 {
                     <tr>
                         <td>@position.Code</td><td>@position.Title</td><td>@(position.DepartmentName ?? T["General"].Value)</td>
@@ -39,3 +40,5 @@
         </tbody>
     </table>
 </div>
+
+<partial name="_ListPagination" model="listing.Pagination" />

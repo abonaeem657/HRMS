@@ -82,6 +82,7 @@ public sealed class AuditLogService(
         }
 
         var totalCount = await logs.CountAsync(cancellationToken);
+        if (query.ShowAll) pageSize = Math.Max(1, totalCount);
         var totalPages = Math.Max(1, (int)Math.Ceiling(totalCount / (double)pageSize));
         var page = Math.Min(requestedPage, totalPages);
         var items = await logs

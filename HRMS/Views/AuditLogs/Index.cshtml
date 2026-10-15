@@ -10,6 +10,7 @@
     </div>
 
     <form method="get" asp-action="Index" class="row g-2 align-items-end mb-3">
+    <input type="hidden" name="ShowAll" value="@DisplayPagination.IsShowAll(Context.Request).ToString().ToLowerInvariant()" />
         <div class="col-12 col-md-6">
             <label for="audit-search" class="form-label">@T["Search"]</label>
             <input id="audit-search" name="Search" value="@Model.Search" class="form-control"
@@ -64,19 +65,5 @@
         </table>
     </div>
 
-    <nav aria-label="@T["AuditPages"].Value" class="mt-3">
-        <ul class="pagination justify-content-center flex-wrap">
-            <li class="page-item @(Model.Page <= 1 ? "disabled" : "")">
-                <a class="page-link" asp-action="Index" asp-route-search="@Model.Search"
-                   asp-route-page="@(Model.Page - 1)" asp-route-pageSize="@Model.PageSize">@T["Previous"]</a>
-            </li>
-            <li class="page-item disabled">
-                <span class="page-link">@Model.Page / @Model.TotalPages</span>
-            </li>
-            <li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : "")">
-                <a class="page-link" asp-action="Index" asp-route-search="@Model.Search"
-                   asp-route-page="@(Model.Page + 1)" asp-route-pageSize="@Model.PageSize">@T["Next"]</a>
-            </li>
-        </ul>
-    </nav>
+    <partial name="_ListPagination" model="@(ViewData["Pagination"])" />
 </div>

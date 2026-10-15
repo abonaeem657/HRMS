@@ -11,6 +11,16 @@
         modal = element ? bootstrap.Modal.getOrCreateInstance(element) : null;
     };
     bindModal();
+    document.addEventListener("click", event => {
+        const button = event.target.closest(".leave-type-edit");
+        if (!button) return;
+        for (const [id, key] of [["LeaveTypeId", "id"], ["Name", "name"], ["NameAr", "nameAr"], ["DefaultDaysPerYear", "days"]])
+            document.getElementById(id).value = button.dataset[key];
+        document.getElementById("IsPaid").checked = button.dataset.paid === "true";
+        document.getElementById("IsActive").checked = button.dataset.active === "true";
+        document.getElementById("Name").focus();
+    });
+
     document.addEventListener("hrms:content-updated", bindModal);
 
     const setStatus = (message, type = "success") => {

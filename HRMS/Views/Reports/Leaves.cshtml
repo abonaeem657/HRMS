@@ -4,6 +4,7 @@
 }
 <h1 class="h3 mb-3">@T["LeaveReport"]</h1>
 <form asp-action="Leaves" method="get" class="row g-2 align-items-end mb-3">
+    <input type="hidden" name="ShowAll" value="@DisplayPagination.IsShowAll(Context.Request).ToString().ToLowerInvariant()" />
     <div class="col-md-2"><label asp-for="DepartmentId" class="form-label">@T["Department"]</label><select asp-for="DepartmentId" class="form-select"><option value="">@T["All"]</option>@foreach (var option in Model.Options.Departments) { <option value="@option.Id">@option.Text</option> }</select></div>
     <div class="col-md-2"><label asp-for="EmployeeId" class="form-label">@T["Employee"]</label><select asp-for="EmployeeId" class="form-select"><option value="">@T["All"]</option>@foreach (var option in Model.Options.Employees) { <option value="@option.Id">@option.Text</option> }</select></div>
     <div class="col-md-2"><label asp-for="LeaveTypeId" class="form-label">@T["LeaveType"]</label><select asp-for="LeaveTypeId" class="form-select"><option value="">@T["All"]</option>@foreach (var option in Model.Options.LeaveTypes) { <option value="@option.Id">@option.Text</option> }</select></div>
@@ -16,4 +17,4 @@
 @if (Model.Results.Items.Count == 0) { <tr><td colspan="8" class="text-center text-muted">@T["NoResults"]</td></tr> }
 @foreach (var row in Model.Results.Items) { <tr><td>@row.EmployeeNumber</td><td>@row.FullName</td><td>@row.DepartmentName</td><td>@row.LeaveTypeName</td><td>@row.StartDate.ToString("yyyy-MM-dd") - @row.EndDate.ToString("yyyy-MM-dd")</td><td>@row.TotalDays</td><td>@T["Status." + row.Status]</td><td>@BusinessClock.ToLocal(row.AppliedAtUtc)?.ToString("yyyy-MM-dd HH:mm")</td></tr> }
 </tbody></table></div>
-<partial name="_ReportPagination" model="@(new HRMS.Models.Reporting.ReportPaginationModel("Leaves", Model.Results.Page, Model.Results.TotalPages, Model.DepartmentId, null, Model.Status, null, null, Model.EmployeeId, null, null, Model.LeaveTypeId, Model.Year, PageSize: Model.PageSize))" />
+<partial name="_ListPagination" model="@(ViewData["Pagination"])" />

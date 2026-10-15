@@ -82,6 +82,7 @@ public sealed class EmployeeService(
 
         var pageSize = Math.Clamp(query.PageSize, 1, MaximumPageSize);
         var totalCount = await employees.CountAsync(cancellationToken);
+        if (query.ShowAll) pageSize = Math.Max(1, totalCount);
         var pageCount = Math.Max(1, (int)Math.Ceiling(totalCount / (double)pageSize));
         var page = Math.Clamp(query.Page, 1, pageCount);
         var items = await employees
@@ -344,7 +345,7 @@ public sealed class EmployeeService(
     public async Task<DeletedEmployeePage> GetDeletedAsync(
         int page = 1,
         int pageSize = 25,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default, bool showAll = false)
     {
         pageSize = Math.Clamp(pageSize, 1, MaximumPageSize);
         var query = dbContext.Employees
@@ -352,6 +353,7 @@ public sealed class EmployeeService(
             .ForRead()
             .Where(employee => employee.IsDeleted);
         var totalCount = await query.CountAsync(cancellationToken);
+        if (showAll) pageSize = Math.Max(1, totalCount);
         var totalPages = Math.Max(1, (int)Math.Ceiling(totalCount / (double)pageSize));
         page = Math.Clamp(page, 1, totalPages);
         var items = await query

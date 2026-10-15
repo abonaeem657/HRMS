@@ -4,6 +4,7 @@
 }
 <h1 class="h3 mb-3">@T["EmployeeDirectory"]</h1>
 <form asp-action="Employees" method="get" class="row g-2 align-items-end mb-3">
+    <input type="hidden" name="ShowAll" value="@DisplayPagination.IsShowAll(Context.Request).ToString().ToLowerInvariant()" />
     <div class="col-md-2"><label asp-for="DepartmentId" class="form-label">@T["Department"]</label><select asp-for="DepartmentId" class="form-select"><option value="">@T["All"]</option>@foreach (var option in Model.Options.Departments) { <option value="@option.Id">@option.Text</option> }</select></div>
     <div class="col-md-2"><label asp-for="PositionId" class="form-label">@T["JobTitle"]</label><select asp-for="PositionId" class="form-select"><option value="">@T["All"]</option>@foreach (var option in Model.Options.Positions) { <option value="@option.Id">@option.Text</option> }</select></div>
     <div class="col-md-2"><label asp-for="Status" class="form-label">@T["Status"]</label><select asp-for="Status" class="form-select"><option value="">@T["All"]</option>@foreach (var status in Model.Options.EmploymentStatuses) { <option value="@status">@T.LocalizeValue("Employment.", status)</option> }</select></div>
@@ -16,4 +17,4 @@
 @if (Model.Results.Items.Count == 0) { <tr><td colspan="7" class="text-center text-muted">@T["NoResults"]</td></tr> }
 @foreach (var row in Model.Results.Items) { <tr><td>@row.EmployeeNumber</td><td>@row.FullName</td><td>@row.WorkEmail</td><td>@row.DepartmentName</td><td>@row.PositionTitle</td><td>@row.HireDate.ToString("yyyy-MM-dd")</td><td>@row.EmploymentStatus</td></tr> }
 </tbody></table></div>
-<partial name="_ReportPagination" model="@(new HRMS.Models.Reporting.ReportPaginationModel("Employees", Model.Results.Page, Model.Results.TotalPages, Model.DepartmentId, Model.PositionId, Model.Status, Model.HiredAfter, Model.HiredBefore, null, null, null, null, null, Model.SortBy, Model.SortDescending, Model.PageSize))" />
+<partial name="_ListPagination" model="@(ViewData["Pagination"])" />

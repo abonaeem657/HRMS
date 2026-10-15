@@ -21,4 +21,4 @@
     }
     </tbody>
 </table></div>
-<div class="d-flex justify-content-between align-items-center gap-2 p-3"><span class="small text-muted">@Model.TotalCount</span><nav aria-label="@T["EmployeePages"]"><ul class="pagination pagination-sm mb-0"><li class="page-item @(Model.Page <= 1 ? "disabled" : "")"><a class="page-link" asp-action="Deleted" asp-route-page="@(Model.Page - 1)" asp-route-pageSize="@Model.PageSize">‹</a></li><li class="page-item disabled"><span class="page-link">@Model.Page / @Model.TotalPages</span></li><li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : "")"><a class="page-link" asp-action="Deleted" asp-route-page="@(Model.Page + 1)" asp-route-pageSize="@Model.PageSize">›</a></li></ul></nav></div></div>
+<partial name="_ListPagination" model="@(ViewData["Pagination"])" /></div>

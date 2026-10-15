@@ -1,3 +1,4 @@
+using HRMS.Models;
 using HRMS.Application.Identity;
 using HRMS.Application.Reporting;
 using HRMS.Application.Employees;
@@ -82,8 +83,9 @@ public sealed class ReportsController(
                 model.SortBy,
                 model.SortDescending,
                 model.Page <= 0 ? 1 : model.Page,
-                model.PageSize <= 0 ? 25 : model.PageSize),
+                DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request)),
             cancellationToken);
+        ViewData["Pagination"] = DisplayPagination.Create(Request, model.Results.TotalCount, model.Results.Page);
         return View(model);
     }
 
@@ -118,8 +120,9 @@ public sealed class ReportsController(
                 model.FromDate,
                 model.ToDate,
                 model.Page <= 0 ? 1 : model.Page,
-                model.PageSize <= 0 ? 25 : model.PageSize),
+                DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request)),
             cancellationToken);
+        ViewData["Pagination"] = DisplayPagination.Create(Request, model.Results.TotalCount, model.Results.Page);
         return View(model);
     }
 
@@ -155,8 +158,9 @@ public sealed class ReportsController(
                 model.Status,
                 model.Year,
                 model.Page <= 0 ? 1 : model.Page,
-                model.PageSize <= 0 ? 25 : model.PageSize),
+                DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request)),
             cancellationToken);
+        ViewData["Pagination"] = DisplayPagination.Create(Request, model.Results.TotalCount, model.Results.Page);
         return View(model);
     }
 

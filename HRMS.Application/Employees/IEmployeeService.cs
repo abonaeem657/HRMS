@@ -36,7 +36,7 @@ public interface IEmployeeService
     Task<DeletedEmployeePage> GetDeletedAsync(
         int page = 1,
         int pageSize = 25,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default, bool showAll = false);
 
     Task<bool> RestoreAsync(
         int employeeId,

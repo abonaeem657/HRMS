@@ -16,6 +16,8 @@ This publishes Release to artifacts/publish and runs all test projects with Loca
 
 - Unit tests cover domain rules, access policies, time-zone boundaries and external-provider behavior.
 - Architecture tests check layer references, application service placement, scoped query contracts, controller dependencies and model/constraint metadata.
+- Login tests verify the warning after the second failure, one-hour lockout after the fifth, rejection of the correct password during lockout and successful login after expiry.
+- Results tests verify six rows, the next page, showing all 107 filtered employees and returning to six, with API/service page-size caps preserved. Browser acceptance exercises AJAX pagination.
 - SQL/HTTP tests cover migrations, employee lifecycle/concurrency/filters, references, real Identity logins for every role, profile ownership, leave reservations/reviews, attendance sessions/correction and request limits.
 - Browser acceptance starts the published app in Production using HTTPS on a random localhost port with a temporary self-signed certificate. Chrome ignores that certificate error only in the isolated test context; the certificate file is deleted afterward.
 - Browser scenarios cover six roles, Arabic/English, desktop/mobile, drawer and AJAX navigation, own profile and role guide, account creation/linking, leave submission/approval, two attendance sessions and targeted correction.

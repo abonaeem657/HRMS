@@ -1,3 +1,4 @@
+using HRMS.Models;
 using HRMS.Application.Auditing;
 using HRMS.Application.Identity;
 using HRMS.Models.Auditing;
@@ -15,10 +16,11 @@ public sealed class AuditLogsController(IAuditLogService auditLogService) : Cont
         CancellationToken cancellationToken)
     {
         var result = await auditLogService.SearchAsync(
-            new AuditLogQuery(model.Search, model.Page, model.PageSize),
+            new AuditLogQuery(model.Search, model.Page, DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request)),
             cancellationToken);
         model.Items = result.Items;
         model.TotalCount = result.TotalCount;
+        ViewData["Pagination"] = DisplayPagination.Create(Request, result.TotalCount, result.Page);
         model.Page = result.Page;
         model.PageSize = result.PageSize;
         return View(model);

@@ -1,3 +1,4 @@
+using HRMS.Models;
 using System.Globalization;
 using System.Security.Claims;
 using HRMS.Application.Attendance;
@@ -55,7 +56,7 @@ public sealed class AttendanceController(
                 model.ToDate,
                 model.Status,
                 model.Page,
-                model.PageSize),
+                DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request)),
             cancellationToken);
         model.Records = page.Items;
         ViewBag.BusinessDate = DateOnly.FromDateTime(
@@ -63,6 +64,7 @@ public sealed class AttendanceController(
         model.Page = page.Page;
         model.PageSize = page.PageSize;
         model.TotalCount = page.TotalCount;
+        ViewData["Pagination"] = DisplayPagination.Create(Request, page.TotalCount, page.Page);
         model.Summary = await attendanceService.GetSummaryAsync(
             new AttendanceFilter(model.EmployeeId, model.DepartmentId, model.FromDate, model.ToDate, model.Status),
             cancellationToken);

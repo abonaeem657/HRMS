@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -1526,5 +1526,20 @@
   </data>
   <data name="MyProfile">
     <value>My profile</value>
+  </data>
+  <data name="ResultPages" xml:space="preserve">
+    <value>Result pages</value>
+  </data>
+  <data name="LoginAttemptsWarning" xml:space="preserve">
+    <value>You have {0} attempts remaining. After these attempts, sign-in to this account will be locked for one hour.</value>
+  </data>
+  <data name="ShowSixPerPage" xml:space="preserve">
+    <value>Show 6 per page</value>
+  </data>
+  <data name="LoginLockedMinutes" xml:space="preserve">
+    <value>Sign-in to this account is temporarily locked after failed attempts. Try again in {0} minutes.</value>
+  </data>
+  <data name="ShowAllResults" xml:space="preserve">
+    <value>Show all</value>
   </data>
 </root>

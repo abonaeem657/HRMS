@@ -22,6 +22,7 @@ public sealed class LoginViewModel
     public string? ReturnUrl { get; set; }
 
     public bool SetupAvailable { get; set; }
+    public string? AttemptWarning { get; set; }
 }
 
 public sealed class InitialAdministratorViewModel

@@ -1,8 +1,4 @@
 @model HRMS.Models.Employees.EmployeeListViewModel
-@{
-    var firstItem = Model.TotalCount == 0 ? 0 : ((Model.Page - 1) * Model.PageSize) + 1;
-    var lastItem = Math.Min(Model.Page * Model.PageSize, Model.TotalCount);
-}
 <div class="table-responsive">
     <table class="table table-striped table-hover align-middle hrms-table">
         <thead>
@@ -49,22 +45,4 @@
         </tbody>
     </table>
 </div>
-<div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
-    <span class="text-muted">@T["ShowRange", firstItem, lastItem, Model.TotalCount]</span>
-    <nav aria-label="@T["EmployeePages"]">
-        <ul class="pagination mb-0">
-            <li class="page-item @(Model.Page <= 1 ? "disabled" : "")">
-                <a class="page-link" asp-route-Search="@Model.Search" asp-route-DepartmentId="@Model.DepartmentId"
-                   asp-route-EmploymentStatus="@Model.EmploymentStatus" asp-route-SortBy="@Model.SortBy"
-                   asp-route-SortDescending="@Model.SortDescending" asp-route-Page="@(Model.Page - 1)"
-                   asp-route-PageSize="@Model.PageSize">@T["Previous"]</a>
-            </li>
-            <li class="page-item @(Model.Page >= Model.PageCount ? "disabled" : "")">
-                <a class="page-link" asp-route-Search="@Model.Search" asp-route-DepartmentId="@Model.DepartmentId"
-                   asp-route-EmploymentStatus="@Model.EmploymentStatus" asp-route-SortBy="@Model.SortBy"
-                   asp-route-SortDescending="@Model.SortDescending" asp-route-Page="@(Model.Page + 1)"
-                   asp-route-PageSize="@Model.PageSize">@T["Next"]</a>
-            </li>
-        </ul>
-    </nav>
-</div>
+<partial name="_ListPagination" model="@(ViewData["Pagination"])" />

@@ -23,7 +23,7 @@ public sealed record AttendanceFilter(
     DateOnly? ToDate = null,
     string? Status = null,
     int Page = 1,
-    int PageSize = 25);
+    int PageSize = 25, bool ShowAll = false);
 
 public sealed record AttendancePage(
     IReadOnlyList<AttendanceRecordDto> Items,

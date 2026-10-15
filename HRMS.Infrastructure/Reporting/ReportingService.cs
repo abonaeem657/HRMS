@@ -169,8 +169,7 @@ public sealed class ReportingService(
                 employee.EmploymentType,
                 employee.WorkLocation)),
             filter.Page,
-            filter.PageSize,
-            cancellationToken);
+            filter.PageSize, cancellationToken, filter.ShowAll);
     }
 
     public async Task<ReportPage<AttendanceReportItem>> GetAttendanceReportAsync(
@@ -219,8 +218,7 @@ public sealed class ReportingService(
                  record.Status != HRMS.Domain.Attendance.AttendanceRecord.AbsentStatus &&
                  record.Status != HRMS.Domain.Attendance.AttendanceRecord.HalfDayStatus))),
             filter.Page,
-            filter.PageSize,
-            cancellationToken);
+            filter.PageSize, cancellationToken, filter.ShowAll);
     }
 
     public async Task<ReportPage<LeaveReportItem>> GetLeaveReportAsync(
@@ -271,8 +269,7 @@ public sealed class ReportingService(
                 request.AppliedAtUtc,
                 request.ReviewNotes)),
             filter.Page,
-            filter.PageSize,
-            cancellationToken);
+            filter.PageSize, cancellationToken, filter.ShowAll);
     }
 
     public async Task<IReadOnlyList<DepartmentHeadcountItem>> GetDepartmentHeadcountReportAsync(
@@ -338,11 +335,11 @@ public sealed class ReportingService(
         IQueryable<T> query,
         int requestedPage,
         int requestedPageSize,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken, bool showAll = false)
     {
         const int maximumPageSize = 100;
         var totalCount = await query.CountAsync(cancellationToken);
-        var pageSize = Math.Clamp(requestedPageSize, 1, maximumPageSize);
+        var pageSize = showAll ? Math.Max(1, totalCount) : Math.Clamp(requestedPageSize, 1, maximumPageSize);
         var totalPages = Math.Max(1, (int)Math.Ceiling(totalCount / (double)pageSize));
         var page = Math.Clamp(requestedPage, 1, totalPages);
         var items = await query.Skip((page - 1) * pageSize)

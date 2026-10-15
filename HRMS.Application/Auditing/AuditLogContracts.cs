@@ -13,7 +13,7 @@ public sealed record AuditLogWriteRequest(
 public sealed record AuditLogQuery(
     string? Search,
     int Page,
-    int PageSize);
+    int PageSize, bool ShowAll = false);
 
 public sealed record AuditLogEntry(
     long AuditLogId,

@@ -53,6 +53,7 @@
 </div>
 
 <form asp-action="Index" method="get" class="card card-body mb-3">
+    <input type="hidden" name="ShowAll" value="@DisplayPagination.IsShowAll(Context.Request).ToString().ToLowerInvariant()" />
     <div asp-validation-summary="All" class="text-danger mb-2"></div>
     <div class="row g-2 align-items-end">
         @if (canManage)
@@ -143,14 +144,4 @@
     </table>
 </div>
 
-<nav aria-label="@T["AttendancePages"]">
-    <ul class="pagination justify-content-center">
-        <li class="page-item @(Model.Page <= 1 ? "disabled" : "")">
-            <a class="page-link" asp-action="Index" asp-route-EmployeeId="@Model.EmployeeId" asp-route-DepartmentId="@Model.DepartmentId" asp-route-FromDate="@Model.FromDate" asp-route-ToDate="@Model.ToDate" asp-route-Status="@Model.Status" asp-route-Page="@(Model.Page - 1)">@T["Previous"]</a>
-        </li>
-        <li class="page-item disabled"><span class="page-link">@Model.Page / @Model.TotalPages</span></li>
-        <li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : "")">
-            <a class="page-link" asp-action="Index" asp-route-EmployeeId="@Model.EmployeeId" asp-route-DepartmentId="@Model.DepartmentId" asp-route-FromDate="@Model.FromDate" asp-route-ToDate="@Model.ToDate" asp-route-Status="@Model.Status" asp-route-Page="@(Model.Page + 1)">@T["Next"]</a>
-        </li>
-    </ul>
-</nav>
+<partial name="_ListPagination" model="@(ViewData["Pagination"])" />

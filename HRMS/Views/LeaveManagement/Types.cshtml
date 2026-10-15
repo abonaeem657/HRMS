@@ -1,4 +1,5 @@
 @model HRMS.Models.LeaveManagement.LeaveTypeFormViewModel
+@{ var listing = DisplayPagination.Slice(Model.Types, Context.Request); }
 @{
     ViewData["Title"] = T["LeaveTypes"].Value;
 }
@@ -25,7 +26,7 @@
     <table class="table table-striped table-hover align-middle">
         <thead><tr><th>@T["Name"]</th><th>@T["Arabic"]</th><th>@T["Days"]</th><th>@T["Paid"]</th><th>@T["Status"]</th><th></th></tr></thead>
         <tbody>
-        @foreach (var item in Model.Types)
+        @foreach (var item in listing.Items)
         {
             <tr>
                 <td>@item.Name</td><td>@item.NameAr</td><td>@item.DefaultDaysPerYear</td><td>@(item.IsPaid ? T["Yes"].Value : T["No"].Value)</td><td>@(item.IsActive ? T["Enabled"].Value : T["Disabled"].Value)</td>
@@ -40,18 +41,4 @@
         </tbody>
     </table>
 </div>
-@section Scripts {
-    <script>
-        document.querySelectorAll(".leave-type-edit").forEach(button => {
-            button.addEventListener("click", () => {
-                document.getElementById("LeaveTypeId").value = button.dataset.id;
-                document.getElementById("Name").value = button.dataset.name;
-                document.getElementById("NameAr").value = button.dataset.nameAr;
-                document.getElementById("DefaultDaysPerYear").value = button.dataset.days;
-                document.getElementById("IsPaid").checked = button.dataset.paid === "true";
-                document.getElementById("IsActive").checked = button.dataset.active === "true";
-                document.getElementById("Name").focus();
-            });
-        });
-    </script>
-}
+<partial name="_ListPagination" model="listing.Pagination" />

@@ -149,3 +149,17 @@ a:focus-visible,button:focus-visible { outline:3px solid #718e44; outline-offset
  .record-details > tbody > tr > th { width:38%; }
  .record-details > tbody > tr > th,.record-details > tbody > tr > td { padding:10px 12px; font-size:.86rem; }
 }
+
+/* Readable secondary text and a consistent six-row results toolbar. */
+:root { --workspace-muted:#46594d; --app-muted:#46594d; --bs-secondary-color:#46594d; }
+.text-muted,.text-body-secondary,.form-text,.text-secondary { color:#46594d !important; }
+.form-control::placeholder { color:#59675e; opacity:1; }
+.workspace-topbar,.workspace-tabs a,.dashboard-eyebrow,.today-date,.app-footer,.guide-hero p,.home-footnote { color:#46594d; }
+.table thead th { color:#344a3b; }
+.page-link { color:#24543e; }
+.page-item.disabled .page-link { color:#5b665e; background:#f1f4ee; }
+.list-pagination { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; padding:16px 0; }
+.list-result-count { color:#415447; font-size:.88rem; }
+.list-pagination .pagination { gap:0; }
+.login-attempt-warning { color:#684900; background:#fff3cd; border-color:#d9b34e; font-weight:600; line-height:1.8; }
+@media(max-width:575.98px) { .list-pagination { align-items:flex-start; } .list-pagination nav { width:100%; } .list-pagination .page-link { padding:.5rem .65rem; } }

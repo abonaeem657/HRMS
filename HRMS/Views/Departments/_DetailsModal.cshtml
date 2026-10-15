@@ -1,4 +1,5 @@
 @model HRMS.Models.Organization.DepartmentDetailsViewModel
+@{ var listing = DisplayPagination.Slice(Model.Employees, Context.Request); }
 <div class="modal-content">
     <div class="modal-header">
         <h2 class="modal-title fs-5" id="hrmsModalLabel">@T["DepartmentDetails"]</h2>
@@ -27,7 +28,7 @@
                 <table class="table table-sm align-middle mb-0">
                     <thead><tr><th>@T["EmployeeNumber"]</th><th>@T["Name"]</th><th>@T["JobTitle"]</th><th>@T["Status"]</th></tr></thead>
                     <tbody>
-                        @foreach (var employee in Model.Employees)
+                        @foreach (var employee in listing.Items)
                         {
                             <tr><td>@employee.EmployeeNumber</td><td>@employee.FullName</td><td>@employee.PositionTitle</td><td>@T.LocalizeValue("Employment.", employee.EmploymentStatus)</td></tr>
                         }
@@ -36,5 +37,6 @@
             </div>
         }
     </div>
+    <div class="px-3"><partial name="_ListPagination" model="listing.Pagination" /></div>
     <div class="modal-footer"><button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">@T["Close"]</button></div>
 </div>

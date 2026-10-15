@@ -1,3 +1,4 @@
+using HRMS.Models;
 using HRMS.Application.Employees;
 using HRMS.Application.Identity;
 using HRMS.Models.Employees;
@@ -14,9 +15,11 @@ public sealed class EmployeesController(IEmployeeService employeeService, IStrin
 {
     [HttpGet]
     [Authorize(Roles = IdentityRoles.ManageEmployees)]
-    public async Task<IActionResult> Deleted(int page = 1, int pageSize = 25, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> Deleted(int page = 1, int pageSize = 6, CancellationToken cancellationToken = default)
     {
-        return View(await employeeService.GetDeletedAsync(page, pageSize, cancellationToken));
+        var result = await employeeService.GetDeletedAsync(page, DisplayPagination.PageSize, cancellationToken, DisplayPagination.IsShowAll(Request));
+        ViewData["Pagination"] = DisplayPagination.Create(Request, result.TotalCount, result.Page);
+        return View(result);
     }
 
     [HttpPost]
@@ -50,7 +53,7 @@ public sealed class EmployeesController(IEmployeeService employeeService, IStrin
                 query.SortBy,
                 query.SortDescending,
                 query.Page,
-                query.PageSize),
+                DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request)),
             cancellationToken);
         var options = await employeeService.GetListFilterOptionsAsync(cancellationToken);
 
@@ -66,6 +69,7 @@ public sealed class EmployeesController(IEmployeeService employeeService, IStrin
                 employee.HireDate))
             .ToList();
         query.TotalCount = result.TotalCount;
+        ViewData["Pagination"] = DisplayPagination.Create(Request, result.TotalCount, result.Page);
         query.Page = result.Page;
         query.PageSize = result.PageSize;
         query.Departments = options.Departments

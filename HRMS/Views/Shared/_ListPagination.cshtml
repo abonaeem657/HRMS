@@ -1,0 +1,29 @@
+@model HRMS.Models.DisplayPagination
+@{
+    var modal = bool.TryParse(Context.Request.Query["modal"], out var isModal) && isModal;
+    var previous = Model.Link(Context.Request, Model.Page - 1, false);
+    var next = Model.Link(Context.Request, Model.Page + 1, false);
+    var toggle = Model.Link(Context.Request, 1, !Model.ShowAll);
+}
+<div class="list-pagination">
+    <span class="list-result-count">@T["ShowRange", Model.First, Model.Last, Model.TotalCount]</span>
+    <nav aria-label="@T["ResultPages"]">
+        <ul class="pagination mb-0 flex-wrap">
+            <li class="page-item @(Model.Page <= 1 ? "disabled" : "")">
+                @if (Model.Page <= 1) { <span class="page-link" aria-disabled="true">@T["Previous"]</span> }
+                else if (modal) { <button type="button" class="page-link" data-modal-url="@previous">@T["Previous"]</button> }
+                else { <a class="page-link" href="@previous">@T["Previous"]</a> }
+            </li>
+            <li class="page-item disabled"><span class="page-link">@Model.Page / @Model.TotalPages</span></li>
+            <li class="page-item @(Model.ShowAll || Model.Page >= Model.TotalPages ? "disabled" : "")">
+                @if (Model.ShowAll || Model.Page >= Model.TotalPages) { <span class="page-link" aria-disabled="true">@T["Next"]</span> }
+                else if (modal) { <button type="button" class="page-link" data-modal-url="@next">@T["Next"]</button> }
+                else { <a class="page-link" href="@next">@T["Next"]</a> }
+            </li>
+            <li class="page-item">
+                @if (modal) { <button type="button" class="page-link" data-modal-url="@toggle">@T[Model.ShowAll ? "ShowSixPerPage" : "ShowAllResults"]</button> }
+                else { <a class="page-link" href="@toggle">@T[Model.ShowAll ? "ShowSixPerPage" : "ShowAllResults"]</a> }
+            </li>
+        </ul>
+    </nav>
+</div>
