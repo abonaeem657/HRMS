@@ -7,9 +7,9 @@
     {
         <div class="alert alert-success" role="status">@message</div>
     }
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex flex-wrap gap-3 justify-content-between align-items-center mb-3">
         <h1 class="h2">@T["DepartmentDetails"]</h1>
-        <div class="d-flex gap-2">
+        <div class="d-flex flex-wrap gap-2">
             <a asp-action="Edit" asp-route-id="@Model.DepartmentId" class="btn btn-primary">@T["Edit"]</a>
             <form asp-action="SetActive" asp-route-id="@Model.DepartmentId" method="post">
                 <input type="hidden" name="isActive" value="@(!Model.IsActive)" />
@@ -20,12 +20,17 @@
         </div>
     </div>
 
-    <dl class="row">
-        <dt class="col-sm-3">@T["Code"]</dt><dd class="col-sm-9">@Model.Code</dd>
-        <dt class="col-sm-3">@T["DepartmentName"]</dt><dd class="col-sm-9">@Model.Name</dd>
-        <dt class="col-sm-3">@T["Manager"]</dt><dd class="col-sm-9">@(Model.ManagerName ?? "—")</dd>
-        <dt class="col-sm-3">@T["Status"]</dt><dd class="col-sm-9">@(Model.IsActive ? T["Status.Active"].Value : T["Status.Inactive"].Value)</dd>
-    </dl>
+    <div class="record-details-panel">
+        <table class="table record-details mb-0">
+            <caption class="visually-hidden">@T["DepartmentDetails"]</caption>
+            <tbody>
+                <tr><th scope="row">@T["Code"]</th><td><bdi dir="ltr">@Model.Code</bdi></td></tr>
+                <tr><th scope="row">@T["DepartmentName"]</th><td><bdi dir="auto">@Model.Name</bdi></td></tr>
+                <tr><th scope="row">@T["Manager"]</th><td><bdi dir="auto">@(Model.ManagerName ?? "—")</bdi></td></tr>
+                <tr><th scope="row">@T["Status"]</th><td><bdi dir="auto">@(Model.IsActive ? T["Status.Active"].Value : T["Status.Inactive"].Value)</bdi></td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2 class="h4 mt-4">@T["DepartmentEmployees"]</h2>
     <div class="table-responsive">

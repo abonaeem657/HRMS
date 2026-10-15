@@ -5,19 +5,24 @@
         <button type="button" class="btn-close ms-0 me-auto" data-bs-dismiss="modal" aria-label="@T["Close"].Value"></button>
     </div>
     <div class="modal-body">
-        <dl class="row mb-0">
-            <dt class="col-sm-4">@T["EmployeeNumber"]</dt><dd class="col-sm-8">@Model.EmployeeNumber</dd>
-            <dt class="col-sm-4">@T["Name"]</dt><dd class="col-sm-8">@Model.FirstName @Model.LastName</dd>
-            <dt class="col-sm-4">@T["WorkEmail"]</dt><dd class="col-sm-8">@Model.WorkEmail</dd>
-            <dt class="col-sm-4">@T["Phone"]</dt><dd class="col-sm-8">@(Model.PhoneNumber ?? "—")</dd>
-            <dt class="col-sm-4">@T["HireDate"]</dt><dd class="col-sm-8">@Model.HireDate.ToString("d")</dd>
-            <dt class="col-sm-4">@T["EmploymentStatus"]</dt><dd class="col-sm-8">@T.LocalizeValue("Employment.", Model.EmploymentStatus)</dd>
-            <dt class="col-sm-4">@T["EmploymentType"]</dt><dd class="col-sm-8">@T.LocalizeValue("EmploymentType.", Model.EmploymentType)</dd>
-            <dt class="col-sm-4">@T["Department"]</dt><dd class="col-sm-8">@Model.DepartmentName</dd>
-            <dt class="col-sm-4">@T["JobTitle"]</dt><dd class="col-sm-8">@Model.PositionTitle</dd>
-            <dt class="col-sm-4">@T["DirectManager"]</dt><dd class="col-sm-8">@(Model.ManagerName ?? "—")</dd>
-            <dt class="col-sm-4">@T["WorkLocation"]</dt><dd class="col-sm-8">@(Model.WorkLocation ?? "—")</dd>
-        </dl>
+        <div class="record-details-panel">
+        <table class="table record-details mb-0">
+            <caption class="visually-hidden">@T["EmployeeDetails"]</caption>
+            <tbody>
+                <tr><th scope="row">@T["EmployeeNumber"]</th><td><bdi dir="ltr">@Model.EmployeeNumber</bdi></td></tr>
+                <tr><th scope="row">@T["Name"]</th><td><bdi dir="auto">@Model.FirstName @Model.LastName</bdi></td></tr>
+                <tr><th scope="row">@T["WorkEmail"]</th><td><bdi dir="ltr">@Model.WorkEmail</bdi></td></tr>
+                <tr><th scope="row">@T["Phone"]</th><td><bdi dir="ltr">@(Model.PhoneNumber ?? "—")</bdi></td></tr>
+                <tr><th scope="row">@T["HireDate"]</th><td><bdi dir="ltr">@Model.HireDate.ToString("yyyy-MM-dd")</bdi></td></tr>
+                <tr><th scope="row">@T["EmploymentStatus"]</th><td><bdi dir="auto">@T.LocalizeValue("Employment.", Model.EmploymentStatus)</bdi></td></tr>
+                <tr><th scope="row">@T["EmploymentType"]</th><td><bdi dir="auto">@T.LocalizeValue("EmploymentType.", Model.EmploymentType)</bdi></td></tr>
+                <tr><th scope="row">@T["Department"]</th><td><bdi dir="auto">@Model.DepartmentName</bdi></td></tr>
+                <tr><th scope="row">@T["JobTitle"]</th><td><bdi dir="auto">@Model.PositionTitle</bdi></td></tr>
+                <tr><th scope="row">@T["DirectManager"]</th><td><bdi dir="auto">@(Model.ManagerName ?? "—")</bdi></td></tr>
+                <tr><th scope="row">@T["WorkLocation"]</th><td><bdi dir="auto">@(Model.WorkLocation ?? "—")</bdi></td></tr>
+            </tbody>
+        </table>
+    </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">@T["Close"]</button>

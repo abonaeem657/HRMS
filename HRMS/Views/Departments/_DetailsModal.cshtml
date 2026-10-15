@@ -5,12 +5,17 @@
         <button type="button" class="btn-close ms-0 me-auto" data-bs-dismiss="modal" aria-label="@T["Close"].Value"></button>
     </div>
     <div class="modal-body">
-        <dl class="row">
-            <dt class="col-sm-4">@T["Code"]</dt><dd class="col-sm-8">@Model.Code</dd>
-            <dt class="col-sm-4">@T["DepartmentName"]</dt><dd class="col-sm-8">@Model.Name</dd>
-            <dt class="col-sm-4">@T["Manager"]</dt><dd class="col-sm-8">@(Model.ManagerName ?? "—")</dd>
-            <dt class="col-sm-4">@T["Status"]</dt><dd class="col-sm-8">@(Model.IsActive ? T["Status.Active"].Value : T["Status.Inactive"].Value)</dd>
-        </dl>
+        <div class="record-details-panel">
+        <table class="table record-details mb-0">
+            <caption class="visually-hidden">@T["DepartmentDetails"]</caption>
+            <tbody>
+                <tr><th scope="row">@T["Code"]</th><td><bdi dir="ltr">@Model.Code</bdi></td></tr>
+                <tr><th scope="row">@T["DepartmentName"]</th><td><bdi dir="auto">@Model.Name</bdi></td></tr>
+                <tr><th scope="row">@T["Manager"]</th><td><bdi dir="auto">@(Model.ManagerName ?? "—")</bdi></td></tr>
+                <tr><th scope="row">@T["Status"]</th><td><bdi dir="auto">@(Model.IsActive ? T["Status.Active"].Value : T["Status.Inactive"].Value)</bdi></td></tr>
+            </tbody>
+        </table>
+    </div>
         <h3 class="h6 mt-4">@T["Employees"] (@Model.Employees.Count)</h3>
         @if (Model.Employees.Count == 0)
         {
