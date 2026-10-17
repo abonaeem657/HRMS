@@ -105,4 +105,3 @@ Remove-Item Env:HRMS_TEST_SQLSERVER
 - [النشر](docs/DEPLOYMENT.md) و[قاعدة البيانات](docs/DATABASE.md)
 - [الصلاحيات والأدوار](docs/ROLES_AND_ACCESS_AR.md)
 - [نتائج التحقق](docs/VERIFICATION.md) و[متطلبات القبول](docs/ACCEPTANCE_AR.md)
-
