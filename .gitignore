@@ -1,9 +1,12 @@
 ﻿.vs/
 **/bin/
+.idea/
 **/obj/
 .vscode/
 *.user
+*.userosscache
 *.suo
+*.sln.docstates
 *.cache
 *.log
 **/TestResults/
@@ -12,6 +15,9 @@ artifacts/
 *.pfx
 *.p12
 *.key
+*.pem
+*.cer
+*.crt
 
 # Secrets and local configuration
 .env
@@ -26,7 +32,11 @@ secrets.json
 *.mdf
 *.ldf
 *.sqlite
+*.sqlite-*
 *.db
+*.db-*
+*.sqlitedb
 
 # Local backup folders
 localization-backup-*/
+DataProtection-Keys/

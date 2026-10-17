@@ -1,116 +1,111 @@
-# HRMS — repaired source delivery
+# HRMS | نظام إدارة الموارد البشرية
 
-ASP.NET Core MVC, SQL Server, EF Core, Identity, Arabic/English. Start with `docs/DELIVERY_AR.md` for the repair summary and limitations. Current acceptance evidence and deployment scope are documented in docs/ACCEPTANCE_AR.md.
+تطبيق لإدارة عمليات الموارد البشرية مبني على **ASP.NET Core MVC** و**Entity Framework Core** و**SQL Server**. يدعم العربية والإنجليزية، واتجاهي RTL وLTR.
 
-For the itemized SRS comparison, evidence and unresolved acceptance items, read [the detailed Arabic review](docs/PDF_DETAILED_REVIEW_AR.md). Passing tests is not a declaration of complete SRS acceptance.
+![لوحة معلومات الموارد البشرية](docs/screenshots/dashboard.png)
 
-## Prerequisites and setup
+## لقطات من النظام
 
-For the complete Arabic A–Z walkthrough of setup, all six roles, attendance, leave, reports and account recovery, read [USER_WALKTHROUGH_AR.md](docs/USER_WALKTHROUGH_AR.md). A shorter bilingual guide is available after sign-in under **Getting started / دليل الاستخدام** (`/Home/Guide`).
+| تسجيل الدخول | إدارة الموظفين |
+|---|---|
+| ![صفحة تسجيل الدخول](docs/screenshots/login.png) | ![قائمة الموظفين](docs/screenshots/employees.png) |
 
-.NET 8 target, ASP.NET Core/EF/Identity 8.0.31, SQL Server 2019+ / LocalDB on Windows. The current build uses SDK 9.0.318 targeting net8.0 and runtime 8.0.31. The owner explicitly selected .NET 8 on 15 October 2026 under the SRS supported-alternative clause. The project remains on the owner-selected .NET 8; Microsoft support ends on 10 November 2026, so a later delivery must revisit the supported-version requirement. IIS requires the .NET 8 hosting bundle; the published application is also verified locally on Kestrel in Production over HTTPS.
+| الحضور والانصراف | تقديم طلب إجازة |
+|---|---|
+| ![صفحة الحضور والانصراف](docs/screenshots/attendance.png) | ![نموذج طلب الإجازة](docs/screenshots/leave-request.png) |
 
-From this directory:
+![إعداد أنواع الإجازات](docs/screenshots/leave-types.png)
+
+> الصور ملتقطة من نسخة عرض محلية ببيانات تجريبية، ولا تتضمن بيانات أشخاص حقيقية.
+
+## الوظائف
+
+- ملفات الموظفين ودورة عملهم، الأقسام والمسميات الوظيفية.
+- تسجيل الحضور والانصراف وتصحيح السجلات مع سجل تدقيق.
+- طلبات الإجازات والأرصدة والمراجعة والاعتماد.
+- لوحة المعلومات والتقارير وسجل التدقيق.
+- ستة أدوار وصلاحيات، وواجهات عربية وإنجليزية متجاوبة.
+- واجهات MVC وواجهات API موثقة عبر Swagger في بيئة التطوير.
+
+## المتطلبات
+
+- .NET SDK 8 أو أحدث مع runtime لـ .NET 8.
+- SQL Server 2019 أو أحدث؛ LocalDB مناسب للتطوير على Windows.
+- Chrome مطلوب لاختبارات المتصفح.
+
+يستهدف الحل .NET 8 ويستخدم ASP.NET Core وEF Core وIdentity بإصدار 8.0.31. راجع [ملاحظات التحقق والتوافق](docs/VERIFICATION.md) و[متطلبات القبول والفجوات](docs/ACCEPTANCE_AR.md) قبل النشر.
+
+## التشغيل محليًا
+
+من مجلد المشروع في PowerShell:
 
 ```powershell
 dotnet tool restore
 dotnet restore HRMS.sln
-dotnet build HRMS.sln
-$env:ASPNETCORE_ENVIRONMENT = "Development"
-# LocalDB development example; use an environment variable/secret store for a real SQL login.
-$env:ConnectionStrings__HRMS = "Server=(localdb)\MSSQLLocalDB;Database=HRMSnew;Trusted_Connection=True;TrustServerCertificate=True"
+Copy-Item .\HRMS\appsettings.Development.example.json .\HRMS\appsettings.Development.json
 dotnet ef database update --project HRMS.Infrastructure --startup-project HRMS
+$env:ASPNETCORE_ENVIRONMENT = "Development"
 dotnet run --project HRMS
 ```
 
-Visit the HTTPS address printed by the app. On an empty database use `/Account/Setup` if initial setup is enabled, or use the explicit demo seed below. Swagger is available at `/swagger` only in Development. Do not enable initial administrator setup on a public deployment.
+ملف المثال يضبط اتصال LocalDB باسم `HRMSnew` ولا يحتوي كلمات مرور. عدّل الاتصال محليًا في `appsettings.Development.json`، أو مرره بمتغير البيئة `ConnectionStrings__HRMS`. لا تضع بيانات اعتماد قاعدة بيانات حقيقية في ملفات المشروع.
 
-## Local administrator creation and recovery
-
-These commands work **only in Development** and connect to the same `ConnectionStrings:HRMS` as the web app. They do not run during a normal startup, do not apply migrations, and never change a stored password merely because a secret value changed. Use them from this solution directory after applying the migration to the intended database:
+لإنشاء أول حساب، فعّل الإعداد المحلي فقط على قاعدة تطوير فارغة:
 
 ```powershell
-$env:ASPNETCORE_ENVIRONMENT = "Development"
-dotnet user-secrets set "LocalAdmin:Email" "your-admin@example.com" --project .\HRMS\HRMS.csproj
-dotnet run --project HRMS --no-launch-profile -- --admin-status
+dotnet user-secrets set "Identity:AllowInitialAdministratorSetup" "true" --project .\HRMS\HRMS.csproj
 ```
 
-Set the password locally without putting it in shell history or command arguments. It must have at least 10 characters including uppercase, lowercase, a digit and a symbol:
+ثم افتح `/Account/Setup` وأنشئ الحساب، وبعدها أوقف الخيار:
 
 ```powershell
-$securePassword = Read-Host "Local administrator password" -AsSecureString
-$passwordPointer = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($securePassword)
-try {
-    $passwordValue = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($passwordPointer)
-    @{ LocalAdmin = @{ Password = $passwordValue } } |
-        ConvertTo-Json -Compress |
-        dotnet user-secrets set --project .\HRMS\HRMS.csproj
-} finally {
-    [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($passwordPointer)
-    Remove-Variable passwordValue, securePassword -ErrorAction SilentlyContinue
-}
+dotnet user-secrets set "Identity:AllowInitialAdministratorSetup" "false" --project .\HRMS\HRMS.csproj
 ```
 
-Run the operation matching the status output:
+يُخزّن ASP.NET Core User Secrets الإعدادات محليًا خارج المستودع. لا تفعّل إعداد الحساب الأول على نشر عام. لتجربة بيانات العرض على قاعدة تطوير فارغة، راجع [دليل إعداد البيانات التجريبية واستعادة حساب الأدمن](docs/DELIVERY_AR.md) و[دليل التشغيل](docs/USER_WALKTHROUGH_AR.md).
+
+## قاعدة البيانات
+
+تُحفظ مخططات EF Core في `HRMS.Infrastructure/Persistence/Migrations`. بعد ضبط `ConnectionStrings:HRMS`، طبّقها بالأمر أعلاه. للاطلاع على مراجعة ما قبل الترحيل والنسخ الاحتياطي راجع [دليل قاعدة البيانات](docs/DATABASE.md). لا تشغّل بيانات العرض أو اختبارات SQL على قاعدة إنتاج.
+
+## البناء والاختبارات
 
 ```powershell
-dotnet run --project HRMS --no-launch-profile -- --admin-create          # Create missing account and role; existing password stays unchanged
-dotnet run --project HRMS --no-launch-profile -- --admin-check-password  # Compare the local secret with the stored Identity hash; no lockout increment
-dotnet run --project HRMS --no-launch-profile -- --admin-reset-password  # Explicit Identity token-based reset
-dotnet run --project HRMS --no-launch-profile -- --admin-unlock          # Explicitly clear lockout, if reported
-dotnet run --project HRMS --no-launch-profile -- --admin-activate        # Explicitly activate account, only if linked employee permits sign-in
-dotnet run --project HRMS --no-launch-profile -- --admin-status
+dotnet build HRMS.sln
+dotnet test HRMS.sln
 ```
 
-`--admin-create` ensures all six application roles exist and assigns only `SystemAdministrator` to the selected account. This also makes the other roles available when creating users through the UI. A linked employee who is deleted or inactive still cannot sign in; restore/reactivate that employee through the authorized HR workflow. If the displayed database differs from the one you migrated or the database is unreachable, correct `ConnectionStrings:HRMS` first. Secrets are stored in the local ASP.NET Core User Secrets store, outside source control. After recovery, remove the password secret if no longer needed with `dotnet user-secrets remove "LocalAdmin:Password" --project .\HRMS\HRMS.csproj`.
-
-## Optional demonstration data — empty development database only
-
-For an existing Development database, `dotnet run --project HRMS --no-launch-profile -- --seed-reference-data` adds six starter leave types without creating users or changing existing definitions. Allowances are evaluation settings, not an approved employment policy. Administrators and HR managers can add/edit them at `/LeaveManagement/Types`. Re-running the command skips types matching an existing English or Arabic name; it does not run on normal startup.
+تعمل اختبارات الوحدة والمعمارية والتكامل دون إعداد إضافي. اختبارات SQL والمتصفح تحتاج اتصال SQL Server محليًا بصلاحية إنشاء قواعد مؤقتة:
 
 ```powershell
-# Choose a unique development-only password satisfying Identity's complexity rules.
-$env:HRMS_DEMO_PASSWORD = Read-Host "Development demo password"
-dotnet run --project HRMS -- --seed-demo
-Remove-Item Env:HRMS_DEMO_PASSWORD
-```
-
-This creates a department, position, annual/unpaid leave types and six linked users. Account names are `systemadministrator@example.test`, `hrmanager@example.test`, `hrofficer@example.test`, `departmentmanager@example.test`, `employee@example.test`, `auditor@example.test`. No password is shipped. Seed refuses non-Development environments and databases containing accounts or employees. The seed performs migrations; review them first for an existing database.
-
-## Verification
-
-```powershell
-dotnet test HRMS.sln --logger trx
-# SQL tests create/drop only a generated HRMS_Test_<guid> database.
-# Supply a test SQL instance whose login has CREATE DATABASE permission.
 $env:HRMS_TEST_SQLSERVER = "Server=(localdb)\MSSQLLocalDB;Integrated Security=True;TrustServerCertificate=True"
-dotnet test HRMS.sln --logger trx
+dotnet test HRMS.sln
+Remove-Item Env:HRMS_TEST_SQLSERVER
 ```
 
-Without HRMS_TEST_SQLSERVER, SQL tests are explicitly skipped, not passed. The handoff requires the SQL gate. Use `scripts/verify.ps1` to reject a missing SQL connection before running acceptance checks.
+تستخدم اختبارات قاعدة البيانات قواعد مؤقتة بأسماء `HRMS_Test_<guid>` وتحذفها بعد الاختبار. راجع [خطوات التحقق](docs/VERIFICATION.md) للتفاصيل.
 
-For the complete published-app acceptance gate, including SQL Server and Chrome, run scripts/verify-published.ps1. See docs/VERIFICATION.md for prerequisites.
+## بنية الحل
 
-See `docs/VERIFICATION.md` for the actual method/results, `docs/REQUIREMENTS_TRACEABILITY.md` for acceptance gaps, `docs/DATABASE.md` for migration preflight, and `docs/DEPLOYMENT.md` for IIS deployment.
+| المشروع | المسؤولية |
+|---|---|
+| `HRMS` | تطبيق الويب وواجهات MVC وAPI |
+| `HRMS.Application` | خدمات الموارد البشرية وقواعد الاستخدام |
+| `HRMS.Domain` | كيانات المجال |
+| `HRMS.Infrastructure` | EF Core وSQL Server وIdentity والتكاملات |
+| `tests` | اختبارات الوحدة والتكامل والمعمارية والمتصفح |
 
+## الوثائق
 
-## Organization starter data and role permissions
-See [Arabic role and access comparison](docs/ROLES_AND_ACCESS_AR.md). Development-only command: dotnet run --project HRMS --configuration Release --launch-profile http -- --seed-organization-data. It links existing users and fills departments, job titles and employees with equal department headcounts; it does not create passwords, attendance or leave requests.
+- [دليل المستخدم العربي](docs/HRMS_USER_GUIDE_AR.md)
+- [دليل التثبيت والتشغيل التفصيلي](docs/USER_WALKTHROUGH_AR.md)
+- [المعمارية](docs/ARCHITECTURE.md) و[الواجهات البرمجية](docs/API.md)
+- [النشر](docs/DEPLOYMENT.md) و[قاعدة البيانات](docs/DATABASE.md)
+- [الصلاحيات والأدوار](docs/ROLES_AND_ACCESS_AR.md)
+- [نتائج التحقق](docs/VERIFICATION.md) و[متطلبات القبول](docs/ACCEPTANCE_AR.md)
 
-## تنظيم ملفات المشروع
+---
 
-الأسماء Data وViewModels اصطلاحات تنظيمية؛ المشروع يستخدم تقسيمًا إلى طبقات ووحدات:
+### English
 
-| المطلوب | مكانه الحالي | وظيفته |
-|---|---|---|
-| بيانات القاعدة، أي Data | HRMS.Infrastructure/Persistence | سياق EF Core، الوصول للبيانات، المهاجرات وتجهيز البيانات |
-| نماذج العرض، أي ViewModels | HRMS/Models | بيانات النماذج والشاشات؛ مثل Employees/EmployeeFormViewModel.cs |
-| صفحات الموقع | HRMS/Views | قوالب Razor المقسّمة حسب الشاشة |
-| استقبال الطلبات | HRMS/Controllers | ربط واجهة الموقع بخدمات التطبيق |
-| قواعد العمل | HRMS.Application | خدمات الموظفين والإجازات والحضور والصلاحيات وعقود البيانات |
-| كيانات النظام | HRMS.Domain | تعريف الموظف والقسم والإجازة والكيانات الأساسية |
-| الاختبارات | tests | اختبارات الوحدات والمعمارية والتكامل والمتصفح |
-
-تعديل الترجمات يكون في ملفات SharedResource.ar-JO.resx وSharedResource.en-US.resx داخل HRMS/Resources، ورسائل الخدمات في HRMS.Application/Common/Messages*.resx. مكتبات الواجهة داخل wwwroot/lib تحتوي النسخ المستخدمة فعليًا وخرائطها وتراخيصها. ملفات المهاجرات وملفات Designer وModelSnapshot ضرورية وليست نسخًا مكررة. نماذج العرض الكاملة والجزئية تخدم الصفحات والنوافذ المنبثقة؛ لا تُحذف لمجرد تشابه أسمائها.
-
-راجع [مراجعة شروط ملف المواصفات والتعديلات](docs/PDF_CHANGE_AUDIT_AR.md) لتمييز الشروط الإلزامية عن الخيارات والسياسات والبنود المؤجلة.
+HRMS is an ASP.NET Core MVC and SQL Server application for employee records, attendance, leave, reporting, and audit. It supports Arabic and English, six application roles, EF Core migrations, and responsive layouts. See the Arabic setup guide above for LocalDB configuration, database migrations, first administrator setup, and test requirements.
