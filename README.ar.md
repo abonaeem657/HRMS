@@ -43,6 +43,16 @@
 
 يستهدف الحل .NET 8 ويستخدم ASP.NET Core وEF Core وIdentity بإصدار 8.0.31. راجع [ملاحظات التحقق والتوافق](docs/VERIFICATION.md) و[متطلبات القبول والفجوات](docs/ACCEPTANCE_AR.md) قبل النشر.
 
+## تشغيل LocalDB من النسخة الصحيحة
+
+بعد تجهيز قاعدة البيانات بالخطوات أدناه، من مجلد المستودع شغّل:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\run-local.ps1
+```
+
+يفتح التطبيق على `http://localhost:5014/Account/Login`، باستخدام `HRMSnew` في Development. يحدد البرنامج النصي المشروع من موقعه ويحفظ إعدادات الاتصال لهذه العملية فقط، دون تعديل القاعدة أو الأسرار. تأكد أن الحل المفتوح في Visual Studio يعود لهذا المجلد؛ تغيير المجلد في PowerShell لا يبدّل حل Visual Studio. راجع [تشخيص اختلاف قاعدة الموقع عن المهاجرات](docs/DATABASE_CONNECTION_FIX_AR.md).
+
 ## التشغيل محليًا
 
 من مجلد المشروع في PowerShell:

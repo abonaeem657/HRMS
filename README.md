@@ -43,6 +43,16 @@ PDF generation uses a local browser on the server and supports Arabic/English. S
 
 The solution targets .NET 8 and uses ASP.NET Core, EF Core, and Identity 8.0.31. Review [verification and compatibility notes](docs/VERIFICATION.md) and [acceptance requirements and gaps](docs/ACCEPTANCE_AR.md) before deployment.
 
+## Run the intended LocalDB checkout
+
+After the initial database setup below, from the repository directory:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\run-local.ps1
+```
+
+This starts `http://localhost:5014/Account/Login` against `HRMSnew` in Development. It resolves the project beside the script and applies connection settings only to the launched process; it does not migrate or modify the database or secrets. Check that Visual Studio has this checkout open: changing a PowerShell directory does not switch its solution. See the [database connection diagnosis](docs/DATABASE_CONNECTION_FIX_AR.md).
+
 ## Run locally
 
 From the repository directory in PowerShell:

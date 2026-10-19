@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.RateLimiting; 
+using Microsoft.EntityFrameworkCore;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -100,6 +101,14 @@ if (!builder.Environment.IsDevelopment())
 builder.Services.AddSingleton<IAuthorizationMiddlewareResultHandler, AuditAuthorizationMiddlewareResultHandler>();
 
 var app = builder.Build();
+if (app.Environment.IsDevelopment())
+{
+    using var diagnosticScope = app.Services.CreateScope();
+    var database = diagnosticScope.ServiceProvider.GetRequiredService<HRMS.Infrastructure.Persistence.HRMSDbContext>()
+        .Database.GetDbConnection().Database;
+    app.Logger.LogInformation("HRMS Development startup: project {ProjectDirectory}; database {Database}.",
+        app.Environment.ContentRootPath, database);
+}
 if (args.Length == 1 && args[0] == "--seed-organization-data")
 {
     if (!app.Environment.IsDevelopment())
