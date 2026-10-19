@@ -280,4 +280,5 @@
   <data name="FieldRequired" xml:space="preserve"><value>This field is required.</value></data>
   <data name="ValidationFailedTitle" xml:space="preserve"><value>Please correct the request data.</value></data>
   <data name="ValidationRange" xml:space="preserve"><value>The field {0} must be between {1} and {2}.</value></data>
+<data name="SupportedLeaveTypesOnly" xml:space="preserve"><value>Only annual, sick and unpaid leave types are supported.</value></data>
 </root>

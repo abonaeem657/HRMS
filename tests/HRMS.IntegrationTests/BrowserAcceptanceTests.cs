@@ -138,7 +138,11 @@ public partial class SqlWorkflowTests
                     await page.Locator(".workspace-menu-bar button").ClickAsync();
                     await page.Locator("#workspaceSidebar.show").WaitForAsync();
                     await page.Locator(".main-nav a[href='/Home/Guide']").ClickAsync();
-                    await page.WaitForURLAsync("**/Home/Guide");
+                    try { await page.WaitForURLAsync("**/Home/Guide"); }
+                    catch (TimeoutException exception)
+                    {
+                        throw new InvalidOperationException($"Guide navigation failed for {role.Name}, {culture}, {width}px. URL: {page.Url}; status: {await page.Locator(".workspace-request-status").InnerTextAsync()}", exception);
+                    }
                     Assert.Equal(role.Name == IdentityRoles.SystemAdministrator, await page.Locator(".guide-grid a[href='/UserAccounts']").CountAsync() > 0);
                     Assert.Equal(role.Name != IdentityRoles.Employee, await page.Locator(".guide-grid a[href='/Reports']").CountAsync() > 0);
                     Assert.True(await page.EvaluateAsync<bool>("document.documentElement.scrollWidth <= window.innerWidth + 2"), "Unexpected horizontal page overflow.");
@@ -175,9 +179,12 @@ public partial class SqlWorkflowTests
                     await page.Locator("#StartDate").FillAsync("2027-08-05");
                     await page.Locator("#EndDate").FillAsync("2027-08-06");
                     await page.Locator("#Reason").FillAsync("Browser acceptance leave");
-                    Assert.Equal("", await page.Locator("#EndTime").InputValueAsync());
+                    Assert.Equal(0, await page.Locator("#StartTime, #EndTime").CountAsync());
                     await page.Locator("#main-content form button[type=submit]").ClickAsync();
                     await page.WaitForURLAsync("**/LeaveManagement/MyReport");
+                    var download = await page.RunAndWaitForDownloadAsync(() => page.Locator("a[download][href*='export=xlsx']").ClickAsync());
+                    Assert.EndsWith(".xlsx", download.SuggestedFilename);
+                    Assert.Null(await download.FailureAsync());
                     await page.GotoAsync(address + "/Attendance");
                     for (var session = 0; session < 2; session++)
                     foreach (var action in new[] { "CheckIn", "CheckOut" })

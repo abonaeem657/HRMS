@@ -24,6 +24,8 @@
     <div class="col-sm-4"><label asp-for="ToDate" class="form-label">@T["To"]</label><input asp-for="ToDate" class="form-control" /></div>
     <div class="col-sm-2"><button class="btn btn-primary" type="submit">@T["Update"]</button></div>
 </form>
+<partial name="_ReportExport" />
+
 <div class="row g-3 mb-4">
     <div class="col-6 col-md-3"><div class="card h-100"><div class="card-body"><div class="text-muted">@T["ActiveEmployees"]</div><div class="h3">@summary.TotalActiveEmployees</div></div></div></div>
     <div class="col-6 col-md-3"><div class="card h-100"><div class="card-body"><div class="text-muted">@T["NewHires"]</div><div class="h3">@summary.NewHires</div></div></div></div>

@@ -19,7 +19,7 @@ namespace HRMS.IntegrationTests;
 public partial class SqlWorkflowTests
 {
     [SqlFact]
-    public async Task RealIdentityLoginWorksForAllRolesAndEmployeeCanSubmitLeaveWithoutEndTime() => await WithDatabase(async db =>
+    public async Task RealIdentityLoginWorksForAllRolesAndEmployeeSubmitsDateOnlyLeave() => await WithDatabase(async db =>
     {
         var (departmentId, positionId) = await Organization(db);
         var connection = db.Database.GetConnectionString()!;
@@ -111,26 +111,32 @@ public partial class SqlWorkflowTests
                 client.DefaultRequestHeaders.Remove("Accept-Language");
                 client.DefaultRequestHeaders.Add("Accept-Language", culture);
                 var page = await client.GetStringAsync("/LeaveManagement/Create");
-                var endInput = Regex.Matches(page, "<input\\b[^>]*>").Select(m => m.Value).Single(s => s.Contains("name=\"EndTime\""));
-                Assert.DoesNotContain("data-val-required", endInput);
+                Assert.DoesNotContain("name=\"StartTime\"", page);
+                Assert.DoesNotContain("name=\"EndTime\"", page);
                 var submit = await client.PostAsync("/LeaveManagement/Create", new FormUrlEncodedContent(new Dictionary<string, string>
                 {
                     ["__RequestVerificationToken"] = Token(page), ["LeaveTypeId"] = leaveType.LeaveTypeId.ToString(),
                     ["StartDate"] = "2027-06-" + day, ["EndDate"] = "2027-06-" + day,
-                    ["StartTime"] = "13:30", ["EndTime"] = "", ["Reason"] = "Optional end time"
+                    ["StartTime"] = "13:30", ["EndTime"] = "", ["Reason"] = "Date-only leave"
                 }));
                 Assert.Equal(HttpStatusCode.Redirect, submit.StatusCode);
                 Assert.Equal("/LeaveManagement/MyReport", submit.Headers.Location!.OriginalString);
                 var report = await client.GetStringAsync("/LeaveManagement/MyReport?year=2027&employeeId=1");
-                Assert.Contains("Optional end time", report);
+                Assert.Contains("Date-only leave", report);
                 Assert.DoesNotContain("SystemAdministrator@example.test", report, StringComparison.OrdinalIgnoreCase);
+                using var ownExport = await client.GetAsync("/LeaveManagement/MyReport?year=2027&employeeId=1&export=xlsx");
+                Assert.Equal(HttpStatusCode.OK, ownExport.StatusCode);
+                var workbook = WorkbookText(await ownExport.Content.ReadAsByteArrayAsync());
+                Assert.Contains("Date-only leave", workbook);
+                Assert.DoesNotContain("SystemAdministrator@example.test", workbook, StringComparison.OrdinalIgnoreCase);
+                Assert.Equal(HttpStatusCode.Redirect, (await client.GetAsync("/Reports/Employees?export=xlsx")).StatusCode);
             }
         }
         db.ChangeTracker.Clear();
         Assert.Equal(6, await db.AuditLogs.CountAsync(a => a.Action == "Authentication.LoginSucceeded"));
         var requests = await db.LeaveRequests.ToListAsync();
         Assert.Equal(2, requests.Count);
-        Assert.All(requests, r => { Assert.Equal(new TimeOnly(13, 30), r.StartTime); Assert.Null(r.EndTime); });
+        Assert.All(requests, r => { Assert.Null(r.StartTime); Assert.Null(r.EndTime); });
         Assert.Empty(await db.AttendanceRecords.ToListAsync());
     });
 

@@ -5,6 +5,8 @@ using HRMS.Application.Identity;
 using HRMS.Application.LeaveManagement;
 using HRMS.Application.Organization;
 using HRMS.Models.LeaveManagement;
+using HRMS.Application.Reporting;
+using HRMS.Models.Reporting;
 using HRMS.Resources;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Authorization;
@@ -19,7 +21,7 @@ public sealed class LeaveManagementController(
     IUserAccountService userAccountService,
     IEmployeeService employeeService,
     HRMS.Application.Common.IBusinessClock businessClock,
-    IDepartmentService departmentService, IStringLocalizer<SharedResource> T) : Controller
+    IDepartmentService departmentService, IStringLocalizer<SharedResource> T, IReportFileExporter exporter) : Controller
 {
     [HttpGet]
     public async Task<IActionResult> Index(string? status, int? year, CancellationToken cancellationToken)
@@ -72,8 +74,20 @@ public sealed class LeaveManagementController(
         var employeeId = await GetEmployeeIdAsync(cancellationToken);
         if (employeeId is null) return Forbid();
         var reportYear = year ?? businessClock.Today.Year;
-        var requests = await leaveService.SearchRequestsAsync(new LeaveFilter(EmployeeId: employeeId.Value, Status: status, Year: reportYear), DisplayPagination.Request(Request), cancellationToken);
-        var balances = await leaveService.SearchBalancesAsync(employeeId.Value, reportYear, DisplayPagination.Request(Request, "Balance"), cancellationToken);
+        var requests = await leaveService.SearchRequestsAsync(new LeaveFilter(EmployeeId: employeeId.Value, Status: status, Year: reportYear), this.IsExport() ? new(ShowAll: true) : DisplayPagination.Request(Request), cancellationToken);
+        var balances = await leaveService.SearchBalancesAsync(employeeId.Value, reportYear, this.IsExport() ? new(ShowAll: true) : DisplayPagination.Request(Request, "Balance"), cancellationToken);
+        if (this.IsExport())
+        {
+            var ar = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
+            return await this.DownloadAsync(exporter, T, T["MyLeaveReport"].Value + " " + reportYear, "my-leaves",
+                businessClock.ToLocal(DateTime.UtcNow)!.Value, cancellationToken,
+                new ReportTable(T["LeaveBalancesTitle", reportYear].Value,
+                    new[] { "LeaveType", "Allowed", "Used", "PendingDays", "Remaining" }.Select(k => T[k].Value).ToArray(),
+                    balances.Items.Select(b => new object?[] { ar ? b.LeaveTypeNameAr : b.LeaveTypeName, b.TotalAllowedDays, b.UsedDays, b.PendingDays, b.RemainingDays }).ToList()),
+                new ReportTable(T["MyLeaveRequests"].Value,
+                    new[] { "LeaveType", "From", "To", "Days", "Status", "Reason", "Review" }.Select(k => T[k].Value).ToArray(),
+                    requests.Items.Select(r => new object?[] { ar ? r.LeaveTypeNameAr : r.LeaveTypeName, r.StartDate, r.EndDate, r.TotalDays, T["Status." + r.Status].Value, r.Reason, r.ReviewNotes }).ToList()));
+        }
         ViewData["Pagination"] = DisplayPagination.Create(Request, requests.TotalCount, requests.Page);
         ViewData["BalancePagination"] = DisplayPagination.Create(Request, balances.TotalCount, balances.Page, "Balance");
         return View(new LeaveListViewModel
@@ -85,11 +99,9 @@ public sealed class LeaveManagementController(
     [HttpGet]
     public async Task<IActionResult> Create(CancellationToken cancellationToken)
     {
-        var now = businessClock.ToLocal(DateTime.UtcNow)!.Value;
         var model = new LeaveRequestFormViewModel
         {
-            StartDate = DateOnly.FromDateTime(now),
-            StartTime = new TimeOnly(now.Hour, now.Minute)
+            StartDate = businessClock.Today
         };
         await PopulateLeaveTypesAsync(model, cancellationToken);
         return View(model);
@@ -105,8 +117,6 @@ public sealed class LeaveManagementController(
         {
             ModelState.AddModelError(nameof(model.EndDate), HRMS.Application.Common.Messages.Get("Business021"));
         }
-        if (model.StartDate == model.EndDate && model.StartTime.HasValue && model.EndTime.HasValue && model.EndTime <= model.StartTime)
-            ModelState.AddModelError(nameof(model.EndTime), T["LeaveTimeOrder"].Value);
 
         var employeeId = await GetEmployeeIdAsync(cancellationToken);
         if (!ModelState.IsValid || employeeId is null)
@@ -125,7 +135,7 @@ public sealed class LeaveManagementController(
                 model.LeaveTypeId,
                 model.StartDate!.Value,
                 model.EndDate!.Value,
-                model.Reason, model.StartTime, model.EndTime),
+                model.Reason),
             cancellationToken);
         if (!result.Succeeded)
         {

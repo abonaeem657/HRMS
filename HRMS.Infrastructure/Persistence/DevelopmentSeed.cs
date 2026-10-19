@@ -36,8 +36,8 @@ public static class DevelopmentSeed
             db.Employees.Add(employee);await db.SaveChangesAsync();
             if(role.Name==IdentityRoles.DepartmentManager) department.AssignManager(employee.EmployeeId);
         }
-        db.LeaveTypes.Add(new LeaveType("Annual","سنوية",14));
-        db.LeaveTypes.Add(new LeaveType("Unpaid","بدون راتب",0,false));
+        foreach (var type in HRMS.Application.LeaveManagement.LeavePolicy.Defaults)
+            db.LeaveTypes.Add(new LeaveType(type.Name, type.NameAr, type.DefaultDaysPerYear, type.IsPaid, type.IsActive));
         await db.SaveChangesAsync();await transaction.CommitAsync();
     }
     private static void Check(IdentityResult result)

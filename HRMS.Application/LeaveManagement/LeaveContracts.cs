@@ -36,9 +36,7 @@ public sealed record CreateLeaveRequestCommand(
     int LeaveTypeId,
     DateOnly StartDate,
     DateOnly EndDate,
-    string Reason,
-    TimeOnly? StartTime = null,
-    TimeOnly? EndTime = null);
+    string Reason);
 
 public sealed record LeaveTypeInput(
     string Name,

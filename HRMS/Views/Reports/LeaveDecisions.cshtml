@@ -16,6 +16,8 @@
     @if (Model.Departments.Count > 0) { <div class="col-md-3"><label asp-for="DepartmentId" class="form-label">@T["Department"]</label><select asp-for="DepartmentId" asp-items="Model.Departments" class="form-select"><option value="">@T["AllDepartments"]</option></select></div> }
     <div class="col-md-auto"><button type="submit" class="btn btn-primary">@T["ApplyFilters"]</button></div>
 </div></form>
+<partial name="_ReportExport" />
+
 <div class="row g-3">
     <div class="col-md-6"><section class="card border-0 shadow-sm h-100"><div class="card-body"><div class="text-muted">@T["ApprovedRequests"]</div><div class="display-5 fw-semibold text-success">@Model.Summary.ApprovedCount</div></div></section></div>
     <div class="col-md-6"><section class="card border-0 shadow-sm h-100"><div class="card-body"><div class="text-muted">@T["RejectedRequests"]</div><div class="display-5 fw-semibold text-danger">@Model.Summary.RejectedCount</div></div></section></div>

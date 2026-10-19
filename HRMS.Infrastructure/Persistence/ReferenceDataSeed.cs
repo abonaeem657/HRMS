@@ -7,15 +7,7 @@ namespace HRMS.Infrastructure.Persistence;
 /// <summary>Explicit development starter values, editable through leave type management.</summary>
 public static class ReferenceDataSeed
 {
-    public static IReadOnlyList<LeaveTypeInput> LeaveTypes { get; } =
-    [
-        new("Annual", "سنوية", 14, true, true),
-        new("Sick", "مرضية", 14, true, true),
-        new("Emergency", "طارئة", 3, true, true),
-        new("Bereavement", "وفاة", 3, true, true),
-        new("Study", "دراسة", 5, false, true),
-        new("Unpaid", "بدون راتب", 0, false, true)
-    ];
+    public static IReadOnlyList<LeaveTypeInput> LeaveTypes => LeavePolicy.Defaults;
 
     public static async Task<int> RunAsync(IServiceProvider services)
     {
@@ -23,6 +15,17 @@ public static class ReferenceDataSeed
         if ((await db.Database.GetPendingMigrationsAsync()).Any())
             throw new InvalidOperationException("Apply the pending migrations before adding reference data.");
         var leaveService = services.GetRequiredService<ILeaveService>();
+        var audit = services.GetRequiredService<HRMS.Application.Auditing.IAuditLogService>();
+        await using (var transaction = await db.Database.BeginTransactionAsync())
+        {
+            foreach (var type in await db.LeaveTypes.Where(t => !LeavePolicy.SupportedNames.Contains(t.Name) && t.IsActive).ToListAsync())
+            {
+                type.Update(type.Name, type.NameAr, type.DefaultDaysPerYear, type.IsPaid, false);
+                await audit.RecordAsync(new("LeaveType.Deactivated", "LeaveType", type.LeaveTypeId.ToString(), [new("IsActive", "true", "false")]));
+            }
+            // Commit legacy deactivation before the application service's own creation transactions.
+            await transaction.CommitAsync();
+        }
         var created = 0;
         foreach (var input in LeaveTypes)
         {

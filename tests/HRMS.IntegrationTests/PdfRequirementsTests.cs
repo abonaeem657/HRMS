@@ -73,7 +73,8 @@ public partial class SqlWorkflowTests
         {
             db.Departments.Add(new Department($"PAGE{i}", $"Department{i}", true));
             db.Positions.Add(new Position($"PAGE{i}", $"Position{i}", true, departmentId));
-            db.LeaveTypes.Add(new LeaveType($"Type{i}", $"نوع{i}", 14));
+            var definition = i <= 3 ? LeavePolicy.Defaults[i - 1] : new LeaveTypeInput($"Legacy{i}", $"قديم{i}", 14, true, true);
+            db.LeaveTypes.Add(new LeaveType(definition.Name, definition.NameAr, definition.DefaultDaysPerYear, definition.IsPaid));
             db.Users.Add(new HRMSUser { Id = $"paging-user-{i}", Email = $"user{i}@example.test", UserName = $"user{i}@example.test", NormalizedEmail = $"USER{i}@EXAMPLE.TEST", NormalizedUserName = $"USER{i}@EXAMPLE.TEST", IsActive = true });
         }
         await db.SaveChangesAsync();
@@ -104,9 +105,9 @@ public partial class SqlWorkflowTests
         var requests = await leave.SearchRequestsAsync(new(EmployeeId: employee.EmployeeId), page);
         Assert.Equal(8, requests.TotalCount); Assert.Equal(2, requests.Items.Count); capture.AssertPaged();
         var types = await leave.SearchTypesAsync(false, page);
-        Assert.Equal(8, types.TotalCount); Assert.Equal(2, types.Items.Count); capture.AssertPaged();
+        Assert.Equal(3, types.TotalCount); Assert.Equal(3, types.Items.Count); capture.AssertPaged();
         var balances = await leave.SearchBalancesAsync(employee.EmployeeId, 2026, page);
-        Assert.Equal(8, balances.TotalCount); Assert.Equal(2, balances.Items.Count); Assert.All(balances.Items, b => Assert.Equal(1, b.PendingDays)); capture.AssertPaged();
+        Assert.Equal(3, balances.TotalCount); Assert.Equal(3, balances.Items.Count); Assert.All(balances.Items, b => Assert.Equal(1, b.PendingDays)); capture.AssertPaged();
         var all = await leave.SearchRequestsAsync(new(EmployeeId: employee.EmployeeId), new(ShowAll: true));
         Assert.Equal(8, all.Items.Count);
         await using var app = DisplayAndLoginApp(db);

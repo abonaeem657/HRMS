@@ -104,3 +104,6 @@ Database tests use temporary `HRMS_Test_<guid>` databases and remove them after 
 - [Roles and permissions](docs/ROLES_AND_ACCESS_AR.md)
 - [Verification results](docs/VERIFICATION.md) and [acceptance requirements](docs/ACCEPTANCE_AR.md)
 - [Arabic user guide](docs/HRMS_USER_GUIDE_AR.md) and [setup walkthrough](docs/USER_WALKTHROUGH_AR.md)
+
+## Trainer update — 19 October 2026
+[PDF/Excel downloads and the simple three-type date-only leave policy](docs/TRAINER_UPDATE_2026_10_19_AR.md) are implemented. Download from the filtered report page or My leave report. Excel needs no Office installation; PDF uses local Chrome/Edge (ReportExport__BrowserPath optional override). Restart the running application to load this build. No schema migration is needed; the explicit reference-data command disables legacy types while preserving their request history.

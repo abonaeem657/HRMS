@@ -18,7 +18,7 @@ public sealed class LeaveService(
     HRMS.Application.Identity.IRecordAccess access) : ILeaveService
 {
     private IQueryable<LeaveTypeDto> TypeQuery(bool onlyActive) => dbContext.LeaveTypes.ForRead()
-        .Where(type => !onlyActive || type.IsActive).OrderBy(type => type.Name).ThenBy(type => type.LeaveTypeId)
+        .Where(type => LeavePolicy.SupportedNames.Contains(type.Name) && (!onlyActive || type.IsActive)).OrderBy(type => type.Name).ThenBy(type => type.LeaveTypeId)
         .Select(type => new LeaveTypeDto(type.LeaveTypeId, type.Name, type.NameAr, type.DefaultDaysPerYear, type.IsPaid, type.IsActive));
 
     public async Task<IReadOnlyList<LeaveTypeDto>> GetLeaveTypesAsync(bool onlyActive = true, CancellationToken cancellationToken = default) =>
@@ -56,8 +56,6 @@ public sealed class LeaveService(
     {
         if (!await access.CanAccessEmployeeAsync(command.EmployeeId, false, cancellationToken))
             return LeaveOperationResult.Failure(HRMS.Application.Common.Messages.Get("Extra000"));
-        if (command.StartDate == command.EndDate && command.StartTime.HasValue && command.EndTime.HasValue && command.EndTime <= command.StartTime)
-            return LeaveOperationResult.Failure(Messages.Get("LeaveTimeOrderInvalid"));
         if (command.StartDate == default || command.EndDate < command.StartDate ||
             string.IsNullOrWhiteSpace(command.Reason) || command.Reason.Trim().Length > 1000)
         {
@@ -74,7 +72,7 @@ public sealed class LeaveService(
         }
 
         if (!await dbContext.LeaveTypes.AnyAsync(
-                type => type.LeaveTypeId == command.LeaveTypeId && type.IsActive,
+                type => type.LeaveTypeId == command.LeaveTypeId && type.IsActive && LeavePolicy.SupportedNames.Contains(type.Name),
                 cancellationToken))
         {
             return LeaveOperationResult.Failure(HRMS.Application.Common.Messages.Get("Business059"));
@@ -99,7 +97,7 @@ public sealed class LeaveService(
             command.LeaveTypeId,
             command.StartDate,
             command.EndDate,
-            command.Reason, command.StartTime, command.EndTime);
+            command.Reason);
         dbContext.LeaveRequests.Add(request);
 
         try
@@ -207,7 +205,7 @@ public sealed class LeaveService(
         var yearEnd = new DateOnly(year, 12, 31);
         var typePage = await dbContext.LeaveTypes
             .ForRead()
-            .Where(type => type.IsActive).OrderBy(type => type.Name).ThenBy(type => type.LeaveTypeId)
+            .Where(type => type.IsActive && LeavePolicy.SupportedNames.Contains(type.Name)).OrderBy(type => type.Name).ThenBy(type => type.LeaveTypeId)
             .Select(type => new
             {
                 type.LeaveTypeId,
@@ -258,6 +256,9 @@ public sealed class LeaveService(
         LeaveTypeInput input,
         CancellationToken cancellationToken = default)
     {
+        var normalized = LeavePolicy.Normalize(input);
+        if (normalized is null) return LeaveOperationResult.Failure(Messages.Get("SupportedLeaveTypesOnly"));
+        input = normalized;
         if (!IsValidTypeInput(input))
         {
             return LeaveOperationResult.Failure(HRMS.Application.Common.Messages.Get("Business019"));
@@ -278,6 +279,9 @@ public sealed class LeaveService(
         LeaveTypeInput input,
         CancellationToken cancellationToken = default)
     {
+        var normalized = LeavePolicy.Normalize(input);
+        if (normalized is null) return LeaveOperationResult.Failure(Messages.Get("SupportedLeaveTypesOnly"));
+        input = normalized;
         if (!IsValidTypeInput(input))
         {
             return LeaveOperationResult.Failure(HRMS.Application.Common.Messages.Get("Business019"));

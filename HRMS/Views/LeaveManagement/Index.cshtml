@@ -61,7 +61,7 @@
                 <td>@request.EmployeeNumber - @request.EmployeeName</td>
                 <td>@request.DepartmentName</td>
                 <td>@request.LeaveTypeNameAr (@request.LeaveTypeName)</td>
-                <td>@request.StartDate.ToString("d", System.Globalization.CultureInfo.CurrentCulture) @request.StartTime?.ToString("t", System.Globalization.CultureInfo.CurrentCulture) — @request.EndDate.ToString("d", System.Globalization.CultureInfo.CurrentCulture) @request.EndTime?.ToString("t", System.Globalization.CultureInfo.CurrentCulture)</td>
+                <td>@request.StartDate.ToString("d", System.Globalization.CultureInfo.CurrentCulture) — @request.EndDate.ToString("d", System.Globalization.CultureInfo.CurrentCulture)</td>
                 <td>@request.TotalDays</td>
                 <td>@T["Status." + request.Status]</td>
                 <td class="text-break">@request.Reason</td>

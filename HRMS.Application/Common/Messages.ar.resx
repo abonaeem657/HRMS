@@ -280,4 +280,5 @@
   <data name="FieldRequired" xml:space="preserve"><value>هذا الحقل مطلوب.</value></data>
   <data name="ValidationFailedTitle" xml:space="preserve"><value>يرجى تصحيح بيانات الطلب.</value></data>
   <data name="ValidationRange" xml:space="preserve"><value>يجب أن تكون قيمة {0} بين {1} و{2}.</value></data>
+<data name="SupportedLeaveTypesOnly" xml:space="preserve"><value>الأنواع المتاحة هي السنوية والمرضية وبدون راتب فقط.</value></data>
 </root>

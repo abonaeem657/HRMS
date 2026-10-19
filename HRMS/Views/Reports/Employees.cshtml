@@ -13,6 +13,8 @@
     <partial name="_ReportSort" model="@(new Dictionary<string, string> { ["name"] = "Name", ["hiredate"] = "HireDate", ["status"] = "Status" })" />
     <div class="col-md-2"><button class="btn btn-primary" type="submit">@T["Filter"]</button></div>
 </form>
+<partial name="_ReportExport" />
+
 <p class="text-muted">@T["Results"] @Model.Results.TotalCount</p>
 <div class="table-responsive"><table class="table table-striped table-hover align-middle"><thead><tr><th>@T["EmployeeNumber"]</th><th>@T["Name"]</th><th>@T["Email"]</th><th>@T["Department"]</th><th>@T["JobTitle"]</th><th>@T["HireDate"]</th><th>@T["Status"]</th></tr></thead><tbody>
 @if (Model.Results.Items.Count == 0) { <tr><td colspan="7" class="text-center text-muted">@T["NoResults"]</td></tr> }

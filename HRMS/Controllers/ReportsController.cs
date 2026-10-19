@@ -13,12 +13,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace HRMS.Controllers;
 
 [Authorize(Roles = IdentityRoles.ViewReports)]
-public sealed class ReportsController(
+public sealed partial class ReportsController(
     IReportingService reportingService,
     HRMS.Application.Common.IBusinessClock clock,
     IUserAccountService userAccountService,
     IEmployeeService employeeService,
-    IDepartmentService departmentService, IStringLocalizer<SharedResource> T) : Controller
+    IDepartmentService departmentService, IStringLocalizer<SharedResource> T, IReportFileExporter exporter) : Controller
 {
     [HttpGet]
     public async Task<IActionResult> Index(
@@ -54,7 +54,10 @@ public sealed class ReportsController(
             model.ToDate,
             departmentId,
             includeRecentActivity: IdentityRoles.ViewAuditLogs.Split(',').Any(User.IsInRole),
-            cancellationToken, new DashboardPaging(DisplayPagination.Request(Request, "Departments"), DisplayPagination.Request(Request, "Statuses"), DisplayPagination.Request(Request, "Activity")));
+            cancellationToken, this.IsExport()
+                ? new DashboardPaging(new(ShowAll: true), new(ShowAll: true), new(ShowAll: true))
+                : new DashboardPaging(DisplayPagination.Request(Request, "Departments"), DisplayPagination.Request(Request, "Statuses"), DisplayPagination.Request(Request, "Activity")));
+        if (this.IsExport()) return await ExportDashboardAsync(model, cancellationToken);
         var pages = model.Summary.Pages!;
         ViewData["DepartmentsPagination"] = DisplayPagination.Create(Request, pages.DepartmentsCount, pages.DepartmentsPage, "Departments");
         ViewData["StatusesPagination"] = DisplayPagination.Create(Request, pages.StatusesCount, pages.StatusesPage, "Statuses");
@@ -87,8 +90,9 @@ public sealed class ReportsController(
                 model.SortBy,
                 model.SortDescending,
                 model.Page <= 0 ? 1 : model.Page,
-                DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request)),
+                DisplayPagination.PageSize, this.IsExport() || DisplayPagination.IsShowAll(Request)),
             cancellationToken);
+        if (this.IsExport()) return await ExportEmployeesAsync(model.Results.Items, cancellationToken);
         ViewData["Pagination"] = DisplayPagination.Create(Request, model.Results.TotalCount, model.Results.Page);
         ViewData["SortDescending"] = model.SortDescending;
         return View(model);
@@ -125,8 +129,9 @@ public sealed class ReportsController(
                 model.FromDate,
                 model.ToDate,
                 model.Page <= 0 ? 1 : model.Page,
-                DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request), model.SortBy, model.SortDescending),
+                DisplayPagination.PageSize, this.IsExport() || DisplayPagination.IsShowAll(Request), model.SortBy, model.SortDescending),
             cancellationToken);
+        if (this.IsExport()) return await ExportAttendanceAsync(model.Results.Items, cancellationToken);
         ViewData["Pagination"] = DisplayPagination.Create(Request, model.Results.TotalCount, model.Results.Page);
         ViewData["SortDescending"] = model.SortDescending;
         return View(model);
@@ -164,8 +169,9 @@ public sealed class ReportsController(
                 model.Status,
                 model.Year,
                 model.Page <= 0 ? 1 : model.Page,
-                DisplayPagination.PageSize, DisplayPagination.IsShowAll(Request), model.SortBy, model.SortDescending),
+                DisplayPagination.PageSize, this.IsExport() || DisplayPagination.IsShowAll(Request), model.SortBy, model.SortDescending),
             cancellationToken);
+        if (this.IsExport()) return await ExportLeavesAsync(model.Results.Items, cancellationToken);
         ViewData["Pagination"] = DisplayPagination.Create(Request, model.Results.TotalCount, model.Results.Page);
         ViewData["SortDescending"] = model.SortDescending;
         return View(model);
@@ -214,6 +220,7 @@ public sealed class ReportsController(
             model.ToDate,
             model.DepartmentId,
             cancellationToken);
+        if (this.IsExport()) return await ExportDecisionsAsync(model.Summary, cancellationToken);
         return View(model);
     }
 
@@ -227,7 +234,8 @@ public sealed class ReportsController(
         {
             return Forbid();
         }
-        var page = await reportingService.GetDepartmentHeadcountPageAsync(departmentId, DisplayPagination.Request(Request), cancellationToken, sortBy, sortDescending);
+        var page = await reportingService.GetDepartmentHeadcountPageAsync(departmentId, this.IsExport() ? new(ShowAll: true) : DisplayPagination.Request(Request), cancellationToken, sortBy, sortDescending);
+        if (this.IsExport()) return await ExportHeadcountAsync(page.Items, cancellationToken);
         ViewData["SortDescending"] = sortDescending;
         ViewData["Pagination"] = DisplayPagination.Create(Request, page.TotalCount, page.Page);
         return View(page.Items);

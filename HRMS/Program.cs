@@ -114,7 +114,7 @@ if (args.Length == 1 && args[0] == "--seed-reference-data")
         throw new InvalidOperationException("Starter reference data is available only in Development.");
     await using var scope = app.Services.CreateAsyncScope();
     var count = await HRMS.Infrastructure.Persistence.ReferenceDataSeed.RunAsync(scope.ServiceProvider);
-    Console.WriteLine($"Created {count} leave types. Existing settings were preserved. Edit allowances in Leave > Leave types.");
+    Console.WriteLine($"Created {count} leave types. Supported types: Annual, Sick, Unpaid. Other types were disabled without deleting history. Existing allowances were preserved; edit them in Leave > Leave types.");
     return;
 }
 if (args.Length == 1 && args[0] is "--admin-status" or "--admin-create" or

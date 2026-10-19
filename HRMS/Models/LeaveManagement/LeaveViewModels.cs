@@ -17,11 +17,6 @@ public sealed class LeaveListViewModel
 
 public sealed class LeaveRequestFormViewModel
 {
-    [DataType(DataType.Time), Display(Name = "LeaveStartTime")]
-    public TimeOnly? StartTime { get; set; }
-
-    [DataType(DataType.Time), Display(Name = "LeaveEndTime")]
-    public TimeOnly? EndTime { get; set; }
     [Range(1, int.MaxValue, ErrorMessage = "LeaveTypeRequired")]
     [Display(Name = "Label.LeaveType")]
     public int LeaveTypeId { get; set; }

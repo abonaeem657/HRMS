@@ -1492,7 +1492,7 @@
     <value>End time must be after start time.</value>
   </data>
   <data name="LeaveTimeHint">
-    <value>Both dates are required; times are optional. Start time defaults to now and can be cleared. End time stays blank. Leave uses inclusive calendar days, not hours.</value>
+    <value>Choose the start and end dates. Leave counts inclusive calendar days; hourly permissions are not supported.</value>
   </data>
   <data name="PendingDays">
     <value>Reserved for pending requests</value>
@@ -1586,7 +1586,7 @@
   <data name="DefaultOrder" xml:space="preserve"><value>Default order</value></data>
   <data name="GuideChangeYourPasswordText" xml:space="preserve"><value>Enter your current password, then the new password and its confirmation. Sign out when finished on a shared device.</value></data>
   <data name="GuideChangeYourPasswordTitle" xml:space="preserve"><value>Change your password</value></data>
-  <data name="GuideConfigureLeaveTypesText" xml:space="preserve"><value>Set the Arabic and English names, annual allowance, paid flag and active flag. Starter values are editable under your organization policy. Inactive types are unavailable for new requests.</value></data>
+  <data name="GuideConfigureLeaveTypesText" xml:space="preserve"><value>In Leave types, change the annual or sick allowance, or enable/disable a type, then save. Supported types are annual, sick and unpaid; no additional types are needed.</value></data>
   <data name="GuideConfigureLeaveTypesTitle" xml:space="preserve"><value>Configure leave types</value></data>
   <data name="GuideCorrectAnAttendanceSessionText" xml:space="preserve"><value>Find the employee and date in Attendance and choose Edit beside the required session. Set check-in and check-out and save. For overnight work choose the following check-out date. Avoid future times, intervals above 24 hours, or overlaps. The general correction form can also add a missing record; use the row&apos;s Edit button when multiple sessions exist.</value></data>
   <data name="GuideCorrectAnAttendanceSessionTitle" xml:space="preserve"><value>Correct an attendance session</value></data>
@@ -1600,11 +1600,11 @@
   <data name="GuideReadAuditHistoryTitle" xml:space="preserve"><value>Read audit history</value></data>
   <data name="GuideReadYourEmployeeProfileText" xml:space="preserve"><value>Open My profile to read your employment details, department, job title and manager. Ask HR to correct this read-only record.</value></data>
   <data name="GuideReadYourEmployeeProfileTitle" xml:space="preserve"><value>Read your employee profile</value></data>
-  <data name="GuideReadYourPersonalLeaveReportText" xml:space="preserve"><value>Open My leave report in navigation. Select year and status to review your requests, decisions and notes. Balances show allowance, used, reserved and remaining for the whole year; status only filters the request list. This report contains only your own data.</value></data>
+  <data name="GuideReadYourPersonalLeaveReportText" xml:space="preserve"><value>Open My leave report and select year and status. Review your requests, decisions and balance, then download PDF or Excel. Exports contain only your matching requests; balances cover the full year.</value></data>
   <data name="GuideReadYourPersonalLeaveReportTitle" xml:space="preserve"><value>Read your personal leave report</value></data>
   <data name="GuideRecordYourAttendanceText" xml:space="preserve"><value>Check in when starting work and out when finishing. After checking out you can start another session the same day; only one session can remain open. Times use Jordan time. Ask HR to correct mistakes.</value></data>
   <data name="GuideRecordYourAttendanceTitle" xml:space="preserve"><value>Record your attendance</value></data>
-  <data name="GuideSubmitAndTrackLeaveText" xml:space="preserve"><value>Choose type, start and end dates, and reason. Times are optional; start defaults to now and can be cleared, while end stays blank. Allowance uses calendar days, not hours. Submission reserves days, approval confirms the deduction, and rejection or pending cancellation releases them. Cancel your pending request from Leave.</value></data>
+  <data name="GuideSubmitAndTrackLeaveText" xml:space="preserve"><value>Choose annual, sick or unpaid leave, enter the start/end dates and reason. There are no time fields. Pending requests reserve days; approval confirms usage and rejection or cancellation releases them. Follow the decision in My leave report.</value></data>
   <data name="GuideSubmitAndTrackLeaveTitle" xml:space="preserve"><value>Submit and track leave</value></data>
   <data name="GuideChooseScopedReportHr" xml:space="preserve"><value>Choose employees, attendance, leave, decisions or headcount, and filter by department, employee and date. Reading a report does not create records.</value></data>
   <data name="GuideReviewScopedLeaveManager" xml:space="preserve"><value>Filter Leave to Pending. Review your department and approve or reject with a reason. HR reviews your own request. If your department is unavailable, ask the administrator to check your employee link and department manager assignment.</value></data>
@@ -1620,4 +1620,20 @@
   <data name="FieldRequired" xml:space="preserve"><value>This field is required.</value></data>
   <data name="ValidationFailedTitle" xml:space="preserve"><value>Please correct the request data.</value></data>
   <data name="ValidationRange" xml:space="preserve"><value>The field {0} must be between {1} and {2}.</value></data>
+  <data name="ExportPdf" xml:space="preserve"><value>Download PDF</value></data>
+  <data name="ExportExcel" xml:space="preserve"><value>Download Excel</value></data>
+  <data name="ExportFilteredHint" xml:space="preserve"><value>Includes all results matching the current filters within your permissions.</value></data>
+  <data name="ExportGenerated" xml:space="preserve"><value>Generated on {0} — Jordan time</value></data>
+  <data name="ExportTooLarge" xml:space="preserve"><value>More than 10,000 rows. Narrow the filters before exporting.</value></data>
+  <data name="ExportFormatInvalid" xml:space="preserve"><value>Unsupported report format.</value></data>
+  <data name="PdfBrowserUnavailable" xml:space="preserve"><value>PDF export is not configured on this server. Contact the administrator; Excel export is available.</value></data>
+  <data name="PdfExportFailed" xml:space="preserve"><value>Unable to generate PDF. Retry or download Excel.</value></data>
+  <data name="SimpleLeaveTypesHint" xml:space="preserve"><value>Supported types: annual, sick and unpaid. Requests use dates only and count calendar days. Adjust the yearly allowance or enable/disable a type here.</value></data>
+  <data name="UnpaidNoAllowance" xml:space="preserve"><value>Unpaid leave has no paid allowance.</value></data>
+  <data name="LeaveKind.Annual" xml:space="preserve"><value>Annual</value></data>
+  <data name="LeaveKind.Sick" xml:space="preserve"><value>Sick</value></data>
+  <data name="LeaveKind.Unpaid" xml:space="preserve"><value>Unpaid</value></data>
+  <data name="User" xml:space="preserve"><value>User</value></data>
+  <data name="Entity" xml:space="preserve"><value>Entity</value></data>
+  <data name="RecordId" xml:space="preserve"><value>Record ID</value></data>
 </root>

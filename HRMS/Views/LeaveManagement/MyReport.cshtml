@@ -19,6 +19,8 @@
     </select></div>
     <div class="col-sm-4"><button class="btn btn-outline-primary" type="submit">@T["Filter"]</button></div>
 </form>
+<partial name="_ReportExport" />
+
 <section class="card card-body mb-4">
     <h2 class="h5">@T["LeaveBalancesTitle", Model.Year ?? BusinessClock.Today.Year]</h2>
     <div class="table-responsive"><table class="table align-middle mb-0">
@@ -36,7 +38,7 @@
     @foreach (var r in Model.Requests)
     {
         <tr><td>@(ar ? r.LeaveTypeNameAr : r.LeaveTypeName)</td>
-            <td>@r.StartDate.ToString("d", System.Globalization.CultureInfo.CurrentCulture) @r.StartTime?.ToString("t", System.Globalization.CultureInfo.CurrentCulture) — @r.EndDate.ToString("d", System.Globalization.CultureInfo.CurrentCulture) @r.EndTime?.ToString("t", System.Globalization.CultureInfo.CurrentCulture)</td>
+            <td>@r.StartDate.ToString("d", System.Globalization.CultureInfo.CurrentCulture) — @r.EndDate.ToString("d", System.Globalization.CultureInfo.CurrentCulture)</td>
             <td>@r.TotalDays</td><td>@T["Status." + r.Status]</td><td>@r.Reason</td>
             <td>@r.ReviewNotes @if (r.ReviewedAtUtc.HasValue) { <div class="small text-muted">@BusinessClock.ToLocal(r.ReviewedAtUtc)?.ToString("g", System.Globalization.CultureInfo.CurrentCulture) @T["JordanTime"]</div> }</td>
         </tr>

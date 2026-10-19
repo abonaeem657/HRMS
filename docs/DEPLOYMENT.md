@@ -15,3 +15,6 @@ The Release publish output has been started locally in Production over HTTPS on 
 ## Verified local publish and browser acceptance
 
 Run scripts/verify-published.ps1 from the solution directory. It creates artifacts/publish, starts that exact build in Production on a random HTTPS localhost port, exercises the six roles in Chrome against temporary SQL databases, and stops the test host. It does not change HRMSnew, publish to a public host, install IIS or seed a production database. For a persistent host, provide ConnectionStrings__HRMS, ASPNETCORE_ENVIRONMENT=Production, an HTTPS binding/certificate, and a managed service identity as described above.
+
+## PDF and Excel exports
+Excel is generated as Open XML without Microsoft Office. PDF requires Chrome/Edge on the app host, an Arabic-capable system font and a private writable temporary directory. Set ReportExport__BrowserPath to override browser detection. Keep the browser patched and allow the application identity to execute it; the app does not disable the browser sandbox. Rendering is local, limited to two concurrent browser processes with a 45-second timeout. Missing renderer configuration returns a localized 503 and does not create a fake PDF. See TRAINER_UPDATE_2026_10_19_AR.md.

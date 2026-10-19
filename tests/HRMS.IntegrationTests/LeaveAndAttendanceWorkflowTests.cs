@@ -51,12 +51,12 @@ public partial class SqlWorkflowTests
             Assert.Equal((used, pending, remaining), (balance.UsedDays, balance.PendingDays, balance.RemainingDays));
         }
         await AssertBalance(0, 0, 14);
-        // A prefilled start time must not require an end time for a day-based request.
-        var submitted = await service.SubmitLeaveRequestAsync(new(employeeId, typeId, new(2027, 1, 10), new(2027, 1, 11), "Annual", new(9, 30), null));
+        // Requests use calendar dates only; new records do not carry hourly permission metadata.
+        var submitted = await service.SubmitLeaveRequestAsync(new(employeeId, typeId, new(2027, 1, 10), new(2027, 1, 11), "Annual"));
         Assert.True(submitted.Succeeded);
         await AssertBalance(0, 2, 12);
         var saved = await service.GetLeaveRequestByIdAsync(submitted.LeaveRequestId!.Value);
-        Assert.Equal(new TimeOnly(9, 30), saved!.StartTime);
+        Assert.Null(saved!.StartTime);
         Assert.Null(saved.EndTime);
         Assert.True((await service.ApproveLeaveRequestAsync(saved.LeaveRequestId, owner.Id)).Succeeded);
         await AssertBalance(2, 0, 12);

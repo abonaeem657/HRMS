@@ -115,6 +115,7 @@ public static class DependencyInjection
         services.AddScoped<ILeaveService, LeaveService>();
         services.AddScoped<IRecordAccess, RecordAccess>();
         services.AddScoped<IReportingService, ReportingService>();
+        services.AddSingleton<IReportFileExporter, ReportFileExporter>();
         services.AddHttpClient<IPublicHolidaysService, PublicHolidaysService>((provider, client) =>
         {
             var apiBaseAddress = configuration["ExternalApis:PublicHolidays:BaseAddress"]

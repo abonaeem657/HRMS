@@ -1492,7 +1492,7 @@
     <value>يجب أن يكون وقت النهاية بعد وقت البداية.</value>
   </data>
   <data name="LeaveTimeHint">
-    <value>التاريخان مطلوبان، والوقتان اختياريان. يُملأ وقت البداية بالوقت الحالي ويمكن مسحه. يبقى وقت النهاية فارغًا. تُحسب الإجازة بالأيام التقويمية بما يشمل يوم البداية والنهاية، وليس بالساعات.</value>
+    <value>اختر تاريخ البداية والنهاية. تُحسب الإجازة بالأيام التقويمية بما يشمل اليومين، ولا توجد مغادرات بالساعة.</value>
   </data>
   <data name="PendingDays">
     <value>محجوز للطلبات المعلقة</value>
@@ -1586,7 +1586,7 @@
   <data name="DefaultOrder" xml:space="preserve"><value>الترتيب الافتراضي</value></data>
   <data name="GuideChangeYourPasswordText" xml:space="preserve"><value>من تغيير كلمة المرور أدخل الحالية ثم الجديدة وأكّدها. سجل الخروج عند الانتهاء من جهاز مشترك.</value></data>
   <data name="GuideChangeYourPasswordTitle" xml:space="preserve"><value>حدّث كلمة مرورك</value></data>
-  <data name="GuideConfigureLeaveTypesText" xml:space="preserve"><value>افتح أنواع الإجازات وحدد الاسم بالعربية والإنجليزية والرصيد السنوي وهل النوع مدفوع ونشط. القيم الأولية قابلة للتعديل وفق سياسة مؤسستك. النوع غير النشط لا يظهر في طلب جديد.</value></data>
+  <data name="GuideConfigureLeaveTypesText" xml:space="preserve"><value>من أنواع الإجازات عدّل أيام السنوية أو المرضية، أو فعّل النوع وعطّله، ثم احفظ. الأنواع ثابتة: سنوية ومرضية وبدون راتب. لا تحتاج إضافة أنواع أخرى.</value></data>
   <data name="GuideConfigureLeaveTypesTitle" xml:space="preserve"><value>اضبط أنواع الإجازة</value></data>
   <data name="GuideCorrectAnAttendanceSessionText" xml:space="preserve"><value>في جدول الحضور ابحث عن الموظف والتاريخ واضغط تعديل بجانب الفترة المطلوبة. صحّح وقت الحضور والانصراف واحفظ. للوردية الليلية اختر تاريخ الانصراف التالي. لا تدخل وقتًا مستقبليًا أو فترة تتجاوز 24 ساعة أو تتداخل مع فترة أخرى. زر تصحيح الحضور العام مخصص أيضًا لإضافة سجل مفقود؛ عند تعدد الفترات استخدم تعديل بجانب الفترة.</value></data>
   <data name="GuideCorrectAnAttendanceSessionTitle" xml:space="preserve"><value>صحّح فترة دوام محددة</value></data>
@@ -1600,11 +1600,11 @@
   <data name="GuideReadAuditHistoryTitle" xml:space="preserve"><value>راجع سجل التدقيق</value></data>
   <data name="GuideReadYourEmployeeProfileText" xml:space="preserve"><value>افتح ملفي الشخصي للاطلاع على بياناتك الوظيفية والقسم والمسمّى والمدير. البيانات للعرض فقط؛ اطلب تصحيحها من الموارد البشرية.</value></data>
   <data name="GuideReadYourEmployeeProfileTitle" xml:space="preserve"><value>راجع ملفك الوظيفي</value></data>
-  <data name="GuideReadYourPersonalLeaveReportText" xml:space="preserve"><value>افتح تقرير إجازاتي من القائمة. اختر السنة والحالة لتشاهد طلباتك وقراراتها وملاحظات المراجعة. جدول الرصيد يعرض المسموح والمستخدم والمحجوز والمتبقي للسنة كاملة؛ فلتر الحالة يغير قائمة الطلبات فقط. التقرير يعرض بياناتك وحدك.</value></data>
+  <data name="GuideReadYourPersonalLeaveReportText" xml:space="preserve"><value>افتح تقرير إجازاتي واختر السنة والحالة. راجع طلباتك والقرارات والرصيد، ثم اضغط تنزيل PDF أو تنزيل إكسل لحفظ تقريرك. التصدير يشمل طلباتك المطابقة للفلاتر فقط، والرصيد يعرض السنة كاملة.</value></data>
   <data name="GuideReadYourPersonalLeaveReportTitle" xml:space="preserve"><value>راجع تقرير إجازاتك</value></data>
   <data name="GuideRecordYourAttendanceText" xml:space="preserve"><value>اضغط تسجيل حضور عند بدء العمل وانصراف عند الانتهاء. بعد الانصراف يمكنك بدء فترة جديدة في اليوم نفسه؛ لا تفتح فترتين معًا. الأوقات بتوقيت الأردن. إذا احتجت تصحيحًا، اطلبه من فريق الموارد البشرية.</value></data>
   <data name="GuideRecordYourAttendanceTitle" xml:space="preserve"><value>سجّل حضورك وانصرافك</value></data>
-  <data name="GuideSubmitAndTrackLeaveText" xml:space="preserve"><value>اختر النوع وتاريخ البداية والنهاية واكتب السبب. الوقت اختياري؛ البداية تُملأ بالوقت الحالي ويمكن مسحها، والنهاية تبقى فارغة. الحساب بالأيام التقويمية وليس بالساعات. بعد الإرسال يُحجز الرصيد؛ الموافقة تثبّت الخصم والرفض أو إلغاء الطلب المعلّق يعيدان الأيام. ألغِ طلبك المعلّق من صفحة الإجازات.</value></data>
+  <data name="GuideSubmitAndTrackLeaveText" xml:space="preserve"><value>اختر سنوية أو مرضية أو بدون راتب، وحدد تاريخ البداية والنهاية واكتب السبب. لا توجد حقول وقت. بعد الإرسال تُحجز الأيام؛ الموافقة تثبّت الخصم والرفض أو إلغاء الطلب المعلّق يعيدانها. تابع النتيجة في تقرير إجازاتي.</value></data>
   <data name="GuideSubmitAndTrackLeaveTitle" xml:space="preserve"><value>قدّم طلب إجازة وتابع حالته</value></data>
   <data name="GuideChooseScopedReportHr" xml:space="preserve"><value>من التقارير اختر الموظفين أو الحضور أو الإجازات أو قرارات الإجازة أو أعداد الموظفين. حدد القسم والموظف والتاريخ عند الحاجة. عرض التقرير لا ينشئ سجلات جديدة.</value></data>
   <data name="GuideReviewScopedLeaveManager" xml:space="preserve"><value>افتح الإجازات واختر الحالة معلّق. راجع طلبات قسمك ووافق أو ارفض مع سبب. لا تعتمد طلبك الشخصي؛ يراجعه فريق الموارد البشرية. إذا لم تظهر بيانات قسمك، اطلب من مسؤول النظام التأكد من ربط حسابك بموظف وتعيينه مديرًا للقسم.</value></data>
@@ -1620,4 +1620,20 @@
   <data name="FieldRequired" xml:space="preserve"><value>هذا الحقل مطلوب.</value></data>
   <data name="ValidationFailedTitle" xml:space="preserve"><value>يرجى تصحيح بيانات الطلب.</value></data>
   <data name="ValidationRange" xml:space="preserve"><value>يجب أن تكون قيمة {0} بين {1} و{2}.</value></data>
+  <data name="ExportPdf" xml:space="preserve"><value>تنزيل PDF</value></data>
+  <data name="ExportExcel" xml:space="preserve"><value>تنزيل إكسل</value></data>
+  <data name="ExportFilteredHint" xml:space="preserve"><value>يشمل جميع النتائج المطابقة للفلاتر الحالية ضمن صلاحياتك.</value></data>
+  <data name="ExportGenerated" xml:space="preserve"><value>أُنشئ في {0} — توقيت الأردن</value></data>
+  <data name="ExportTooLarge" xml:space="preserve"><value>النتائج تتجاوز ١٠٬٠٠٠ صف. ضيّق الفلاتر ثم صدّر التقرير.</value></data>
+  <data name="ExportFormatInvalid" xml:space="preserve"><value>صيغة التقرير غير مدعومة.</value></data>
+  <data name="PdfBrowserUnavailable" xml:space="preserve"><value>تصدير PDF غير مهيأ على الخادم. تواصل مع مسؤول النظام؛ تصدير إكسل متاح.</value></data>
+  <data name="PdfExportFailed" xml:space="preserve"><value>تعذر إنشاء PDF. حاول مجددًا أو نزّل التقرير بإكسل.</value></data>
+  <data name="SimpleLeaveTypesHint" xml:space="preserve"><value>الأنواع المعتمدة: سنوية ومرضية وبدون راتب. الطلب بالتواريخ فقط ويُحسب بالأيام التقويمية. يمكنك تعديل الأيام السنوية أو تفعيل النوع وتعطيله هنا.</value></data>
+  <data name="UnpaidNoAllowance" xml:space="preserve"><value>إجازة بدون راتب؛ لا رصيد مدفوع محدد لها.</value></data>
+  <data name="LeaveKind.Annual" xml:space="preserve"><value>سنوية</value></data>
+  <data name="LeaveKind.Sick" xml:space="preserve"><value>مرضية</value></data>
+  <data name="LeaveKind.Unpaid" xml:space="preserve"><value>بدون راتب</value></data>
+  <data name="User" xml:space="preserve"><value>المستخدم</value></data>
+  <data name="Entity" xml:space="preserve"><value>نوع السجل</value></data>
+  <data name="RecordId" xml:space="preserve"><value>معرّف السجل</value></data>
 </root>

@@ -28,7 +28,8 @@ public sealed class ReportingService(
             Employees = await employees.OrderBy(e => e.EmployeeNumber)
                 .Select(e => new ReportOption(e.EmployeeId, e.EmployeeNumber + " - " + e.FirstName + " " + e.LastName))
                 .ToListAsync(cancellationToken),
-            LeaveTypes = await dbContext.LeaveTypes.AsNoTracking().OrderBy(t => t.Name)
+            LeaveTypes = await dbContext.LeaveTypes.AsNoTracking()
+                .Where(t => HRMS.Application.LeaveManagement.LeavePolicy.SupportedNames.Contains(t.Name)).OrderBy(t => t.Name)
                 .Select(t => new ReportOption(t.LeaveTypeId, t.Name)).ToListAsync(cancellationToken),
             EmploymentStatuses = await employees.Select(e => e.EmploymentStatus).Distinct()
                 .OrderBy(s => s).ToListAsync(cancellationToken)

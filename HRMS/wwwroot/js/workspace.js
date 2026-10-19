@@ -93,8 +93,32 @@
         }
     };
     history.replaceState({}, "", location.href);
-    document.addEventListener("click", event => {
+    document.addEventListener("click", async event => {
         const link = event.target.closest("a[href]");
+        if (link?.hasAttribute("data-report-download") && event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
+            event.preventDefault();
+            if (link.getAttribute("aria-disabled") === "true") return;
+            link.setAttribute("aria-disabled", "true");
+            tell(words.loading);
+            try {
+                const response = await fetch(link.href, { credentials: "same-origin", cache: "no-store" });
+                if (!response.ok) {
+                    const problem = await response.json().catch(() => null);
+                    throw new Error(problem?.title || words.failed);
+                }
+                const mime = response.headers.get("content-type") || "";
+                if (!mime.includes("application/pdf") && !mime.includes("spreadsheetml.sheet")) throw new Error(words.failed);
+                const filename = /filename="?([^";]+)/i.exec(response.headers.get("content-disposition") || "")?.[1] || "report";
+                const url = URL.createObjectURL(await response.blob());
+                const anchor = document.createElement("a");
+                anchor.href = url; anchor.download = filename;
+                document.body.append(anchor); anchor.click(); anchor.remove();
+                setTimeout(() => URL.revokeObjectURL(url), 1000);
+                tell("");
+            } catch (error) { tell(error instanceof TypeError ? words.network : error.message, true); }
+            finally { link.removeAttribute("aria-disabled"); }
+            return;
+        }
         if (event.defaultPrevented || !link || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey ||
             link.hasAttribute("download") || link.target || link.closest(".language-switch") || link.matches("[data-modal-url], [data-bs-toggle]") ||
             link.closest(".disabled, .modal, [data-no-ajax]")) return;

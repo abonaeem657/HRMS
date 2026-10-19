@@ -1,0 +1,13 @@
+@{
+    string Link(string format)
+    {
+        var query = Context.Request.Query.ToDictionary(p => p.Key, p => (string?)p.Value.ToString(), StringComparer.OrdinalIgnoreCase);
+        query["export"] = format;
+        return Context.Request.PathBase + Context.Request.Path + Microsoft.AspNetCore.Http.QueryString.Create(query);
+    }
+}
+<div class="d-flex flex-wrap align-items-center gap-2 mb-3" data-no-ajax>
+    <a href="@Link("pdf")" class="btn btn-outline-primary" download data-report-download>@T["ExportPdf"]</a>
+    <a href="@Link("xlsx")" class="btn btn-outline-primary" download data-report-download>@T["ExportExcel"]</a>
+    <span class="small text-muted">@T["ExportFilteredHint"]</span>
+</div>

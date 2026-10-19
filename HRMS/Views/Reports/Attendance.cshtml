@@ -12,6 +12,8 @@
     <partial name="_ReportSort" model="@(new Dictionary<string, string> { ["employee"] = "EmployeeNumber", ["date"] = "Date", ["hours"] = "Hours", ["status"] = "Status" })" />
     <div class="col-md-2"><button class="btn btn-primary" type="submit">@T["Filter"]</button></div>
 </form>
+<partial name="_ReportExport" />
+
 <p class="text-muted">@T["AttendanceUtcResults"] @Model.Results.TotalCount</p>
 <div class="table-responsive"><table class="table table-striped table-hover align-middle"><thead><tr><th>@T["Date"]</th><th>@T["EmployeeNumber"]</th><th>@T["Employee"]</th><th>@T["Department"]</th><th>@T["CheckInUtc"]</th><th>@T["CheckOutUtc"]</th><th>@T["Hours"]</th><th>@T["Verification"]</th></tr></thead><tbody>
 @if (Model.Results.Items.Count == 0) { <tr><td colspan="8" class="text-center text-muted">@T["NoResults"]</td></tr> }
