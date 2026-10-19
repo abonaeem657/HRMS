@@ -12,28 +12,34 @@
 |---|---|
 | ![صفحة تسجيل الدخول](docs/screenshots/login.png) | ![قائمة الموظفين](docs/screenshots/employees.png) |
 
-| الحضور والانصراف | تقديم طلب إجازة |
-|---|---|
-| ![صفحة الحضور والانصراف](docs/screenshots/attendance.png) | ![نموذج طلب الإجازة](docs/screenshots/leave-request.png) |
-
-![إعداد أنواع الإجازات](docs/screenshots/leave-types.png)
+![صفحة الحضور والانصراف](docs/screenshots/attendance.png)
 
 > الصور ملتقطة من نسخة عرض محلية ببيانات تجريبية، ولا تتضمن بيانات أشخاص حقيقية.
 
 ## الوظائف
 
 - ملفات الموظفين ودورة عملهم، الأقسام والمسميات الوظيفية.
-- تسجيل الحضور والانصراف وتصحيح السجلات مع سجل تدقيق.
-- طلبات الإجازات والأرصدة والمراجعة والاعتماد.
-- لوحة المعلومات والتقارير وسجل التدقيق.
+- تسجيل الحضور والانصراف لعدة فترات مكتملة في اليوم، وتصحيح السجلات بالصلاحيات مع سجل تدقيق.
+- إجازات سنوية ومرضية وبدون راتب بالتواريخ فقط، مع الأرصدة والمراجعة والاعتماد.
+- لوحة المعلومات والتقارير وسجل التدقيق، مع تنزيل PDF وإكسل وفق الفلاتر والصلاحيات.
 - ستة أدوار وصلاحيات، وواجهات عربية وإنجليزية متجاوبة.
 - واجهات MVC وواجهات API موثقة عبر Swagger في بيئة التطوير.
+
+## التقارير والإجازات
+
+1. افتح التقرير، وحدد الفلاتر والترتيب، ثم طبّقها.
+2. اضغط **تنزيل PDF** أو **تنزيل إكسل**. الملف يشمل جميع النتائج المطابقة ضمن صلاحياتك، وليس ستة صفوف الصفحة الحالية فقط.
+3. الموظف ينزّل طلباته وأرصدته من **تقرير إجازاتي**، ومدير القسم يصدّر نطاق قسمه فقط.
+
+أنواع الإجازات ثابتة: **سنوية، مرضية، وبدون راتب**. الطلب يحتوي تاريخ البداية والنهاية والسبب، دون حقول ساعة أو مغادرات. من **الإجازات ← أنواع الإجازات** يستطيع مسؤول النظام ومدير الموارد البشرية تعديل بدل السنوية والمرضية أو تفعيل النوع وتعطيله. البدل الأولي ١٤ يومًا لكل منهما، مع حفظ القيم الموجودة في القاعدة. الأنواع القديمة تعطّلت دون حذف طلباتها.
+
+إنشاء PDF يدعم العربية والإنجليزية ويستخدم متصفحًا محليًا على الخادم. اضبط `ReportExport__BrowserPath` إن كان المتصفح بمسار آخر. إكسل ملف `.xlsx` فعلي. راجع [تفاصيل تحديث المدرب وإعداد التصدير](docs/TRAINER_UPDATE_2026_10_19_AR.md) للسياسات التدريبية والحدود.
 
 ## المتطلبات
 
 - .NET SDK 8 أو أحدث مع runtime لـ .NET 8.
 - SQL Server 2019 أو أحدث؛ LocalDB مناسب للتطوير على Windows.
-- Chrome مطلوب لاختبارات المتصفح.
+- Chrome أو Edge على خادم التطبيق لإنشاء PDF؛ وChrome لاختبارات المتصفح. تصدير إكسل لا يحتاج Microsoft Office.
 
 يستهدف الحل .NET 8 ويستخدم ASP.NET Core وEF Core وIdentity بإصدار 8.0.31. راجع [ملاحظات التحقق والتوافق](docs/VERIFICATION.md) و[متطلبات القبول والفجوات](docs/ACCEPTANCE_AR.md) قبل النشر.
 
@@ -44,9 +50,12 @@
 ```powershell
 dotnet tool restore
 dotnet restore HRMS.sln
-Copy-Item .\HRMS\appsettings.Development.example.json .\HRMS\appsettings.Development.json
+if (!(Test-Path .\HRMS\appsettings.Development.json)) {
+    Copy-Item .\HRMS\appsettings.Development.example.json .\HRMS\appsettings.Development.json
+}
 $env:ASPNETCORE_ENVIRONMENT = "Development"
 dotnet ef database update --project HRMS.Infrastructure --startup-project HRMS
+dotnet run --project HRMS -- --seed-reference-data
 dotnet run --project HRMS
 ```
 
@@ -77,7 +86,7 @@ dotnet build HRMS.sln
 dotnet test HRMS.sln
 ```
 
-تعمل اختبارات الوحدة والمعمارية والتكامل دون إعداد إضافي. اختبارات SQL والمتصفح تحتاج اتصال SQL Server محليًا بصلاحية إنشاء قواعد مؤقتة:
+تعمل اختبارات الوحدة والمعمارية وHTTP دون إعداد إضافي. تتجاوز أداة الاختبار سيناريوهات SQL والمتصفح إذا لم تتوفر متطلباتها؛ التجاوز لا يثبت نجاح هذه السيناريوهات. اختبارات SQL والمتصفح تحتاج اتصال SQL Server محليًا بصلاحية إنشاء قواعد مؤقتة:
 
 ```powershell
 $env:HRMS_TEST_SQLSERVER = "Server=(localdb)\MSSQLLocalDB;Integrated Security=True;TrustServerCertificate=True"
@@ -86,6 +95,12 @@ Remove-Item Env:HRMS_TEST_SQLSERVER
 ```
 
 تستخدم اختبارات قاعدة البيانات قواعد مؤقتة بأسماء `HRMS_Test_<guid>` وتحذفها بعد الاختبار. راجع [خطوات التحقق](docs/VERIFICATION.md) للتفاصيل.
+
+آخر تحقق كامل بتاريخ ١٩ تشرين الأول ٢٠٢٦: **١٠٣ ناجحًا، صفر فشل، صفر تجاوز**: ٥٠ للوحدات، و٧ للمعمارية، و٤٦ للتكامل وSQL وHTTP والمتصفح. لإعادة التحقق من نسخة النشر مع SQL Server وChrome:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-published.ps1
+```
 
 ## بنية الحل
 
@@ -105,6 +120,3 @@ Remove-Item Env:HRMS_TEST_SQLSERVER
 - [النشر](docs/DEPLOYMENT.md) و[قاعدة البيانات](docs/DATABASE.md)
 - [الصلاحيات والأدوار](docs/ROLES_AND_ACCESS_AR.md)
 - [نتائج التحقق](docs/VERIFICATION.md) و[متطلبات القبول](docs/ACCEPTANCE_AR.md)
-
-## تحديث متطلبات المدرب — ١٩ تشرين الأول ٢٠٢٦
-التقارير تدعم تنزيل PDF وإكسل مع الفلاتر والصلاحيات. الموظف ينزّل تقريره من «تقرير إجازاتي». الإجازات سنوية ومرضية وبدون راتب، بالتواريخ فقط ودون مغادرات بالساعات. عدد الأيام والتفعيل يعدلان من «الإجازات ← أنواع الإجازات». راجع [تفاصيل التحديث والإعداد](docs/TRAINER_UPDATE_2026_10_19_AR.md). قد تعكس بعض اللقطات التوضيحية أعلاه الواجهة السابقة.

@@ -12,28 +12,34 @@ HRMS is an ASP.NET Core MVC application for employee records, attendance, leave,
 |---|---|
 | ![Sign-in page](docs/screenshots/login.png) | ![Employee list](docs/screenshots/employees.png) |
 
-| Attendance | Leave request |
-|---|---|
-| ![Attendance page](docs/screenshots/attendance.png) | ![Leave request form](docs/screenshots/leave-request.png) |
-
-![Leave type settings](docs/screenshots/leave-types.png)
+![Attendance page](docs/screenshots/attendance.png)
 
 > Screenshots use local demonstration data and contain no real employee data.
 
 ## Features
 
 - Employee records and lifecycle, departments, and job positions.
-- Attendance check-in/out and corrections with an audit trail.
-- Leave requests, balances, review, and approval.
-- Dashboard, reports, and audit log.
+- Attendance check-in/out, multiple completed sessions per day, and authorized corrections with an audit trail.
+- Date-only annual, sick, and unpaid leave requests, balances, review, and approval.
+- Dashboard, reports, and audit log with PDF and Excel downloads that respect filters and role permissions.
 - Six roles and permissions with responsive Arabic and English interfaces.
 - MVC pages and API endpoints. Swagger is available in Development only.
+
+## Reports and leave
+
+1. Open a report, choose the filters and sort order, then apply them.
+2. Select **Download PDF** or **Download Excel**. The file includes all matching results within your permissions, not just the six rows on the current page.
+3. Employees use **My leave report** to download their own requests and balances. Department managers can export only their department scope.
+
+Leave types are fixed to **Annual**, **Sick**, and **Unpaid**. Requests contain start/end dates and a reason, without time fields or hourly permissions. Under **Leave → Leave types**, administrators and HR managers can edit the annual/sick allowance or enable/disable a type. Initial annual and sick allowances are 14 days each; existing configured values are preserved. Legacy types are disabled without deleting request history.
+
+PDF generation uses a local browser on the server and supports Arabic/English. Set `ReportExport__BrowserPath` if the browser is installed elsewhere. Excel is a real `.xlsx` workbook. See the [trainer update and export setup](docs/TRAINER_UPDATE_2026_10_19_AR.md) for the selected training policies and limits.
 
 ## Requirements
 
 - .NET SDK 8 or later and the .NET 8 runtime.
 - SQL Server 2019 or later. LocalDB is suitable for Windows development.
-- Chrome for browser acceptance tests.
+- Chrome or Edge on the application host for PDF generation; Chrome for browser acceptance tests. Excel export does not require Microsoft Office.
 
 The solution targets .NET 8 and uses ASP.NET Core, EF Core, and Identity 8.0.31. Review [verification and compatibility notes](docs/VERIFICATION.md) and [acceptance requirements and gaps](docs/ACCEPTANCE_AR.md) before deployment.
 
@@ -44,9 +50,12 @@ From the repository directory in PowerShell:
 ```powershell
 dotnet tool restore
 dotnet restore HRMS.sln
-Copy-Item .\HRMS\appsettings.Development.example.json .\HRMS\appsettings.Development.json
+if (!(Test-Path .\HRMS\appsettings.Development.json)) {
+    Copy-Item .\HRMS\appsettings.Development.example.json .\HRMS\appsettings.Development.json
+}
 $env:ASPNETCORE_ENVIRONMENT = "Development"
 dotnet ef database update --project HRMS.Infrastructure --startup-project HRMS
+dotnet run --project HRMS -- --seed-reference-data
 dotnet run --project HRMS
 ```
 
@@ -77,7 +86,7 @@ dotnet build HRMS.sln
 dotnet test HRMS.sln
 ```
 
-Unit, architecture, and integration tests run without extra configuration. SQL and browser tests require a local SQL Server connection with permission to create temporary databases:
+Unit, architecture, and HTTP tests run without extra configuration. SQL and browser scenarios are skipped unless their prerequisites are configured; a skipped scenario is not a verified acceptance result. SQL and browser tests require a local SQL Server connection with permission to create temporary databases:
 
 ```powershell
 $env:HRMS_TEST_SQLSERVER = "Server=(localdb)\MSSQLLocalDB;Integrated Security=True;TrustServerCertificate=True"
@@ -86,6 +95,12 @@ Remove-Item Env:HRMS_TEST_SQLSERVER
 ```
 
 Database tests use temporary `HRMS_Test_<guid>` databases and remove them after each test. See the [verification guide](docs/VERIFICATION.md) for details.
+
+Latest complete verification (19 October 2026): **103 passed, 0 failed, 0 skipped** — 50 unit, 7 architecture, and 46 integration/SQL/HTTP/browser tests. To reproduce the published application gate with SQL Server and Chrome:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-published.ps1
+```
 
 ## Solution structure
 
@@ -104,6 +119,3 @@ Database tests use temporary `HRMS_Test_<guid>` databases and remove them after 
 - [Roles and permissions](docs/ROLES_AND_ACCESS_AR.md)
 - [Verification results](docs/VERIFICATION.md) and [acceptance requirements](docs/ACCEPTANCE_AR.md)
 - [Arabic user guide](docs/HRMS_USER_GUIDE_AR.md) and [setup walkthrough](docs/USER_WALKTHROUGH_AR.md)
-
-## Trainer update — 19 October 2026
-[PDF/Excel downloads and the simple three-type date-only leave policy](docs/TRAINER_UPDATE_2026_10_19_AR.md) are implemented. Download from the filtered report page or My leave report. Excel needs no Office installation; PDF uses local Chrome/Edge (ReportExport__BrowserPath optional override). Restart the running application to load this build. No schema migration is needed; the explicit reference-data command disables legacy types while preserving their request history.
