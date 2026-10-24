@@ -12,17 +12,19 @@
 <div class="home-dashboard home-simple">
     <section class="dashboard-welcome" aria-labelledby="welcome-title">
         <div>
-            <span class="dashboard-eyebrow">@Model.Today.ToDateTime(TimeOnly.MinValue).ToString("dddd، d MMMM yyyy", CultureInfo.CurrentUICulture)</span>
             <h1 id="welcome-title">@T["WelcomeUser", Model.DisplayName]</h1>
             <p>@(T["UiWhatYouNeedToStartYourDay"].Value)</p>
         </div>
-        <span class="role-chip">@Model.RoleName</span>
+        <div class="dashboard-context">
+            <time datetime="@Model.Today.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)">@Model.Today.ToDateTime(TimeOnly.MinValue).ToString(ar ? "dddd، d MMMM yyyy" : "dddd, d MMMM yyyy", CultureInfo.CurrentUICulture)</time>
+            <span class="role-chip">@Model.RoleName</span>
+        </div>
     </section>
 
     @if (Model.CanViewHrData)
     {
         <div class="home-stats" aria-label="@(T["UiOrganizationSummary"].Value)">
-            <div><span>@T["ActiveEmployees"]</span><strong>@Model.EmployeeCount</strong></div>
+            <div><span>@T["ActiveEmployees"]</span><strong>@(summary?.TotalActiveEmployees ?? 0)</strong></div>
             <div><span>@T["Departments"]</span><strong>@Model.DepartmentCount</strong></div>
             <div><span>@T["PendingLeaveRequests"]</span><strong>@(summary?.PendingLeaveRequests ?? 0)</strong></div>
         </div>
@@ -50,8 +52,8 @@
     else if (Model.CanApproveLeaves)
     {
         <section class="home-task">
-            <div class="home-task-mark" aria-hidden="true">@(summary?.PendingLeaveRequests > 0 ? "!" : "✓")</div>
-            <div><h2>@(T["UiRequestsAwaitingYourReview"].Value)</h2>
+            <div class="home-task-mark"><partial name="_WorkspaceIcon" model='@(summary?.PendingLeaveRequests > 0 ? "Review" : "Check")' /></div>
+            <div><h2>@T[summary?.PendingLeaveRequests > 0 ? "UiRequestsAwaitingYourReview" : "UiNoPendingReviews"]</h2>
                 <p>@(summary?.PendingLeaveRequests > 0
                     ? (T["UiReviewPendingLeaveRequestsAndRecordA"].Value)
                     : (T["UiThereAreNoPendingLeaveRequestsIn"].Value))</p>
@@ -79,5 +81,61 @@
             <p class="text-muted mb-0">@(T["UiUseReportsToAnalyzeOrganizationDataOr"].Value)</p>
         </section>
     }
-    <p class="home-footnote">@(T["UiUseTheNavigationForYourTasksSetup"].Value)</p>
+    <div class="dashboard-work-grid">
+        <section class="dashboard-task-list" aria-labelledby="workspace-tasks-title">
+            <div class="dashboard-section-heading">
+                <h2 id="workspace-tasks-title">@T["UiWorkspaceTasks"]</h2>
+                <p>@T["UiWorkspaceTasksHint"]</p>
+            </div>
+            <nav aria-label="@T["UiWorkspaceTasks"]">
+                @if (Model.CanViewHrData)
+                {
+                    <a class="dashboard-task-link" asp-controller="Employees" asp-action="Index"><partial name="_WorkspaceIcon" model='@("Employees")' /><span>@T["Employees"]</span><partial name="_WorkspaceIcon" model='@("Arrow")' /></a>
+                }
+                @if (Model.CanUseAttendance)
+                {
+                    <a class="dashboard-task-link" asp-controller="Attendance" asp-action="Index"><partial name="_WorkspaceIcon" model='@("Attendance")' /><span>@T["Attendance"]</span><partial name="_WorkspaceIcon" model='@("Arrow")' /></a>
+                }
+                @if (Model.CanUseLeaves)
+                {
+                    <a class="dashboard-task-link" asp-controller="LeaveManagement" asp-action="Index"><partial name="_WorkspaceIcon" model='@("LeaveManagement")' /><span>@T["Leave"]</span><partial name="_WorkspaceIcon" model='@("Arrow")' /></a>
+                }
+                @if (Model.CanViewReports)
+                {
+                    <a class="dashboard-task-link" asp-controller="Reports" asp-action="Index"><partial name="_WorkspaceIcon" model='@("Reports")' /><span>@T["Reports"]</span><partial name="_WorkspaceIcon" model='@("Arrow")' /></a>
+                }
+                @if (Model.CanViewAudit)
+                {
+                    <a class="dashboard-task-link" asp-controller="AuditLogs" asp-action="Index"><partial name="_WorkspaceIcon" model='@("AuditLogs")' /><span>@T["AuditLog"]</span><partial name="_WorkspaceIcon" model='@("Arrow")' /></a>
+                }
+            </nav>
+        </section>
+        @if (Model.CanViewReports && summary is not null)
+        {
+            <section class="dashboard-attendance" aria-labelledby="attendance-summary-title">
+                <div class="dashboard-section-heading">
+                    <h2 id="attendance-summary-title">@T["AttendanceReport"]</h2>
+                    <p class="dashboard-period"><time datetime="@Model.FromDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)">@Model.FromDate.ToString("d", CultureInfo.CurrentUICulture)</time><span aria-hidden="true">–</span><time datetime="@Model.ToDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)">@Model.ToDate.ToString("d", CultureInfo.CurrentUICulture)</time></p>
+                </div>
+                @if (summary.Attendance.TotalRecords > 0)
+                {
+                    <dl class="dashboard-attendance-values">
+                        <div><dt>@T["UiRecordedSessions"]</dt><dd>@summary.Attendance.TotalRecords.ToString("N0", CultureInfo.CurrentUICulture)</dd></div>
+                        <div><dt>@T["TotalHours"]</dt><dd>@summary.Attendance.TotalHoursWorked.ToString("N1", CultureInfo.CurrentUICulture)</dd></div>
+                        <div><dt>@T["Status.Present"]</dt><dd>@summary.Attendance.PresentCount.ToString("N0", CultureInfo.CurrentUICulture)</dd></div>
+                        <div><dt>@T["Status.Late"]</dt><dd>@summary.Attendance.LateCount.ToString("N0", CultureInfo.CurrentUICulture)</dd></div>
+                    </dl>
+                }
+                else
+                {
+                    <div class="dashboard-attendance-empty"><partial name="_WorkspaceIcon" model='@("Attendance")' /><p>@T["UiNoAttendanceInPeriod"]</p></div>
+                }
+                <a class="dashboard-report-link" asp-controller="Reports" asp-action="Attendance" asp-route-FromDate="@Model.FromDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)" asp-route-ToDate="@Model.ToDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)">@T["AttendanceReport"]<partial name="_WorkspaceIcon" model='@("Arrow")' /></a>
+            </section>
+        }
+        else
+        {
+            <section class="dashboard-guide" aria-labelledby="dashboard-guide-title"><partial name="_WorkspaceIcon" model='@("Guide")' /><h2 id="dashboard-guide-title">@T["UiGettingStarted"]</h2><p>@T["UiUseTheNavigationForYourTasksSetup"]</p><a class="dashboard-report-link" asp-controller="Home" asp-action="Guide">@T["UiOpenTheGuide"]<partial name="_WorkspaceIcon" model='@("Arrow")' /></a></section>
+        }
+    </div>
 </div>

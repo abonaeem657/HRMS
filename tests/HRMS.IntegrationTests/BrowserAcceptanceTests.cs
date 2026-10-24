@@ -126,10 +126,42 @@ public partial class SqlWorkflowTests
                     await page.SetViewportSizeAsync(width, 900);
                     await page.GotoAsync(address + "/Home/SetLanguage?culture=" + culture + "&returnUrl=%2F");
                     Assert.Equal(culture == "ar-JO" ? "rtl" : "ltr", await page.Locator("html").GetAttributeAsync("dir"));
+                    Assert.True(await page.EvaluateAsync<bool>("document.documentElement.scrollWidth <= window.innerWidth + 2"), "Dashboard overflows horizontally.");
+                    Assert.Equal(role.Name is IdentityRoles.SystemAdministrator or IdentityRoles.HRManager or IdentityRoles.HROfficer,
+                        await page.Locator(".dashboard-task-list a[href='/Employees']").CountAsync() > 0);
+                    Assert.Equal(role.Name != IdentityRoles.Employee,
+                        await page.Locator(".dashboard-task-list a[href='/Reports']").CountAsync() > 0);
+                    var screenshotDirectory = Environment.GetEnvironmentVariable("HRMS_UI_SCREENSHOT_DIR");
+                    if (role.Name == IdentityRoles.SystemAdministrator && !string.IsNullOrWhiteSpace(screenshotDirectory))
+                    {
+                        Directory.CreateDirectory(screenshotDirectory);
+                        await page.ScreenshotAsync(new() { Path = Path.Combine(screenshotDirectory, $"dashboard-{culture}-{width}.png"), FullPage = true, Animations = ScreenshotAnimations.Disabled });
+                    }
                     Assert.False(await page.Locator("#workspaceSidebar").IsVisibleAsync());
+                    var checkReducedMotion = role.Name == IdentityRoles.SystemAdministrator && culture == "ar-JO" && width == 390;
+                    if (checkReducedMotion)
+                    {
+                        await page.EmulateMediaAsync(new() { ReducedMotion = ReducedMotion.Reduce });
+                        Assert.Equal("none", await page.Locator(".dashboard-welcome").EvaluateAsync<string>("element => getComputedStyle(element).animationName"));
+                    }
                     await page.EvaluateAsync("window.__acceptanceMarker = 'preserved'");
                     await page.Locator(".workspace-menu-bar button").ClickAsync();
                     await page.Locator("#workspaceSidebar.show").WaitForAsync();
+                    if (checkReducedMotion)
+                    {
+                        Assert.Equal("0s", await page.Locator("#workspaceSidebar").EvaluateAsync<string>("element => getComputedStyle(element).transitionDuration"));
+                        await page.Keyboard.PressAsync("Escape");
+                        await page.Locator("#workspaceSidebar").WaitForAsync(new() { State = WaitForSelectorState.Hidden });
+                        Assert.True(await page.Locator(".workspace-menu-bar button").EvaluateAsync<bool>("element => document.activeElement === element"));
+                        await page.Locator(".workspace-menu-bar button").ClickAsync();
+                        await page.Locator("#workspaceSidebar.show").WaitForAsync();
+                        await page.EmulateMediaAsync(new() { ReducedMotion = ReducedMotion.NoPreference });
+                    }
+                    Assert.Equal("page", await page.Locator(".main-nav a.active").GetAttributeAsync("aria-current"));
+                    if (role.Name == IdentityRoles.SystemAdministrator && culture == "ar-JO" && width == 390 && !string.IsNullOrWhiteSpace(screenshotDirectory))
+                    {
+                        await page.ScreenshotAsync(new() { Path = Path.Combine(screenshotDirectory, "navigation-ar-JO-390.png"), FullPage = true, Animations = ScreenshotAnimations.Disabled });
+                    }
                     await page.Locator(".main-nav a[href='/MyProfile']").ClickAsync();
                     await page.WaitForURLAsync("**/MyProfile");
                     Assert.Equal("preserved", await page.EvaluateAsync<string>("window.__acceptanceMarker"));

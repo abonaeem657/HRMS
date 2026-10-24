@@ -1636,4 +1636,9 @@
   <data name="User" xml:space="preserve"><value>المستخدم</value></data>
   <data name="Entity" xml:space="preserve"><value>نوع السجل</value></data>
   <data name="RecordId" xml:space="preserve"><value>معرّف السجل</value></data>
+  <data name="UiWorkspaceTasks" xml:space="preserve"><value>مساحة عملك</value></data>
+  <data name="UiWorkspaceTasksHint" xml:space="preserve"><value>انتقل مباشرةً إلى المهمة التي تحتاجها.</value></data>
+  <data name="UiNoPendingReviews" xml:space="preserve"><value>لا طلبات بانتظار المراجعة</value></data>
+  <data name="UiRecordedSessions" xml:space="preserve"><value>جلسات الحضور المسجلة</value></data>
+  <data name="UiNoAttendanceInPeriod" xml:space="preserve"><value>لم تُسجّل جلسات حضور خلال هذه الفترة.</value></data>
 </root>

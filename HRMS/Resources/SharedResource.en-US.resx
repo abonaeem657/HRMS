@@ -1636,4 +1636,9 @@
   <data name="User" xml:space="preserve"><value>User</value></data>
   <data name="Entity" xml:space="preserve"><value>Entity</value></data>
   <data name="RecordId" xml:space="preserve"><value>Record ID</value></data>
+  <data name="UiWorkspaceTasks" xml:space="preserve"><value>Your workspace</value></data>
+  <data name="UiWorkspaceTasksHint" xml:space="preserve"><value>Go directly to the work you need.</value></data>
+  <data name="UiNoPendingReviews" xml:space="preserve"><value>No pending reviews</value></data>
+  <data name="UiRecordedSessions" xml:space="preserve"><value>Recorded sessions</value></data>
+  <data name="UiNoAttendanceInPeriod" xml:space="preserve"><value>No attendance sessions recorded in this period.</value></data>
 </root>

@@ -29,11 +29,11 @@
     @if (signedIn)
     {
         <div class="workspace-menu-bar">
-            <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#workspaceSidebar" aria-controls="workspaceSidebar" aria-expanded="false" aria-label="@T["ToggleNavigation"]"><span aria-hidden="true">☰</span> @T["MainNavigation"]</button>
-            <span class="fw-bold">HRMS</span>
+            <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#workspaceSidebar" aria-controls="workspaceSidebar" aria-expanded="false" aria-label="@T["ToggleNavigation"]"><partial name="_WorkspaceIcon" model='@("Menu")' /> @T["MainNavigation"]</button>
+            <a class="workspace-wordmark" asp-controller="Home" asp-action="Index" aria-label="HRMS — @T["Home"]"><span class="workspace-monogram" aria-hidden="true">H</span>HRMS</a>
         </div>
     }
-    <header id="@(signedIn ? "workspaceSidebar" : null)" class="app-header @(signedIn ? "offcanvas offcanvas-start" : "")" tabindex="@(signedIn ? "-1" : null)" aria-label="@T["MainNavigation"]">
+    <header id="@(signedIn ? "workspaceSidebar" : null)" class="app-header @(signedIn ? "offcanvas offcanvas-start" : "")" tabindex="@(signedIn ? "-1" : null)" aria-label="@T["MainNavigation"]" data-bs-scroll="false">
         <nav class="navbar navbar-light navbar-expand-lg" aria-label="@T["MainNavigation"]">
             <div class="container-fluid app-shell">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index"><span class="brand-mark">H</span><span>HRMS<small>@T["ArabicPortal"]</small></span></a>
@@ -43,27 +43,27 @@
                 { <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="@T["ToggleNavigation"]"><span class="navbar-toggler-icon"></span></button> }
                 <div class="@(signedIn ? "navbar-collapse d-flex" : "collapse navbar-collapse")" id="mainNavigation">
                     <ul class="navbar-nav main-nav">
-                        <li class="nav-item"><a class="nav-link @(activeController == "Home" && activeAction == "Index" ? "active" : "")" asp-controller="Home" asp-action="Index">@T["Home"]</a></li>
+                        <li class="nav-item"><a class="nav-link @(activeController == "Home" && activeAction == "Index" ? "active" : "")" aria-current="@(activeController == "Home" && activeAction == "Index" ? "page" : null)" asp-controller="Home" asp-action="Index"><partial name="_WorkspaceIcon" model='@("Home")' /><span>@T["Home"]</span></a></li>
                         @if (canReadHr)
                         {
                             <li class="nav-section">@(T["UiPeopleOrganization"].Value)</li>
-                            <li class="nav-item"><a class="nav-link @(activeController == "Employees" ? "active" : "")" asp-controller="Employees" asp-action="Index">@T["Employees"]</a></li>
-                            <li class="nav-item"><a class="nav-link @(activeController == "Departments" ? "active" : "")" asp-controller="Departments" asp-action="Index">@T["Departments"]</a></li>
-                            <li class="nav-item"><a class="nav-link @(activeController == "Positions" ? "active" : "")" asp-controller="Positions" asp-action="Index">@T["JobTitles"]</a></li>
+                            <li class="nav-item"><a class="nav-link @(activeController == "Employees" ? "active" : "")" aria-current="@(activeController == "Employees" ? "page" : null)" asp-controller="Employees" asp-action="Index"><partial name="_WorkspaceIcon" model='@("Employees")' /><span>@T["Employees"]</span></a></li>
+                            <li class="nav-item"><a class="nav-link @(activeController == "Departments" ? "active" : "")" aria-current="@(activeController == "Departments" ? "page" : null)" asp-controller="Departments" asp-action="Index"><partial name="_WorkspaceIcon" model='@("Departments")' /><span>@T["Departments"]</span></a></li>
+                            <li class="nav-item"><a class="nav-link @(activeController == "Positions" ? "active" : "")" aria-current="@(activeController == "Positions" ? "page" : null)" asp-controller="Positions" asp-action="Index"><partial name="_WorkspaceIcon" model='@("Positions")' /><span>@T["JobTitles"]</span></a></li>
                         }
                         @if (canUseAttendance || canUseLeaves) { <li class="nav-section">@(T["UiDailyWork"].Value)</li> }
-                        @if (canUseAttendance) { <li class="nav-item"><a class="nav-link @(activeController == "Attendance" ? "active" : "")" asp-controller="Attendance" asp-action="Index">@T["Attendance"]</a></li> }
-                        @if (canUseLeaves) { <li class="nav-item"><a class="nav-link @(activeController == "LeaveManagement" && activeAction != "MyReport" ? "active" : "")" asp-controller="LeaveManagement" asp-action="Index">@T["Leave"]</a></li> }
-                        @if (canUseLeaves) { <li class="nav-item"><a class="nav-link @(activeController == "LeaveManagement" && activeAction == "MyReport" ? "active" : "")" asp-controller="LeaveManagement" asp-action="MyReport">@T["MyLeaveReport"]</a></li> }
+                        @if (canUseAttendance) { <li class="nav-item"><a class="nav-link @(activeController == "Attendance" ? "active" : "")" aria-current="@(activeController == "Attendance" ? "page" : null)" asp-controller="Attendance" asp-action="Index"><partial name="_WorkspaceIcon" model='@("Attendance")' /><span>@T["Attendance"]</span></a></li> }
+                        @if (canUseLeaves) { <li class="nav-item"><a class="nav-link @(activeController == "LeaveManagement" && activeAction != "MyReport" ? "active" : "")" aria-current="@(activeController == "LeaveManagement" && activeAction != "MyReport" ? "page" : null)" asp-controller="LeaveManagement" asp-action="Index"><partial name="_WorkspaceIcon" model='@("LeaveManagement")' /><span>@T["Leave"]</span></a></li> }
+                        @if (canUseLeaves) { <li class="nav-item"><a class="nav-link @(activeController == "LeaveManagement" && activeAction == "MyReport" ? "active" : "")" aria-current="@(activeController == "LeaveManagement" && activeAction == "MyReport" ? "page" : null)" asp-controller="LeaveManagement" asp-action="MyReport"><partial name="_WorkspaceIcon" model='@("LeaveManagement")' /><span>@T["MyLeaveReport"]</span></a></li> }
                         @if (canViewReports || canViewAudit) { <li class="nav-section">@(T["UiInsightsAdministration"].Value)</li> }
-                        @if (canViewReports) { <li class="nav-item"><a class="nav-link @(activeController == "Reports" ? "active" : "")" asp-controller="Reports" asp-action="Index">@T["Reports"]</a></li> }
-                        @if (canViewAudit) { <li class="nav-item"><a class="nav-link @(activeController == "AuditLogs" ? "active" : "")" asp-controller="AuditLogs" asp-action="Index">@T["AuditLog"]</a></li> }
-                        @if (User.IsInRole(IdentityRoles.SystemAdministrator)) { <li class="nav-item"><a class="nav-link @(activeController == "UserAccounts" ? "active" : "")" asp-controller="UserAccounts" asp-action="Index">@T["Users"]</a></li> }
+                        @if (canViewReports) { <li class="nav-item"><a class="nav-link @(activeController == "Reports" ? "active" : "")" aria-current="@(activeController == "Reports" ? "page" : null)" asp-controller="Reports" asp-action="Index"><partial name="_WorkspaceIcon" model='@("Reports")' /><span>@T["Reports"]</span></a></li> }
+                        @if (canViewAudit) { <li class="nav-item"><a class="nav-link @(activeController == "AuditLogs" ? "active" : "")" aria-current="@(activeController == "AuditLogs" ? "page" : null)" asp-controller="AuditLogs" asp-action="Index"><partial name="_WorkspaceIcon" model='@("AuditLogs")' /><span>@T["AuditLog"]</span></a></li> }
+                        @if (User.IsInRole(IdentityRoles.SystemAdministrator)) { <li class="nav-item"><a class="nav-link @(activeController == "UserAccounts" ? "active" : "")" aria-current="@(activeController == "UserAccounts" ? "page" : null)" asp-controller="UserAccounts" asp-action="Index"><partial name="_WorkspaceIcon" model='@("UserAccounts")' /><span>@T["Users"]</span></a></li> }
                         @if (signedIn) {
                             <li class="nav-section">@(T["UiHelpAccount"].Value)</li>
-                            <li class="nav-item"><a class="nav-link @(activeAction == "Guide" ? "active" : "")" asp-controller="Home" asp-action="Guide">@(T["UiGettingStarted"].Value)</a></li>
-                            <li class="nav-item"><a class="nav-link @(activeController == "MyProfile" ? "active" : "")" asp-controller="MyProfile" asp-action="Index">@T["MyProfile"]</a></li>
-                            <li class="nav-item"><a class="nav-link @(activeAction == "ChangePassword" ? "active" : "")" asp-controller="Account" asp-action="ChangePassword">@T["ChangePassword"]</a></li>
+                            <li class="nav-item"><a class="nav-link @(activeAction == "Guide" ? "active" : "")" aria-current="@(activeAction == "Guide" ? "page" : null)" asp-controller="Home" asp-action="Guide"><partial name="_WorkspaceIcon" model='@("Guide")' /><span>@(T["UiGettingStarted"].Value)</span></a></li>
+                            <li class="nav-item"><a class="nav-link @(activeController == "MyProfile" ? "active" : "")" aria-current="@(activeController == "MyProfile" ? "page" : null)" asp-controller="MyProfile" asp-action="Index"><partial name="_WorkspaceIcon" model='@("MyProfile")' /><span>@T["MyProfile"]</span></a></li>
+                            <li class="nav-item"><a class="nav-link @(activeAction == "ChangePassword" ? "active" : "")" aria-current="@(activeAction == "ChangePassword" ? "page" : null)" asp-controller="Account" asp-action="ChangePassword"><partial name="_WorkspaceIcon" model='@("ChangePassword")' /><span>@T["ChangePassword"]</span></a></li>
                         }
                     </ul>
                     <div class="navbar-tools">
